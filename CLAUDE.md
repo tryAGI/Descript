@@ -25,7 +25,7 @@ Base URL: `https://descriptapi.com/v1`.
 ## Key Files
 
 - `src/libs/Descript/openapi.yaml` — OpenAPI spec (downloaded from Descript docs, OpenAPI 3.0.0)
-- `src/libs/Descript/generate.sh` — Downloads spec, adds top-level `security` array via `yq`, runs autosdk
+- `src/libs/Descript/generate.sh` — Downloads spec, runs autosdk with `--security-scheme Http:Header:Bearer`
 - `src/libs/Descript/Generated/` — **Never edit** — auto-generated code (204 files)
 - `src/tests/IntegrationTests/Tests.cs` — Test helper with bearer auth
 - `src/tests/IntegrationTests/Examples/` — Example tests (also generate docs)
@@ -33,8 +33,8 @@ Base URL: `https://descriptapi.com/v1`.
 ## Spec Notes
 
 - `generate.sh` downloads spec from `https://docs.descriptapi.com/openapi.yaml`
-- Spec already defines `bearerAuth` security scheme (http/bearer) — no scheme conversion needed
-- `yq` adds top-level `security` array (spec only has per-operation security) for AutoSDK constructor generation
+- Spec already defines `bearerAuth` security scheme (http/bearer)
+- `--security-scheme Http:Header:Bearer` injects top-level security for AutoSDK constructor generation
 - Uses `--exclude-deprecated-operations` flag
 
 ## Sub-client Pattern
