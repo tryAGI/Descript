@@ -7,12 +7,11 @@ dotnet tool install --global autosdk.cli --prerelease
 rm -rf Generated
 curl --fail --silent --show-error -L -o openapi.yaml https://docs.descriptapi.com/openapi.yaml
 
-# Add top-level security array
-yq -i '.security = [{"bearerAuth": []}]' openapi.yaml
-
+# Auth: --security-scheme overrides per-operation-only bearerAuth with top-level security.
 autosdk generate openapi.yaml \
   --namespace Descript \
   --clientClassName DescriptClient \
   --targetFramework net10.0 \
   --output Generated \
-  --exclude-deprecated-operations
+  --exclude-deprecated-operations \
+  --security-scheme Http:Header:Bearer
