@@ -45,10 +45,6 @@ namespace Descript
         /// <summary>
         /// Initializes a new instance of the <see cref="PublishedProjectConflictError" /> class.
         /// </summary>
-        /// <param name="error">
-        /// Error type identifier<br/>
-        /// Example: conflict
-        /// </param>
         /// <param name="message">
         /// Human-readable error message<br/>
         /// Example: Published in invalid state
@@ -56,6 +52,10 @@ namespace Descript
         /// <param name="state">
         /// Current state of the published project<br/>
         /// Example: processing
+        /// </param>
+        /// <param name="error">
+        /// Error type identifier<br/>
+        /// Example: conflict
         /// </param>
 #if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
@@ -65,9 +65,9 @@ namespace Descript
             global::Descript.PublishedProjectConflictErrorState state,
             global::Descript.PublishedProjectConflictErrorError error)
         {
+            this.Error = error;
             this.Message = message ?? throw new global::System.ArgumentNullException(nameof(message));
             this.State = state;
-            this.Error = error;
         }
 
         /// <summary>

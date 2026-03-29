@@ -61,6 +61,9 @@ namespace Descript
         /// <summary>
         /// Initializes a new instance of the <see cref="ImportProjectMediaRequestAddComposition" /> class.
         /// </summary>
+        /// <param name="clips">
+        /// Ordered list of clips to include in the composition
+        /// </param>
         /// <param name="name">
         /// Name of the composition. If not provided, uses default naming.<br/>
         /// Example: Rough Cut
@@ -82,9 +85,6 @@ namespace Descript
         /// Default Value: 30<br/>
         /// Example: 30
         /// </param>
-        /// <param name="clips">
-        /// Ordered list of clips to include in the composition
-        /// </param>
 #if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 #endif
@@ -95,11 +95,11 @@ namespace Descript
             int? height,
             double? fps)
         {
-            this.Clips = clips ?? throw new global::System.ArgumentNullException(nameof(clips));
             this.Name = name;
             this.Width = width;
             this.Height = height;
             this.Fps = fps;
+            this.Clips = clips ?? throw new global::System.ArgumentNullException(nameof(clips));
         }
 
         /// <summary>

@@ -19,18 +19,18 @@ namespace Descript
         /// Status of an import job
         /// </summary>
 #if NET6_0_OR_GREATER
-        public global::Descript.ImportJobStatus? ImportProjectMedia { get; init; }
+        public global::Descript.ImportJobStatus? ImportDivideprojectMedia { get; init; }
 #else
-        public global::Descript.ImportJobStatus? ImportProjectMedia { get; }
+        public global::Descript.ImportJobStatus? ImportDivideprojectMedia { get; }
 #endif
 
         /// <summary>
         /// 
         /// </summary>
 #if NET6_0_OR_GREATER
-        [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhen(true, nameof(ImportProjectMedia))]
+        [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhen(true, nameof(ImportDivideprojectMedia))]
 #endif
-        public bool IsImportProjectMedia => ImportProjectMedia != null;
+        public bool IsImportDivideprojectMedia => ImportDivideprojectMedia != null;
 
         /// <summary>
         /// Status of an Agent edit job
@@ -56,14 +56,14 @@ namespace Descript
         /// <summary>
         /// 
         /// </summary>
-        public static implicit operator global::Descript.ImportJobStatus?(JobStatus @this) => @this.ImportProjectMedia;
+        public static implicit operator global::Descript.ImportJobStatus?(JobStatus @this) => @this.ImportDivideprojectMedia;
 
         /// <summary>
         /// 
         /// </summary>
         public JobStatus(global::Descript.ImportJobStatus? value)
         {
-            ImportProjectMedia = value;
+            ImportDivideprojectMedia = value;
         }
 
         /// <summary>
@@ -89,13 +89,13 @@ namespace Descript
         /// </summary>
         public JobStatus(
             global::Descript.JobStatusDiscriminatorJobType? jobType,
-            global::Descript.ImportJobStatus? importProjectMedia,
+            global::Descript.ImportJobStatus? importDivideprojectMedia,
             global::Descript.AgentJobStatus? agent
             )
         {
             JobType = jobType;
 
-            ImportProjectMedia = importProjectMedia;
+            ImportDivideprojectMedia = importDivideprojectMedia;
             Agent = agent;
         }
 
@@ -104,14 +104,14 @@ namespace Descript
         /// </summary>
         public object? Object =>
             Agent as object ??
-            ImportProjectMedia as object 
+            ImportDivideprojectMedia as object 
             ;
 
         /// <summary>
         /// 
         /// </summary>
         public override string? ToString() =>
-            ImportProjectMedia?.ToString() ??
+            ImportDivideprojectMedia?.ToString() ??
             Agent?.ToString() 
             ;
 
@@ -120,14 +120,14 @@ namespace Descript
         /// </summary>
         public bool Validate()
         {
-            return IsImportProjectMedia && !IsAgent || !IsImportProjectMedia && IsAgent;
+            return IsImportDivideprojectMedia && !IsAgent || !IsImportDivideprojectMedia && IsAgent;
         }
 
         /// <summary>
         /// 
         /// </summary>
         public TResult? Match<TResult>(
-            global::System.Func<global::Descript.ImportJobStatus?, TResult>? importProjectMedia = null,
+            global::System.Func<global::Descript.ImportJobStatus?, TResult>? importDivideprojectMedia = null,
             global::System.Func<global::Descript.AgentJobStatus?, TResult>? agent = null,
             bool validate = true)
         {
@@ -136,9 +136,9 @@ namespace Descript
                 Validate();
             }
 
-            if (IsImportProjectMedia && importProjectMedia != null)
+            if (IsImportDivideprojectMedia && importDivideprojectMedia != null)
             {
-                return importProjectMedia(ImportProjectMedia!);
+                return importDivideprojectMedia(ImportDivideprojectMedia!);
             }
             else if (IsAgent && agent != null)
             {
@@ -152,7 +152,7 @@ namespace Descript
         /// 
         /// </summary>
         public void Match(
-            global::System.Action<global::Descript.ImportJobStatus?>? importProjectMedia = null,
+            global::System.Action<global::Descript.ImportJobStatus?>? importDivideprojectMedia = null,
             global::System.Action<global::Descript.AgentJobStatus?>? agent = null,
             bool validate = true)
         {
@@ -161,9 +161,9 @@ namespace Descript
                 Validate();
             }
 
-            if (IsImportProjectMedia)
+            if (IsImportDivideprojectMedia)
             {
-                importProjectMedia?.Invoke(ImportProjectMedia!);
+                importDivideprojectMedia?.Invoke(ImportDivideprojectMedia!);
             }
             else if (IsAgent)
             {
@@ -178,7 +178,7 @@ namespace Descript
         {
             var fields = new object?[]
             {
-                ImportProjectMedia,
+                ImportDivideprojectMedia,
                 typeof(global::Descript.ImportJobStatus),
                 Agent,
                 typeof(global::Descript.AgentJobStatus),
@@ -198,7 +198,7 @@ namespace Descript
         public bool Equals(JobStatus other)
         {
             return
-                global::System.Collections.Generic.EqualityComparer<global::Descript.ImportJobStatus?>.Default.Equals(ImportProjectMedia, other.ImportProjectMedia) &&
+                global::System.Collections.Generic.EqualityComparer<global::Descript.ImportJobStatus?>.Default.Equals(ImportDivideprojectMedia, other.ImportDivideprojectMedia) &&
                 global::System.Collections.Generic.EqualityComparer<global::Descript.AgentJobStatus?>.Default.Equals(Agent, other.Agent) 
                 ;
         }

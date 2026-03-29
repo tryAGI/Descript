@@ -43,13 +43,13 @@ namespace Descript
         /// <summary>
         /// Initializes a new instance of the <see cref="ImportErrorResult" /> class.
         /// </summary>
-        /// <param name="status">
-        /// Job failed completely<br/>
-        /// Example: error
-        /// </param>
         /// <param name="errorMessage">
         /// Human-readable error message<br/>
         /// Example: Failed to import media files
+        /// </param>
+        /// <param name="status">
+        /// Job failed completely<br/>
+        /// Example: error
         /// </param>
         /// <param name="errorCode">
         /// Machine-readable error code<br/>
@@ -63,8 +63,8 @@ namespace Descript
             global::Descript.ImportErrorResultStatus status,
             string? errorCode)
         {
-            this.ErrorMessage = errorMessage ?? throw new global::System.ArgumentNullException(nameof(errorMessage));
             this.Status = status;
+            this.ErrorMessage = errorMessage ?? throw new global::System.ArgumentNullException(nameof(errorMessage));
             this.ErrorCode = errorCode;
         }
 

@@ -36,11 +36,11 @@ namespace Descript
         /// <summary>
         /// Initializes a new instance of the <see cref="EditInDescriptSchemaPostBodyProjectSchemaFile" /> class.
         /// </summary>
-        /// <param name="name">
-        /// A name for the file.
-        /// </param>
         /// <param name="uri">
         /// A public/pre-signed uri to the audio or video asset, see supported media specifications section.
+        /// </param>
+        /// <param name="name">
+        /// A name for the file.
         /// </param>
         /// <param name="startOffset">
         /// The amount of time into the Project's timeline this audio or video file should start at.
@@ -53,8 +53,8 @@ namespace Descript
             string? name,
             global::Descript.EditInDescriptSchemaPostBodyProjectSchemaFileStartOffset? startOffset)
         {
-            this.Uri = uri ?? throw new global::System.ArgumentNullException(nameof(uri));
             this.Name = name;
+            this.Uri = uri ?? throw new global::System.ArgumentNullException(nameof(uri));
             this.StartOffset = startOffset;
         }
 

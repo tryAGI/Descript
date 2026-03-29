@@ -11,7 +11,7 @@ namespace Descript
         /// <summary>
         /// 
         /// </summary>
-        ImportProjectMedia,
+        ImportDivideprojectMedia,
     }
 
     /// <summary>
@@ -26,7 +26,7 @@ namespace Descript
         {
             return value switch
             {
-                ImportJobStatusJobType.ImportProjectMedia => "import/project_media",
+                ImportJobStatusJobType.ImportDivideprojectMedia => "import/project_media",
                 _ => throw new global::System.ArgumentOutOfRangeException(nameof(value), value, null),
             };
         }
@@ -37,7 +37,7 @@ namespace Descript
         {
             return value switch
             {
-                "import/project_media" => ImportJobStatusJobType.ImportProjectMedia,
+                "import/project_media" => ImportJobStatusJobType.ImportDivideprojectMedia,
                 _ => null,
             };
         }

@@ -78,6 +78,11 @@ namespace Descript
         /// <summary>
         /// Initializes a new instance of the <see cref="AgentEditJobRequest" /> class.
         /// </summary>
+        /// <param name="prompt">
+        /// Natural language instruction for the agent to execute.<br/>
+        /// Examples: "add studio sound to every clip", "remove all filler words", "create a 30-second highlight reel"<br/>
+        /// Example: add studio sound to every clip
+        /// </param>
         /// <param name="projectId">
         /// The ID of an existing project to edit. Mutually exclusive with `project_name`.<br/>
         /// Example: 9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
@@ -93,11 +98,6 @@ namespace Descript
         /// </param>
         /// <param name="model">
         /// AI model to use for editing. Defaults to the default model.
-        /// </param>
-        /// <param name="prompt">
-        /// Natural language instruction for the agent to execute.<br/>
-        /// Examples: "add studio sound to every clip", "remove all filler words", "create a 30-second highlight reel"<br/>
-        /// Example: add studio sound to every clip
         /// </param>
         /// <param name="teamAccess">
         /// Access level for team members when creating a new project.<br/>
@@ -121,11 +121,11 @@ namespace Descript
             global::Descript.AgentEditJobRequestTeamAccess? teamAccess,
             string? callbackUrl)
         {
-            this.Prompt = prompt ?? throw new global::System.ArgumentNullException(nameof(prompt));
             this.ProjectId = projectId;
             this.ProjectName = projectName;
             this.CompositionId = compositionId;
             this.Model = model;
+            this.Prompt = prompt ?? throw new global::System.ArgumentNullException(nameof(prompt));
             this.TeamAccess = teamAccess;
             this.CallbackUrl = callbackUrl;
         }
