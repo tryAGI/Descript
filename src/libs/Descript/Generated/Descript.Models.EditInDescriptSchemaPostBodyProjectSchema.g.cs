@@ -45,12 +45,12 @@ namespace Descript
         /// Schema version id.<br/>
         /// Example: 1.0.0
         /// </param>
+        /// <param name="files">
+        /// List of remote files to import into Descript.
+        /// </param>
         /// <param name="sourceId">
         /// External source id to be included in Descript export pages, see Export from Descript section for details. This ID is not currently used to deduplicate data coming into Descript, a new Project is created for each import.<br/>
         /// Example: 06b3f5bb-68a2-468a-a5d9-df155c1e3588
-        /// </param>
-        /// <param name="files">
-        /// List of remote files to import into Descript.
         /// </param>
 #if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
@@ -61,8 +61,8 @@ namespace Descript
             string? sourceId)
         {
             this.SchemaVersion = schemaVersion ?? throw new global::System.ArgumentNullException(nameof(schemaVersion));
-            this.Files = files ?? throw new global::System.ArgumentNullException(nameof(files));
             this.SourceId = sourceId;
+            this.Files = files ?? throw new global::System.ArgumentNullException(nameof(files));
         }
 
         /// <summary>

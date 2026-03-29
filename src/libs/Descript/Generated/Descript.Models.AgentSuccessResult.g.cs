@@ -60,10 +60,6 @@ namespace Descript
         /// <summary>
         /// Initializes a new instance of the <see cref="AgentSuccessResult" /> class.
         /// </summary>
-        /// <param name="status">
-        /// Indicates successful completion<br/>
-        /// Example: success
-        /// </param>
         /// <param name="agentResponse">
         /// AI response describing what was done<br/>
         /// Example: I added Studio Sound to all 3 clips in your composition
@@ -71,6 +67,10 @@ namespace Descript
         /// <param name="projectChanged">
         /// Whether the agent made modifications to the project<br/>
         /// Example: true
+        /// </param>
+        /// <param name="status">
+        /// Indicates successful completion<br/>
+        /// Example: success
         /// </param>
         /// <param name="mediaSecondsUsed">
         /// Media minutes (in seconds) consumed by this operation<br/>
@@ -90,9 +90,9 @@ namespace Descript
             int? mediaSecondsUsed,
             int? aiCreditsUsed)
         {
+            this.Status = status;
             this.AgentResponse = agentResponse ?? throw new global::System.ArgumentNullException(nameof(agentResponse));
             this.ProjectChanged = projectChanged;
-            this.Status = status;
             this.MediaSecondsUsed = mediaSecondsUsed;
             this.AiCreditsUsed = aiCreditsUsed;
         }

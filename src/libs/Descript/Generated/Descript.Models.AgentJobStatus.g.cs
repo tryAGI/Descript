@@ -110,10 +110,6 @@ namespace Descript
         /// Unique identifier for the job<br/>
         /// Example: 6dc3f30a-58c2-4174-96a6-dc18cf3c7776
         /// </param>
-        /// <param name="jobType">
-        /// Type of job<br/>
-        /// Example: agent
-        /// </param>
         /// <param name="jobState">
         /// Current state of the job:<br/>
         /// - queued: Job is waiting to start<br/>
@@ -126,10 +122,6 @@ namespace Descript
         /// When the job was created<br/>
         /// Example: 2025-11-18T10:30:00Z
         /// </param>
-        /// <param name="stoppedAt">
-        /// When the job stopped (only present when job_state is stopped or cancelled)<br/>
-        /// Example: 2025-11-18T10:35:00Z
-        /// </param>
         /// <param name="driveId">
         /// The drive ID<br/>
         /// Example: c9c5c47e-158a-49f7-846b-4f6ee2a229a2
@@ -141,6 +133,14 @@ namespace Descript
         /// <param name="projectUrl">
         /// URL to access the project in Descript web app<br/>
         /// Example: https://web.descript.com/9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
+        /// </param>
+        /// <param name="jobType">
+        /// Type of job<br/>
+        /// Example: agent
+        /// </param>
+        /// <param name="stoppedAt">
+        /// When the job stopped (only present when job_state is stopped or cancelled)<br/>
+        /// Example: 2025-11-18T10:35:00Z
         /// </param>
         /// <param name="progress">
         /// Progress information for the workflow (only present when job_state is running)
@@ -164,13 +164,13 @@ namespace Descript
             global::Descript.Result2? result)
         {
             this.JobId = jobId;
+            this.JobType = jobType;
             this.JobState = jobState;
             this.CreatedAt = createdAt;
+            this.StoppedAt = stoppedAt;
             this.DriveId = driveId;
             this.ProjectId = projectId;
             this.ProjectUrl = projectUrl ?? throw new global::System.ArgumentNullException(nameof(projectUrl));
-            this.JobType = jobType;
-            this.StoppedAt = stoppedAt;
             this.Progress = progress;
             this.Result = result;
         }
