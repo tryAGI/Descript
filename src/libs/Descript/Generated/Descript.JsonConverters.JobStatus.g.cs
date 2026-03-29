@@ -21,12 +21,12 @@ namespace Descript.JsonConverters
                             throw new global::System.InvalidOperationException($"Cannot get type info for {nameof(global::Descript.JobStatusDiscriminator)}");
             var discriminator = global::System.Text.Json.JsonSerializer.Deserialize(ref readerCopy, discriminatorTypeInfo);
 
-            global::Descript.ImportJobStatus? importDivideprojectMedia = default;
-            if (discriminator?.JobType == global::Descript.JobStatusDiscriminatorJobType.ImportDivideprojectMedia)
+            global::Descript.ImportJobStatus? importProjectMedia = default;
+            if (discriminator?.JobType == global::Descript.JobStatusDiscriminatorJobType.ImportProjectMedia)
             {
                 var typeInfo = typeInfoResolver.GetTypeInfo(typeof(global::Descript.ImportJobStatus), options) as global::System.Text.Json.Serialization.Metadata.JsonTypeInfo<global::Descript.ImportJobStatus> ??
                                throw new global::System.InvalidOperationException($"Cannot get type info for {nameof(global::Descript.ImportJobStatus)}");
-                importDivideprojectMedia = global::System.Text.Json.JsonSerializer.Deserialize(ref reader, typeInfo);
+                importProjectMedia = global::System.Text.Json.JsonSerializer.Deserialize(ref reader, typeInfo);
             }
             global::Descript.AgentJobStatus? agent = default;
             if (discriminator?.JobType == global::Descript.JobStatusDiscriminatorJobType.Agent)
@@ -38,7 +38,7 @@ namespace Descript.JsonConverters
 
             var __value = new global::Descript.JobStatus(
                 discriminator?.JobType,
-                importDivideprojectMedia,
+                importProjectMedia,
 
                 agent
                 );
@@ -55,11 +55,11 @@ namespace Descript.JsonConverters
             options = options ?? throw new global::System.ArgumentNullException(nameof(options));
             var typeInfoResolver = options.TypeInfoResolver ?? throw new global::System.InvalidOperationException("TypeInfoResolver is not set.");
 
-            if (value.IsImportDivideprojectMedia)
+            if (value.IsImportProjectMedia)
             {
                 var typeInfo = typeInfoResolver.GetTypeInfo(typeof(global::Descript.ImportJobStatus), options) as global::System.Text.Json.Serialization.Metadata.JsonTypeInfo<global::Descript.ImportJobStatus?> ??
                                throw new global::System.InvalidOperationException($"Cannot get type info for {typeof(global::Descript.ImportJobStatus).Name}");
-                global::System.Text.Json.JsonSerializer.Serialize(writer, value.ImportDivideprojectMedia, typeInfo);
+                global::System.Text.Json.JsonSerializer.Serialize(writer, value.ImportProjectMedia, typeInfo);
             }
             else if (value.IsAgent)
             {

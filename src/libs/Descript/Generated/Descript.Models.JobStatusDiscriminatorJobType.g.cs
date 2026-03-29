@@ -15,7 +15,7 @@ namespace Descript
         /// <summary>
         /// 
         /// </summary>
-        ImportDivideprojectMedia,
+        ImportProjectMedia,
     }
 
     /// <summary>
@@ -31,7 +31,7 @@ namespace Descript
             return value switch
             {
                 JobStatusDiscriminatorJobType.Agent => "agent",
-                JobStatusDiscriminatorJobType.ImportDivideprojectMedia => "import/project_media",
+                JobStatusDiscriminatorJobType.ImportProjectMedia => "import/project_media",
                 _ => throw new global::System.ArgumentOutOfRangeException(nameof(value), value, null),
             };
         }
@@ -43,7 +43,7 @@ namespace Descript
             return value switch
             {
                 "agent" => JobStatusDiscriminatorJobType.Agent,
-                "import/project_media" => JobStatusDiscriminatorJobType.ImportDivideprojectMedia,
+                "import/project_media" => JobStatusDiscriminatorJobType.ImportProjectMedia,
                 _ => null,
             };
         }
