@@ -370,7 +370,6 @@ namespace Descript
             global::Descript.EditInDescriptSchemaPostBodyProjectSchema projectSchema,
             global::System.Threading.CancellationToken cancellationToken = default)
         {
-
             var __request = new global::Descript.EditInDescriptSchemaPostBody
             {
                 PartnerDriveId = partnerDriveId,

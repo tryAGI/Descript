@@ -489,7 +489,6 @@ namespace Descript
             string? callbackUrl = default,
             global::System.Threading.CancellationToken cancellationToken = default)
         {
-
             var __request = new global::Descript.ImportProjectMediaRequest
             {
                 ProjectId = projectId,
