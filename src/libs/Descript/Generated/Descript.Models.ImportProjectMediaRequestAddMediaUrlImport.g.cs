@@ -19,7 +19,6 @@ namespace Descript
         public required string Url { get; set; }
 
         /// <summary>
-        /// **[Work in progress]** This property is not yet supported and will be ignored if provided. Language is currently auto-detected.<br/>
         /// ISO 639-1 language code for transcription (e.g., "en", "es", "fr").<br/>
         /// If not specified, language is auto-detected from the audio.<br/>
         /// Example: en
@@ -43,7 +42,6 @@ namespace Descript
         /// Example: https://example.com/intro.mp4
         /// </param>
         /// <param name="language">
-        /// **[Work in progress]** This property is not yet supported and will be ignored if provided. Language is currently auto-detected.<br/>
         /// ISO 639-1 language code for transcription (e.g., "en", "es", "fr").<br/>
         /// If not specified, language is auto-detected from the audio.<br/>
         /// Example: en

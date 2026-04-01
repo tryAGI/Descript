@@ -248,8 +248,6 @@ paths:
                           language:
                             type: string
                             description: |
-                              **[Work in progress]** This property is not yet supported and will be ignored if provided. Language is currently auto-detected.
-
                               ISO 639-1 language code for transcription (e.g., "en", "es", "fr").
                               If not specified, language is auto-detected from the audio.
                             example: en
