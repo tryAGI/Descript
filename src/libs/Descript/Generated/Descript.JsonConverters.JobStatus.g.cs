@@ -59,13 +59,13 @@ namespace Descript.JsonConverters
             {
                 var typeInfo = typeInfoResolver.GetTypeInfo(typeof(global::Descript.ImportJobStatus), options) as global::System.Text.Json.Serialization.Metadata.JsonTypeInfo<global::Descript.ImportJobStatus?> ??
                                throw new global::System.InvalidOperationException($"Cannot get type info for {typeof(global::Descript.ImportJobStatus).Name}");
-                global::System.Text.Json.JsonSerializer.Serialize(writer, value.ImportProjectMedia, typeInfo);
+                global::System.Text.Json.JsonSerializer.Serialize(writer, value.ImportProjectMedia!, typeInfo);
             }
             else if (value.IsAgent)
             {
                 var typeInfo = typeInfoResolver.GetTypeInfo(typeof(global::Descript.AgentJobStatus), options) as global::System.Text.Json.Serialization.Metadata.JsonTypeInfo<global::Descript.AgentJobStatus?> ??
                                throw new global::System.InvalidOperationException($"Cannot get type info for {typeof(global::Descript.AgentJobStatus).Name}");
-                global::System.Text.Json.JsonSerializer.Serialize(writer, value.Agent, typeInfo);
+                global::System.Text.Json.JsonSerializer.Serialize(writer, value.Agent!, typeInfo);
             }
         }
     }
