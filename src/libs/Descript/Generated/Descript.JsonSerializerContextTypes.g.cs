@@ -92,19 +92,19 @@ namespace Descript
         /// <summary>
         /// 
         /// </summary>
-        public global::Descript.PublishedProjectMetadataPublishType? Type16 { get; set; }
+        public global::System.DateTime? Type16 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Descript.PublishedProjectMetadataPrivacy? Type17 { get; set; }
+        public global::Descript.PublishedProjectMetadataPublishType? Type17 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Descript.PublishedProjectMetadataMetadata? Type18 { get; set; }
+        public global::Descript.PublishedProjectMetadataPrivacy? Type18 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::System.DateTime? Type19 { get; set; }
+        public global::Descript.PublishedProjectMetadataMetadata? Type19 { get; set; }
         /// <summary>
         /// 
         /// </summary>

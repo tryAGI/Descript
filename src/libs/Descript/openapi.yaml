@@ -1445,6 +1445,16 @@ components:
       type: object
       description: Metadata for a successfully published Descript project
       properties:
+        download_url:
+          type: string
+          format: uri
+          description: A time-limited signed URL for downloading the original published media file. See download_url_expires_at for expiration date.
+          example: https://storage.googleapis.com/bucket/file.mp4?X-Goog-Signature=...
+        download_url_expires_at:
+          type: string
+          format: date-time
+          description: ISO 8601 timestamp indicating when the download_url expires. Present when download_url is present.
+          example: '2025-01-16T10:30:00.000Z'
         project_id:
           type: string
           format: uuid
