@@ -161,7 +161,7 @@ namespace Descript
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.ImportJobStatusJobType), TypeInfoPropertyName = "ImportJobStatusJobType2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.ImportJobStatusJobState), TypeInfoPropertyName = "ImportJobStatusJobState2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.ImportJobStatusProgress))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.Result), TypeInfoPropertyName = "Result3")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.Result), TypeInfoPropertyName = "Result2_3")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.ImportJobStatusResultDiscriminator))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.ImportJobStatusResultDiscriminatorStatus), TypeInfoPropertyName = "ImportJobStatusResultDiscriminatorStatus2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.AgentSuccessResult))]
