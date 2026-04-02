@@ -9,6 +9,22 @@ namespace Descript
     public sealed partial class PublishedProjectMetadata
     {
         /// <summary>
+        /// A time-limited signed URL for downloading the original published media file. See download_url_expires_at for expiration date.<br/>
+        /// Example: https://storage.googleapis.com/bucket/file.mp4?X-Goog-Signature=...
+        /// </summary>
+        /// <example>https://storage.googleapis.com/bucket/file.mp4?X-Goog-Signature=...</example>
+        [global::System.Text.Json.Serialization.JsonPropertyName("download_url")]
+        public string? DownloadUrl { get; set; }
+
+        /// <summary>
+        /// ISO 8601 timestamp indicating when the download_url expires. Present when download_url is present.<br/>
+        /// Example: 2025-01-16T10:30:00.000Z
+        /// </summary>
+        /// <example>2025-01-16T10:30:00.000Z</example>
+        [global::System.Text.Json.Serialization.JsonPropertyName("download_url_expires_at")]
+        public global::System.DateTime? DownloadUrlExpiresAt { get; set; }
+
+        /// <summary>
         /// The unique identifier of the source Descript project<br/>
         /// Example: 12345678-1234-5678-1234-567812345678
         /// </summary>
@@ -81,6 +97,14 @@ namespace Descript
         /// Full VTT-formatted subtitle/caption content for the published project<br/>
         /// Example: WEBVTT\n\n00:00:00.000 --&gt; 00:00:02.000\nWelcome to my video
         /// </param>
+        /// <param name="downloadUrl">
+        /// A time-limited signed URL for downloading the original published media file. See download_url_expires_at for expiration date.<br/>
+        /// Example: https://storage.googleapis.com/bucket/file.mp4?X-Goog-Signature=...
+        /// </param>
+        /// <param name="downloadUrlExpiresAt">
+        /// ISO 8601 timestamp indicating when the download_url expires. Present when download_url is present.<br/>
+        /// Example: 2025-01-16T10:30:00.000Z
+        /// </param>
 #if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 #endif
@@ -89,8 +113,12 @@ namespace Descript
             global::Descript.PublishedProjectMetadataPublishType publishType,
             global::Descript.PublishedProjectMetadataPrivacy privacy,
             global::Descript.PublishedProjectMetadataMetadata metadata,
-            string subtitles)
+            string subtitles,
+            string? downloadUrl,
+            global::System.DateTime? downloadUrlExpiresAt)
         {
+            this.DownloadUrl = downloadUrl;
+            this.DownloadUrlExpiresAt = downloadUrlExpiresAt;
             this.ProjectId = projectId;
             this.PublishType = publishType;
             this.Privacy = privacy;
