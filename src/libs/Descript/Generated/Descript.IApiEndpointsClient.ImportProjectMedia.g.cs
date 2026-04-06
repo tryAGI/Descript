@@ -18,6 +18,8 @@ namespace Descript
         /// - URLs must support HTTP Range requests<br/>
         /// - Recommended to sign URLs for 12-48 hours to reduce chance of failure<br/>
         /// - [Supported file types](https://help.descript.com/hc/en-us/articles/10164098416909-Supported-file-types)<br/>
+        /// ### Direct file upload<br/>
+        /// **[Work in progress]** Instead of providing a URL, you can upload files directly by specifying `content_type` and `file_size` for a media item. The response will include a signed `upload_url` for each direct upload item. PUT the file bytes to that URL, and the import job will process it automatically. See the [Direct file upload](#tag/Direct-file-upload) guide for a full walkthrough.<br/>
         /// ### Async Operations<br/>
         /// Imports run in the background and return a `job_id`. Monitor progress via the [GET /jobs/{job_id}](#operation/getJob) endpoint.<br/>
         /// ### Dynamic webhook<br/>
@@ -45,6 +47,8 @@ namespace Descript
         /// - URLs must support HTTP Range requests<br/>
         /// - Recommended to sign URLs for 12-48 hours to reduce chance of failure<br/>
         /// - [Supported file types](https://help.descript.com/hc/en-us/articles/10164098416909-Supported-file-types)<br/>
+        /// ### Direct file upload<br/>
+        /// **[Work in progress]** Instead of providing a URL, you can upload files directly by specifying `content_type` and `file_size` for a media item. The response will include a signed `upload_url` for each direct upload item. PUT the file bytes to that URL, and the import job will process it automatically. See the [Direct file upload](#tag/Direct-file-upload) guide for a full walkthrough.<br/>
         /// ### Async Operations<br/>
         /// Imports run in the background and return a `job_id`. Monitor progress via the [GET /jobs/{job_id}](#operation/getJob) endpoint.<br/>
         /// ### Dynamic webhook<br/>
