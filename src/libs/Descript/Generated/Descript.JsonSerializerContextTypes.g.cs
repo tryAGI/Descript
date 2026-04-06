@@ -288,11 +288,11 @@ namespace Descript
         /// <summary>
         /// 
         /// </summary>
-        public global::Descript.OneOf<global::Descript.ImportProjectMediaRequestAddMediaUrlImport, global::Descript.ImportProjectMediaRequestAddMediaMultitrackSequence>? Type65 { get; set; }
+        public global::Descript.ImportProjectMediaRequestAddMediaUrlImport? Type65 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Descript.ImportProjectMediaRequestAddMediaUrlImport? Type66 { get; set; }
+        public global::Descript.ImportProjectMediaRequestAddMediaDirectUpload? Type66 { get; set; }
         /// <summary>
         /// 
         /// </summary>
@@ -340,27 +340,35 @@ namespace Descript
         /// <summary>
         /// 
         /// </summary>
-        public global::Descript.AgentEditJobResponse? Type78 { get; set; }
+        public global::System.Collections.Generic.Dictionary<string, global::Descript.ImportProjectMediaResponseUploadUrls2>? Type78 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Descript.ListJobsResponse? Type79 { get; set; }
+        public global::Descript.ImportProjectMediaResponseUploadUrls2? Type79 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::System.Collections.Generic.IList<global::Descript.JobStatus>? Type80 { get; set; }
+        public global::Descript.AgentEditJobResponse? Type80 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Descript.ListJobsResponsePagination? Type81 { get; set; }
+        public global::Descript.ListJobsResponse? Type81 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Descript.GetStatusResponse? Type82 { get; set; }
+        public global::System.Collections.Generic.IList<global::Descript.JobStatus>? Type82 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Descript.GetStatusResponseStatus? Type83 { get; set; }
+        public global::Descript.ListJobsResponsePagination? Type83 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::Descript.GetStatusResponse? Type84 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::Descript.GetStatusResponseStatus? Type85 { get; set; }
 
         /// <summary>
         /// 

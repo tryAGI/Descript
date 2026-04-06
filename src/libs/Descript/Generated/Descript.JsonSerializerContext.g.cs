@@ -111,7 +111,7 @@ namespace Descript
 
             typeof(global::Descript.JsonConverters.JobStatusJsonConverter),
 
-            typeof(global::Descript.JsonConverters.OneOfJsonConverter<global::Descript.ImportProjectMediaRequestAddMediaUrlImport, global::Descript.ImportProjectMediaRequestAddMediaMultitrackSequence>),
+            typeof(global::Descript.JsonConverters.OneOfJsonConverter<global::Descript.ImportProjectMediaRequestAddMediaUrlImport, global::Descript.ImportProjectMediaRequestAddMediaDirectUpload, global::Descript.ImportProjectMediaRequestAddMediaMultitrackSequence>),
 
             typeof(global::Descript.JsonConverters.UnixTimestampJsonConverter),
         })]
@@ -181,9 +181,10 @@ namespace Descript
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.JobStatusDiscriminatorJobType), TypeInfoPropertyName = "JobStatusDiscriminatorJobType2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.ImportProjectMediaRequest))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.ImportProjectMediaRequestTeamAccess), TypeInfoPropertyName = "ImportProjectMediaRequestTeamAccess2")]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.Dictionary<string, global::Descript.OneOf<global::Descript.ImportProjectMediaRequestAddMediaUrlImport, global::Descript.ImportProjectMediaRequestAddMediaMultitrackSequence>>))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.OneOf<global::Descript.ImportProjectMediaRequestAddMediaUrlImport, global::Descript.ImportProjectMediaRequestAddMediaMultitrackSequence>), TypeInfoPropertyName = "OneOfImportProjectMediaRequestAddMediaUrlImportImportProjectMediaRequestAddMediaMultitrackSequence2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.Dictionary<string, global::Descript.OneOf<global::Descript.ImportProjectMediaRequestAddMediaUrlImport, global::Descript.ImportProjectMediaRequestAddMediaDirectUpload, global::Descript.ImportProjectMediaRequestAddMediaMultitrackSequence>>), TypeInfoPropertyName = "ImportProjectMediaRequestAddMediaMultitrackSequence_be431db9011ff791")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.OneOf<global::Descript.ImportProjectMediaRequestAddMediaUrlImport, global::Descript.ImportProjectMediaRequestAddMediaDirectUpload, global::Descript.ImportProjectMediaRequestAddMediaMultitrackSequence>), TypeInfoPropertyName = "ImportProjectMediaRequestAddMediaMultitrackSequence_dc92f0bae16ba1fc")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.ImportProjectMediaRequestAddMediaUrlImport))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.ImportProjectMediaRequestAddMediaDirectUpload))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.ImportProjectMediaRequestAddMediaMultitrackSequence))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.IList<global::Descript.ImportProjectMediaRequestAddMediaMultitrackSequenceTrack>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.ImportProjectMediaRequestAddMediaMultitrackSequenceTrack))]
@@ -195,6 +196,8 @@ namespace Descript
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.AgentEditJobRequestTeamAccess), TypeInfoPropertyName = "AgentEditJobRequestTeamAccess2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.ListJobsType), TypeInfoPropertyName = "ListJobsType2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.ImportProjectMediaResponse))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.Dictionary<string, global::Descript.ImportProjectMediaResponseUploadUrls2>))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.ImportProjectMediaResponseUploadUrls2))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.AgentEditJobResponse))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.ListJobsResponse))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.IList<global::Descript.JobStatus>))]

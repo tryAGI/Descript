@@ -45,6 +45,15 @@ namespace Descript
         public required string ProjectUrl { get; set; }
 
         /// <summary>
+        /// Signed upload URLs for each direct upload media item. Only present when the request<br/>
+        /// includes direct upload references. PUT the file contents to the `upload_url` with<br/>
+        /// `Content-Type: application/octet-stream`. The import job will automatically detect<br/>
+        /// the upload and process the file.
+        /// </summary>
+        [global::System.Text.Json.Serialization.JsonPropertyName("upload_urls")]
+        public global::System.Collections.Generic.Dictionary<string, global::Descript.ImportProjectMediaResponseUploadUrls2>? UploadUrls { get; set; }
+
+        /// <summary>
         /// Additional properties that are not explicitly defined in the schema
         /// </summary>
         [global::System.Text.Json.Serialization.JsonExtensionData]
@@ -69,6 +78,12 @@ namespace Descript
         /// URL to access the project in Descript web app<br/>
         /// Example: https://web.descript.com/9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
         /// </param>
+        /// <param name="uploadUrls">
+        /// Signed upload URLs for each direct upload media item. Only present when the request<br/>
+        /// includes direct upload references. PUT the file contents to the `upload_url` with<br/>
+        /// `Content-Type: application/octet-stream`. The import job will automatically detect<br/>
+        /// the upload and process the file.
+        /// </param>
 #if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 #endif
@@ -76,12 +91,14 @@ namespace Descript
             global::System.Guid jobId,
             global::System.Guid driveId,
             global::System.Guid projectId,
-            string projectUrl)
+            string projectUrl,
+            global::System.Collections.Generic.Dictionary<string, global::Descript.ImportProjectMediaResponseUploadUrls2>? uploadUrls)
         {
             this.JobId = jobId;
             this.DriveId = driveId;
             this.ProjectId = projectId;
             this.ProjectUrl = projectUrl ?? throw new global::System.ArgumentNullException(nameof(projectUrl));
+            this.UploadUrls = uploadUrls;
         }
 
         /// <summary>
