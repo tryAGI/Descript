@@ -6,7 +6,7 @@ namespace Descript
     /// <summary>
     /// 
     /// </summary>
-    public readonly partial struct OneOf<T1, T2> : global::System.IEquatable<OneOf<T1, T2>>
+    public readonly partial struct OneOf<T1, T2, T3> : global::System.IEquatable<OneOf<T1, T2, T3>>
     {
         /// <summary>
         /// 
@@ -41,15 +41,32 @@ namespace Descript
         [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhen(true, nameof(Value2))]
 #endif
         public bool IsValue2 => Value2 != null;
-        /// <summary>
-        /// 
-        /// </summary>
-        public static implicit operator OneOf<T1, T2>(T1 value) => new OneOf<T1, T2>((T1?)value);
 
         /// <summary>
         /// 
         /// </summary>
-        public static implicit operator T1?(OneOf<T1, T2> @this) => @this.Value1;
+#if NET6_0_OR_GREATER
+        public T3? Value3 { get; init; }
+#else
+        public T3? Value3 { get; }
+#endif
+
+        /// <summary>
+        /// 
+        /// </summary>
+#if NET6_0_OR_GREATER
+        [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhen(true, nameof(Value3))]
+#endif
+        public bool IsValue3 => Value3 != null;
+        /// <summary>
+        /// 
+        /// </summary>
+        public static implicit operator OneOf<T1, T2, T3>(T1 value) => new OneOf<T1, T2, T3>((T1?)value);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static implicit operator T1?(OneOf<T1, T2, T3> @this) => @this.Value1;
 
         /// <summary>
         /// 
@@ -62,12 +79,12 @@ namespace Descript
         /// <summary>
         /// 
         /// </summary>
-        public static implicit operator OneOf<T1, T2>(T2 value) => new OneOf<T1, T2>((T2?)value);
+        public static implicit operator OneOf<T1, T2, T3>(T2 value) => new OneOf<T1, T2, T3>((T2?)value);
 
         /// <summary>
         /// 
         /// </summary>
-        public static implicit operator T2?(OneOf<T1, T2> @this) => @this.Value2;
+        public static implicit operator T2?(OneOf<T1, T2, T3> @this) => @this.Value2;
 
         /// <summary>
         /// 
@@ -80,19 +97,40 @@ namespace Descript
         /// <summary>
         /// 
         /// </summary>
+        public static implicit operator OneOf<T1, T2, T3>(T3 value) => new OneOf<T1, T2, T3>((T3?)value);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static implicit operator T3?(OneOf<T1, T2, T3> @this) => @this.Value3;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public OneOf(T3? value)
+        {
+            Value3 = value;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public OneOf(
             T1? value1,
-            T2? value2
+            T2? value2,
+            T3? value3
             )
         {
             Value1 = value1;
             Value2 = value2;
+            Value3 = value3;
         }
 
         /// <summary>
         /// 
         /// </summary>
         public object? Object =>
+            Value3 as object ??
             Value2 as object ??
             Value1 as object 
             ;
@@ -102,7 +140,8 @@ namespace Descript
         /// </summary>
         public override string? ToString() =>
             Value1?.ToString() ??
-            Value2?.ToString() 
+            Value2?.ToString() ??
+            Value3?.ToString() 
             ;
 
         /// <summary>
@@ -110,7 +149,7 @@ namespace Descript
         /// </summary>
         public bool Validate()
         {
-            return IsValue1 && !IsValue2 || !IsValue1 && IsValue2;
+            return IsValue1 && !IsValue2 && !IsValue3 || !IsValue1 && IsValue2 && !IsValue3 || !IsValue1 && !IsValue2 && IsValue3;
         }
 
         /// <summary>
@@ -119,6 +158,7 @@ namespace Descript
         public TResult? Match<TResult>(
             global::System.Func<T1, TResult>? value1 = null,
             global::System.Func<T2, TResult>? value2 = null,
+            global::System.Func<T3, TResult>? value3 = null,
             bool validate = true)
         {
             if (validate)
@@ -134,6 +174,10 @@ namespace Descript
             {
                 return value2(Value2!);
             }
+            else if (IsValue3 && value3 != null)
+            {
+                return value3(Value3!);
+            }
 
             return default(TResult);
         }
@@ -144,6 +188,7 @@ namespace Descript
         public void Match(
             global::System.Action<T1>? value1 = null,
             global::System.Action<T2>? value2 = null,
+            global::System.Action<T3>? value3 = null,
             bool validate = true)
         {
             if (validate)
@@ -159,6 +204,10 @@ namespace Descript
             {
                 value2?.Invoke(Value2!);
             }
+            else if (IsValue3)
+            {
+                value3?.Invoke(Value3!);
+            }
         }
 
         /// <summary>
@@ -172,6 +221,8 @@ namespace Descript
                 typeof(T1),
                 Value2,
                 typeof(T2),
+                Value3,
+                typeof(T3),
             };
             const int offset = unchecked((int)2166136261);
             const int prime = 16777619;
@@ -185,26 +236,27 @@ namespace Descript
         /// <summary>
         /// 
         /// </summary>
-        public bool Equals(OneOf<T1, T2> other)
+        public bool Equals(OneOf<T1, T2, T3> other)
         {
             return
                 global::System.Collections.Generic.EqualityComparer<T1?>.Default.Equals(Value1, other.Value1) &&
-                global::System.Collections.Generic.EqualityComparer<T2?>.Default.Equals(Value2, other.Value2) 
+                global::System.Collections.Generic.EqualityComparer<T2?>.Default.Equals(Value2, other.Value2) &&
+                global::System.Collections.Generic.EqualityComparer<T3?>.Default.Equals(Value3, other.Value3) 
                 ;
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public static bool operator ==(OneOf<T1, T2> obj1, OneOf<T1, T2> obj2)
+        public static bool operator ==(OneOf<T1, T2, T3> obj1, OneOf<T1, T2, T3> obj2)
         {
-            return global::System.Collections.Generic.EqualityComparer<OneOf<T1, T2>>.Default.Equals(obj1, obj2);
+            return global::System.Collections.Generic.EqualityComparer<OneOf<T1, T2, T3>>.Default.Equals(obj1, obj2);
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public static bool operator !=(OneOf<T1, T2> obj1, OneOf<T1, T2> obj2)
+        public static bool operator !=(OneOf<T1, T2, T3> obj1, OneOf<T1, T2, T3> obj2)
         {
             return !(obj1 == obj2);
         }
@@ -214,7 +266,7 @@ namespace Descript
         /// </summary>
         public override bool Equals(object? obj)
         {
-            return obj is OneOf<T1, T2> o && Equals(o);
+            return obj is OneOf<T1, T2, T3> o && Equals(o);
         }
     }
 }

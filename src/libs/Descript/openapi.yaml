@@ -73,6 +73,114 @@ tags:
       Run `descript-api help` to see the full list of available commands and options.
   - name: API Endpoints
     description: Import media, edit projects with AI, and query jobs and projects.
+  - name: Direct file upload
+    description: |
+      Instead of providing a public URL, you can upload files directly from your local machine using the [import endpoint](#operation/importProjectMedia). The flow has three steps: request signed upload URLs, PUT your file bytes, then poll for completion.
+
+      ## Step 1 — Request upload URLs
+
+      Call the import endpoint with `content_type` and `file_size` instead of `url` for each media item you want to upload directly.
+
+      **Request**
+
+      ```bash
+      curl -X POST https://descriptapi.com/v1/jobs/import/project_media \
+        -H "Authorization: Bearer YOUR_API_TOKEN" \
+        -H "Content-Type: application/json" \
+        -d '{
+          "project_name": "My Upload Project",
+          "add_media": {
+            "recording.mp4": {
+              "content_type": "video/mp4",
+              "file_size": 52428800
+            }
+          },
+          "add_compositions": [
+            {
+              "name": "Main",
+              "clips": [
+                { "media": "recording.mp4" }
+              ]
+            }
+          ]
+        }'
+      ```
+
+      The response includes an `upload_urls` object keyed by media reference ID. Each entry contains a signed `upload_url` (valid for 3 hours), plus `asset_id` and `artifact_id` for the created asset.
+
+      **Response**
+
+      ```json
+      {
+        "job_id": "project-media-import-a1b2c3d4",
+        "drive_id": "c9c5c47e",
+        "project_id": "e2f89ce6",
+        "project_url": "https://web.descript.com/e2f89ce6",
+        "upload_urls": {
+          "recording.mp4": {
+            "upload_url": "https://storage.googleapis.com/bucket/...",
+            "asset_id": "d4e5f6a7-1234-5678-9abc-def012345678",
+            "artifact_id": "a1b2c3d4-5678-9abc-def0-123456789abc"
+          }
+        }
+      }
+      ```
+
+      ## Step 2 — Upload the file
+
+      PUT the raw file bytes to the signed URL. Use `Content-Type: application/octet-stream`.
+
+      ```bash
+      curl -X PUT \
+        -H "Content-Type: application/octet-stream" \
+        --data-binary @recording.mp4 \
+        "https://storage.googleapis.com/bucket/..."
+      ```
+
+      The import job detects the upload automatically and begins processing.
+
+      ## Step 3 — Poll for completion
+
+      Check the job status the same way as a URL-based import — poll the [job status endpoint](#operation/getJob) with the `job_id`, or provide a `callback_url` in the original request.
+
+      ```bash
+      curl https://descriptapi.com/v1/jobs/project-media-import-a1b2c3d4 \
+        -H "Authorization: Bearer YOUR_API_TOKEN"
+      ```
+
+      When the job reaches `job_state: "stopped"`, check `result.status` for success or failure.
+
+      ## Mixing URL imports and direct uploads
+
+      You can combine URL-based and direct upload media items in a single request. Items with `url` are fetched server-side; items with `content_type` and `file_size` return signed upload URLs.
+
+      ```bash
+      curl -X POST https://descriptapi.com/v1/jobs/import/project_media \
+        -H "Authorization: Bearer YOUR_API_TOKEN" \
+        -H "Content-Type: application/json" \
+        -d '{
+          "project_name": "Mixed Import",
+          "add_media": {
+            "intro.mp4": {
+              "url": "https://example.com/intro.mp4"
+            },
+            "recording.mp4": {
+              "content_type": "video/mp4",
+              "file_size": 52428800
+            }
+          }
+        }'
+      ```
+
+      The response will include `upload_urls` only for the direct upload items.
+
+      ## Required fields
+
+      | Field | Type | Description |
+      |-------|------|-------------|
+      | `content_type` | string | MIME type of the file (e.g., `video/mp4`, `audio/wav`) |
+      | `file_size` | integer | File size in bytes |
+      | `language` | string | *(optional)* ISO 639-1 language code for transcription. Auto-detected if omitted. |
   - name: Authentication
     description: |
       The Descript API uses personal API tokens to authenticate requests. Tokens are scoped to a specific Drive and inherit your permissions on that Drive.
@@ -177,7 +285,7 @@ paths:
       summary: Import media and sequences
       security:
         - bearerAuth: []
-      description: "Import media files into a new or existing project and create compositions.\n\nThis endpoint can:\n- Create a new project if `project_id` is not provided\n- Import media files from URLs\n- Create multitrack sequences\n- Create compositions (timelines) from existing or new media in the project\n- Trigger transcription and other background processing tasks\n\n### Media URL requirements\n- URLs must be accessible by Descript servers\n- URLs must support HTTP Range requests\n- Recommended to sign URLs for 12-48 hours to reduce chance of failure\n- [Supported file types](https://help.descript.com/hc/en-us/articles/10164098416909-Supported-file-types)\n\n### Direct file upload\n\n**[Work in progress]** Instead of providing a URL, you can upload files directly by specifying `content_type` and `file_size` for a media item. The response will include a signed `upload_url` for each direct upload item. PUT the file bytes to that URL, and the import job will process it automatically. See the [Direct file upload](#tag/Direct-file-upload) guide for a full walkthrough.\n\n### Async Operations\n\nImports\_run in the background and return a `job_id`. Monitor progress via the [GET /jobs/{job_id}](#operation/getJob) endpoint.\n\n### Dynamic webhook\n\nIf `callback_url` is provided, Descript will POST the job status to that URL when the job finishes (successfully or not).\n\nThe payload will match the format returned by [GET /jobs/{job_id}](#operation/getJob).\n"
+      description: "Import media files into a new or existing project and create compositions.\n\nThis endpoint can:\n- Create a new project if `project_id` is not provided\n- Import media files from URLs\n- Create multitrack sequences\n- Create compositions (timelines) from existing or new media in the project\n- Trigger transcription and other background processing tasks\n\n### Media URL requirements\n- URLs must be accessible by Descript servers\n- URLs must support HTTP Range requests\n- Recommended to sign URLs for 12-48 hours to reduce chance of failure\n- [Supported file types](https://help.descript.com/hc/en-us/articles/10164098416909-Supported-file-types)\n\n### Direct file upload\n\nInstead of providing a URL, you can upload files directly by specifying `content_type` and `file_size` for a media item. The response will include a signed `upload_url` for each direct upload item. PUT the file bytes to that URL, and the import job will process it automatically. See the [Direct file upload](#tag/Direct-file-upload) guide for a full walkthrough.\n\n### Async Operations\n\nImports\_run in the background and return a `job_id`. Monitor progress via the [GET /jobs/{job_id}](#operation/getJob) endpoint.\n\n### Dynamic webhook\n\nIf `callback_url` is provided, Descript will POST the job status to that URL when the job finishes (successfully or not).\n\nThe payload will match the format returned by [GET /jobs/{job_id}](#operation/getJob).\n"
       operationId: importProjectMedia
       requestBody:
         content:
@@ -245,6 +353,31 @@ paths:
                               URL to import media from. Must be accessible by Descript servers and support Range requests.
                               Recommended to sign URLs for 12-48 hours to reduce chance of failure.
                             example: https://example.com/intro.mp4
+                          language:
+                            type: string
+                            description: |
+                              ISO 639-1 language code for transcription (e.g., "en", "es", "fr").
+                              If not specified, language is auto-detected from the audio.
+                            example: en
+                        additionalProperties: false
+                      - type: object
+                        title: Direct Upload
+                        description: |
+                          Upload a file directly to Descript. The API returns a signed upload URL
+                          in the response. PUT your file to that URL, then the import job will
+                          process it automatically.
+                        required:
+                          - content_type
+                          - file_size
+                        properties:
+                          content_type:
+                            type: string
+                            description: MIME type of the file (e.g., "video/mp4", "audio/wav")
+                            example: video/mp4
+                          file_size:
+                            type: integer
+                            description: File size in bytes
+                            example: 52428800
                           language:
                             type: string
                             description: |
@@ -373,6 +506,19 @@ paths:
                       url: https://example.com/intro.mp4
                     Assets/logo.png:
                       url: https://example.com/logo.png
+              direct_upload:
+                summary: Direct file upload
+                description: Upload a local file directly instead of providing a URL
+                value:
+                  project_name: Upload Project
+                  add_media:
+                    recording.mp4:
+                      content_type: video/mp4
+                      file_size: 52428800
+                  add_compositions:
+                    - name: Main
+                      clips:
+                        - media: recording.mp4
               multitrack_sequence:
                 summary: Create multitrack sequence
                 description: Combine multiple tracks with time offsets
@@ -429,6 +575,32 @@ paths:
                     format: uri
                     description: URL to access the project in Descript web app
                     example: https://web.descript.com/9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
+                  upload_urls:
+                    type: object
+                    description: |
+                      Signed upload URLs for each direct upload media item. Only present when the request
+                      includes direct upload references. PUT the file contents to the `upload_url` with
+                      `Content-Type: application/octet-stream`. The import job will automatically detect
+                      the upload and process the file.
+                    additionalProperties:
+                      type: object
+                      properties:
+                        upload_url:
+                          type: string
+                          format: uri
+                          description: Signed URL to PUT the file to. Expires after 3 hours.
+                        asset_id:
+                          type: string
+                          format: uuid
+                          description: GAT asset ID for the uploaded file
+                        artifact_id:
+                          type: string
+                          format: uuid
+                          description: GAT artifact ID for the uploaded file
+                      required:
+                        - upload_url
+                        - asset_id
+                        - artifact_id
                 required:
                   - job_id
                   - drive_id

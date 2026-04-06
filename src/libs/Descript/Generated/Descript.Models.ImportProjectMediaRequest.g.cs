@@ -54,7 +54,7 @@ namespace Descript
         /// </summary>
         /// <example>{"Misc/intro.mp4":{"url":"https://example.com/intro.mp4"},"demo.mp4":{"url":"https://example.com/demo.mp4"},"Multicam_Track":{"tracks":[{"media":"Recordings/camera1.mp4","offset":0},{"media":"Recordings/camera2.mp4","offset":50}]}}</example>
         [global::System.Text.Json.Serialization.JsonPropertyName("add_media")]
-        public global::System.Collections.Generic.Dictionary<string, global::Descript.OneOf<global::Descript.ImportProjectMediaRequestAddMediaUrlImport, global::Descript.ImportProjectMediaRequestAddMediaMultitrackSequence>>? AddMedia { get; set; }
+        public global::System.Collections.Generic.Dictionary<string, global::Descript.OneOf<global::Descript.ImportProjectMediaRequestAddMediaUrlImport, global::Descript.ImportProjectMediaRequestAddMediaDirectUpload, global::Descript.ImportProjectMediaRequestAddMediaMultitrackSequence>>? AddMedia { get; set; }
 
         /// <summary>
         /// Optional list of compositions to create in the project
@@ -121,7 +121,7 @@ namespace Descript
             global::System.Guid? projectId,
             string? projectName,
             global::Descript.ImportProjectMediaRequestTeamAccess? teamAccess,
-            global::System.Collections.Generic.Dictionary<string, global::Descript.OneOf<global::Descript.ImportProjectMediaRequestAddMediaUrlImport, global::Descript.ImportProjectMediaRequestAddMediaMultitrackSequence>>? addMedia,
+            global::System.Collections.Generic.Dictionary<string, global::Descript.OneOf<global::Descript.ImportProjectMediaRequestAddMediaUrlImport, global::Descript.ImportProjectMediaRequestAddMediaDirectUpload, global::Descript.ImportProjectMediaRequestAddMediaMultitrackSequence>>? addMedia,
             global::System.Collections.Generic.IList<global::Descript.ImportProjectMediaRequestAddComposition>? addCompositions,
             string? callbackUrl)
         {
