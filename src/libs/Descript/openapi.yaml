@@ -2098,6 +2098,7 @@ components:
         mapping:
           import/project_media: '#/components/schemas/ImportJobStatus'
           agent: '#/components/schemas/AgentJobStatus'
+          publish: '#/components/schemas/PublishJobStatus'
       description: |
         Status of an async job. The response structure varies based on the job type.
         Use the `job_type` field to determine which fields will be present.
