@@ -5,6 +5,25 @@ namespace Descript
 {
     public partial class ApiEndpointsClient
     {
+
+
+        private static readonly global::Descript.EndPointSecurityRequirement s_GetJobSecurityRequirement0 =
+            new global::Descript.EndPointSecurityRequirement
+            {
+                Authorizations = new global::Descript.EndPointAuthorizationRequirement[]
+                {                    new global::Descript.EndPointAuthorizationRequirement
+                    {
+                        Type = "Http",
+                        Location = "Header",
+                        Name = "Bearer",
+                        FriendlyName = "Bearer",
+                    },
+                },
+            };
+        private static readonly global::Descript.EndPointSecurityRequirement[] s_GetJobSecurityRequirements =
+            new global::Descript.EndPointSecurityRequirement[]
+            {                s_GetJobSecurityRequirement0,
+            };
         partial void PrepareGetJobArguments(
             global::System.Net.Http.HttpClient httpClient,
             ref global::System.Guid jobId);
@@ -39,9 +58,15 @@ namespace Descript
                 httpClient: HttpClient,
                 jobId: ref jobId);
 
+
+            var __authorizations = global::Descript.EndPointSecurityResolver.ResolveAuthorizations(
+                availableAuthorizations: Authorizations,
+                securityRequirements: s_GetJobSecurityRequirements,
+                operationName: "GetJobAsync");
+
             var __pathBuilder = new global::Descript.PathBuilder(
                 path: $"/jobs/{jobId}",
-                baseUri: HttpClient.BaseAddress); 
+                baseUri: HttpClient.BaseAddress);
             var __path = __pathBuilder.ToString();
             using var __httpRequest = new global::System.Net.Http.HttpRequestMessage(
                 method: global::System.Net.Http.HttpMethod.Get,
@@ -51,7 +76,7 @@ namespace Descript
             __httpRequest.VersionPolicy = global::System.Net.Http.HttpVersionPolicy.RequestVersionOrHigher;
 #endif
 
-            foreach (var __authorization in Authorizations)
+            foreach (var __authorization in __authorizations)
             {
                 if (__authorization.Type == "Http" ||
                     __authorization.Type == "OAuth2")
