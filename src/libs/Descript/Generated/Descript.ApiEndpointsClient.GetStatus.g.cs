@@ -5,6 +5,25 @@ namespace Descript
 {
     public partial class ApiEndpointsClient
     {
+
+
+        private static readonly global::Descript.EndPointSecurityRequirement s_GetStatusSecurityRequirement0 =
+            new global::Descript.EndPointSecurityRequirement
+            {
+                Authorizations = new global::Descript.EndPointAuthorizationRequirement[]
+                {                    new global::Descript.EndPointAuthorizationRequirement
+                    {
+                        Type = "Http",
+                        Location = "Header",
+                        Name = "Bearer",
+                        FriendlyName = "Bearer",
+                    },
+                },
+            };
+        private static readonly global::Descript.EndPointSecurityRequirement[] s_GetStatusSecurityRequirements =
+            new global::Descript.EndPointSecurityRequirement[]
+            {                s_GetStatusSecurityRequirement0,
+            };
         partial void PrepareGetStatusArguments(
             global::System.Net.Http.HttpClient httpClient);
         partial void PrepareGetStatusRequest(
@@ -38,9 +57,15 @@ namespace Descript
             PrepareGetStatusArguments(
                 httpClient: HttpClient);
 
+
+            var __authorizations = global::Descript.EndPointSecurityResolver.ResolveAuthorizations(
+                availableAuthorizations: Authorizations,
+                securityRequirements: s_GetStatusSecurityRequirements,
+                operationName: "GetStatusAsync");
+
             var __pathBuilder = new global::Descript.PathBuilder(
                 path: "/status",
-                baseUri: HttpClient.BaseAddress); 
+                baseUri: HttpClient.BaseAddress);
             var __path = __pathBuilder.ToString();
             using var __httpRequest = new global::System.Net.Http.HttpRequestMessage(
                 method: global::System.Net.Http.HttpMethod.Get,
@@ -50,7 +75,7 @@ namespace Descript
             __httpRequest.VersionPolicy = global::System.Net.Http.HttpVersionPolicy.RequestVersionOrHigher;
 #endif
 
-            foreach (var __authorization in Authorizations)
+            foreach (var __authorization in __authorizations)
             {
                 if (__authorization.Type == "Http" ||
                     __authorization.Type == "OAuth2")

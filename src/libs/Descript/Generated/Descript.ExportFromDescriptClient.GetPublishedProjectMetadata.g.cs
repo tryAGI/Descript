@@ -5,6 +5,25 @@ namespace Descript
 {
     public partial class ExportFromDescriptClient
     {
+
+
+        private static readonly global::Descript.EndPointSecurityRequirement s_GetPublishedProjectMetadataSecurityRequirement0 =
+            new global::Descript.EndPointSecurityRequirement
+            {
+                Authorizations = new global::Descript.EndPointAuthorizationRequirement[]
+                {                    new global::Descript.EndPointAuthorizationRequirement
+                    {
+                        Type = "Http",
+                        Location = "Header",
+                        Name = "Bearer",
+                        FriendlyName = "Bearer",
+                    },
+                },
+            };
+        private static readonly global::Descript.EndPointSecurityRequirement[] s_GetPublishedProjectMetadataSecurityRequirements =
+            new global::Descript.EndPointSecurityRequirement[]
+            {                s_GetPublishedProjectMetadataSecurityRequirement0,
+            };
         partial void PrepareGetPublishedProjectMetadataArguments(
             global::System.Net.Http.HttpClient httpClient,
             ref string publishedProjectSlug);
@@ -41,9 +60,15 @@ namespace Descript
                 httpClient: HttpClient,
                 publishedProjectSlug: ref publishedProjectSlug);
 
+
+            var __authorizations = global::Descript.EndPointSecurityResolver.ResolveAuthorizations(
+                availableAuthorizations: Authorizations,
+                securityRequirements: s_GetPublishedProjectMetadataSecurityRequirements,
+                operationName: "GetPublishedProjectMetadataAsync");
+
             var __pathBuilder = new global::Descript.PathBuilder(
                 path: $"/published_projects/{publishedProjectSlug}",
-                baseUri: HttpClient.BaseAddress); 
+                baseUri: HttpClient.BaseAddress);
             var __path = __pathBuilder.ToString();
             using var __httpRequest = new global::System.Net.Http.HttpRequestMessage(
                 method: global::System.Net.Http.HttpMethod.Get,
@@ -53,7 +78,7 @@ namespace Descript
             __httpRequest.VersionPolicy = global::System.Net.Http.HttpVersionPolicy.RequestVersionOrHigher;
 #endif
 
-            foreach (var __authorization in Authorizations)
+            foreach (var __authorization in __authorizations)
             {
                 if (__authorization.Type == "Http" ||
                     __authorization.Type == "OAuth2")
