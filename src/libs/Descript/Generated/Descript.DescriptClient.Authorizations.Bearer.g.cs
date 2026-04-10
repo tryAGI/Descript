@@ -25,6 +25,7 @@ namespace Descript
             Authorizations.Add(new global::Descript.EndPointAuthorization
             {
                 Type = "Http",
+                SchemeId = "HttpBearer",
                 Location = "Header",
                 Name = "Bearer",
                 Value = apiKey,
