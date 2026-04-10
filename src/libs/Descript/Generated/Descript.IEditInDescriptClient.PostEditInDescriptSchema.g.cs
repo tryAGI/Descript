@@ -43,11 +43,13 @@ namespace Descript
         /// * Video: h264, HEVC (container: MOV, MP4)
         /// </summary>
         /// <param name="request"></param>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Descript.ApiException"></exception>
         global::System.Threading.Tasks.Task<global::Descript.EditInDescriptSchemaPostResponse> PostEditInDescriptSchemaAsync(
 
             global::Descript.EditInDescriptSchemaPostBody request,
+            global::Descript.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Create Import URL<br/>
@@ -94,11 +96,13 @@ namespace Descript
         /// <param name="projectSchema">
         /// The Project schema
         /// </param>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::System.InvalidOperationException"></exception>
         global::System.Threading.Tasks.Task<global::Descript.EditInDescriptSchemaPostResponse> PostEditInDescriptSchemaAsync(
             global::System.Guid partnerDriveId,
             global::Descript.EditInDescriptSchemaPostBodyProjectSchema projectSchema,
+            global::Descript.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
     }
 }

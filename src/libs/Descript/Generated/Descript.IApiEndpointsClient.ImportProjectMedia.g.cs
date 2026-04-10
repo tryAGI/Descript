@@ -27,11 +27,13 @@ namespace Descript
         /// The payload will match the format returned by [GET /jobs/{job_id}](#operation/getJob).
         /// </summary>
         /// <param name="request"></param>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Descript.ApiException"></exception>
         global::System.Threading.Tasks.Task<global::Descript.ImportProjectMediaResponse> ImportProjectMediaAsync(
 
             global::Descript.ImportProjectMediaRequest request,
+            global::Descript.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Import media and sequences<br/>
@@ -89,6 +91,7 @@ namespace Descript
         /// Descript will POST the job status (same format as [GET /jobs/{job_id}](#operation/getJob)) to this URL.<br/>
         /// Example: https://example.com/webhooks/descript/job_callback
         /// </param>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::System.InvalidOperationException"></exception>
         global::System.Threading.Tasks.Task<global::Descript.ImportProjectMediaResponse> ImportProjectMediaAsync(
@@ -98,6 +101,7 @@ namespace Descript
             global::System.Collections.Generic.Dictionary<string, global::Descript.OneOf<global::Descript.ImportProjectMediaRequestAddMediaUrlImport, global::Descript.ImportProjectMediaRequestAddMediaDirectUpload, global::Descript.ImportProjectMediaRequestAddMediaMultitrackSequence>>? addMedia = default,
             global::System.Collections.Generic.IList<global::Descript.ImportProjectMediaRequestAddComposition>? addCompositions = default,
             string? callbackUrl = default,
+            global::Descript.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
     }
 }
