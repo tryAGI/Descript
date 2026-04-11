@@ -1,0 +1,92 @@
+{
+  "Examples": [
+    {
+      "Order": 1,
+      "Title": "Agent edit",
+      "Slug": "agenteditjob",
+      "Description": "Use a background agent to create and edit projects using a natural language prompt.\n\n- **Edit existing project**: Provide a \u0060project_id\u0060 to edit an existing project\n- **Create new project**: Provide a \u0060project_name\u0060 instead of \u0060project_id\u0060 to create a new project\n\n### Common use cases\n- Create new content: \u0022create a 30-second video about cooking tips\u0022\n- Apply audio effects: \u0022add studio sound to every clip\u0022\n- Remove filler words: \u0022remove all filler words from the transcript\u0022\n- Create highlights: \u0022create a 30-second highlight reel\u0022\n- Content editing: \u0022remove the section from 1:30 to 2:15\u0022\n\n### Async Operations\n\nAgent edits run in the background and return a \u0060job_id\u0060. Monitor progress via the [GET /jobs/{job_id}](#operation/getJob) endpoint.\n\n### Dynamic webhook\n\nIf \u0060callback_url\u0060 is provided, Descript will POST the job status to that URL when the job completes or fails.\nThe payload will match the format returned by [GET /jobs/{job_id}](#operation/getJob).",
+      "Language": "csharp",
+      "Code": "using var client = new DescriptClient(apiKey);\n\nvar request = global::System.Text.Json.JsonSerializer.Deserialize\u003Cglobal::Descript.AgentEditJobRequest\u003E(\n    @\u0022{\n  \u0022\u0022project_id\u0022\u0022: \u0022\u00229f36ee32-5a2c-47e7-b1a3-94991d3e3ddb\u0022\u0022,\n  \u0022\u0022model\u0022\u0022: \u0022\u0022haiku-4.5\u0022\u0022,\n  \u0022\u0022prompt\u0022\u0022: \u0022\u0022add studio sound to every clip\u0022\u0022\n}\u0022)!;\n\nvar response = await client.ApiEndpoints.AgentEditJobAsync(\n    request: request\n);",
+      "Format": "sdk",
+      "OperationId": "agentEditJob",
+      "Setup": "This example assumes \u0060using Descript;\u0060 is in scope and \u0060apiKey\u0060 contains the required credential."
+    },
+    {
+      "Order": 2,
+      "Title": "Cancel job",
+      "Slug": "canceljob",
+      "Description": "Cancel a running job.",
+      "Language": "http",
+      "Code": "### Cancel job\n# @name cancelJob\nDELETE {{host}}/jobs/{{job_id}}\nAuthorization: Bearer {{token}}\nAccept: application/json\n\n## Responses\n# 204\n# Description: Job cancelled successfully\n# 401\n# Description: Unauthorized - invalid or missing authentication token\n# Content-Type: application/json\n# 403\n# Description: Forbidden - user does not have access to this job\n# Content-Type: application/json\n# 404\n# Description: Job not found\n# Content-Type: application/json\n# 429\n# Description: Too many requests - rate limit exceeded.\nUse the \u0060Retry-After\u0060 header to determine when to retry.\n\n# Content-Type: application/json",
+      "Format": "http",
+      "OperationId": "cancelJob",
+      "Setup": null
+    },
+    {
+      "Order": 3,
+      "Title": "Get job status",
+      "Slug": "getjob",
+      "Description": "Retrieve the status of any job.\n\nThe response format varies based on job type and includes type-specific fields.",
+      "Language": "http",
+      "Code": "### Get job status\n# @name getJob\nGET {{host}}/jobs/{{job_id}}\nAuthorization: Bearer {{token}}\nAccept: application/json\n\n## Responses\n# 200\n# Description: Job status retrieved successfully\n# Content-Type: application/json\n# 401\n# Description: Unauthorized - invalid or missing authentication token\n# Content-Type: application/json\n# 403\n# Description: Forbidden - user does not have access to this job\n# Content-Type: application/json\n# 404\n# Description: Job not found\n# Content-Type: application/json\n# 429\n# Description: Too many requests - rate limit exceeded.\nUse the \u0060Retry-After\u0060 header to determine when to retry.\n\n# Content-Type: application/json",
+      "Format": "http",
+      "OperationId": "getJob",
+      "Setup": null
+    },
+    {
+      "Order": 4,
+      "Title": "Check API status",
+      "Slug": "getstatus",
+      "Description": "\u003E **Work in progress** \u2014 This endpoint is not yet available and will return an error if called.\n\nCheck API availability and validate authentication token.\n\nThis endpoint can be used to:\n- Verify that your authentication token is valid\n- Check API connectivity without performing any heavy operations\n\nReturns a success response if the token is valid, or a 401 error if the token is invalid or missing.",
+      "Language": "csharp",
+      "Code": "using var client = new DescriptClient(apiKey);\nvar response = await client.ApiEndpoints.GetStatusAsync();\n\n// Example response:\n// {\n//   \u0022status\u0022: \u0022ok\u0022\n// }",
+      "Format": "sdk",
+      "OperationId": "getStatus",
+      "Setup": "This example assumes \u0060using Descript;\u0060 is in scope and \u0060apiKey\u0060 contains the required credential."
+    },
+    {
+      "Order": 5,
+      "Title": "Import media and sequences",
+      "Slug": "importprojectmedia",
+      "Description": "Import media files into a new or existing project and create compositions.\n\nThis endpoint can:\n- Create a new project if \u0060project_id\u0060 is not provided\n- Import media files from URLs\n- Create multitrack sequences\n- Create compositions (timelines) from existing or new media in the project\n- Trigger transcription and other background processing tasks\n\n### Media URL requirements\n- URLs must be accessible by Descript servers\n- URLs must support HTTP Range requests\n- Recommended to sign URLs for 12-48 hours to reduce chance of failure\n- [Supported file types](https://help.descript.com/hc/en-us/articles/10164098416909-Supported-file-types)\n\n### Direct file upload\n\nInstead of providing a URL, you can upload files directly by specifying \u0060content_type\u0060 and \u0060file_size\u0060 for a media item. The response will include a signed \u0060upload_url\u0060 for each direct upload item. PUT the file bytes to that URL, and the import job will process it automatically. See the [Direct file upload](#tag/Direct-file-upload) guide for a full walkthrough.\n\n### Async Operations\n\nImports\u00A0run in the background and return a \u0060job_id\u0060. Monitor progress via the [GET /jobs/{job_id}](#operation/getJob) endpoint.\n\n### Dynamic webhook\n\nIf \u0060callback_url\u0060 is provided, Descript will POST the job status to that URL when the job finishes (successfully or not).\n\nThe payload will match the format returned by [GET /jobs/{job_id}](#operation/getJob).",
+      "Language": "csharp",
+      "Code": "using var client = new DescriptClient(apiKey);\n\nvar request = global::System.Text.Json.JsonSerializer.Deserialize\u003Cglobal::Descript.ImportProjectMediaRequest\u003E(\n    @\u0022{\n  \u0022\u0022project_name\u0022\u0022: \u0022\u0022Marketing Video\u0022\u0022,\n  \u0022\u0022add_media\u0022\u0022: {\n    \u0022\u0022Misc/intro.mp4\u0022\u0022: {\n      \u0022\u0022url\u0022\u0022: \u0022\u0022https://example.com/intro.mp4\u0022\u0022\n    },\n    \u0022\u0022demo.mp4\u0022\u0022: {\n      \u0022\u0022url\u0022\u0022: \u0022\u0022https://example.com/demo.mp4\u0022\u0022\n    },\n    \u0022\u0022Misc/outro.mp4\u0022\u0022: {\n      \u0022\u0022url\u0022\u0022: \u0022\u0022https://example.com/outro.mp4\u0022\u0022\n    }\n  },\n  \u0022\u0022add_compositions\u0022\u0022: [\n    {\n      \u0022\u0022name\u0022\u0022: \u0022\u0022Rough Cut\u0022\u0022,\n      \u0022\u0022clips\u0022\u0022: [\n        {\n          \u0022\u0022media\u0022\u0022: \u0022\u0022Misc/intro.mp4\u0022\u0022\n        },\n        {\n          \u0022\u0022media\u0022\u0022: \u0022\u0022demo.mp4\u0022\u0022\n        },\n        {\n          \u0022\u0022media\u0022\u0022: \u0022\u0022Misc/outro.mp4\u0022\u0022\n        }\n      ]\n    }\n  ]\n}\u0022)!;\n\nvar response = await client.ApiEndpoints.ImportProjectMediaAsync(\n    request: request\n);",
+      "Format": "sdk",
+      "OperationId": "importProjectMedia",
+      "Setup": "This example assumes \u0060using Descript;\u0060 is in scope and \u0060apiKey\u0060 contains the required credential."
+    },
+    {
+      "Order": 6,
+      "Title": "List jobs",
+      "Slug": "listjobs",
+      "Description": "List recent jobs with optional filtering by project or job type.\n\nBy default, jobs created within the last 7 days are returned. Use \u0060created_after\u0060 and\n\u0060created_before\u0060 to customize the time range. The maximum lookback is 30 days.\n\nResults are paginated. Use the \u0060cursor\u0060 from the response \u0060pagination.next_cursor\u0060 to\nfetch subsequent pages.\n\nQuery parameters allow you to filter the results:\n* Filter by \u0060project_id\u0060 to see all jobs for a project\n* Filter by \u0060type\u0060 to see specific job types (import/project_media, agent)",
+      "Language": "csharp",
+      "Code": "using var client = new DescriptClient(apiKey);\nvar response = await client.ApiEndpoints.ListJobsAsync();\n\n// Example response:\n// {\n//   \u0022data\u0022: [\n//     {\n//       \u0022job_id\u0022: \u00226dc3f30a-58c2-4174-96a6-dc18cf3c7776\u0022,\n//       \u0022job_type\u0022: \u0022import/project_media\u0022,\n//       \u0022job_state\u0022: \u0022stopped\u0022,\n//       \u0022created_at\u0022: \u00222025-11-18T10:30:00Z\u0022,\n//       \u0022stopped_at\u0022: \u00222025-11-18T10:35:00Z\u0022,\n//       \u0022drive_id\u0022: \u0022c9c5c47e-158a-49f7-846b-4f6ee2a229a2\u0022,\n//       \u0022project_id\u0022: \u00229f36ee32-5a2c-47e7-b1a3-94991d3e3ddb\u0022,\n//       \u0022project_url\u0022: \u0022https://web.descript.com/9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb\u0022,\n//       \u0022result\u0022: {\n//         \u0022status\u0022: \u0022success\u0022,\n//         \u0022media_status\u0022: {\n//           \u0022Misc/intro.mp4\u0022: {\n//             \u0022status\u0022: \u0022success\u0022,\n//             \u0022duration_seconds\u0022: 10.5\n//           }\n//         },\n//         \u0022media_seconds_used\u0022: 11\n//       }\n//     },\n//     {\n//       \u0022job_id\u0022: \u0022a1b2c3d4-5678-90ab-cdef-1234567890ab\u0022,\n//       \u0022job_type\u0022: \u0022agent\u0022,\n//       \u0022job_state\u0022: \u0022running\u0022,\n//       \u0022created_at\u0022: \u00222025-11-18T11:00:00Z\u0022,\n//       \u0022drive_id\u0022: \u0022c9c5c47e-158a-49f7-846b-4f6ee2a229a2\u0022,\n//       \u0022project_id\u0022: \u00229f36ee32-5a2c-47e7-b1a3-94991d3e3ddb\u0022,\n//       \u0022project_url\u0022: \u0022https://web.descript.com/9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb\u0022,\n//       \u0022progress\u0022: {\n//         \u0022label\u0022: \u0022Applying Studio Sound to clip 2...\u0022,\n//         \u0022last_update_at\u0022: \u00222025-11-18T11:01:00Z\u0022\n//       }\n//     }\n//   ],\n//   \u0022pagination\u0022: {\n//     \u0022next_cursor\u0022: \u0022YTFiMmMzZDQtNTY3OC05MGFiLWNkZWYtMTIzNDU2Nzg5MGFi\u0022\n//   }\n// }",
+      "Format": "sdk",
+      "OperationId": "listJobs",
+      "Setup": "This example assumes \u0060using Descript;\u0060 is in scope and \u0060apiKey\u0060 contains the required credential."
+    },
+    {
+      "Order": 7,
+      "Title": "Create Import URL",
+      "Slug": "posteditindescriptschema",
+      "Description": "Create an Import URL by sending a Project schema to Descript API from your service\u0027s backend.\n\n### Import Schema\nOur import schemas are specified as a minimal JSON list of files which is detailed in full at the bottom of this\nsection. At it\u0027s smallest, the request body looks like:\n\n\u0060\u0060\u0060\n{\n  \u0022partner_drive_id\u0022: \u0022162c61d1-6ced-4b25-a622-7dba922983ee\u0022,\n  \u0022project_schema\u0022: {\n    \u0022schema_version\u0022: \u00221.0.0\u0022,\n    \u0022files\u0022: [{\u0022uri\u0022: \u0022https://descriptusercontent.com/jane.wav?signature=d182bca64bf94a1483d2fd16b579f955\u0022}]\n  }\n}\n\u0060\u0060\u0060\n\n### File Access\nThe file paths provided in the schema need to either be public or pre-signed URIs with enough time before\nexpiration for failures and retries, we suggest URIs that won\u0027t expire for 48 hours. We ask that the files have\nalready been saved when the import link is generated to minimize cases where we\u0027re waiting for eventually\nconsistent storage of files that will never be written. We will, however, wait for eventual consistency of the\nstorage layer and retry fetching files before eventually timing out.\n\nFiles must be hosted on preapproved hosts as our import process has an allow list which it checks URIs against.\nFiles will be requested with \u0060User-Agent: Descriptbot/1.0\u0060 (version may change) for tracking purposes.\n\n### Import link expiration\nImport links are no longer valid after a user imports their data once. Viewing an already used import link will\nnot allow for importing again and will not provide access to a previously created Descript Project. Partners are\nable to generate a new import link at any time, regardless of if a previous import link has been used.\n\nThe API does not currently provide partners with a link to the Descript Project, though users will be redirected\nto it from Descript\u0027s web interface the first time they import files, and can always find the Project in Descript.\n\nImport links expire after 3 hours and attempting to use an import link after the pre-signed links in the schema\nfile have expired will result in an error, so we recommend generating the import link after the user has clicked\nthe Edit in Descript button.\n\n### Supported media specification\nWe recommend sending the highest quality, uncompressed versions of files available to you. If you have multiple\ntracks, we recommend prioritizing sending us the full multi-track sequence over a combined file.\n\n* Audio: WAV, FLAC, AAC, MP3\n* Video: h264, HEVC (container: MOV, MP4)",
+      "Language": "http",
+      "Code": "### Create Import URL\n# @name postEditInDescriptSchema\nPOST {{host}}/edit_in_descript/schema\nAuthorization: Bearer {{token}}\nContent-Type: application/json\nAccept: application/json\n\n{\n  \u0022partner_drive_id\u0022: \u0022aa3b2d8d-e5ca-41c2-8801-683328293fb9\u0022,\n  \u0022project_schema\u0022: {\n    \u0022schema_version\u0022: \u00221.0.0\u0022,\n    \u0022source_id\u0022: \u002206b3f5bb-68a2-468a-a5d9-df155c1e3588\u0022,\n    \u0022files\u0022: [\n      {\n        \u0022name\u0022: \u0022Jane\\u0027s studio recording\u0022,\n        \u0022uri\u0022: \u0022https://descriptusercontent.com/jane.wav?signature=d182bca64bf94a1483d2fd16b579f955\u0022,\n        \u0022start_offset\u0022: {\n          \u0022seconds\u0022: 10\n        }\n      }\n    ]\n  }\n}\n\n## Responses\n# 201\n# Description: Successful operation.\n# Content-Type: application/json\n# 400\n# Description: Invalid input.\n# 403\n# Description: Associated drive does not have Edit in Descript permissions.\n# 429\n# Description: Too many requests - rate limit exceeded.\nUse the \u0060Retry-After\u0060 header to determine when to retry.\n\n# Content-Type: application/json",
+      "Format": "http",
+      "OperationId": "postEditInDescriptSchema",
+      "Setup": null
+    },
+    {
+      "Order": 8,
+      "Title": "Get Published Project Metadata",
+      "Slug": "getpublishedprojectmetadata",
+      "Description": "Retrieve metadata for a published Descript project by its URL slug. This endpoint provides information\nabout the published project including title, duration, publisher details, privacy settings, and subtitles.\n\nThis endpoint requires authentication using a personal token and is subject to rate limiting of 1000\nrequests per hour per user.",
+      "Language": "http",
+      "Code": "### Get Published Project Metadata\n# @name getPublishedProjectMetadata\nGET {{host}}/published_projects/{{publishedProjectSlug}}\nAuthorization: Bearer {{token}}\nAccept: application/json\n\n## Responses\n# 200\n# Description: Successfully retrieved published project metadata.\n# Content-Type: application/json\n# 401\n# Description: Unauthorized - invalid or missing authentication token.\n# Content-Type: application/json\n# 403\n# Description: Forbidden - user does not have access to this published project.\n# Content-Type: application/json\n# 404\n# Description: Not found - published project does not exist.\n# Content-Type: application/json\n# 409\n# Description: Conflict - published project is in an invalid state (processing or failed).\n# Content-Type: application/json\n# 429\n# Description: Too many requests - rate limit exceeded.\nUse the \u0060Retry-After\u0060 header to determine when to retry.\n\n# Content-Type: application/json",
+      "Format": "http",
+      "OperationId": "getPublishedProjectMetadata",
+      "Setup": null
+    }
+  ]
+}
