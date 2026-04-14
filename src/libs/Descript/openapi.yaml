@@ -702,6 +702,7 @@ paths:
         Use a background agent to create and edit projects using a natural language prompt.
 
         - **Edit existing project**: Provide a `project_id` to edit an existing project
+        - **Target a specific composition**: Provide both `project_id` and `composition_id` to direct the agent to a specific composition within the project
         - **Create new project**: Provide a `project_name` instead of `project_id` to create a new project
 
         ### Common use cases
@@ -745,9 +746,10 @@ paths:
                   type: string
                   format: uuid
                   description: |
-                    **[Work in progress]** This property is accepted but not yet functional. It will be ignored.
-
-                    Optional composition ID within the project to edit.
+                    Optional composition ID within the project to target. When provided,
+                    the agent will focus its edits on this specific composition rather
+                    than choosing one automatically. Only valid when `project_id` is also
+                    provided. Requires `project_id`.
                   example: 39677a40-1c43-4c36-8449-46cfbc4de2b5
                 model:
                   type: string

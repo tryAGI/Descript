@@ -8,6 +8,7 @@ namespace Descript
         /// Agent edit<br/>
         /// Use a background agent to create and edit projects using a natural language prompt.<br/>
         /// - **Edit existing project**: Provide a `project_id` to edit an existing project<br/>
+        /// - **Target a specific composition**: Provide both `project_id` and `composition_id` to direct the agent to a specific composition within the project<br/>
         /// - **Create new project**: Provide a `project_name` instead of `project_id` to create a new project<br/>
         /// ### Common use cases<br/>
         /// - Create new content: "create a 30-second video about cooking tips"<br/>
@@ -34,6 +35,7 @@ namespace Descript
         /// Agent edit<br/>
         /// Use a background agent to create and edit projects using a natural language prompt.<br/>
         /// - **Edit existing project**: Provide a `project_id` to edit an existing project<br/>
+        /// - **Target a specific composition**: Provide both `project_id` and `composition_id` to direct the agent to a specific composition within the project<br/>
         /// - **Create new project**: Provide a `project_name` instead of `project_id` to create a new project<br/>
         /// ### Common use cases<br/>
         /// - Create new content: "create a 30-second video about cooking tips"<br/>
@@ -56,8 +58,10 @@ namespace Descript
         /// Example: My New Project
         /// </param>
         /// <param name="compositionId">
-        /// **[Work in progress]** This property is accepted but not yet functional. It will be ignored.<br/>
-        /// Optional composition ID within the project to edit.<br/>
+        /// Optional composition ID within the project to target. When provided,<br/>
+        /// the agent will focus its edits on this specific composition rather<br/>
+        /// than choosing one automatically. Only valid when `project_id` is also<br/>
+        /// provided. Requires `project_id`.<br/>
         /// Example: 39677a40-1c43-4c36-8449-46cfbc4de2b5
         /// </param>
         /// <param name="model">
