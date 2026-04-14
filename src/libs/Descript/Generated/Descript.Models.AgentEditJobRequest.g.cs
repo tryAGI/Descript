@@ -27,8 +27,10 @@ namespace Descript
         public string? ProjectName { get; set; }
 
         /// <summary>
-        /// **[Work in progress]** This property is accepted but not yet functional. It will be ignored.<br/>
-        /// Optional composition ID within the project to edit.<br/>
+        /// Optional composition ID within the project to target. When provided,<br/>
+        /// the agent will focus its edits on this specific composition rather<br/>
+        /// than choosing one automatically. Only valid when `project_id` is also<br/>
+        /// provided. Requires `project_id`.<br/>
         /// Example: 39677a40-1c43-4c36-8449-46cfbc4de2b5
         /// </summary>
         /// <example>39677a40-1c43-4c36-8449-46cfbc4de2b5</example>
@@ -92,8 +94,10 @@ namespace Descript
         /// Example: My New Project
         /// </param>
         /// <param name="compositionId">
-        /// **[Work in progress]** This property is accepted but not yet functional. It will be ignored.<br/>
-        /// Optional composition ID within the project to edit.<br/>
+        /// Optional composition ID within the project to target. When provided,<br/>
+        /// the agent will focus its edits on this specific composition rather<br/>
+        /// than choosing one automatically. Only valid when `project_id` is also<br/>
+        /// provided. Requires `project_id`.<br/>
         /// Example: 39677a40-1c43-4c36-8449-46cfbc4de2b5
         /// </param>
         /// <param name="model">
