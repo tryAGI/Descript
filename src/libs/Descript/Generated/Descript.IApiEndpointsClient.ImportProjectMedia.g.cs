@@ -77,6 +77,13 @@ namespace Descript
         /// Default Value: none<br/>
         /// Example: edit
         /// </param>
+        /// <param name="folderName">
+        /// Folder path to place the new project in (e.g. "Clients/Acme/Videos").<br/>
+        /// Supports nested paths using "/" as separator. Only applicable when creating a new project<br/>
+        /// (when project_id is not provided). Existing folders along the path are reused; missing<br/>
+        /// segments are created automatically.<br/>
+        /// Example: Clients/Acme
+        /// </param>
         /// <param name="addMedia">
         /// Map of media reference IDs (display names with optional folder paths) to media import items.<br/>
         /// Keys are the display names that will appear in the project (e.g., "Misc/intro.mp4" or "demo.mp4").<br/>
@@ -98,6 +105,7 @@ namespace Descript
             global::System.Guid? projectId = default,
             string? projectName = default,
             global::Descript.ImportProjectMediaRequestTeamAccess? teamAccess = default,
+            string? folderName = default,
             global::System.Collections.Generic.Dictionary<string, global::Descript.OneOf<global::Descript.ImportProjectMediaRequestAddMediaUrlImport, global::Descript.ImportProjectMediaRequestAddMediaDirectUpload, global::Descript.ImportProjectMediaRequestAddMediaMultitrackSequence>>? addMedia = default,
             global::System.Collections.Generic.IList<global::Descript.ImportProjectMediaRequestAddComposition>? addCompositions = default,
             string? callbackUrl = default,

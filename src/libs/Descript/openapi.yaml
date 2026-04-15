@@ -329,6 +329,14 @@ paths:
                     - none
                   default: none
                   example: edit
+                folder_name:
+                  type: string
+                  description: |
+                    Folder path to place the new project in (e.g. "Clients/Acme/Videos").
+                    Supports nested paths using "/" as separator. Only applicable when creating a new project
+                    (when project_id is not provided). Existing folders along the path are reused; missing
+                    segments are created automatically.
+                  example: Clients/Acme
                 add_media:
                   type: object
                   description: |
