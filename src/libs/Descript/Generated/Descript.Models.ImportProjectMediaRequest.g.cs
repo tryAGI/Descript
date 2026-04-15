@@ -47,6 +47,17 @@ namespace Descript
         public global::Descript.ImportProjectMediaRequestTeamAccess? TeamAccess { get; set; }
 
         /// <summary>
+        /// Folder path to place the new project in (e.g. "Clients/Acme/Videos").<br/>
+        /// Supports nested paths using "/" as separator. Only applicable when creating a new project<br/>
+        /// (when project_id is not provided). Existing folders along the path are reused; missing<br/>
+        /// segments are created automatically.<br/>
+        /// Example: Clients/Acme
+        /// </summary>
+        /// <example>Clients/Acme</example>
+        [global::System.Text.Json.Serialization.JsonPropertyName("folder_name")]
+        public string? FolderName { get; set; }
+
+        /// <summary>
         /// Map of media reference IDs (display names with optional folder paths) to media import items.<br/>
         /// Keys are the display names that will appear in the project (e.g., "Misc/intro.mp4" or "demo.mp4").<br/>
         /// Values define how to import each media item (URL import or multitrack sequence).<br/>
@@ -100,6 +111,13 @@ namespace Descript
         /// Default Value: none<br/>
         /// Example: edit
         /// </param>
+        /// <param name="folderName">
+        /// Folder path to place the new project in (e.g. "Clients/Acme/Videos").<br/>
+        /// Supports nested paths using "/" as separator. Only applicable when creating a new project<br/>
+        /// (when project_id is not provided). Existing folders along the path are reused; missing<br/>
+        /// segments are created automatically.<br/>
+        /// Example: Clients/Acme
+        /// </param>
         /// <param name="addMedia">
         /// Map of media reference IDs (display names with optional folder paths) to media import items.<br/>
         /// Keys are the display names that will appear in the project (e.g., "Misc/intro.mp4" or "demo.mp4").<br/>
@@ -121,6 +139,7 @@ namespace Descript
             global::System.Guid? projectId,
             string? projectName,
             global::Descript.ImportProjectMediaRequestTeamAccess? teamAccess,
+            string? folderName,
             global::System.Collections.Generic.Dictionary<string, global::Descript.OneOf<global::Descript.ImportProjectMediaRequestAddMediaUrlImport, global::Descript.ImportProjectMediaRequestAddMediaDirectUpload, global::Descript.ImportProjectMediaRequestAddMediaMultitrackSequence>>? addMedia,
             global::System.Collections.Generic.IList<global::Descript.ImportProjectMediaRequestAddComposition>? addCompositions,
             string? callbackUrl)
@@ -128,6 +147,7 @@ namespace Descript
             this.ProjectId = projectId;
             this.ProjectName = projectName;
             this.TeamAccess = teamAccess;
+            this.FolderName = folderName;
             this.AddMedia = addMedia;
             this.AddCompositions = addCompositions;
             this.CallbackUrl = callbackUrl;
