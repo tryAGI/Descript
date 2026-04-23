@@ -35,6 +35,17 @@
     },
     {
       "Order": 4,
+      "Title": "Get project details",
+      "Slug": "getproject",
+      "Description": "Get a detailed project summary including all media files and compositions.\n\nReturns the project\u0027s id, name, drive_id, a map of media files (keyed by\ndisplay path) with type and duration, and a list of compositions with id,\nname, duration, and media type.\n\nUse this to inspect a project\u0027s contents before editing or importing media.",
+      "Language": "http",
+      "Code": "### Get project details\n# @name getProject\nGET {{host}}/projects/{{project_id}}\nAuthorization: Bearer {{token}}\nAccept: application/json\n\n## Responses\n# 200\n# Description: Project details retrieved successfully\n# Content-Type: application/json\n# 401\n# Description: Unauthorized - invalid or missing authentication token\n# Content-Type: application/json\n# 403\n# Description: Forbidden - user does not have access to this project\n# Content-Type: application/json\n# 404\n# Description: Project not found\n# Content-Type: application/json\n# 429\n# Description: Too many requests - rate limit exceeded.\nUse the \u0060Retry-After\u0060 header to determine when to retry.\n\n# Content-Type: application/json",
+      "Format": "http",
+      "OperationId": "getProject",
+      "Setup": null
+    },
+    {
+      "Order": 5,
       "Title": "Check API status",
       "Slug": "getstatus",
       "Description": "\u003E **Work in progress** \u2014 This endpoint is not yet available and will return an error if called.\n\nCheck API availability and validate authentication token.\n\nThis endpoint can be used to:\n- Verify that your authentication token is valid\n- Check API connectivity without performing any heavy operations\n\nReturns a success response if the token is valid, or a 401 error if the token is invalid or missing.",
@@ -45,7 +56,7 @@
       "Setup": "This example assumes \u0060using Descript;\u0060 is in scope and \u0060apiKey\u0060 contains the required credential."
     },
     {
-      "Order": 5,
+      "Order": 6,
       "Title": "Import media and sequences",
       "Slug": "importprojectmedia",
       "Description": "Import media files into a new or existing project and create compositions.\n\nThis endpoint can:\n- Create a new project if \u0060project_id\u0060 is not provided\n- Import media files from URLs\n- Create multitrack sequences\n- Create compositions (timelines) from existing or new media in the project\n- Trigger transcription and other background processing tasks\n\n### Media URL requirements\n- URLs must be accessible by Descript servers\n- URLs must support HTTP Range requests\n- Recommended to sign URLs for 12-48 hours to reduce chance of failure\n- [Supported file types](https://help.descript.com/hc/en-us/articles/10164098416909-Supported-file-types)\n\n### Direct file upload\n\nInstead of providing a URL, you can upload files directly by specifying \u0060content_type\u0060 and \u0060file_size\u0060 for a media item. The response will include a signed \u0060upload_url\u0060 for each direct upload item. PUT the file bytes to that URL, and the import job will process it automatically. See the [Direct file upload](#tag/Direct-file-upload) guide for a full walkthrough.\n\n### Async Operations\n\nImports\u00A0run in the background and return a \u0060job_id\u0060. Monitor progress via the [GET /jobs/{job_id}](#operation/getJob) endpoint.\n\n### Dynamic webhook\n\nIf \u0060callback_url\u0060 is provided, Descript will POST the job status to that URL when the job finishes (successfully or not).\n\nThe payload will match the format returned by [GET /jobs/{job_id}](#operation/getJob).",
@@ -56,7 +67,7 @@
       "Setup": "This example assumes \u0060using Descript;\u0060 is in scope and \u0060apiKey\u0060 contains the required credential."
     },
     {
-      "Order": 6,
+      "Order": 7,
       "Title": "List jobs",
       "Slug": "listjobs",
       "Description": "List recent jobs with optional filtering by project or job type.\n\nBy default, jobs created within the last 7 days are returned. Use \u0060created_after\u0060 and\n\u0060created_before\u0060 to customize the time range. The maximum lookback is 30 days.\n\nResults are paginated. Use the \u0060cursor\u0060 from the response \u0060pagination.next_cursor\u0060 to\nfetch subsequent pages.\n\nQuery parameters allow you to filter the results:\n* Filter by \u0060project_id\u0060 to see all jobs for a project\n* Filter by \u0060type\u0060 to see specific job types (import/project_media, agent)",
@@ -67,7 +78,29 @@
       "Setup": "This example assumes \u0060using Descript;\u0060 is in scope and \u0060apiKey\u0060 contains the required credential."
     },
     {
-      "Order": 7,
+      "Order": 8,
+      "Title": "List projects",
+      "Slug": "listprojects",
+      "Description": "List projects accessible to the authenticated user within a drive.\n\nThe drive is determined from the access token.\n\nResults are paginated. Use the \u0060cursor\u0060 from the response \u0060pagination.next_cursor\u0060\nto fetch subsequent pages.",
+      "Language": "csharp",
+      "Code": "using var client = new DescriptClient(apiKey);\nvar response = await client.ApiEndpoints.ListProjectsAsync();",
+      "Format": "sdk",
+      "OperationId": "listProjects",
+      "Setup": "This example assumes \u0060using Descript;\u0060 is in scope and \u0060apiKey\u0060 contains the required credential."
+    },
+    {
+      "Order": 9,
+      "Title": "Publish project media",
+      "Slug": "publishjob",
+      "Description": "Publish a project composition to create a shareable link and download the exported file.\n\nPublishes a specific composition from a project, rendering the output as video or audio\nat the specified resolution. When the job completes successfully the result contains both:\n\n- \u0060share_url\u0060: a public URL that can be used to view the published content on Descript\u0027s share site.\n- \u0060download_url\u0060: a time-limited signed URL to download the exported media file directly,\n  along with \u0060download_url_expires_at\u0060 indicating when the link expires.\n\n### Async Operations\n\nPublish jobs run in the background and return a \u0060job_id\u0060. Monitor progress via the [GET /jobs/{job_id}](#operation/getJob) endpoint,\nwhich returns the \u0060share_url\u0060, \u0060download_url\u0060, and \u0060download_url_expires_at\u0060 fields once the job finishes.\n\n### Dynamic webhook\n\nIf \u0060callback_url\u0060 is provided, Descript will POST the job status to that URL when the job completes or fails.\nThe payload will match the format returned by [GET /jobs/{job_id}](#operation/getJob).",
+      "Language": "csharp",
+      "Code": "using var client = new DescriptClient(apiKey);\n\nvar request = global::System.Text.Json.JsonSerializer.Deserialize\u003Cglobal::Descript.PublishJobRequest\u003E(\n    @\u0022{\n  \u0022\u0022project_id\u0022\u0022: \u0022\u00229f36ee32-5a2c-47e7-b1a3-94991d3e3ddb\u0022\u0022,\n  \u0022\u0022composition_id\u0022\u0022: \u0022\u002239677a40-1c43-4c36-8449-46cfbc4de2b5\u0022\u0022,\n  \u0022\u0022media_type\u0022\u0022: \u0022\u0022Audio\u0022\u0022\n}\u0022)!;\n\nvar response = await client.ApiEndpoints.PublishJobAsync(\n    request: request\n);",
+      "Format": "sdk",
+      "OperationId": "publishJob",
+      "Setup": "This example assumes \u0060using Descript;\u0060 is in scope and \u0060apiKey\u0060 contains the required credential."
+    },
+    {
+      "Order": 10,
       "Title": "Create Import URL",
       "Slug": "posteditindescriptschema",
       "Description": "Create an Import URL by sending a Project schema to Descript API from your service\u0027s backend.\n\n### Import Schema\nOur import schemas are specified as a minimal JSON list of files which is detailed in full at the bottom of this\nsection. At it\u0027s smallest, the request body looks like:\n\n\u0060\u0060\u0060\n{\n  \u0022partner_drive_id\u0022: \u0022162c61d1-6ced-4b25-a622-7dba922983ee\u0022,\n  \u0022project_schema\u0022: {\n    \u0022schema_version\u0022: \u00221.0.0\u0022,\n    \u0022files\u0022: [{\u0022uri\u0022: \u0022https://descriptusercontent.com/jane.wav?signature=d182bca64bf94a1483d2fd16b579f955\u0022}]\n  }\n}\n\u0060\u0060\u0060\n\n### File Access\nThe file paths provided in the schema need to either be public or pre-signed URIs with enough time before\nexpiration for failures and retries, we suggest URIs that won\u0027t expire for 48 hours. We ask that the files have\nalready been saved when the import link is generated to minimize cases where we\u0027re waiting for eventually\nconsistent storage of files that will never be written. We will, however, wait for eventual consistency of the\nstorage layer and retry fetching files before eventually timing out.\n\nFiles must be hosted on preapproved hosts as our import process has an allow list which it checks URIs against.\nFiles will be requested with \u0060User-Agent: Descriptbot/1.0\u0060 (version may change) for tracking purposes.\n\n### Import link expiration\nImport links are no longer valid after a user imports their data once. Viewing an already used import link will\nnot allow for importing again and will not provide access to a previously created Descript Project. Partners are\nable to generate a new import link at any time, regardless of if a previous import link has been used.\n\nThe API does not currently provide partners with a link to the Descript Project, though users will be redirected\nto it from Descript\u0027s web interface the first time they import files, and can always find the Project in Descript.\n\nImport links expire after 3 hours and attempting to use an import link after the pre-signed links in the schema\nfile have expired will result in an error, so we recommend generating the import link after the user has clicked\nthe Edit in Descript button.\n\n### Supported media specification\nWe recommend sending the highest quality, uncompressed versions of files available to you. If you have multiple\ntracks, we recommend prioritizing sending us the full multi-track sequence over a combined file.\n\n* Audio: WAV, FLAC, AAC, MP3\n* Video: h264, HEVC (container: MOV, MP4)",
@@ -78,7 +111,7 @@
       "Setup": null
     },
     {
-      "Order": 8,
+      "Order": 11,
       "Title": "Get Published Project Metadata",
       "Slug": "getpublishedprojectmetadata",
       "Description": "Retrieve metadata for a published Descript project by its URL slug. This endpoint provides information\nabout the published project including title, duration, publisher details, privacy settings, and subtitles.\n\nThis endpoint requires authentication using a personal token and is subject to rate limiting of 1000\nrequests per hour per user.",

@@ -35,12 +35,21 @@ namespace Descript.JsonConverters
                                throw new global::System.InvalidOperationException($"Cannot get type info for {nameof(global::Descript.AgentJobStatus)}");
                 agent = global::System.Text.Json.JsonSerializer.Deserialize(ref reader, typeInfo);
             }
+            global::Descript.PublishJobStatus? publish = default;
+            if (discriminator?.JobType == global::Descript.JobStatusDiscriminatorJobType.Publish)
+            {
+                var typeInfo = typeInfoResolver.GetTypeInfo(typeof(global::Descript.PublishJobStatus), options) as global::System.Text.Json.Serialization.Metadata.JsonTypeInfo<global::Descript.PublishJobStatus> ??
+                               throw new global::System.InvalidOperationException($"Cannot get type info for {nameof(global::Descript.PublishJobStatus)}");
+                publish = global::System.Text.Json.JsonSerializer.Deserialize(ref reader, typeInfo);
+            }
 
             var __value = new global::Descript.JobStatus(
                 discriminator?.JobType,
                 importProjectMedia,
 
-                agent
+                agent,
+
+                publish
                 );
 
             return __value;
@@ -66,6 +75,12 @@ namespace Descript.JsonConverters
                 var typeInfo = typeInfoResolver.GetTypeInfo(typeof(global::Descript.AgentJobStatus), options) as global::System.Text.Json.Serialization.Metadata.JsonTypeInfo<global::Descript.AgentJobStatus?> ??
                                throw new global::System.InvalidOperationException($"Cannot get type info for {typeof(global::Descript.AgentJobStatus).Name}");
                 global::System.Text.Json.JsonSerializer.Serialize(writer, value.Agent!, typeInfo);
+            }
+            else if (value.IsPublish)
+            {
+                var typeInfo = typeInfoResolver.GetTypeInfo(typeof(global::Descript.PublishJobStatus), options) as global::System.Text.Json.Serialization.Metadata.JsonTypeInfo<global::Descript.PublishJobStatus?> ??
+                               throw new global::System.InvalidOperationException($"Cannot get type info for {typeof(global::Descript.PublishJobStatus).Name}");
+                global::System.Text.Json.JsonSerializer.Serialize(writer, value.Publish!, typeInfo);
             }
         }
     }
