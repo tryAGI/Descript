@@ -48,6 +48,23 @@ namespace Descript
         [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhen(true, nameof(Agent))]
 #endif
         public bool IsAgent => Agent != null;
+
+        /// <summary>
+        /// Status of a publish job
+        /// </summary>
+#if NET6_0_OR_GREATER
+        public global::Descript.PublishJobStatus? Publish { get; init; }
+#else
+        public global::Descript.PublishJobStatus? Publish { get; }
+#endif
+
+        /// <summary>
+        /// 
+        /// </summary>
+#if NET6_0_OR_GREATER
+        [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhen(true, nameof(Publish))]
+#endif
+        public bool IsPublish => Publish != null;
         /// <summary>
         /// 
         /// </summary>
@@ -87,22 +104,43 @@ namespace Descript
         /// <summary>
         /// 
         /// </summary>
+        public static implicit operator JobStatus(global::Descript.PublishJobStatus value) => new JobStatus((global::Descript.PublishJobStatus?)value);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static implicit operator global::Descript.PublishJobStatus?(JobStatus @this) => @this.Publish;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public JobStatus(global::Descript.PublishJobStatus? value)
+        {
+            Publish = value;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public JobStatus(
             global::Descript.JobStatusDiscriminatorJobType? jobType,
             global::Descript.ImportJobStatus? importProjectMedia,
-            global::Descript.AgentJobStatus? agent
+            global::Descript.AgentJobStatus? agent,
+            global::Descript.PublishJobStatus? publish
             )
         {
             JobType = jobType;
 
             ImportProjectMedia = importProjectMedia;
             Agent = agent;
+            Publish = publish;
         }
 
         /// <summary>
         /// 
         /// </summary>
         public object? Object =>
+            Publish as object ??
             Agent as object ??
             ImportProjectMedia as object 
             ;
@@ -112,7 +150,8 @@ namespace Descript
         /// </summary>
         public override string? ToString() =>
             ImportProjectMedia?.ToString() ??
-            Agent?.ToString() 
+            Agent?.ToString() ??
+            Publish?.ToString() 
             ;
 
         /// <summary>
@@ -120,7 +159,7 @@ namespace Descript
         /// </summary>
         public bool Validate()
         {
-            return IsImportProjectMedia && !IsAgent || !IsImportProjectMedia && IsAgent;
+            return IsImportProjectMedia && !IsAgent && !IsPublish || !IsImportProjectMedia && IsAgent && !IsPublish || !IsImportProjectMedia && !IsAgent && IsPublish;
         }
 
         /// <summary>
@@ -129,6 +168,7 @@ namespace Descript
         public TResult? Match<TResult>(
             global::System.Func<global::Descript.ImportJobStatus?, TResult>? importProjectMedia = null,
             global::System.Func<global::Descript.AgentJobStatus?, TResult>? agent = null,
+            global::System.Func<global::Descript.PublishJobStatus?, TResult>? publish = null,
             bool validate = true)
         {
             if (validate)
@@ -144,6 +184,10 @@ namespace Descript
             {
                 return agent(Agent!);
             }
+            else if (IsPublish && publish != null)
+            {
+                return publish(Publish!);
+            }
 
             return default(TResult);
         }
@@ -154,6 +198,7 @@ namespace Descript
         public void Match(
             global::System.Action<global::Descript.ImportJobStatus?>? importProjectMedia = null,
             global::System.Action<global::Descript.AgentJobStatus?>? agent = null,
+            global::System.Action<global::Descript.PublishJobStatus?>? publish = null,
             bool validate = true)
         {
             if (validate)
@@ -169,6 +214,10 @@ namespace Descript
             {
                 agent?.Invoke(Agent!);
             }
+            else if (IsPublish)
+            {
+                publish?.Invoke(Publish!);
+            }
         }
 
         /// <summary>
@@ -182,6 +231,8 @@ namespace Descript
                 typeof(global::Descript.ImportJobStatus),
                 Agent,
                 typeof(global::Descript.AgentJobStatus),
+                Publish,
+                typeof(global::Descript.PublishJobStatus),
             };
             const int offset = unchecked((int)2166136261);
             const int prime = 16777619;
@@ -199,7 +250,8 @@ namespace Descript
         {
             return
                 global::System.Collections.Generic.EqualityComparer<global::Descript.ImportJobStatus?>.Default.Equals(ImportProjectMedia, other.ImportProjectMedia) &&
-                global::System.Collections.Generic.EqualityComparer<global::Descript.AgentJobStatus?>.Default.Equals(Agent, other.Agent) 
+                global::System.Collections.Generic.EqualityComparer<global::Descript.AgentJobStatus?>.Default.Equals(Agent, other.Agent) &&
+                global::System.Collections.Generic.EqualityComparer<global::Descript.PublishJobStatus?>.Default.Equals(Publish, other.Publish) 
                 ;
         }
 

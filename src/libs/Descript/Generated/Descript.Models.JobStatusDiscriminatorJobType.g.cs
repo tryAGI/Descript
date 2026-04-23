@@ -16,6 +16,10 @@ namespace Descript
         /// 
         /// </summary>
         ImportProjectMedia,
+        /// <summary>
+        /// 
+        /// </summary>
+        Publish,
     }
 
     /// <summary>
@@ -32,6 +36,7 @@ namespace Descript
             {
                 JobStatusDiscriminatorJobType.Agent => "agent",
                 JobStatusDiscriminatorJobType.ImportProjectMedia => "import/project_media",
+                JobStatusDiscriminatorJobType.Publish => "publish",
                 _ => throw new global::System.ArgumentOutOfRangeException(nameof(value), value, null),
             };
         }
@@ -44,6 +49,7 @@ namespace Descript
             {
                 "agent" => JobStatusDiscriminatorJobType.Agent,
                 "import/project_media" => JobStatusDiscriminatorJobType.ImportProjectMedia,
+                "publish" => JobStatusDiscriminatorJobType.Publish,
                 _ => null,
             };
         }

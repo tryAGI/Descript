@@ -921,6 +921,200 @@ paths:
                     message: Composition not found
         '429':
           $ref: '#/components/responses/Error429Response'
+  /jobs/publish:
+    post:
+      tags:
+        - API Endpoints
+      summary: Publish project media
+      security:
+        - bearerAuth: []
+      description: |
+        Publish a project composition to create a shareable link and download the exported file.
+
+        Publishes a specific composition from a project, rendering the output as video or audio
+        at the specified resolution. When the job completes successfully the result contains both:
+
+        - `share_url`: a public URL that can be used to view the published content on Descript's share site.
+        - `download_url`: a time-limited signed URL to download the exported media file directly,
+          along with `download_url_expires_at` indicating when the link expires.
+
+        ### Async Operations
+
+        Publish jobs run in the background and return a `job_id`. Monitor progress via the [GET /jobs/{job_id}](#operation/getJob) endpoint,
+        which returns the `share_url`, `download_url`, and `download_url_expires_at` fields once the job finishes.
+
+        ### Dynamic webhook
+
+        If `callback_url` is provided, Descript will POST the job status to that URL when the job completes or fails.
+        The payload will match the format returned by [GET /jobs/{job_id}](#operation/getJob).
+      operationId: publishJob
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              description: |
+                Request to publish a project composition.
+              properties:
+                project_id:
+                  type: string
+                  format: uuid
+                  description: The ID of the project to publish.
+                  example: 9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
+                composition_id:
+                  type: string
+                  format: uuid
+                  description: The ID of the composition within the project to publish.
+                  example: 39677a40-1c43-4c36-8449-46cfbc4de2b5
+                media_type:
+                  type: string
+                  enum:
+                    - Video
+                    - Audio
+                  default: Video
+                  description: Media type of the published output.
+                resolution:
+                  type: string
+                  enum:
+                    - 480p
+                    - 720p
+                    - 1080p
+                    - 1440p
+                    - 4K
+                  description: Resolution for the published output. Only applicable when media_type is Video.
+                callback_url:
+                  type: string
+                  format: uri
+                  description: |
+                    Optional webhook URL to call when the job completes or fails.
+                    Descript will POST the job status (same format as [GET /jobs/{job_id}](#operation/getJob)) to this URL.
+                  example: https://example.com/webhooks/descript/job_callback
+                access_level:
+                  type: string
+                  enum:
+                    - public
+                    - unlisted
+                    - drive
+                    - private
+                  description: |
+                    Desired access level for the published share page.
+                    If omitted, the drive's configured default is used.
+                    Returns 403 if the requested level is not permitted by the drive's publish settings
+                    (e.g. requesting `public` when search engine indexing is disabled).
+              required:
+                - project_id
+              additionalProperties: false
+            examples:
+              publish_video:
+                summary: Publish as 1080p video
+                value:
+                  project_id: 9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
+                  composition_id: 39677a40-1c43-4c36-8449-46cfbc4de2b5
+                  media_type: Video
+                  resolution: 1080p
+              publish_audio:
+                summary: Publish as audio only
+                value:
+                  project_id: 9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
+                  composition_id: 39677a40-1c43-4c36-8449-46cfbc4de2b5
+                  media_type: Audio
+              with_callback:
+                summary: Publish with webhook callback
+                value:
+                  project_id: 9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
+                  composition_id: 39677a40-1c43-4c36-8449-46cfbc4de2b5
+                  media_type: Video
+                  resolution: 720p
+                  callback_url: https://example.com/webhooks/descript/job_callback
+        description: Publish request
+        required: true
+      responses:
+        '201':
+          description: Publish job created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  job_id:
+                    type: string
+                    format: uuid
+                    description: Unique identifier for the publish job
+                    example: 6dc3f30a-58c2-4174-96a6-dc18cf3c7776
+                  drive_id:
+                    type: string
+                    format: uuid
+                    description: Drive ID where the project is located
+                    example: c9c5c47e-158a-49f7-846b-4f6ee2a229a2
+                  project_id:
+                    type: string
+                    format: uuid
+                    description: The project ID being published
+                    example: 9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
+                  project_url:
+                    type: string
+                    format: uri
+                    description: URL to access the project in Descript web app
+                    example: https://web.descript.com/9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
+                required:
+                  - job_id
+                  - drive_id
+                  - project_id
+                  - project_url
+        '400':
+          description: |
+            Invalid input:
+            - Malformed request body
+            - Invalid project_id or composition_id format
+            - Invalid media_type or resolution value
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error400'
+              examples:
+                invalid_project:
+                  summary: Invalid project ID
+                  value:
+                    error: invalid_input
+                    message: Invalid project_id format
+                invalid_resolution:
+                  summary: Invalid resolution
+                  value:
+                    error: invalid_input
+                    message: '"resolution" must be one of [480p, 720p, 1080p, 1440p, 4K]'
+        '401':
+          description: Unauthorized - missing or invalid authentication token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401'
+              examples:
+                unauthorized:
+                  summary: Missing authentication token
+                  value:
+                    error: unauthorized
+                    message: Missing or invalid authentication token
+        '403':
+          description: |
+            Forbidden:
+            - User doesn't have write access to the project
+            - Project doesn't belong to the token's drive
+            - Requested `access_level` is not permitted by the drive's publish settings
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error403'
+              examples:
+                forbidden:
+                  summary: No access to project
+                  value:
+                    error: forbidden
+                    message: Forbidden
+        '422':
+          description: |
+            Unprocessable Entity
+        '429':
+          $ref: '#/components/responses/Error429Response'
   /jobs:
     get:
       tags:
@@ -1173,6 +1367,52 @@ paths:
                     progress:
                       label: Applying Studio Sound to clip 2
                       last_update_at: '2025-11-18T10:32:00Z'
+                publish_success:
+                  summary: Publish job completed successfully
+                  value:
+                    job_id: 6dc3f30a-58c2-4174-96a6-dc18cf3c7776
+                    job_type: publish
+                    job_state: stopped
+                    created_at: '2025-11-18T10:30:00Z'
+                    stopped_at: '2025-11-18T10:35:00Z'
+                    drive_id: c9c5c47e-158a-49f7-846b-4f6ee2a229a2
+                    project_id: 9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
+                    project_url: https://web.descript.com/9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
+                    result:
+                      status: success
+                      composition_id: 39677a40-1c43-4c36-8449-46cfbc4de2b5
+                      share_url: https://share.descript.com/view/abc123
+                      download_url: https://storage.googleapis.com/bucket/object?X-Goog-Signature=...
+                      download_url_expires_at: '2025-11-18T11:35:00Z'
+                publish_running:
+                  summary: Publish job running with share URL in progress
+                  value:
+                    job_id: 6dc3f30a-58c2-4174-96a6-dc18cf3c7776
+                    job_type: publish
+                    job_state: running
+                    created_at: '2025-11-18T10:30:00Z'
+                    drive_id: c9c5c47e-158a-49f7-846b-4f6ee2a229a2
+                    project_id: 9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
+                    project_url: https://web.descript.com/9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
+                    progress:
+                      label: Rendering video export
+                      last_update_at: '2025-11-18T10:32:00Z'
+                      composition_id: 39677a40-1c43-4c36-8449-46cfbc4de2b5
+                      share_url: https://share.descript.com/view/abc123
+                publish_failed:
+                  summary: Publish job failed
+                  value:
+                    job_id: 6dc3f30a-58c2-4174-96a6-dc18cf3c7776
+                    job_type: publish
+                    job_state: stopped
+                    created_at: '2025-11-18T10:30:00Z'
+                    stopped_at: '2025-11-18T10:31:00Z'
+                    drive_id: c9c5c47e-158a-49f7-846b-4f6ee2a229a2
+                    project_id: 9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
+                    project_url: https://web.descript.com/9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
+                    result:
+                      status: error
+                      error_message: Export failed during render
                 job_failed:
                   summary: Job failed
                   value:
@@ -1292,6 +1532,277 @@ paths:
                   value:
                     error: not_found
                     message: Job not found
+        '429':
+          $ref: '#/components/responses/Error429Response'
+  /projects:
+    get:
+      tags:
+        - API Endpoints
+      summary: List projects
+      description: |
+        List projects accessible to the authenticated user within a drive.
+
+        The drive is determined from the access token.
+
+        Results are paginated. Use the `cursor` from the response `pagination.next_cursor`
+        to fetch subsequent pages.
+      operationId: listProjects
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: query
+          name: name
+          description: Filter projects whose name contains this string (case-insensitive).
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: created_by
+          description: Filter projects created by this user UUID.
+          required: false
+          schema:
+            type: string
+            format: uuid
+        - in: query
+          name: created_after
+          description: Filter projects created after this ISO 8601 timestamp.
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - in: query
+          name: created_before
+          description: Filter projects created before this ISO 8601 timestamp.
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - in: query
+          name: updated_after
+          description: Filter projects updated after this ISO 8601 timestamp.
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - in: query
+          name: updated_before
+          description: Filter projects updated before this ISO 8601 timestamp.
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - in: query
+          name: sort
+          description: Sort field. Defaults to created_at.
+          required: false
+          schema:
+            type: string
+            enum:
+              - name
+              - created_at
+              - updated_at
+              - last_viewed_at
+            default: created_at
+        - in: query
+          name: direction
+          description: Sort direction. Defaults to desc.
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+            default: desc
+        - in: query
+          name: cursor
+          description: Pagination cursor from a previous response's `pagination.next_cursor`.
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: limit
+          description: Number of projects per page (1-100). Defaults to 20.
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 20
+      responses:
+        '200':
+          description: Projects listed successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - pagination
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                        - id
+                        - name
+                        - created_at
+                        - updated_at
+                      properties:
+                        id:
+                          type: string
+                          format: uuid
+                          description: Project ID
+                          example: 9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
+                        name:
+                          type: string
+                          description: Project name
+                          example: Marketing Video
+                        created_at:
+                          type: string
+                          format: date-time
+                          description: When the project was created
+                          example: '2025-11-18T10:30:00Z'
+                        updated_at:
+                          type: string
+                          format: date-time
+                          description: When the project was last updated
+                          example: '2025-11-19T14:00:00Z'
+                  pagination:
+                    type: object
+                    properties:
+                      next_cursor:
+                        type: string
+                        description: Cursor for the next page. Absent if no more results.
+        '401':
+          description: Unauthorized - invalid or missing authentication token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401'
+        '429':
+          $ref: '#/components/responses/Error429Response'
+  /projects/{project_id}:
+    get:
+      tags:
+        - API Endpoints
+      summary: Get project details
+      description: |
+        Get a detailed project summary including all media files and compositions.
+
+        Returns the project's id, name, drive_id, a map of media files (keyed by
+        display path) with type and duration, and a list of compositions with id,
+        name, duration, and media type.
+
+        Use this to inspect a project's contents before editing or importing media.
+      operationId: getProject
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: project_id
+          description: The project UUID
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Project details retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - id
+                  - name
+                  - drive_id
+                  - created_at
+                  - updated_at
+                  - media_files
+                  - compositions
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                    description: Project ID
+                  name:
+                    type: string
+                    description: Project name
+                  drive_id:
+                    type: string
+                    format: uuid
+                    description: Drive ID the project belongs to
+                  created_at:
+                    type: string
+                    format: date-time
+                    description: When the project was created (ISO 8601)
+                  updated_at:
+                    type: string
+                    format: date-time
+                    description: When the project was last updated (ISO 8601)
+                  media_files:
+                    type: object
+                    description: Map of display path to media file info
+                    additionalProperties:
+                      type: object
+                      required:
+                        - type
+                      properties:
+                        type:
+                          type: string
+                          enum:
+                            - audio
+                            - video
+                            - image
+                            - sequence
+                            - other
+                          description: Media type
+                        duration:
+                          type: number
+                          format: float
+                          description: Duration in seconds (absent for images)
+                  compositions:
+                    type: array
+                    description: Compositions in the project
+                    items:
+                      type: object
+                      required:
+                        - id
+                        - name
+                      properties:
+                        id:
+                          type: string
+                          format: uuid
+                          description: Composition ID
+                        name:
+                          type: string
+                          description: Composition name
+                        duration:
+                          type: number
+                          format: float
+                          description: Duration in seconds
+                        media_type:
+                          type: string
+                          description: Media type of the composition
+        '401':
+          description: Unauthorized - invalid or missing authentication token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401'
+        '403':
+          description: Forbidden - user does not have access to this project
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error403'
+        '404':
+          description: Project not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404'
         '429':
           $ref: '#/components/responses/Error429Response'
   /status:
@@ -2099,10 +2610,158 @@ components:
         - drive_id
         - project_id
         - project_url
+    PublishSuccessResult:
+      type: object
+      description: Result when publish completed successfully
+      properties:
+        status:
+          type: string
+          enum:
+            - success
+          description: Indicates successful completion
+        composition_id:
+          type: string
+          description: Identifier of the published composition
+          example: 39677a40-1c43-4c36-8449-46cfbc4de2b5
+        share_url:
+          type: string
+          format: uri
+          description: Public URL to view the published content
+          example: https://share.descript.com/view/abc123
+        download_url:
+          type: string
+          format: uri
+          description: |
+            Time-limited signed URL to download the original published media file. Present when the job completed successfully and signing succeeded.
+          example: https://storage.googleapis.com/bucket/object?X-Goog-Signature=...
+        download_url_expires_at:
+          type: string
+          format: date-time
+          description: ISO 8601 time when download_url expires (if download_url is set)
+      required:
+        - status
+        - composition_id
+        - share_url
+    PublishErrorResult:
+      type: object
+      description: Result when publish failed
+      properties:
+        status:
+          type: string
+          enum:
+            - error
+          description: Indicates the publish job failed
+        error_message:
+          type: string
+          description: Human-readable error message
+          example: Export failed during render
+      required:
+        - status
+        - error_message
+    PublishJobStatus:
+      type: object
+      description: Status of a publish job
+      properties:
+        job_id:
+          type: string
+          format: uuid
+          description: Unique identifier for the job
+          example: 6dc3f30a-58c2-4174-96a6-dc18cf3c7776
+        job_type:
+          type: string
+          enum:
+            - publish
+          description: Type of job
+        job_state:
+          type: string
+          enum:
+            - queued
+            - running
+            - stopped
+            - cancelled
+          description: |
+            Current state of the job:
+            - queued: Job is waiting to start
+            - running: Job is actively processing
+            - stopped: Job has finished (check result.status for outcome)
+            - cancelled: Job was cancelled by user
+          example: stopped
+        created_at:
+          type: string
+          format: date-time
+          description: When the job was created
+          example: '2025-11-18T10:30:00Z'
+        stopped_at:
+          type: string
+          format: date-time
+          description: When the job stopped (only present when job_state is stopped or cancelled)
+          example: '2025-11-18T10:35:00Z'
+        drive_id:
+          type: string
+          format: uuid
+          description: The drive ID
+          example: c9c5c47e-158a-49f7-846b-4f6ee2a229a2
+        project_id:
+          type: string
+          format: uuid
+          description: The project ID
+          example: 9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
+        project_url:
+          type: string
+          format: uri
+          description: URL to access the project in Descript web app
+          example: https://web.descript.com/9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
+        progress:
+          type: object
+          description: Progress information for the workflow (only present when job_state is running)
+          properties:
+            label:
+              type: string
+              description: Human-readable label describing the current action
+              example: Exporting composition...
+            percent:
+              type: integer
+              description: Percentage of the workflow that has been completed
+              example: 50
+            last_update_at:
+              type: string
+              format: date-time
+              description: When the progress was last updated
+              example: '2025-11-18T10:32:00Z'
+            composition_id:
+              type: string
+              description: Composition being published (present when known)
+              example: 39677a40-1c43-4c36-8449-46cfbc4de2b5
+            share_url:
+              type: string
+              format: uri
+              description: Share URL when available before the job completes
+              example: https://share.descript.com/view/abc123
+          required:
+            - label
+        result:
+          description: Job result (only present when job_state is stopped)
+          oneOf:
+            - $ref: '#/components/schemas/PublishSuccessResult'
+            - $ref: '#/components/schemas/PublishErrorResult'
+          discriminator:
+            propertyName: status
+            mapping:
+              success: '#/components/schemas/PublishSuccessResult'
+              error: '#/components/schemas/PublishErrorResult'
+      required:
+        - job_id
+        - job_type
+        - job_state
+        - created_at
+        - drive_id
+        - project_id
+        - project_url
     JobStatus:
       oneOf:
         - $ref: '#/components/schemas/ImportJobStatus'
         - $ref: '#/components/schemas/AgentJobStatus'
+        - $ref: '#/components/schemas/PublishJobStatus'
       discriminator:
         propertyName: job_type
         mapping:
