@@ -32,7 +32,7 @@ namespace Descript
         /// <exception cref="global::Descript.ApiException"></exception>
         global::System.Threading.Tasks.Task<global::Descript.ListProjectsResponse> ListProjectsAsync(
             string? name = default,
-            global::System.Guid? createdBy = default,
+            string? createdBy = default,
             global::System.DateTime? createdAfter = default,
             global::System.DateTime? createdBefore = default,
             global::System.DateTime? updatedAfter = default,
