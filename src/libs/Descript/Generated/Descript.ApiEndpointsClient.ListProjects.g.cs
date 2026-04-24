@@ -28,7 +28,7 @@ namespace Descript
         partial void PrepareListProjectsArguments(
             global::System.Net.Http.HttpClient httpClient,
             ref string? name,
-            ref global::System.Guid? createdBy,
+            ref string? createdBy,
             ref global::System.DateTime? createdAfter,
             ref global::System.DateTime? createdBefore,
             ref global::System.DateTime? updatedAfter,
@@ -41,7 +41,7 @@ namespace Descript
             global::System.Net.Http.HttpClient httpClient,
             global::System.Net.Http.HttpRequestMessage httpRequestMessage,
             string? name,
-            global::System.Guid? createdBy,
+            string? createdBy,
             global::System.DateTime? createdAfter,
             global::System.DateTime? createdBefore,
             global::System.DateTime? updatedAfter,
@@ -87,7 +87,7 @@ namespace Descript
         /// <exception cref="global::Descript.ApiException"></exception>
         public async global::System.Threading.Tasks.Task<global::Descript.ListProjectsResponse> ListProjectsAsync(
             string? name = default,
-            global::System.Guid? createdBy = default,
+            string? createdBy = default,
             global::System.DateTime? createdAfter = default,
             global::System.DateTime? createdBefore = default,
             global::System.DateTime? updatedAfter = default,
@@ -141,7 +141,7 @@ namespace Descript
                                 baseUri: HttpClient.BaseAddress); 
                             __pathBuilder
                                 .AddOptionalParameter("name", name)
-                                .AddOptionalParameter("created_by", createdBy?.ToString())
+                                .AddOptionalParameter("created_by", createdBy)
                                 .AddOptionalParameter("created_after", createdAfter?.ToString("yyyy-MM-ddTHH:mm:ssZ"))
                                 .AddOptionalParameter("created_before", createdBefore?.ToString("yyyy-MM-ddTHH:mm:ssZ"))
                                 .AddOptionalParameter("updated_after", updatedAfter?.ToString("yyyy-MM-ddTHH:mm:ssZ"))

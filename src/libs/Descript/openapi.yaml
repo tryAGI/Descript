@@ -1558,11 +1558,10 @@ paths:
             type: string
         - in: query
           name: created_by
-          description: Filter projects created by this user UUID.
+          description: Filter projects created by this user UUID. Pass `me` to filter by the authenticated user.
           required: false
           schema:
             type: string
-            format: uuid
         - in: query
           name: created_after
           description: Filter projects created after this ISO 8601 timestamp.
