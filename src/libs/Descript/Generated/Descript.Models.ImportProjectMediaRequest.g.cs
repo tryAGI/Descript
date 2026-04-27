@@ -14,7 +14,6 @@ namespace Descript
     public sealed partial class ImportProjectMediaRequest
     {
         /// <summary>
-        /// **[Work in progress]** Importing into an existing project is not yet supported. Currently, a new project is always created.<br/>
         /// Existing project ID to import media into. If not provided, a new project will be created.<br/>
         /// When importing into an existing project, media filenames must not conflict with existing files.<br/>
         /// Example: 9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
@@ -92,7 +91,6 @@ namespace Descript
         /// Initializes a new instance of the <see cref="ImportProjectMediaRequest" /> class.
         /// </summary>
         /// <param name="projectId">
-        /// **[Work in progress]** Importing into an existing project is not yet supported. Currently, a new project is always created.<br/>
         /// Existing project ID to import media into. If not provided, a new project will be created.<br/>
         /// When importing into an existing project, media filenames must not conflict with existing files.<br/>
         /// Example: 9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb

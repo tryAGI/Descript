@@ -49,6 +49,11 @@ namespace Descript
         /// - `share_url`: a public URL that can be used to view the published content on Descript's share site.<br/>
         /// - `download_url`: a time-limited signed URL to download the exported media file directly,<br/>
         ///   along with `download_url_expires_at` indicating when the link expires.<br/>
+        /// ### Republishing<br/>
+        /// Publishing the same composition a second time automatically reuses the previous share URL,<br/>
+        /// overwriting its content — so bookmarks and links handed out for the first publish keep working.<br/>
+        /// Republish matching is keyed on `(project_id, composition_id, media_type)`, so a Video publish<br/>
+        /// and an Audio publish of the same composition produce two separate share URLs.<br/>
         /// ### Async Operations<br/>
         /// Publish jobs run in the background and return a `job_id`. Monitor progress via the [GET /jobs/{job_id}](#operation/getJob) endpoint,<br/>
         /// which returns the `share_url`, `download_url`, and `download_url_expires_at` fields once the job finishes.<br/>
@@ -591,6 +596,11 @@ namespace Descript
         /// - `share_url`: a public URL that can be used to view the published content on Descript's share site.<br/>
         /// - `download_url`: a time-limited signed URL to download the exported media file directly,<br/>
         ///   along with `download_url_expires_at` indicating when the link expires.<br/>
+        /// ### Republishing<br/>
+        /// Publishing the same composition a second time automatically reuses the previous share URL,<br/>
+        /// overwriting its content — so bookmarks and links handed out for the first publish keep working.<br/>
+        /// Republish matching is keyed on `(project_id, composition_id, media_type)`, so a Video publish<br/>
+        /// and an Audio publish of the same composition produce two separate share URLs.<br/>
         /// ### Async Operations<br/>
         /// Publish jobs run in the background and return a `job_id`. Monitor progress via the [GET /jobs/{job_id}](#operation/getJob) endpoint,<br/>
         /// which returns the `share_url`, `download_url`, and `download_url_expires_at` fields once the job finishes.<br/>
