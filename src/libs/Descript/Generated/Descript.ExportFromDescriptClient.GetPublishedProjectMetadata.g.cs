@@ -128,7 +128,7 @@ namespace Descript
                 PrepareGetPublishedProjectMetadataRequest(
                     httpClient: HttpClient,
                     httpRequestMessage: __httpRequest,
-                    publishedProjectSlug: publishedProjectSlug);
+                    publishedProjectSlug: publishedProjectSlug!);
 
                 return __httpRequest;
             }
