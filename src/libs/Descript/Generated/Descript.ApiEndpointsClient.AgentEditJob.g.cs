@@ -618,10 +618,14 @@ namespace Descript
         /// Example: My New Project
         /// </param>
         /// <param name="compositionId">
-        /// Optional composition ID within the project to target. When provided,<br/>
+        /// Composition to target within the project. When provided,<br/>
         /// the agent will focus its edits on this specific composition rather<br/>
         /// than choosing one automatically. Only valid when `project_id` is also<br/>
         /// provided. Requires `project_id`.<br/>
+        /// Accepts any of the following formats:<br/>
+        /// - A full composition UUID (e.g. `39677a40-1c43-4c36-8449-46cfbc4de2b5`)<br/>
+        /// - A 5-character short ID from a Descript URL (e.g. `39677`)<br/>
+        /// - A full Descript project URL (e.g. `https://web.descript.com/{project_id}/39677`)<br/>
         /// Example: 39677a40-1c43-4c36-8449-46cfbc4de2b5
         /// </param>
         /// <param name="model">
@@ -649,7 +653,7 @@ namespace Descript
             string prompt,
             global::System.Guid? projectId = default,
             string? projectName = default,
-            global::System.Guid? compositionId = default,
+            string? compositionId = default,
             string? model = default,
             global::Descript.AgentEditJobRequestTeamAccess? teamAccess = default,
             string? callbackUrl = default,

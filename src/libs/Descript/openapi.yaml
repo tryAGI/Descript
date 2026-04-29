@@ -750,12 +750,16 @@ paths:
                   example: My New Project
                 composition_id:
                   type: string
-                  format: uuid
                   description: |
-                    Optional composition ID within the project to target. When provided,
+                    Composition to target within the project. When provided,
                     the agent will focus its edits on this specific composition rather
                     than choosing one automatically. Only valid when `project_id` is also
                     provided. Requires `project_id`.
+
+                    Accepts any of the following formats:
+                    - A full composition UUID (e.g. `39677a40-1c43-4c36-8449-46cfbc4de2b5`)
+                    - A 5-character short ID from a Descript URL (e.g. `39677`)
+                    - A full Descript project URL (e.g. `https://web.descript.com/{project_id}/39677`)
                   example: 39677a40-1c43-4c36-8449-46cfbc4de2b5
                 model:
                   type: string
