@@ -53,6 +53,35 @@ namespace Descript
         /// If `callback_url` is provided, Descript will POST the job status to that URL when the job completes or fails.<br/>
         /// The payload will match the format returned by [GET /jobs/{job_id}](#operation/getJob).
         /// </summary>
+        /// <param name="request"></param>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
+        /// <param name="cancellationToken">The token to cancel the operation with</param>
+        /// <exception cref="global::Descript.ApiException"></exception>
+        global::System.Threading.Tasks.Task<global::Descript.AutoSDKHttpResponse<global::Descript.PublishJobResponse>> PublishJobAsResponseAsync(
+
+            global::Descript.PublishJobRequest request,
+            global::Descript.AutoSDKRequestOptions? requestOptions = default,
+            global::System.Threading.CancellationToken cancellationToken = default);
+        /// <summary>
+        /// Publish project media<br/>
+        /// Publish a project composition to create a shareable link and download the exported file.<br/>
+        /// Publishes a specific composition from a project, rendering the output as video or audio<br/>
+        /// at the specified resolution. When the job completes successfully the result contains both:<br/>
+        /// - `share_url`: a public URL that can be used to view the published content on Descript's share site.<br/>
+        /// - `download_url`: a time-limited signed URL to download the exported media file directly,<br/>
+        ///   along with `download_url_expires_at` indicating when the link expires.<br/>
+        /// ### Republishing<br/>
+        /// Publishing the same composition a second time automatically reuses the previous share URL,<br/>
+        /// overwriting its content — so bookmarks and links handed out for the first publish keep working.<br/>
+        /// Republish matching is keyed on `(project_id, composition_id, media_type)`, so a Video publish<br/>
+        /// and an Audio publish of the same composition produce two separate share URLs.<br/>
+        /// ### Async Operations<br/>
+        /// Publish jobs run in the background and return a `job_id`. Monitor progress via the [GET /jobs/{job_id}](#operation/getJob) endpoint,<br/>
+        /// which returns the `share_url`, `download_url`, and `download_url_expires_at` fields once the job finishes.<br/>
+        /// ### Dynamic webhook<br/>
+        /// If `callback_url` is provided, Descript will POST the job status to that URL when the job completes or fails.<br/>
+        /// The payload will match the format returned by [GET /jobs/{job_id}](#operation/getJob).
+        /// </summary>
         /// <param name="projectId">
         /// The ID of the project to publish.<br/>
         /// Example: 9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
