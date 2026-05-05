@@ -49,6 +49,33 @@ namespace Descript
         /// If `callback_url` is provided, Descript will POST the job status to that URL when the job completes or fails.<br/>
         /// The payload will match the format returned by [GET /jobs/{job_id}](#operation/getJob).
         /// </summary>
+        /// <param name="request"></param>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
+        /// <param name="cancellationToken">The token to cancel the operation with</param>
+        /// <exception cref="global::Descript.ApiException"></exception>
+        global::System.Threading.Tasks.Task<global::Descript.AutoSDKHttpResponse<global::Descript.AgentEditJobResponse>> AgentEditJobAsResponseAsync(
+
+            global::Descript.AgentEditJobRequest request,
+            global::Descript.AutoSDKRequestOptions? requestOptions = default,
+            global::System.Threading.CancellationToken cancellationToken = default);
+        /// <summary>
+        /// Agent edit<br/>
+        /// Use a background agent to create and edit projects using a natural language prompt.<br/>
+        /// - **Edit existing project**: Provide a `project_id` to edit an existing project<br/>
+        /// - **Target a specific composition**: Provide both `project_id` and `composition_id` to direct the agent to a specific composition within the project<br/>
+        /// - **Create new project**: Provide a `project_name` instead of `project_id` to create a new project<br/>
+        /// ### Common use cases<br/>
+        /// - Create new content: "create a 30-second video about cooking tips"<br/>
+        /// - Apply audio effects: "add studio sound to every clip"<br/>
+        /// - Remove filler words: "remove all filler words from the transcript"<br/>
+        /// - Create highlights: "create a 30-second highlight reel"<br/>
+        /// - Content editing: "remove the section from 1:30 to 2:15"<br/>
+        /// ### Async Operations<br/>
+        /// Agent edits run in the background and return a `job_id`. Monitor progress via the [GET /jobs/{job_id}](#operation/getJob) endpoint.<br/>
+        /// ### Dynamic webhook<br/>
+        /// If `callback_url` is provided, Descript will POST the job status to that URL when the job completes or fails.<br/>
+        /// The payload will match the format returned by [GET /jobs/{job_id}](#operation/getJob).
+        /// </summary>
         /// <param name="projectId">
         /// The ID of an existing project to edit. Mutually exclusive with `project_name`.<br/>
         /// Example: 9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb

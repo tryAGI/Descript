@@ -73,6 +73,47 @@ namespace Descript
             global::Descript.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default)
         {
+            var __response = await ImportProjectMediaAsResponseAsync(
+
+                request: request,
+                requestOptions: requestOptions,
+                cancellationToken: cancellationToken
+            ).ConfigureAwait(false);
+
+            return __response.Body;
+        }
+        /// <summary>
+        /// Import media and sequences<br/>
+        /// Import media files into a new or existing project and create compositions.<br/>
+        /// This endpoint can:<br/>
+        /// - Create a new project if `project_id` is not provided<br/>
+        /// - Import media files from URLs<br/>
+        /// - Create multitrack sequences<br/>
+        /// - Create compositions (timelines) from existing or new media in the project<br/>
+        /// - Trigger transcription and other background processing tasks<br/>
+        /// ### Media URL requirements<br/>
+        /// - URLs must be accessible by Descript servers<br/>
+        /// - URLs must support HTTP Range requests<br/>
+        /// - Recommended to sign URLs for 12-48 hours to reduce chance of failure<br/>
+        /// - [Supported file types](https://help.descript.com/hc/en-us/articles/10164098416909-Supported-file-types)<br/>
+        /// ### Direct file upload<br/>
+        /// Instead of providing a URL, you can upload files directly by specifying `content_type` and `file_size` for a media item. The response will include a signed `upload_url` for each direct upload item. PUT the file bytes to that URL, and the import job will process it automatically. See the [Direct file upload](#tag/Direct-file-upload) guide for a full walkthrough.<br/>
+        /// ### Async Operations<br/>
+        /// Imports run in the background and return a `job_id`. Monitor progress via the [GET /jobs/{job_id}](#operation/getJob) endpoint.<br/>
+        /// ### Dynamic webhook<br/>
+        /// If `callback_url` is provided, Descript will POST the job status to that URL when the job finishes (successfully or not).<br/>
+        /// The payload will match the format returned by [GET /jobs/{job_id}](#operation/getJob).
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
+        /// <param name="cancellationToken">The token to cancel the operation with</param>
+        /// <exception cref="global::Descript.ApiException"></exception>
+        public async global::System.Threading.Tasks.Task<global::Descript.AutoSDKHttpResponse<global::Descript.ImportProjectMediaResponse>> ImportProjectMediaAsResponseAsync(
+
+            global::Descript.ImportProjectMediaRequest request,
+            global::Descript.AutoSDKRequestOptions? requestOptions = default,
+            global::System.Threading.CancellationToken cancellationToken = default)
+        {
             request = request ?? throw new global::System.ArgumentNullException(nameof(request));
 
             PrepareArguments(
@@ -103,6 +144,7 @@ namespace Descript
 
             global::System.Net.Http.HttpRequestMessage __CreateHttpRequest()
             {
+
                             var __pathBuilder = new global::Descript.PathBuilder(
                                 path: "/jobs/import/project_media",
                                 baseUri: HttpClient.BaseAddress);
@@ -182,6 +224,8 @@ namespace Descript
                                 attempt: __attempt,
                                 maxAttempts: __maxAttempts,
                                 willRetry: false,
+                                retryDelay: null,
+                                retryReason: global::System.String.Empty,
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                     try
                     {
@@ -192,6 +236,11 @@ namespace Descript
                     }
                     catch (global::System.Net.Http.HttpRequestException __exception)
                     {
+                        var __retryDelay = global::Descript.AutoSDKRequestOptionsSupport.GetRetryDelay(
+                            clientOptions: Options,
+                            requestOptions: requestOptions,
+                            response: null,
+                            attempt: __attempt);
                         var __willRetry = __attempt < __maxAttempts && !__effectiveCancellationToken.IsCancellationRequested;
                         await global::Descript.AutoSDKRequestOptionsSupport.OnAfterErrorAsync(
                             clientOptions: Options,
@@ -209,6 +258,8 @@ namespace Descript
                                 attempt: __attempt,
                                 maxAttempts: __maxAttempts,
                                 willRetry: __willRetry,
+                                retryDelay: __willRetry ? __retryDelay : (global::System.TimeSpan?)null,
+                                retryReason: "exception",
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                         if (!__willRetry)
                         {
@@ -218,8 +269,7 @@ namespace Descript
                         __httpRequest.Dispose();
                         __httpRequest = null;
                         await global::Descript.AutoSDKRequestOptionsSupport.DelayBeforeRetryAsync(
-                            clientOptions: Options,
-                            requestOptions: requestOptions,
+                            retryDelay: __retryDelay,
                             cancellationToken: __effectiveCancellationToken).ConfigureAwait(false);
                         continue;
                     }
@@ -228,6 +278,11 @@ namespace Descript
                         __attempt < __maxAttempts &&
                         global::Descript.AutoSDKRequestOptionsSupport.ShouldRetryStatusCode(__response.StatusCode))
                     {
+                        var __retryDelay = global::Descript.AutoSDKRequestOptionsSupport.GetRetryDelay(
+                            clientOptions: Options,
+                            requestOptions: requestOptions,
+                            response: __response,
+                            attempt: __attempt);
                         await global::Descript.AutoSDKRequestOptionsSupport.OnAfterErrorAsync(
                             clientOptions: Options,
                             context: global::Descript.AutoSDKRequestOptionsSupport.CreateHookContext(
@@ -244,14 +299,15 @@ namespace Descript
                                 attempt: __attempt,
                                 maxAttempts: __maxAttempts,
                                 willRetry: true,
+                                retryDelay: __retryDelay,
+                                retryReason: "status:" + ((int)__response.StatusCode).ToString(global::System.Globalization.CultureInfo.InvariantCulture),
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                         __response.Dispose();
                         __response = null;
                         __httpRequest.Dispose();
                         __httpRequest = null;
                         await global::Descript.AutoSDKRequestOptionsSupport.DelayBeforeRetryAsync(
-                            clientOptions: Options,
-                            requestOptions: requestOptions,
+                            retryDelay: __retryDelay,
                             cancellationToken: __effectiveCancellationToken).ConfigureAwait(false);
                         continue;
                     }
@@ -291,6 +347,8 @@ namespace Descript
                                 attempt: __attemptNumber,
                                 maxAttempts: __maxAttempts,
                                 willRetry: false,
+                                retryDelay: null,
+                                retryReason: global::System.String.Empty,
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                 }
                 else
@@ -311,6 +369,8 @@ namespace Descript
                                 attempt: __attemptNumber,
                                 maxAttempts: __maxAttempts,
                                 willRetry: false,
+                                retryDelay: null,
+                                retryReason: global::System.String.Empty,
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                 }
                             // Invalid input: - Malformed request body - Invalid media URLs - URLs not accessible or don't support Range requests - Media filename conflicts with existing files (when importing to existing project) 
@@ -563,9 +623,13 @@ namespace Descript
                                 {
                                     __response.EnsureSuccessStatusCode();
 
-                                    return
-                                        global::Descript.ImportProjectMediaResponse.FromJson(__content, JsonSerializerContext) ??
+                                    var __value = global::Descript.ImportProjectMediaResponse.FromJson(__content, JsonSerializerContext) ??
                                         throw new global::System.InvalidOperationException($"Response deserialization failed for \"{__content}\" ");
+                                    return new global::Descript.AutoSDKHttpResponse<global::Descript.ImportProjectMediaResponse>(
+                                        statusCode: __response.StatusCode,
+                                        headers: global::Descript.AutoSDKHttpResponse.CreateHeaders(__response),
+                                        requestUri: __response.RequestMessage?.RequestUri,
+                                        body: __value);
                                 }
                                 catch (global::System.Exception __ex)
                                 {
@@ -593,9 +657,13 @@ namespace Descript
                 #endif
                                     ).ConfigureAwait(false);
 
-                                    return
-                                        await global::Descript.ImportProjectMediaResponse.FromJsonStreamAsync(__content, JsonSerializerContext).ConfigureAwait(false) ??
+                                    var __value = await global::Descript.ImportProjectMediaResponse.FromJsonStreamAsync(__content, JsonSerializerContext).ConfigureAwait(false) ??
                                         throw new global::System.InvalidOperationException("Response deserialization failed.");
+                                    return new global::Descript.AutoSDKHttpResponse<global::Descript.ImportProjectMediaResponse>(
+                                        statusCode: __response.StatusCode,
+                                        headers: global::Descript.AutoSDKHttpResponse.CreateHeaders(__response),
+                                        requestUri: __response.RequestMessage?.RequestUri,
+                                        body: __value);
                                 }
                                 catch (global::System.Exception __ex)
                                 {
