@@ -28,6 +28,7 @@ namespace Descript
         partial void PrepareListProjectsArguments(
             global::System.Net.Http.HttpClient httpClient,
             ref string? name,
+            ref string? folderPath,
             ref string? createdBy,
             ref global::System.DateTime? createdAfter,
             ref global::System.DateTime? createdBefore,
@@ -41,6 +42,7 @@ namespace Descript
             global::System.Net.Http.HttpClient httpClient,
             global::System.Net.Http.HttpRequestMessage httpRequestMessage,
             string? name,
+            string? folderPath,
             string? createdBy,
             global::System.DateTime? createdAfter,
             global::System.DateTime? createdBefore,
@@ -67,6 +69,7 @@ namespace Descript
         /// to fetch subsequent pages.
         /// </summary>
         /// <param name="name"></param>
+        /// <param name="folderPath"></param>
         /// <param name="createdBy"></param>
         /// <param name="createdAfter"></param>
         /// <param name="createdBefore"></param>
@@ -87,6 +90,7 @@ namespace Descript
         /// <exception cref="global::Descript.ApiException"></exception>
         public async global::System.Threading.Tasks.Task<global::Descript.ListProjectsResponse> ListProjectsAsync(
             string? name = default,
+            string? folderPath = default,
             string? createdBy = default,
             global::System.DateTime? createdAfter = default,
             global::System.DateTime? createdBefore = default,
@@ -101,6 +105,7 @@ namespace Descript
         {
             var __response = await ListProjectsAsResponseAsync(
                 name: name,
+                folderPath: folderPath,
                 createdBy: createdBy,
                 createdAfter: createdAfter,
                 createdBefore: createdBefore,
@@ -124,6 +129,7 @@ namespace Descript
         /// to fetch subsequent pages.
         /// </summary>
         /// <param name="name"></param>
+        /// <param name="folderPath"></param>
         /// <param name="createdBy"></param>
         /// <param name="createdAfter"></param>
         /// <param name="createdBefore"></param>
@@ -144,6 +150,7 @@ namespace Descript
         /// <exception cref="global::Descript.ApiException"></exception>
         public async global::System.Threading.Tasks.Task<global::Descript.AutoSDKHttpResponse<global::Descript.ListProjectsResponse>> ListProjectsAsResponseAsync(
             string? name = default,
+            string? folderPath = default,
             string? createdBy = default,
             global::System.DateTime? createdAfter = default,
             global::System.DateTime? createdBefore = default,
@@ -161,6 +168,7 @@ namespace Descript
             PrepareListProjectsArguments(
                 httpClient: HttpClient,
                 name: ref name,
+                folderPath: ref folderPath,
                 createdBy: ref createdBy,
                 createdAfter: ref createdAfter,
                 createdBefore: ref createdBefore,
@@ -199,6 +207,7 @@ namespace Descript
                                 baseUri: HttpClient.BaseAddress);
                             __pathBuilder
                                 .AddOptionalParameter("name", name)
+                                .AddOptionalParameter("folder_path", folderPath)
                                 .AddOptionalParameter("created_by", createdBy)
                                 .AddOptionalParameter("created_after", createdAfter?.ToString("yyyy-MM-ddTHH:mm:ssZ"))
                                 .AddOptionalParameter("created_before", createdBefore?.ToString("yyyy-MM-ddTHH:mm:ssZ"))
@@ -250,6 +259,7 @@ namespace Descript
                     httpClient: HttpClient,
                     httpRequestMessage: __httpRequest,
                     name: name,
+                    folderPath: folderPath,
                     createdBy: createdBy,
                     createdAfter: createdAfter,
                     createdBefore: createdBefore,
