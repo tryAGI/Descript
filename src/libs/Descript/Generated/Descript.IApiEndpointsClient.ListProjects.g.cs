@@ -12,6 +12,7 @@ namespace Descript
         /// to fetch subsequent pages.
         /// </summary>
         /// <param name="name"></param>
+        /// <param name="folderPath"></param>
         /// <param name="createdBy"></param>
         /// <param name="createdAfter"></param>
         /// <param name="createdBefore"></param>
@@ -32,6 +33,7 @@ namespace Descript
         /// <exception cref="global::Descript.ApiException"></exception>
         global::System.Threading.Tasks.Task<global::Descript.ListProjectsResponse> ListProjectsAsync(
             string? name = default,
+            string? folderPath = default,
             string? createdBy = default,
             global::System.DateTime? createdAfter = default,
             global::System.DateTime? createdBefore = default,
@@ -51,6 +53,7 @@ namespace Descript
         /// to fetch subsequent pages.
         /// </summary>
         /// <param name="name"></param>
+        /// <param name="folderPath"></param>
         /// <param name="createdBy"></param>
         /// <param name="createdAfter"></param>
         /// <param name="createdBefore"></param>
@@ -71,6 +74,7 @@ namespace Descript
         /// <exception cref="global::Descript.ApiException"></exception>
         global::System.Threading.Tasks.Task<global::Descript.AutoSDKHttpResponse<global::Descript.ListProjectsResponse>> ListProjectsAsResponseAsync(
             string? name = default,
+            string? folderPath = default,
             string? createdBy = default,
             global::System.DateTime? createdAfter = default,
             global::System.DateTime? createdBefore = default,
