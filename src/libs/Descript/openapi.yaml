@@ -1243,6 +1243,12 @@ paths:
                           last_update_at: '2025-11-18T11:01:00Z'
                     pagination:
                       next_cursor: YTFiMmMzZDQtNTY3OC05MGFiLWNkZWYtMTIzNDU2Nzg5MGFi
+        '400':
+          description: Bad request - `project_id` is not a valid UUID
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error400'
         '401':
           description: Unauthorized - invalid or missing authentication token
           content:
@@ -1482,7 +1488,7 @@ paths:
                   summary: Job does not exist
                   value:
                     error: not_found
-                    message: Job not found
+                    message: No job found for job_id "6dc3f30a-58c2-4174-96a6-dc18cf3c7776".
         '429':
           $ref: '#/components/responses/Error429Response'
     delete:
@@ -1540,7 +1546,7 @@ paths:
                   summary: Job does not exist
                   value:
                     error: not_found
-                    message: Job not found
+                    message: No job found for job_id "6dc3f30a-58c2-4174-96a6-dc18cf3c7776".
         '429':
           $ref: '#/components/responses/Error429Response'
   /projects:
@@ -1807,6 +1813,12 @@ paths:
                         media_type:
                           type: string
                           description: Media type of the composition
+        '400':
+          description: Bad request - `project_id` is not a valid UUID
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error400'
         '401':
           description: Unauthorized - invalid or missing authentication token
           content:
