@@ -44,6 +44,14 @@ namespace Descript
         public required global::System.DateTime UpdatedAt { get; set; }
 
         /// <summary>
+        /// Full folder path for the project (e.g. "Clients/Acme/Videos"). Absent when the project is at the drive root.<br/>
+        /// Example: Clients/Acme/Videos
+        /// </summary>
+        /// <example>Clients/Acme/Videos</example>
+        [global::System.Text.Json.Serialization.JsonPropertyName("folder_path")]
+        public string? FolderPath { get; set; }
+
+        /// <summary>
         /// Map of display path to media file info
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("media_files")]
@@ -87,6 +95,10 @@ namespace Descript
         /// <param name="compositions">
         /// Compositions in the project
         /// </param>
+        /// <param name="folderPath">
+        /// Full folder path for the project (e.g. "Clients/Acme/Videos"). Absent when the project is at the drive root.<br/>
+        /// Example: Clients/Acme/Videos
+        /// </param>
 #if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 #endif
@@ -97,13 +109,15 @@ namespace Descript
             global::System.DateTime createdAt,
             global::System.DateTime updatedAt,
             global::System.Collections.Generic.Dictionary<string, global::Descript.GetProjectResponseMediaFiles2> mediaFiles,
-            global::System.Collections.Generic.IList<global::Descript.GetProjectResponseComposition> compositions)
+            global::System.Collections.Generic.IList<global::Descript.GetProjectResponseComposition> compositions,
+            string? folderPath)
         {
             this.Id = id;
             this.Name = name ?? throw new global::System.ArgumentNullException(nameof(name));
             this.DriveId = driveId;
             this.CreatedAt = createdAt;
             this.UpdatedAt = updatedAt;
+            this.FolderPath = folderPath;
             this.MediaFiles = mediaFiles ?? throw new global::System.ArgumentNullException(nameof(mediaFiles));
             this.Compositions = compositions ?? throw new global::System.ArgumentNullException(nameof(compositions));
         }

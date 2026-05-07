@@ -1682,6 +1682,10 @@ paths:
                           format: date-time
                           description: When the project was last updated
                           example: '2025-11-19T14:00:00Z'
+                        folder_path:
+                          type: string
+                          description: Full folder path for the project (e.g. "Clients/Acme/Videos"). Absent when the project is at the drive root.
+                          example: Clients/Acme/Videos
                   pagination:
                     type: object
                     properties:
@@ -1755,6 +1759,10 @@ paths:
                     type: string
                     format: date-time
                     description: When the project was last updated (ISO 8601)
+                  folder_path:
+                    type: string
+                    description: Full folder path for the project (e.g. "Clients/Acme/Videos"). Absent when the project is at the drive root.
+                    example: Clients/Acme/Videos
                   media_files:
                     type: object
                     description: Map of display path to media file info
