@@ -32,6 +32,19 @@ namespace Descript
         public bool IsSuccess => Success != null;
 
         /// <summary>
+        /// 
+        /// </summary>
+        public bool TryPickSuccess(
+#if NET6_0_OR_GREATER
+            [global::System.Diagnostics.CodeAnalysis.NotNullWhen(true)]
+#endif
+            out global::Descript.AgentSuccessResult? value)
+        {
+            value = Success;
+            return IsSuccess;
+        }
+
+        /// <summary>
         /// Result when Agent edit failed
         /// </summary>
 #if NET6_0_OR_GREATER
@@ -47,6 +60,19 @@ namespace Descript
         [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhen(true, nameof(Error))]
 #endif
         public bool IsError => Error != null;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool TryPickError(
+#if NET6_0_OR_GREATER
+            [global::System.Diagnostics.CodeAnalysis.NotNullWhen(true)]
+#endif
+            out global::Descript.AgentErrorResult? value)
+        {
+            value = Error;
+            return IsError;
+        }
         /// <summary>
         /// 
         /// </summary>
@@ -126,8 +152,8 @@ namespace Descript
         /// 
         /// </summary>
         public TResult? Match<TResult>(
-            global::System.Func<global::Descript.AgentSuccessResult?, TResult>? success = null,
-            global::System.Func<global::Descript.AgentErrorResult?, TResult>? error = null,
+            global::System.Func<global::Descript.AgentSuccessResult, TResult>? success = null,
+            global::System.Func<global::Descript.AgentErrorResult, TResult>? error = null,
             bool validate = true)
         {
             if (validate)
@@ -151,8 +177,32 @@ namespace Descript
         /// 
         /// </summary>
         public void Match(
-            global::System.Action<global::Descript.AgentSuccessResult?>? success = null,
-            global::System.Action<global::Descript.AgentErrorResult?>? error = null,
+            global::System.Action<global::Descript.AgentSuccessResult>? success = null,
+
+            global::System.Action<global::Descript.AgentErrorResult>? error = null,
+            bool validate = true)
+        {
+            if (validate)
+            {
+                Validate();
+            }
+
+            if (IsSuccess)
+            {
+                success?.Invoke(Success!);
+            }
+            else if (IsError)
+            {
+                error?.Invoke(Error!);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Switch(
+            global::System.Action<global::Descript.AgentSuccessResult>? success = null,
+            global::System.Action<global::Descript.AgentErrorResult>? error = null,
             bool validate = true)
         {
             if (validate)
