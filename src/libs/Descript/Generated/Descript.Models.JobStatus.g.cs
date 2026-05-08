@@ -33,6 +33,19 @@ namespace Descript
         public bool IsImportProjectMedia => ImportProjectMedia != null;
 
         /// <summary>
+        /// 
+        /// </summary>
+        public bool TryPickImportProjectMedia(
+#if NET6_0_OR_GREATER
+            [global::System.Diagnostics.CodeAnalysis.NotNullWhen(true)]
+#endif
+            out global::Descript.ImportJobStatus? value)
+        {
+            value = ImportProjectMedia;
+            return IsImportProjectMedia;
+        }
+
+        /// <summary>
         /// Status of an Agent edit job
         /// </summary>
 #if NET6_0_OR_GREATER
@@ -50,6 +63,19 @@ namespace Descript
         public bool IsAgent => Agent != null;
 
         /// <summary>
+        /// 
+        /// </summary>
+        public bool TryPickAgent(
+#if NET6_0_OR_GREATER
+            [global::System.Diagnostics.CodeAnalysis.NotNullWhen(true)]
+#endif
+            out global::Descript.AgentJobStatus? value)
+        {
+            value = Agent;
+            return IsAgent;
+        }
+
+        /// <summary>
         /// Status of a publish job
         /// </summary>
 #if NET6_0_OR_GREATER
@@ -65,6 +91,19 @@ namespace Descript
         [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhen(true, nameof(Publish))]
 #endif
         public bool IsPublish => Publish != null;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool TryPickPublish(
+#if NET6_0_OR_GREATER
+            [global::System.Diagnostics.CodeAnalysis.NotNullWhen(true)]
+#endif
+            out global::Descript.PublishJobStatus? value)
+        {
+            value = Publish;
+            return IsPublish;
+        }
         /// <summary>
         /// 
         /// </summary>
@@ -166,9 +205,9 @@ namespace Descript
         /// 
         /// </summary>
         public TResult? Match<TResult>(
-            global::System.Func<global::Descript.ImportJobStatus?, TResult>? importProjectMedia = null,
-            global::System.Func<global::Descript.AgentJobStatus?, TResult>? agent = null,
-            global::System.Func<global::Descript.PublishJobStatus?, TResult>? publish = null,
+            global::System.Func<global::Descript.ImportJobStatus, TResult>? importProjectMedia = null,
+            global::System.Func<global::Descript.AgentJobStatus, TResult>? agent = null,
+            global::System.Func<global::Descript.PublishJobStatus, TResult>? publish = null,
             bool validate = true)
         {
             if (validate)
@@ -196,9 +235,39 @@ namespace Descript
         /// 
         /// </summary>
         public void Match(
-            global::System.Action<global::Descript.ImportJobStatus?>? importProjectMedia = null,
-            global::System.Action<global::Descript.AgentJobStatus?>? agent = null,
-            global::System.Action<global::Descript.PublishJobStatus?>? publish = null,
+            global::System.Action<global::Descript.ImportJobStatus>? importProjectMedia = null,
+
+            global::System.Action<global::Descript.AgentJobStatus>? agent = null,
+
+            global::System.Action<global::Descript.PublishJobStatus>? publish = null,
+            bool validate = true)
+        {
+            if (validate)
+            {
+                Validate();
+            }
+
+            if (IsImportProjectMedia)
+            {
+                importProjectMedia?.Invoke(ImportProjectMedia!);
+            }
+            else if (IsAgent)
+            {
+                agent?.Invoke(Agent!);
+            }
+            else if (IsPublish)
+            {
+                publish?.Invoke(Publish!);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Switch(
+            global::System.Action<global::Descript.ImportJobStatus>? importProjectMedia = null,
+            global::System.Action<global::Descript.AgentJobStatus>? agent = null,
+            global::System.Action<global::Descript.PublishJobStatus>? publish = null,
             bool validate = true)
         {
             if (validate)
