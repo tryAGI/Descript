@@ -94,6 +94,11 @@ namespace Descript
         /// <summary>
         /// 
         /// </summary>
+        public static Result2 FromSuccess(global::Descript.AgentSuccessResult? value) => new Result2(value);
+
+        /// <summary>
+        /// 
+        /// </summary>
         public static implicit operator Result2(global::Descript.AgentErrorResult value) => new Result2((global::Descript.AgentErrorResult?)value);
 
         /// <summary>
@@ -108,6 +113,11 @@ namespace Descript
         {
             Error = value;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static Result2 FromError(global::Descript.AgentErrorResult? value) => new Result2(value);
 
         /// <summary>
         /// 

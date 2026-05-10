@@ -94,6 +94,11 @@ namespace Descript
         /// <summary>
         /// 
         /// </summary>
+        public static Result FromSuccess(global::Descript.ImportSuccessResult? value) => new Result(value);
+
+        /// <summary>
+        /// 
+        /// </summary>
         public static implicit operator Result(global::Descript.ImportErrorResult value) => new Result((global::Descript.ImportErrorResult?)value);
 
         /// <summary>
@@ -108,6 +113,11 @@ namespace Descript
         {
             Error = value;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static Result FromError(global::Descript.ImportErrorResult? value) => new Result(value);
 
         /// <summary>
         /// 

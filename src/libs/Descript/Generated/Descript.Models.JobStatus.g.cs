@@ -125,6 +125,11 @@ namespace Descript
         /// <summary>
         /// 
         /// </summary>
+        public static JobStatus FromImportProjectMedia(global::Descript.ImportJobStatus? value) => new JobStatus(value);
+
+        /// <summary>
+        /// 
+        /// </summary>
         public static implicit operator JobStatus(global::Descript.AgentJobStatus value) => new JobStatus((global::Descript.AgentJobStatus?)value);
 
         /// <summary>
@@ -143,6 +148,11 @@ namespace Descript
         /// <summary>
         /// 
         /// </summary>
+        public static JobStatus FromAgent(global::Descript.AgentJobStatus? value) => new JobStatus(value);
+
+        /// <summary>
+        /// 
+        /// </summary>
         public static implicit operator JobStatus(global::Descript.PublishJobStatus value) => new JobStatus((global::Descript.PublishJobStatus?)value);
 
         /// <summary>
@@ -157,6 +167,11 @@ namespace Descript
         {
             Publish = value;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static JobStatus FromPublish(global::Descript.PublishJobStatus? value) => new JobStatus(value);
 
         /// <summary>
         /// 
