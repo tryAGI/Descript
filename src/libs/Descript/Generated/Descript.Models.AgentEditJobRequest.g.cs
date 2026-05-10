@@ -148,5 +148,6 @@ namespace Descript
         public AgentEditJobRequest()
         {
         }
+
     }
 }

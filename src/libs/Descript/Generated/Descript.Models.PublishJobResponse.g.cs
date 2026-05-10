@@ -90,5 +90,6 @@ namespace Descript
         public PublishJobResponse()
         {
         }
+
     }
 }

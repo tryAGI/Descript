@@ -46,6 +46,13 @@ namespace Descript
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        public global::Descript.ImportJobStatus PickImportProjectMedia() => IsImportProjectMedia
+            ? ImportProjectMedia!
+            : throw new global::System.InvalidOperationException($"Expected union variant 'ImportProjectMedia' but the value was {ToString()}.");
+
+        /// <summary>
         /// Status of an Agent edit job
         /// </summary>
 #if NET6_0_OR_GREATER
@@ -76,6 +83,13 @@ namespace Descript
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        public global::Descript.AgentJobStatus PickAgent() => IsAgent
+            ? Agent!
+            : throw new global::System.InvalidOperationException($"Expected union variant 'Agent' but the value was {ToString()}.");
+
+        /// <summary>
         /// Status of a publish job
         /// </summary>
 #if NET6_0_OR_GREATER
@@ -104,6 +118,13 @@ namespace Descript
             value = Publish;
             return IsPublish;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::Descript.PublishJobStatus PickPublish() => IsPublish
+            ? Publish!
+            : throw new global::System.InvalidOperationException($"Expected union variant 'Publish' but the value was {ToString()}.");
         /// <summary>
         /// 
         /// </summary>

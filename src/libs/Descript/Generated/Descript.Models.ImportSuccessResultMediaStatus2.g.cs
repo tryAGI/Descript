@@ -71,5 +71,6 @@ namespace Descript
         public ImportSuccessResultMediaStatus2()
         {
         }
+
     }
 }
