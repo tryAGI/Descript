@@ -94,6 +94,11 @@ namespace Descript
         /// <summary>
         /// 
         /// </summary>
+        public static Result3 FromSuccess(global::Descript.PublishSuccessResult? value) => new Result3(value);
+
+        /// <summary>
+        /// 
+        /// </summary>
         public static implicit operator Result3(global::Descript.PublishErrorResult value) => new Result3((global::Descript.PublishErrorResult?)value);
 
         /// <summary>
@@ -108,6 +113,11 @@ namespace Descript
         {
             Error = value;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static Result3 FromError(global::Descript.PublishErrorResult? value) => new Result3(value);
 
         /// <summary>
         /// 
