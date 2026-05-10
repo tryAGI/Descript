@@ -101,5 +101,6 @@ namespace Descript
         public PublishJobStatusProgress()
         {
         }
+
     }
 }

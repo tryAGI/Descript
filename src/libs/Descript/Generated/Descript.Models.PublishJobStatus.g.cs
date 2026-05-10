@@ -178,5 +178,6 @@ namespace Descript
         public PublishJobStatus()
         {
         }
+
     }
 }

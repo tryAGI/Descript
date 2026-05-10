@@ -119,5 +119,6 @@ namespace Descript
         public PublishJobRequest()
         {
         }
+
     }
 }
