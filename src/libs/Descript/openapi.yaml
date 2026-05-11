@@ -860,7 +860,7 @@ paths:
           description: |
             Invalid input:
             - Malformed request body
-            - Invalid project_id or composition_id
+            - Invalid project_id or composition_id format
             - Empty or invalid prompt
           content:
             application/json:
@@ -905,7 +905,7 @@ paths:
           description: |
             Not found:
             - Project doesn't exist
-            - Composition doesn't exist (when composition_id is provided)
+            - Composition doesn't exist in the specified project (when composition_id is provided)
           content:
             application/json:
               schema:
@@ -917,10 +917,10 @@ paths:
                     error: not_found
                     message: Project not found
                 composition_not_found:
-                  summary: Composition not found
+                  summary: Composition not found in project
                   value:
                     error: not_found
-                    message: Composition not found
+                    message: No composition matching '5b507b2b-e3ef-4146-a0d0-6741df516973' found in project 9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
         '429':
           $ref: '#/components/responses/Error429Response'
   /jobs/publish:

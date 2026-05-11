@@ -365,7 +365,7 @@ namespace Descript
                                 retryReason: global::System.String.Empty,
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                 }
-                            // Invalid input: - Malformed request body - Invalid project_id or composition_id - Empty or invalid prompt 
+                            // Invalid input: - Malformed request body - Invalid project_id or composition_id format - Empty or invalid prompt 
                             if ((int)__response.StatusCode == 400)
                             {
                                 string? __content_400 = null;
@@ -479,7 +479,7 @@ namespace Descript
                                         h => h.Value),
                                 };
                             }
-                            // Not found: - Project doesn't exist - Composition doesn't exist (when composition_id is provided) 
+                            // Not found: - Project doesn't exist - Composition doesn't exist in the specified project (when composition_id is provided) 
                             if ((int)__response.StatusCode == 404)
                             {
                                 string? __content_404 = null;
