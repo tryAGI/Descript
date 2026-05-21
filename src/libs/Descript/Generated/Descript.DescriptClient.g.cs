@@ -43,7 +43,7 @@ namespace Descript
         /// <summary>
         /// Import media, edit projects with AI, and query jobs and projects.
         /// </summary>
-        public ApiEndpointsClient ApiEndpoints => new ApiEndpointsClient(HttpClient, authorizations: Authorizations, options: Options)
+        public ApiEndpointsClient ApiEndpoints => new ApiEndpointsClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
         {
             ReadResponseAsString = ReadResponseAsString,
             JsonSerializerContext = JsonSerializerContext,
@@ -85,7 +85,7 @@ namespace Descript
         /// Descript Project should be created.<br/>
         /// They'll then be redirected to the Project, where they can monitor the progress of the import and start editing.
         /// </summary>
-        public EditInDescriptClient EditInDescript => new EditInDescriptClient(HttpClient, authorizations: Authorizations, options: Options)
+        public EditInDescriptClient EditInDescript => new EditInDescriptClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
         {
             ReadResponseAsString = ReadResponseAsString,
             JsonSerializerContext = JsonSerializerContext,
@@ -105,7 +105,7 @@ namespace Descript
         /// &lt;meta property="descript:source" content="409148bd-81aa-4af6-a9c3-29b761506f3a" /&gt;<br/>
         /// ```.
         /// </summary>
-        public ExportFromDescriptClient ExportFromDescript => new ExportFromDescriptClient(HttpClient, authorizations: Authorizations, options: Options)
+        public ExportFromDescriptClient ExportFromDescript => new ExportFromDescriptClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
         {
             ReadResponseAsString = ReadResponseAsString,
             JsonSerializerContext = JsonSerializerContext,
@@ -134,6 +134,27 @@ namespace Descript
         }
 
         /// <summary>
+        /// Creates a new instance of the DescriptClient with explicit options but no base URL override.
+        /// Skips passing <c>baseUri</c> so the default base URL from the OpenAPI spec applies.
+        /// </summary>
+        /// <param name="httpClient">The HttpClient instance. If not provided, a new one will be created.</param>
+        /// <param name="authorizations">The authorizations to use for the requests.</param>
+        /// <param name="options">Client-wide request defaults such as headers, query parameters, retries, and timeout.</param>
+        /// <param name="disposeHttpClient">Dispose the HttpClient when the instance is disposed. True by default.</param>
+        public DescriptClient(
+            global::System.Net.Http.HttpClient? httpClient,
+            global::System.Collections.Generic.List<global::Descript.EndPointAuthorization>? authorizations,
+            global::Descript.AutoSDKClientOptions? options,
+            bool disposeHttpClient = true) : this(
+                httpClient,
+                baseUri: null,
+                authorizations,
+                options,
+                disposeHttpClient: disposeHttpClient)
+        {
+        }
+
+        /// <summary>
         /// Creates a new instance of the DescriptClient.
         /// If no httpClient is provided, a new one will be created.
         /// If no baseUri is provided, the default baseUri from OpenAPI spec will be used.
@@ -144,10 +165,10 @@ namespace Descript
         /// <param name="options">Client-wide request defaults such as headers, query parameters, retries, and timeout.</param>
         /// <param name="disposeHttpClient">Dispose the HttpClient when the instance is disposed. True by default.</param>
         public DescriptClient(
-            global::System.Net.Http.HttpClient? httpClient = null,
-            global::System.Uri? baseUri = null,
-            global::System.Collections.Generic.List<global::Descript.EndPointAuthorization>? authorizations = null,
-            global::Descript.AutoSDKClientOptions? options = null,
+            global::System.Net.Http.HttpClient? httpClient,
+            global::System.Uri? baseUri,
+            global::System.Collections.Generic.List<global::Descript.EndPointAuthorization>? authorizations,
+            global::Descript.AutoSDKClientOptions? options,
             bool disposeHttpClient = true)
         {
 

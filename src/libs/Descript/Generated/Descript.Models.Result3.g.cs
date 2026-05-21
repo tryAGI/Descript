@@ -32,6 +32,26 @@ namespace Descript
         public bool IsSuccess => Success != null;
 
         /// <summary>
+        /// 
+        /// </summary>
+        public bool TryPickSuccess(
+#if NET6_0_OR_GREATER
+            [global::System.Diagnostics.CodeAnalysis.NotNullWhen(true)]
+#endif
+            out global::Descript.PublishSuccessResult? value)
+        {
+            value = Success;
+            return IsSuccess;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::Descript.PublishSuccessResult PickSuccess() => IsSuccess
+            ? Success!
+            : throw new global::System.InvalidOperationException($"Expected union variant 'Success' but the value was {ToString()}.");
+
+        /// <summary>
         /// Result when publish failed
         /// </summary>
 #if NET6_0_OR_GREATER
@@ -47,6 +67,26 @@ namespace Descript
         [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhen(true, nameof(Error))]
 #endif
         public bool IsError => Error != null;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool TryPickError(
+#if NET6_0_OR_GREATER
+            [global::System.Diagnostics.CodeAnalysis.NotNullWhen(true)]
+#endif
+            out global::Descript.PublishErrorResult? value)
+        {
+            value = Error;
+            return IsError;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::Descript.PublishErrorResult PickError() => IsError
+            ? Error!
+            : throw new global::System.InvalidOperationException($"Expected union variant 'Error' but the value was {ToString()}.");
         /// <summary>
         /// 
         /// </summary>
@@ -68,6 +108,11 @@ namespace Descript
         /// <summary>
         /// 
         /// </summary>
+        public static Result3 FromSuccess(global::Descript.PublishSuccessResult? value) => new Result3(value);
+
+        /// <summary>
+        /// 
+        /// </summary>
         public static implicit operator Result3(global::Descript.PublishErrorResult value) => new Result3((global::Descript.PublishErrorResult?)value);
 
         /// <summary>
@@ -82,6 +127,11 @@ namespace Descript
         {
             Error = value;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static Result3 FromError(global::Descript.PublishErrorResult? value) => new Result3(value);
 
         /// <summary>
         /// 
@@ -126,8 +176,8 @@ namespace Descript
         /// 
         /// </summary>
         public TResult? Match<TResult>(
-            global::System.Func<global::Descript.PublishSuccessResult?, TResult>? success = null,
-            global::System.Func<global::Descript.PublishErrorResult?, TResult>? error = null,
+            global::System.Func<global::Descript.PublishSuccessResult, TResult>? success = null,
+            global::System.Func<global::Descript.PublishErrorResult, TResult>? error = null,
             bool validate = true)
         {
             if (validate)
@@ -151,8 +201,32 @@ namespace Descript
         /// 
         /// </summary>
         public void Match(
-            global::System.Action<global::Descript.PublishSuccessResult?>? success = null,
-            global::System.Action<global::Descript.PublishErrorResult?>? error = null,
+            global::System.Action<global::Descript.PublishSuccessResult>? success = null,
+
+            global::System.Action<global::Descript.PublishErrorResult>? error = null,
+            bool validate = true)
+        {
+            if (validate)
+            {
+                Validate();
+            }
+
+            if (IsSuccess)
+            {
+                success?.Invoke(Success!);
+            }
+            else if (IsError)
+            {
+                error?.Invoke(Error!);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Switch(
+            global::System.Action<global::Descript.PublishSuccessResult>? success = null,
+            global::System.Action<global::Descript.PublishErrorResult>? error = null,
             bool validate = true)
         {
             if (validate)

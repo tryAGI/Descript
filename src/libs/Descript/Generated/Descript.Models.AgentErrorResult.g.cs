@@ -74,5 +74,6 @@ namespace Descript
         public AgentErrorResult()
         {
         }
+
     }
 }

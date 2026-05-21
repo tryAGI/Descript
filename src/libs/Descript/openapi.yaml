@@ -860,7 +860,7 @@ paths:
           description: |
             Invalid input:
             - Malformed request body
-            - Invalid project_id or composition_id
+            - Invalid project_id or composition_id format
             - Empty or invalid prompt
           content:
             application/json:
@@ -905,7 +905,7 @@ paths:
           description: |
             Not found:
             - Project doesn't exist
-            - Composition doesn't exist (when composition_id is provided)
+            - Composition doesn't exist in the specified project (when composition_id is provided)
           content:
             application/json:
               schema:
@@ -917,10 +917,10 @@ paths:
                     error: not_found
                     message: Project not found
                 composition_not_found:
-                  summary: Composition not found
+                  summary: Composition not found in project
                   value:
                     error: not_found
-                    message: Composition not found
+                    message: No composition matching '5b507b2b-e3ef-4146-a0d0-6741df516973' found in project 9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
         '429':
           $ref: '#/components/responses/Error429Response'
   /jobs/publish:
@@ -1243,6 +1243,12 @@ paths:
                           last_update_at: '2025-11-18T11:01:00Z'
                     pagination:
                       next_cursor: YTFiMmMzZDQtNTY3OC05MGFiLWNkZWYtMTIzNDU2Nzg5MGFi
+        '400':
+          description: Bad request - `project_id` is not a valid UUID
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error400'
         '401':
           description: Unauthorized - invalid or missing authentication token
           content:
@@ -1482,7 +1488,7 @@ paths:
                   summary: Job does not exist
                   value:
                     error: not_found
-                    message: Job not found
+                    message: No job found for job_id "6dc3f30a-58c2-4174-96a6-dc18cf3c7776".
         '429':
           $ref: '#/components/responses/Error429Response'
     delete:
@@ -1540,7 +1546,7 @@ paths:
                   summary: Job does not exist
                   value:
                     error: not_found
-                    message: Job not found
+                    message: No job found for job_id "6dc3f30a-58c2-4174-96a6-dc18cf3c7776".
         '429':
           $ref: '#/components/responses/Error429Response'
   /projects:
@@ -1562,6 +1568,12 @@ paths:
         - in: query
           name: name
           description: Filter projects whose name contains this string (case-insensitive).
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: folder_path
+          description: Filter projects by folder path (e.g. "Clients/Acme/Videos"). Use "/" to separate nested folders. Returns only projects directly inside the deepest folder.
           required: false
           schema:
             type: string
@@ -1676,6 +1688,10 @@ paths:
                           format: date-time
                           description: When the project was last updated
                           example: '2025-11-19T14:00:00Z'
+                        folder_path:
+                          type: string
+                          description: Full folder path for the project (e.g. "Clients/Acme/Videos"). Absent when the project is at the drive root.
+                          example: Clients/Acme/Videos
                   pagination:
                     type: object
                     properties:
@@ -1749,6 +1765,10 @@ paths:
                     type: string
                     format: date-time
                     description: When the project was last updated (ISO 8601)
+                  folder_path:
+                    type: string
+                    description: Full folder path for the project (e.g. "Clients/Acme/Videos"). Absent when the project is at the drive root.
+                    example: Clients/Acme/Videos
                   media_files:
                     type: object
                     description: Map of display path to media file info
@@ -1793,6 +1813,12 @@ paths:
                         media_type:
                           type: string
                           description: Media type of the composition
+        '400':
+          description: Bad request - `project_id` is not a valid UUID
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error400'
         '401':
           description: Unauthorized - invalid or missing authentication token
           content:

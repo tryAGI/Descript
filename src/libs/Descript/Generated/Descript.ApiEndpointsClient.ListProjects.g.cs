@@ -28,6 +28,7 @@ namespace Descript
         partial void PrepareListProjectsArguments(
             global::System.Net.Http.HttpClient httpClient,
             ref string? name,
+            ref string? folderPath,
             ref string? createdBy,
             ref global::System.DateTime? createdAfter,
             ref global::System.DateTime? createdBefore,
@@ -41,6 +42,7 @@ namespace Descript
             global::System.Net.Http.HttpClient httpClient,
             global::System.Net.Http.HttpRequestMessage httpRequestMessage,
             string? name,
+            string? folderPath,
             string? createdBy,
             global::System.DateTime? createdAfter,
             global::System.DateTime? createdBefore,
@@ -67,6 +69,7 @@ namespace Descript
         /// to fetch subsequent pages.
         /// </summary>
         /// <param name="name"></param>
+        /// <param name="folderPath"></param>
         /// <param name="createdBy"></param>
         /// <param name="createdAfter"></param>
         /// <param name="createdBefore"></param>
@@ -87,6 +90,67 @@ namespace Descript
         /// <exception cref="global::Descript.ApiException"></exception>
         public async global::System.Threading.Tasks.Task<global::Descript.ListProjectsResponse> ListProjectsAsync(
             string? name = default,
+            string? folderPath = default,
+            string? createdBy = default,
+            global::System.DateTime? createdAfter = default,
+            global::System.DateTime? createdBefore = default,
+            global::System.DateTime? updatedAfter = default,
+            global::System.DateTime? updatedBefore = default,
+            global::Descript.ListProjectsSort? sort = default,
+            global::Descript.ListProjectsDirection? direction = default,
+            string? cursor = default,
+            int? limit = default,
+            global::Descript.AutoSDKRequestOptions? requestOptions = default,
+            global::System.Threading.CancellationToken cancellationToken = default)
+        {
+            var __response = await ListProjectsAsResponseAsync(
+                name: name,
+                folderPath: folderPath,
+                createdBy: createdBy,
+                createdAfter: createdAfter,
+                createdBefore: createdBefore,
+                updatedAfter: updatedAfter,
+                updatedBefore: updatedBefore,
+                sort: sort,
+                direction: direction,
+                cursor: cursor,
+                limit: limit,
+                requestOptions: requestOptions,
+                cancellationToken: cancellationToken
+            ).ConfigureAwait(false);
+
+            return __response.Body;
+        }
+        /// <summary>
+        /// List projects<br/>
+        /// List projects accessible to the authenticated user within a drive.<br/>
+        /// The drive is determined from the access token.<br/>
+        /// Results are paginated. Use the `cursor` from the response `pagination.next_cursor`<br/>
+        /// to fetch subsequent pages.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="folderPath"></param>
+        /// <param name="createdBy"></param>
+        /// <param name="createdAfter"></param>
+        /// <param name="createdBefore"></param>
+        /// <param name="updatedAfter"></param>
+        /// <param name="updatedBefore"></param>
+        /// <param name="sort">
+        /// Default Value: created_at
+        /// </param>
+        /// <param name="direction">
+        /// Default Value: desc
+        /// </param>
+        /// <param name="cursor"></param>
+        /// <param name="limit">
+        /// Default Value: 20
+        /// </param>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
+        /// <param name="cancellationToken">The token to cancel the operation with</param>
+        /// <exception cref="global::Descript.ApiException"></exception>
+        public async global::System.Threading.Tasks.Task<global::Descript.AutoSDKHttpResponse<global::Descript.ListProjectsResponse>> ListProjectsAsResponseAsync(
+            string? name = default,
+            string? folderPath = default,
             string? createdBy = default,
             global::System.DateTime? createdAfter = default,
             global::System.DateTime? createdBefore = default,
@@ -104,6 +168,7 @@ namespace Descript
             PrepareListProjectsArguments(
                 httpClient: HttpClient,
                 name: ref name,
+                folderPath: ref folderPath,
                 createdBy: ref createdBy,
                 createdAfter: ref createdAfter,
                 createdBefore: ref createdBefore,
@@ -136,11 +201,13 @@ namespace Descript
 
             global::System.Net.Http.HttpRequestMessage __CreateHttpRequest()
             {
+
                             var __pathBuilder = new global::Descript.PathBuilder(
                                 path: "/projects",
-                                baseUri: HttpClient.BaseAddress); 
+                                baseUri: HttpClient.BaseAddress);
                             __pathBuilder
                                 .AddOptionalParameter("name", name)
+                                .AddOptionalParameter("folder_path", folderPath)
                                 .AddOptionalParameter("created_by", createdBy)
                                 .AddOptionalParameter("created_after", createdAfter?.ToString("yyyy-MM-ddTHH:mm:ssZ"))
                                 .AddOptionalParameter("created_before", createdBefore?.ToString("yyyy-MM-ddTHH:mm:ssZ"))
@@ -149,7 +216,7 @@ namespace Descript
                                 .AddOptionalParameter("sort", sort?.ToValueString())
                                 .AddOptionalParameter("direction", direction?.ToValueString())
                                 .AddOptionalParameter("cursor", cursor)
-                                .AddOptionalParameter("limit", limit?.ToString()) 
+                                .AddOptionalParameter("limit", limit?.ToString())
                                 ;
                             var __path = __pathBuilder.ToString();
                 __path = global::Descript.AutoSDKRequestOptionsSupport.AppendQueryParameters(
@@ -192,6 +259,7 @@ namespace Descript
                     httpClient: HttpClient,
                     httpRequestMessage: __httpRequest,
                     name: name,
+                    folderPath: folderPath,
                     createdBy: createdBy,
                     createdAfter: createdAfter,
                     createdBefore: createdBefore,
@@ -230,6 +298,8 @@ namespace Descript
                                 attempt: __attempt,
                                 maxAttempts: __maxAttempts,
                                 willRetry: false,
+                                retryDelay: null,
+                                retryReason: global::System.String.Empty,
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                     try
                     {
@@ -240,6 +310,11 @@ namespace Descript
                     }
                     catch (global::System.Net.Http.HttpRequestException __exception)
                     {
+                        var __retryDelay = global::Descript.AutoSDKRequestOptionsSupport.GetRetryDelay(
+                            clientOptions: Options,
+                            requestOptions: requestOptions,
+                            response: null,
+                            attempt: __attempt);
                         var __willRetry = __attempt < __maxAttempts && !__effectiveCancellationToken.IsCancellationRequested;
                         await global::Descript.AutoSDKRequestOptionsSupport.OnAfterErrorAsync(
                             clientOptions: Options,
@@ -257,6 +332,8 @@ namespace Descript
                                 attempt: __attempt,
                                 maxAttempts: __maxAttempts,
                                 willRetry: __willRetry,
+                                retryDelay: __willRetry ? __retryDelay : (global::System.TimeSpan?)null,
+                                retryReason: "exception",
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                         if (!__willRetry)
                         {
@@ -266,8 +343,7 @@ namespace Descript
                         __httpRequest.Dispose();
                         __httpRequest = null;
                         await global::Descript.AutoSDKRequestOptionsSupport.DelayBeforeRetryAsync(
-                            clientOptions: Options,
-                            requestOptions: requestOptions,
+                            retryDelay: __retryDelay,
                             cancellationToken: __effectiveCancellationToken).ConfigureAwait(false);
                         continue;
                     }
@@ -276,6 +352,11 @@ namespace Descript
                         __attempt < __maxAttempts &&
                         global::Descript.AutoSDKRequestOptionsSupport.ShouldRetryStatusCode(__response.StatusCode))
                     {
+                        var __retryDelay = global::Descript.AutoSDKRequestOptionsSupport.GetRetryDelay(
+                            clientOptions: Options,
+                            requestOptions: requestOptions,
+                            response: __response,
+                            attempt: __attempt);
                         await global::Descript.AutoSDKRequestOptionsSupport.OnAfterErrorAsync(
                             clientOptions: Options,
                             context: global::Descript.AutoSDKRequestOptionsSupport.CreateHookContext(
@@ -292,14 +373,15 @@ namespace Descript
                                 attempt: __attempt,
                                 maxAttempts: __maxAttempts,
                                 willRetry: true,
+                                retryDelay: __retryDelay,
+                                retryReason: "status:" + ((int)__response.StatusCode).ToString(global::System.Globalization.CultureInfo.InvariantCulture),
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                         __response.Dispose();
                         __response = null;
                         __httpRequest.Dispose();
                         __httpRequest = null;
                         await global::Descript.AutoSDKRequestOptionsSupport.DelayBeforeRetryAsync(
-                            clientOptions: Options,
-                            requestOptions: requestOptions,
+                            retryDelay: __retryDelay,
                             cancellationToken: __effectiveCancellationToken).ConfigureAwait(false);
                         continue;
                     }
@@ -339,6 +421,8 @@ namespace Descript
                                 attempt: __attemptNumber,
                                 maxAttempts: __maxAttempts,
                                 willRetry: false,
+                                retryDelay: null,
+                                retryReason: global::System.String.Empty,
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                 }
                 else
@@ -359,6 +443,8 @@ namespace Descript
                                 attempt: __attemptNumber,
                                 maxAttempts: __maxAttempts,
                                 willRetry: false,
+                                retryDelay: null,
+                                retryReason: global::System.String.Empty,
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                 }
                             // Unauthorized - invalid or missing authentication token
@@ -459,9 +545,13 @@ namespace Descript
                                 {
                                     __response.EnsureSuccessStatusCode();
 
-                                    return
-                                        global::Descript.ListProjectsResponse.FromJson(__content, JsonSerializerContext) ??
+                                    var __value = global::Descript.ListProjectsResponse.FromJson(__content, JsonSerializerContext) ??
                                         throw new global::System.InvalidOperationException($"Response deserialization failed for \"{__content}\" ");
+                                    return new global::Descript.AutoSDKHttpResponse<global::Descript.ListProjectsResponse>(
+                                        statusCode: __response.StatusCode,
+                                        headers: global::Descript.AutoSDKHttpResponse.CreateHeaders(__response),
+                                        requestUri: __response.RequestMessage?.RequestUri,
+                                        body: __value);
                                 }
                                 catch (global::System.Exception __ex)
                                 {
@@ -489,9 +579,13 @@ namespace Descript
                 #endif
                                     ).ConfigureAwait(false);
 
-                                    return
-                                        await global::Descript.ListProjectsResponse.FromJsonStreamAsync(__content, JsonSerializerContext).ConfigureAwait(false) ??
+                                    var __value = await global::Descript.ListProjectsResponse.FromJsonStreamAsync(__content, JsonSerializerContext).ConfigureAwait(false) ??
                                         throw new global::System.InvalidOperationException("Response deserialization failed.");
+                                    return new global::Descript.AutoSDKHttpResponse<global::Descript.ListProjectsResponse>(
+                                        statusCode: __response.StatusCode,
+                                        headers: global::Descript.AutoSDKHttpResponse.CreateHeaders(__response),
+                                        requestUri: __response.RequestMessage?.RequestUri,
+                                        body: __value);
                                 }
                                 catch (global::System.Exception __ex)
                                 {

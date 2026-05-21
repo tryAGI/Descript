@@ -97,5 +97,6 @@ namespace Descript
         public PublishSuccessResult()
         {
         }
+
     }
 }
