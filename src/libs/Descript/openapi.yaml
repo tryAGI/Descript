@@ -901,6 +901,18 @@ paths:
                   value:
                     error: payment_required
                     message: Insufficient AI credits to start the job (100 credits required, 25 available)
+        '403':
+          description: Forbidden - the drive admin has disabled agent usage for this drive
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error403'
+              examples:
+                agent_disabled:
+                  summary: Agent usage disabled by admin
+                  value:
+                    error: forbidden
+                    message: Agent usage has been disabled by your admin
         '404':
           description: |
             Not found:
