@@ -129,6 +129,14 @@ namespace Descript
 
             typeof(global::Descript.JsonConverters.PublishJobRequestAccessLevelNullableJsonConverter),
 
+            typeof(global::Descript.JsonConverters.ExportTranscriptRequestFormatJsonConverter),
+
+            typeof(global::Descript.JsonConverters.ExportTranscriptRequestFormatNullableJsonConverter),
+
+            typeof(global::Descript.JsonConverters.ExportTranscriptRequestIncludeSpeakerLabelsJsonConverter),
+
+            typeof(global::Descript.JsonConverters.ExportTranscriptRequestIncludeSpeakerLabelsNullableJsonConverter),
+
             typeof(global::Descript.JsonConverters.ListJobsTypeJsonConverter),
 
             typeof(global::Descript.JsonConverters.ListJobsTypeNullableJsonConverter),
@@ -255,6 +263,10 @@ namespace Descript
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.PublishJobRequestMediaType), TypeInfoPropertyName = "PublishJobRequestMediaType2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.PublishJobRequestResolution), TypeInfoPropertyName = "PublishJobRequestResolution2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.PublishJobRequestAccessLevel), TypeInfoPropertyName = "PublishJobRequestAccessLevel2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.ExportTranscriptRequest))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.ExportTranscriptRequestFormat), TypeInfoPropertyName = "ExportTranscriptRequestFormat2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.ExportTranscriptRequestIncludeSpeakerLabels), TypeInfoPropertyName = "ExportTranscriptRequestIncludeSpeakerLabels2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.ExportTranscriptRequestTimecodes))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.ListJobsType), TypeInfoPropertyName = "ListJobsType2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.ListProjectsSort), TypeInfoPropertyName = "ListProjectsSort2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.ListProjectsDirection), TypeInfoPropertyName = "ListProjectsDirection2")]
@@ -263,6 +275,7 @@ namespace Descript
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.ImportProjectMediaResponseUploadUrls2))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.AgentEditJobResponse))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.PublishJobResponse))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(byte[]))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.ListJobsResponse))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.IList<global::Descript.JobStatus>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.ListJobsResponsePagination))]
