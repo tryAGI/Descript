@@ -392,95 +392,115 @@ namespace Descript
         /// <summary>
         /// 
         /// </summary>
-        public global::Descript.ListJobsType? Type91 { get; set; }
+        public global::Descript.ExportTranscriptRequest? Type91 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Descript.ListProjectsSort? Type92 { get; set; }
+        public global::Descript.ExportTranscriptRequestFormat? Type92 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Descript.ListProjectsDirection? Type93 { get; set; }
+        public global::Descript.ExportTranscriptRequestIncludeSpeakerLabels? Type93 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Descript.ImportProjectMediaResponse? Type94 { get; set; }
+        public global::Descript.ExportTranscriptRequestTimecodes? Type94 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::System.Collections.Generic.Dictionary<string, global::Descript.ImportProjectMediaResponseUploadUrls2>? Type95 { get; set; }
+        public global::Descript.ListJobsType? Type95 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Descript.ImportProjectMediaResponseUploadUrls2? Type96 { get; set; }
+        public global::Descript.ListProjectsSort? Type96 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Descript.AgentEditJobResponse? Type97 { get; set; }
+        public global::Descript.ListProjectsDirection? Type97 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Descript.PublishJobResponse? Type98 { get; set; }
+        public global::Descript.ImportProjectMediaResponse? Type98 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Descript.ListJobsResponse? Type99 { get; set; }
+        public global::System.Collections.Generic.Dictionary<string, global::Descript.ImportProjectMediaResponseUploadUrls2>? Type99 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::System.Collections.Generic.IList<global::Descript.JobStatus>? Type100 { get; set; }
+        public global::Descript.ImportProjectMediaResponseUploadUrls2? Type100 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Descript.ListJobsResponsePagination? Type101 { get; set; }
+        public global::Descript.AgentEditJobResponse? Type101 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Descript.ListProjectsResponse? Type102 { get; set; }
+        public global::Descript.PublishJobResponse? Type102 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::System.Collections.Generic.IList<global::Descript.ListProjectsResponseDataItem>? Type103 { get; set; }
+        public byte[]? Type103 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Descript.ListProjectsResponseDataItem? Type104 { get; set; }
+        public global::Descript.ListJobsResponse? Type104 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Descript.ListProjectsResponsePagination? Type105 { get; set; }
+        public global::System.Collections.Generic.IList<global::Descript.JobStatus>? Type105 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Descript.GetProjectResponse? Type106 { get; set; }
+        public global::Descript.ListJobsResponsePagination? Type106 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::System.Collections.Generic.Dictionary<string, global::Descript.GetProjectResponseMediaFiles2>? Type107 { get; set; }
+        public global::Descript.ListProjectsResponse? Type107 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Descript.GetProjectResponseMediaFiles2? Type108 { get; set; }
+        public global::System.Collections.Generic.IList<global::Descript.ListProjectsResponseDataItem>? Type108 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Descript.GetProjectResponseMediaFilesType? Type109 { get; set; }
+        public global::Descript.ListProjectsResponseDataItem? Type109 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::System.Collections.Generic.IList<global::Descript.GetProjectResponseComposition>? Type110 { get; set; }
+        public global::Descript.ListProjectsResponsePagination? Type110 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Descript.GetProjectResponseComposition? Type111 { get; set; }
+        public global::Descript.GetProjectResponse? Type111 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Descript.GetStatusResponse? Type112 { get; set; }
+        public global::System.Collections.Generic.Dictionary<string, global::Descript.GetProjectResponseMediaFiles2>? Type112 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Descript.GetStatusResponseStatus? Type113 { get; set; }
+        public global::Descript.GetProjectResponseMediaFiles2? Type113 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::Descript.GetProjectResponseMediaFilesType? Type114 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::System.Collections.Generic.IList<global::Descript.GetProjectResponseComposition>? Type115 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::Descript.GetProjectResponseComposition? Type116 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::Descript.GetStatusResponse? Type117 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::Descript.GetStatusResponseStatus? Type118 { get; set; }
 
         /// <summary>
         /// 

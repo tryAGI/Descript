@@ -1136,6 +1136,173 @@ paths:
             Unprocessable Entity
         '429':
           $ref: '#/components/responses/Error429Response'
+  /export/transcript:
+    post:
+      tags:
+        - API Endpoints
+      summary: Export project transcript
+      security:
+        - bearerAuth: []
+      description: |
+        Export the transcript from a project composition.
+
+        Supports plain text, Markdown, HTML, RTF, and DOCX formats.
+        Options include speaker labels, timecodes, and markers.
+
+        The response body is the raw transcript file (binary for `docx`,
+        text otherwise) with a `Content-Disposition: attachment` header and
+        an `X-Composition-Id` header identifying the exported composition.
+      operationId: exportTranscript
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              description: Request to export the transcript from a project composition.
+              properties:
+                project_id:
+                  type: string
+                  format: uuid
+                  description: The ID of the project to export from.
+                  example: 9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
+                composition_id:
+                  type: string
+                  format: uuid
+                  description: The ID of the composition to export. Defaults to the first composition.
+                  example: 39677a40-1c43-4c36-8449-46cfbc4de2b5
+                format:
+                  type: string
+                  enum:
+                    - txt
+                    - markdown
+                    - html
+                    - rtf
+                    - docx
+                  description: |
+                    Transcript file format. For `docx`, the response `content` field
+                    contains the base64-encoded binary file.
+                include_speaker_labels:
+                  type: string
+                  enum:
+                    - 'off'
+                    - changes
+                    - every_paragraph
+                  default: changes
+                  description: |
+                    Speaker label mode.
+                    - `off`: No speaker labels
+                    - `changes`: Show speaker label when the speaker changes
+                    - `every_paragraph`: Show speaker label on every paragraph
+                include_markers:
+                  type: boolean
+                  default: false
+                  description: Include markers in the transcript.
+                timecodes:
+                  type: object
+                  description: |
+                    Timecode options. When provided, timecodes are included in
+                    the output.
+                  properties:
+                    frequency_seconds:
+                      type: number
+                      description: Interval in seconds for timecode insertion.
+                    on_paragraphs:
+                      type: boolean
+                      default: false
+                      description: Show timecodes at paragraph breaks.
+                    on_speakers:
+                      type: boolean
+                      default: false
+                      description: Show timecodes at speaker changes.
+                    on_markers:
+                      type: boolean
+                      default: false
+                      description: Show timecodes at markers.
+                    offset_seconds:
+                      type: number
+                      description: Offset in seconds applied to all timecodes.
+                  additionalProperties: false
+              required:
+                - project_id
+                - format
+              additionalProperties: false
+            examples:
+              plain_text_with_speakers:
+                summary: Export as plain text with speaker labels
+                value:
+                  project_id: 9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
+                  format: txt
+                  include_speaker_labels: changes
+              markdown_with_timecodes:
+                summary: Export as Markdown with timecodes
+                value:
+                  project_id: 9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
+                  format: markdown
+                  include_speaker_labels: every_paragraph
+                  timecodes:
+                    on_paragraphs: true
+        description: Transcript export request
+        required: true
+      responses:
+        '200':
+          description: |
+            Transcript exported successfully. The response body is the raw
+            transcript file with the appropriate Content-Type for the
+            requested format.
+
+            The `X-Composition-Id` response header contains the composition
+            UUID that was exported.
+          headers:
+            Content-Disposition:
+              schema:
+                type: string
+              description: Attachment filename, e.g. `attachment; filename="transcript.md"`
+            X-Composition-Id:
+              schema:
+                type: string
+                format: uuid
+              description: The composition ID that was exported
+          content:
+            text/plain:
+              schema:
+                type: string
+              example: |-
+                Speaker 1: Hello, welcome to the show.
+
+                Speaker 2: Thanks for having me.
+            text/markdown:
+              schema:
+                type: string
+            text/html:
+              schema:
+                type: string
+            application/rtf:
+              schema:
+                type: string
+            application/vnd.openxmlformats-officedocument.wordprocessingml.document:
+              schema:
+                type: string
+                format: binary
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error400'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error403'
+        '429':
+          $ref: '#/components/responses/Error429Response'
   /jobs:
     get:
       tags:
