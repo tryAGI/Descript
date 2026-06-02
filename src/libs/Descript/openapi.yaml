@@ -789,6 +789,15 @@ paths:
                     Optional webhook URL to call when the job completes or fails.
                     Descript will POST the job status (same format as [GET /jobs/{job_id}](#operation/getJob)) to this URL.
                   example: https://example.com/webhooks/descript/job_callback
+                conversation_id:
+                  type: string
+                  format: uuid
+                  description: |
+                    Conversation ID from a previous agent job to continue that conversation.
+                    Requires `project_id` (a conversation belongs to an existing project).
+                    When omitted, a new conversation is started. The `conversation_id` is returned
+                    in the job result when the job completes.
+                  example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
               required:
                 - prompt
               additionalProperties: false
@@ -815,6 +824,12 @@ paths:
                   project_id: 9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
                   composition_id: 39677a40-1c43-4c36-8449-46cfbc4de2b5
                   prompt: create a 30-second highlight reel with the best moments
+              continue_conversation:
+                summary: Continue a previous conversation
+                value:
+                  project_id: 9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
+                  prompt: now also add captions to the video
+                  conversation_id: a1b2c3d4-e5f6-7890-abcd-ef1234567890
               with_callback:
                 summary: Agent job with webhook callback
                 value:
@@ -2706,6 +2721,13 @@ components:
           type: integer
           description: AI credits consumed by this operation
           example: 5
+        conversation_id:
+          type: string
+          format: uuid
+          description: |
+            Conversation ID for this agent session. Pass this value as `conversation_id` in a
+            subsequent [POST /jobs/agent](#operation/agentEditJob) request to continue the conversation.
+          example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
       required:
         - status
         - agent_response
@@ -2729,6 +2751,12 @@ components:
           type: string
           description: Machine-readable error code
           example: agent_execution_failed
+        conversation_id:
+          type: string
+          format: uuid
+          description: |
+            Conversation ID for this agent session, if one was created before the error occurred.
+          example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
       required:
         - status
         - error_message
