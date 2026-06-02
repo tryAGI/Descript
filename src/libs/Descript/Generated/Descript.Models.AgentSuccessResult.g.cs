@@ -52,6 +52,15 @@ namespace Descript
         public int? AiCreditsUsed { get; set; }
 
         /// <summary>
+        /// Conversation ID for this agent session. Pass this value as `conversation_id` in a<br/>
+        /// subsequent [POST /jobs/agent](#operation/agentEditJob) request to continue the conversation.<br/>
+        /// Example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+        /// </summary>
+        /// <example>a1b2c3d4-e5f6-7890-abcd-ef1234567890</example>
+        [global::System.Text.Json.Serialization.JsonPropertyName("conversation_id")]
+        public global::System.Guid? ConversationId { get; set; }
+
+        /// <summary>
         /// Additional properties that are not explicitly defined in the schema
         /// </summary>
         [global::System.Text.Json.Serialization.JsonExtensionData]
@@ -80,6 +89,11 @@ namespace Descript
         /// AI credits consumed by this operation<br/>
         /// Example: 5
         /// </param>
+        /// <param name="conversationId">
+        /// Conversation ID for this agent session. Pass this value as `conversation_id` in a<br/>
+        /// subsequent [POST /jobs/agent](#operation/agentEditJob) request to continue the conversation.<br/>
+        /// Example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+        /// </param>
 #if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 #endif
@@ -88,13 +102,15 @@ namespace Descript
             bool projectChanged,
             global::Descript.AgentSuccessResultStatus status,
             int? mediaSecondsUsed,
-            int? aiCreditsUsed)
+            int? aiCreditsUsed,
+            global::System.Guid? conversationId)
         {
             this.Status = status;
             this.AgentResponse = agentResponse ?? throw new global::System.ArgumentNullException(nameof(agentResponse));
             this.ProjectChanged = projectChanged;
             this.MediaSecondsUsed = mediaSecondsUsed;
             this.AiCreditsUsed = aiCreditsUsed;
+            this.ConversationId = conversationId;
         }
 
         /// <summary>

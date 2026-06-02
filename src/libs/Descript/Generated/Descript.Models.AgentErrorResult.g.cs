@@ -35,6 +35,14 @@ namespace Descript
         public string? ErrorCode { get; set; }
 
         /// <summary>
+        /// Conversation ID for this agent session, if one was created before the error occurred.<br/>
+        /// Example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+        /// </summary>
+        /// <example>a1b2c3d4-e5f6-7890-abcd-ef1234567890</example>
+        [global::System.Text.Json.Serialization.JsonPropertyName("conversation_id")]
+        public global::System.Guid? ConversationId { get; set; }
+
+        /// <summary>
         /// Additional properties that are not explicitly defined in the schema
         /// </summary>
         [global::System.Text.Json.Serialization.JsonExtensionData]
@@ -55,17 +63,23 @@ namespace Descript
         /// Machine-readable error code<br/>
         /// Example: agent_execution_failed
         /// </param>
+        /// <param name="conversationId">
+        /// Conversation ID for this agent session, if one was created before the error occurred.<br/>
+        /// Example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+        /// </param>
 #if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 #endif
         public AgentErrorResult(
             string errorMessage,
             global::Descript.AgentErrorResultStatus status,
-            string? errorCode)
+            string? errorCode,
+            global::System.Guid? conversationId)
         {
             this.Status = status;
             this.ErrorMessage = errorMessage ?? throw new global::System.ArgumentNullException(nameof(errorMessage));
             this.ErrorCode = errorCode;
+            this.ConversationId = conversationId;
         }
 
         /// <summary>
