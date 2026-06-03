@@ -26,8 +26,8 @@ namespace Descript
         public global::System.Guid? CompositionId { get; set; }
 
         /// <summary>
-        /// Transcript file format. For `docx`, the response `content` field<br/>
-        /// contains the base64-encoded binary file.
+        /// Transcript file format. The response body is the raw transcript file<br/>
+        /// in the requested format (binary for `docx`, plain text otherwise).
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("format")]
         [global::System.Text.Json.Serialization.JsonConverter(typeof(global::Descript.JsonConverters.ExportTranscriptRequestFormatJsonConverter))]
@@ -73,8 +73,8 @@ namespace Descript
         /// Example: 9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
         /// </param>
         /// <param name="format">
-        /// Transcript file format. For `docx`, the response `content` field<br/>
-        /// contains the base64-encoded binary file.
+        /// Transcript file format. The response body is the raw transcript file<br/>
+        /// in the requested format (binary for `docx`, plain text otherwise).
         /// </param>
         /// <param name="compositionId">
         /// The ID of the composition to export. Defaults to the first composition.<br/>
