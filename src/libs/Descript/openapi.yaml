@@ -1194,8 +1194,8 @@ paths:
                     - rtf
                     - docx
                   description: |
-                    Transcript file format. For `docx`, the response `content` field
-                    contains the base64-encoded binary file.
+                    Transcript file format. The response body is the raw transcript file
+                    in the requested format (binary for `docx`, plain text otherwise).
                 include_speaker_labels:
                   type: string
                   enum:

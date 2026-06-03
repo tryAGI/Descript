@@ -605,8 +605,8 @@ namespace Descript
         /// Example: 39677a40-1c43-4c36-8449-46cfbc4de2b5
         /// </param>
         /// <param name="format">
-        /// Transcript file format. For `docx`, the response `content` field<br/>
-        /// contains the base64-encoded binary file.
+        /// Transcript file format. The response body is the raw transcript file<br/>
+        /// in the requested format (binary for `docx`, plain text otherwise).
         /// </param>
         /// <param name="includeSpeakerLabels">
         /// Speaker label mode.<br/>

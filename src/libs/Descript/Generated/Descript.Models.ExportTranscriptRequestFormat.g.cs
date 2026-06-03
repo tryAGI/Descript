@@ -4,8 +4,8 @@
 namespace Descript
 {
     /// <summary>
-    /// Transcript file format. For `docx`, the response `content` field<br/>
-    /// contains the base64-encoded binary file.
+    /// Transcript file format. The response body is the raw transcript file<br/>
+    /// in the requested format (binary for `docx`, plain text otherwise).
     /// </summary>
     public enum ExportTranscriptRequestFormat
     {
