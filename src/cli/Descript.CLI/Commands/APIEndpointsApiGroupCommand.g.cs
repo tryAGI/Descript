@@ -11,6 +11,7 @@ internal static class APIEndpointsApiGroupCommand
         var command = new Command(@"api-endpoints", @"API Endpoints endpoint commands.");
                          command.Subcommands.Add(ApiEndpointsAgentEditJobCommandApiCommand.Create());
                          command.Subcommands.Add(ApiEndpointsCancelJobCommandApiCommand.Create());
+                         command.Subcommands.Add(ApiEndpointsExportTranscriptCommandApiCommand.Create());
                          command.Subcommands.Add(ApiEndpointsGetJobCommandApiCommand.Create());
                          command.Subcommands.Add(ApiEndpointsGetProjectCommandApiCommand.Create());
                          command.Subcommands.Add(ApiEndpointsGetStatusCommandApiCommand.Create());
