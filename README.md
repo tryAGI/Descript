@@ -19,6 +19,13 @@ using Descript;
 using var client = new DescriptClient(apiKey);
 ```
 
+### CLI
+
+```bash
+dotnet tool install --global Descript.CLI --prerelease
+descript api --help
+```
+
 <!-- EXAMPLES:START -->
 <!-- EXAMPLES:END -->
 

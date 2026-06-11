@@ -15,3 +15,20 @@ autosdk generate openapi.yaml \
   --output Generated \
   --exclude-deprecated-operations \
   --security-scheme Http:Header:Bearer
+
+rm -rf ../../cli/Descript.CLI
+
+autosdk cli-project openapi.yaml \
+  --output ../../cli/Descript.CLI \
+  --sdk-project ../../libs/Descript/Descript.csproj \
+  --targetFramework net10.0 \
+  --namespace Descript \
+  --clientClassName DescriptClient \
+  --package-id Descript.CLI \
+  --tool-command-name descript \
+  --user-secrets-id Descript.CLI \
+  --api-key-env-var DESCRIPT_API_KEY \
+  --base-url-env-var DESCRIPT_BASE_URL \
+  --cli-credential-file \
+  --exclude-deprecated-operations \
+  --security-scheme Http:Header:Bearer
