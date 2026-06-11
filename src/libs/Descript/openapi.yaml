@@ -789,6 +789,15 @@ paths:
                     Optional webhook URL to call when the job completes or fails.
                     Descript will POST the job status (same format as [GET /jobs/{job_id}](#operation/getJob)) to this URL.
                   example: https://example.com/webhooks/descript/job_callback
+                conversation_id:
+                  type: string
+                  format: uuid
+                  description: |
+                    Conversation ID from a previous agent job to continue that conversation.
+                    Requires `project_id` (a conversation belongs to an existing project).
+                    When omitted, a new conversation is started. The `conversation_id` is returned
+                    in the job result when the job completes.
+                  example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
               required:
                 - prompt
               additionalProperties: false
@@ -815,6 +824,12 @@ paths:
                   project_id: 9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
                   composition_id: 39677a40-1c43-4c36-8449-46cfbc4de2b5
                   prompt: create a 30-second highlight reel with the best moments
+              continue_conversation:
+                summary: Continue a previous conversation
+                value:
+                  project_id: 9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
+                  prompt: now also add captions to the video
+                  conversation_id: a1b2c3d4-e5f6-7890-abcd-ef1234567890
               with_callback:
                 summary: Agent job with webhook callback
                 value:
@@ -1134,6 +1149,173 @@ paths:
         '422':
           description: |
             Unprocessable Entity
+        '429':
+          $ref: '#/components/responses/Error429Response'
+  /export/transcript:
+    post:
+      tags:
+        - API Endpoints
+      summary: Export project transcript
+      security:
+        - bearerAuth: []
+      description: |
+        Export the transcript from a project composition.
+
+        Supports plain text, Markdown, HTML, RTF, and DOCX formats.
+        Options include speaker labels, timecodes, and markers.
+
+        The response body is the raw transcript file (binary for `docx`,
+        text otherwise) with a `Content-Disposition: attachment` header and
+        an `X-Composition-Id` header identifying the exported composition.
+      operationId: exportTranscript
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              description: Request to export the transcript from a project composition.
+              properties:
+                project_id:
+                  type: string
+                  format: uuid
+                  description: The ID of the project to export from.
+                  example: 9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
+                composition_id:
+                  type: string
+                  format: uuid
+                  description: The ID of the composition to export. Defaults to the first composition.
+                  example: 39677a40-1c43-4c36-8449-46cfbc4de2b5
+                format:
+                  type: string
+                  enum:
+                    - txt
+                    - markdown
+                    - html
+                    - rtf
+                    - docx
+                  description: |
+                    Transcript file format. The response body is the raw transcript file
+                    in the requested format (binary for `docx`, plain text otherwise).
+                include_speaker_labels:
+                  type: string
+                  enum:
+                    - 'off'
+                    - changes
+                    - every_paragraph
+                  default: changes
+                  description: |
+                    Speaker label mode.
+                    - `off`: No speaker labels
+                    - `changes`: Show speaker label when the speaker changes
+                    - `every_paragraph`: Show speaker label on every paragraph
+                include_markers:
+                  type: boolean
+                  default: false
+                  description: Include markers in the transcript.
+                timecodes:
+                  type: object
+                  description: |
+                    Timecode options. When provided, timecodes are included in
+                    the output.
+                  properties:
+                    frequency_seconds:
+                      type: number
+                      description: Interval in seconds for timecode insertion.
+                    on_paragraphs:
+                      type: boolean
+                      default: false
+                      description: Show timecodes at paragraph breaks.
+                    on_speakers:
+                      type: boolean
+                      default: false
+                      description: Show timecodes at speaker changes.
+                    on_markers:
+                      type: boolean
+                      default: false
+                      description: Show timecodes at markers.
+                    offset_seconds:
+                      type: number
+                      description: Offset in seconds applied to all timecodes.
+                  additionalProperties: false
+              required:
+                - project_id
+                - format
+              additionalProperties: false
+            examples:
+              plain_text_with_speakers:
+                summary: Export as plain text with speaker labels
+                value:
+                  project_id: 9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
+                  format: txt
+                  include_speaker_labels: changes
+              markdown_with_timecodes:
+                summary: Export as Markdown with timecodes
+                value:
+                  project_id: 9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
+                  format: markdown
+                  include_speaker_labels: every_paragraph
+                  timecodes:
+                    on_paragraphs: true
+        description: Transcript export request
+        required: true
+      responses:
+        '200':
+          description: |
+            Transcript exported successfully. The response body is the raw
+            transcript file with the appropriate Content-Type for the
+            requested format.
+
+            The `X-Composition-Id` response header contains the composition
+            UUID that was exported.
+          headers:
+            Content-Disposition:
+              schema:
+                type: string
+              description: Attachment filename, e.g. `attachment; filename="transcript.md"`
+            X-Composition-Id:
+              schema:
+                type: string
+                format: uuid
+              description: The composition ID that was exported
+          content:
+            text/plain:
+              schema:
+                type: string
+              example: |-
+                Speaker 1: Hello, welcome to the show.
+
+                Speaker 2: Thanks for having me.
+            text/markdown:
+              schema:
+                type: string
+            text/html:
+              schema:
+                type: string
+            application/rtf:
+              schema:
+                type: string
+            application/vnd.openxmlformats-officedocument.wordprocessingml.document:
+              schema:
+                type: string
+                format: binary
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error400'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error403'
         '429':
           $ref: '#/components/responses/Error429Response'
   /jobs:
@@ -2539,6 +2721,13 @@ components:
           type: integer
           description: AI credits consumed by this operation
           example: 5
+        conversation_id:
+          type: string
+          format: uuid
+          description: |
+            Conversation ID for this agent session. Pass this value as `conversation_id` in a
+            subsequent [POST /jobs/agent](#operation/agentEditJob) request to continue the conversation.
+          example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
       required:
         - status
         - agent_response
@@ -2562,6 +2751,12 @@ components:
           type: string
           description: Machine-readable error code
           example: agent_execution_failed
+        conversation_id:
+          type: string
+          format: uuid
+          description: |
+            Conversation ID for this agent session, if one was created before the error occurred.
+          example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
       required:
         - status
         - error_message
@@ -2814,6 +3009,7 @@ components:
           import/project_media: '#/components/schemas/ImportJobStatus'
           agent: '#/components/schemas/AgentJobStatus'
           publish: '#/components/schemas/PublishJobStatus'
+          export/timeline: '#/components/schemas/TimelineExportJobStatus'
       description: |
         Status of an async job. The response structure varies based on the job type.
         Use the `job_type` field to determine which fields will be present.
