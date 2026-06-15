@@ -147,11 +147,11 @@ The payload will match the format returned by [GET /jobs/{job_id}](#operation/ge
                             global::Descript.SourceGenerationContext.Default,
                             cancellationToken).ConfigureAwait(false);
                         var projectId = parseResult.GetRequiredValue(ProjectId);
-                        var compositionId = CliRuntime.WasSpecified(parseResult, CompositionId) ? parseResult.GetValue(CompositionId) : __requestBase is not null ? __requestBase.CompositionId : default;
-                        var mediaType = CliRuntime.WasSpecified(parseResult, MediaType) ? parseResult.GetValue(MediaType) : __requestBase is not null ? __requestBase.MediaType : default;
-                        var resolution = CliRuntime.WasSpecified(parseResult, Resolution) ? parseResult.GetValue(Resolution) : __requestBase is not null ? __requestBase.Resolution : default;
-                        var callbackUrl = CliRuntime.WasSpecified(parseResult, CallbackUrl) ? parseResult.GetValue(CallbackUrl) : __requestBase is not null ? __requestBase.CallbackUrl : default;
-                        var accessLevel = CliRuntime.WasSpecified(parseResult, AccessLevel) ? parseResult.GetValue(AccessLevel) : __requestBase is not null ? __requestBase.AccessLevel : default;
+                        var compositionId = CliRuntime.WasSpecified(parseResult, CompositionId) ? parseResult.GetValue(CompositionId) : (__requestBase is { } __CompositionIdBaseValue ? __CompositionIdBaseValue.CompositionId : default);
+                        var mediaType = CliRuntime.WasSpecified(parseResult, MediaType) ? parseResult.GetValue(MediaType) : (__requestBase is { } __MediaTypeBaseValue ? __MediaTypeBaseValue.MediaType : default);
+                        var resolution = CliRuntime.WasSpecified(parseResult, Resolution) ? parseResult.GetValue(Resolution) : (__requestBase is { } __ResolutionBaseValue ? __ResolutionBaseValue.Resolution : default);
+                        var callbackUrl = CliRuntime.WasSpecified(parseResult, CallbackUrl) ? parseResult.GetValue(CallbackUrl) : (__requestBase is { } __CallbackUrlBaseValue ? __CallbackUrlBaseValue.CallbackUrl : default);
+                        var accessLevel = CliRuntime.WasSpecified(parseResult, AccessLevel) ? parseResult.GetValue(AccessLevel) : (__requestBase is { } __AccessLevelBaseValue ? __AccessLevelBaseValue.AccessLevel : default);
                 using var client = await CliRuntime.CreateClientAsync(parseResult, cancellationToken).ConfigureAwait(false);
 
 

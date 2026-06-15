@@ -166,13 +166,13 @@ The payload will match the format returned by [GET /jobs/{job_id}](#operation/ge
                             RequestFile,
                             global::Descript.SourceGenerationContext.Default,
                             cancellationToken).ConfigureAwait(false);
-                        var projectId = CliRuntime.WasSpecified(parseResult, ProjectId) ? parseResult.GetValue(ProjectId) : __requestBase is not null ? __requestBase.ProjectId : default;
-                        var projectName = CliRuntime.WasSpecified(parseResult, ProjectName) ? parseResult.GetValue(ProjectName) : __requestBase is not null ? __requestBase.ProjectName : default;
-                        var teamAccess = CliRuntime.WasSpecified(parseResult, TeamAccess) ? parseResult.GetValue(TeamAccess) : __requestBase is not null ? __requestBase.TeamAccess : default;
-                        var folderName = CliRuntime.WasSpecified(parseResult, FolderName) ? parseResult.GetValue(FolderName) : __requestBase is not null ? __requestBase.FolderName : default;
-                        var addMedia = CliRuntime.WasSpecified(parseResult, AddMedia) ? parseResult.GetValue(AddMedia) : __requestBase is not null ? __requestBase.AddMedia : default;
-                        var addCompositions = CliRuntime.WasSpecified(parseResult, AddCompositions) ? parseResult.GetValue(AddCompositions) : __requestBase is not null ? __requestBase.AddCompositions : default;
-                        var callbackUrl = CliRuntime.WasSpecified(parseResult, CallbackUrl) ? parseResult.GetValue(CallbackUrl) : __requestBase is not null ? __requestBase.CallbackUrl : default;
+                        var projectId = CliRuntime.WasSpecified(parseResult, ProjectId) ? parseResult.GetValue(ProjectId) : (__requestBase is { } __ProjectIdBaseValue ? __ProjectIdBaseValue.ProjectId : default);
+                        var projectName = CliRuntime.WasSpecified(parseResult, ProjectName) ? parseResult.GetValue(ProjectName) : (__requestBase is { } __ProjectNameBaseValue ? __ProjectNameBaseValue.ProjectName : default);
+                        var teamAccess = CliRuntime.WasSpecified(parseResult, TeamAccess) ? parseResult.GetValue(TeamAccess) : (__requestBase is { } __TeamAccessBaseValue ? __TeamAccessBaseValue.TeamAccess : default);
+                        var folderName = CliRuntime.WasSpecified(parseResult, FolderName) ? parseResult.GetValue(FolderName) : (__requestBase is { } __FolderNameBaseValue ? __FolderNameBaseValue.FolderName : default);
+                        var addMedia = CliRuntime.WasSpecified(parseResult, AddMedia) ? parseResult.GetValue(AddMedia) : (__requestBase is { } __AddMediaBaseValue ? __AddMediaBaseValue.AddMedia : default);
+                        var addCompositions = CliRuntime.WasSpecified(parseResult, AddCompositions) ? parseResult.GetValue(AddCompositions) : (__requestBase is { } __AddCompositionsBaseValue ? __AddCompositionsBaseValue.AddCompositions : default);
+                        var callbackUrl = CliRuntime.WasSpecified(parseResult, CallbackUrl) ? parseResult.GetValue(CallbackUrl) : (__requestBase is { } __CallbackUrlBaseValue ? __CallbackUrlBaseValue.CallbackUrl : default);
                 using var client = await CliRuntime.CreateClientAsync(parseResult, cancellationToken).ConfigureAwait(false);
 
 
