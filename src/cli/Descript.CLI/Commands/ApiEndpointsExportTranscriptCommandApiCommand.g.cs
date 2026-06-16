@@ -131,11 +131,11 @@ an `X-Composition-Id` header identifying the exported composition.
                             global::Descript.SourceGenerationContext.Default,
                             cancellationToken).ConfigureAwait(false);
                         var projectId = parseResult.GetRequiredValue(ProjectId);
-                        var compositionId = CliRuntime.WasSpecified(parseResult, CompositionId) ? parseResult.GetValue(CompositionId) : __requestBase is not null ? __requestBase.CompositionId : default;
+                        var compositionId = CliRuntime.WasSpecified(parseResult, CompositionId) ? parseResult.GetValue(CompositionId) : (__requestBase is { } __CompositionIdBaseValue ? __CompositionIdBaseValue.CompositionId : default);
                         var format = parseResult.GetRequiredValue(Format);
-                        var includeSpeakerLabels = CliRuntime.WasSpecified(parseResult, IncludeSpeakerLabels) ? parseResult.GetValue(IncludeSpeakerLabels) : __requestBase is not null ? __requestBase.IncludeSpeakerLabels : default;
-                        var includeMarkers = CliRuntime.WasSpecified(parseResult, IncludeMarkers) ? parseResult.GetValue(IncludeMarkers) : __requestBase is not null ? __requestBase.IncludeMarkers : default;
-                        var timecodes = CliRuntime.WasSpecified(parseResult, Timecodes) ? parseResult.GetValue(Timecodes) : __requestBase is not null ? __requestBase.Timecodes : default;
+                        var includeSpeakerLabels = CliRuntime.WasSpecified(parseResult, IncludeSpeakerLabels) ? parseResult.GetValue(IncludeSpeakerLabels) : (__requestBase is { } __IncludeSpeakerLabelsBaseValue ? __IncludeSpeakerLabelsBaseValue.IncludeSpeakerLabels : default);
+                        var includeMarkers = CliRuntime.WasSpecified(parseResult, IncludeMarkers) ? parseResult.GetValue(IncludeMarkers) : (__requestBase is { } __IncludeMarkersBaseValue ? __IncludeMarkersBaseValue.IncludeMarkers : default);
+                        var timecodes = CliRuntime.WasSpecified(parseResult, Timecodes) ? parseResult.GetValue(Timecodes) : (__requestBase is { } __TimecodesBaseValue ? __TimecodesBaseValue.Timecodes : default);
                 using var client = await CliRuntime.CreateClientAsync(parseResult, cancellationToken).ConfigureAwait(false);
 
 

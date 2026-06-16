@@ -173,14 +173,14 @@ The payload will match the format returned by [GET /jobs/{job_id}](#operation/ge
                             RequestFile,
                             global::Descript.SourceGenerationContext.Default,
                             cancellationToken).ConfigureAwait(false);
-                        var projectId = CliRuntime.WasSpecified(parseResult, ProjectId) ? parseResult.GetValue(ProjectId) : __requestBase is not null ? __requestBase.ProjectId : default;
-                        var projectName = CliRuntime.WasSpecified(parseResult, ProjectName) ? parseResult.GetValue(ProjectName) : __requestBase is not null ? __requestBase.ProjectName : default;
-                        var compositionId = CliRuntime.WasSpecified(parseResult, CompositionId) ? parseResult.GetValue(CompositionId) : __requestBase is not null ? __requestBase.CompositionId : default;
-                        var model = CliRuntime.WasSpecified(parseResult, Model) ? parseResult.GetValue(Model) : __requestBase is not null ? __requestBase.Model : default;
+                        var projectId = CliRuntime.WasSpecified(parseResult, ProjectId) ? parseResult.GetValue(ProjectId) : (__requestBase is { } __ProjectIdBaseValue ? __ProjectIdBaseValue.ProjectId : default);
+                        var projectName = CliRuntime.WasSpecified(parseResult, ProjectName) ? parseResult.GetValue(ProjectName) : (__requestBase is { } __ProjectNameBaseValue ? __ProjectNameBaseValue.ProjectName : default);
+                        var compositionId = CliRuntime.WasSpecified(parseResult, CompositionId) ? parseResult.GetValue(CompositionId) : (__requestBase is { } __CompositionIdBaseValue ? __CompositionIdBaseValue.CompositionId : default);
+                        var model = CliRuntime.WasSpecified(parseResult, Model) ? parseResult.GetValue(Model) : (__requestBase is { } __ModelBaseValue ? __ModelBaseValue.Model : default);
                         var prompt = parseResult.GetRequiredValue(Prompt);
-                        var teamAccess = CliRuntime.WasSpecified(parseResult, TeamAccess) ? parseResult.GetValue(TeamAccess) : __requestBase is not null ? __requestBase.TeamAccess : default;
-                        var callbackUrl = CliRuntime.WasSpecified(parseResult, CallbackUrl) ? parseResult.GetValue(CallbackUrl) : __requestBase is not null ? __requestBase.CallbackUrl : default;
-                        var conversationId = CliRuntime.WasSpecified(parseResult, ConversationId) ? parseResult.GetValue(ConversationId) : __requestBase is not null ? __requestBase.ConversationId : default;
+                        var teamAccess = CliRuntime.WasSpecified(parseResult, TeamAccess) ? parseResult.GetValue(TeamAccess) : (__requestBase is { } __TeamAccessBaseValue ? __TeamAccessBaseValue.TeamAccess : default);
+                        var callbackUrl = CliRuntime.WasSpecified(parseResult, CallbackUrl) ? parseResult.GetValue(CallbackUrl) : (__requestBase is { } __CallbackUrlBaseValue ? __CallbackUrlBaseValue.CallbackUrl : default);
+                        var conversationId = CliRuntime.WasSpecified(parseResult, ConversationId) ? parseResult.GetValue(ConversationId) : (__requestBase is { } __ConversationIdBaseValue ? __ConversationIdBaseValue.ConversationId : default);
                 using var client = await CliRuntime.CreateClientAsync(parseResult, cancellationToken).ConfigureAwait(false);
 
 
