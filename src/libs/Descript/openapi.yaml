@@ -1495,7 +1495,7 @@ paths:
                     stopped_at: '2025-11-18T10:35:00Z'
                     drive_id: c9c5c47e-158a-49f7-846b-4f6ee2a229a2
                     project_id: 9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
-                    project_url: https://web.descript.com/9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
+                    project_url: https://web.descript.com/9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb/0171c
                     result:
                       status: success
                       media_status:
@@ -1519,7 +1519,7 @@ paths:
                     stopped_at: '2025-11-18T10:35:00Z'
                     drive_id: c9c5c47e-158a-49f7-846b-4f6ee2a229a2
                     project_id: 9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
-                    project_url: https://web.descript.com/9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
+                    project_url: https://web.descript.com/9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb/0171c
                     result:
                       status: partial
                       media_status:
@@ -1586,7 +1586,7 @@ paths:
                     stopped_at: '2025-11-18T10:35:00Z'
                     drive_id: c9c5c47e-158a-49f7-846b-4f6ee2a229a2
                     project_id: 9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
-                    project_url: https://web.descript.com/9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
+                    project_url: https://web.descript.com/9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb/39677
                     result:
                       status: success
                       composition_id: 39677a40-1c43-4c36-8449-46cfbc4de2b5
@@ -2654,7 +2654,7 @@ components:
         project_url:
           type: string
           format: uri
-          description: URL to access the project in Descript web app
+          description: URL to access the project in Descript web app. When a composition ID is available in the result, the URL includes a composition short ID suffix.
           example: https://web.descript.com/9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
         progress:
           type: object
@@ -2812,7 +2812,7 @@ components:
         project_url:
           type: string
           format: uri
-          description: URL to access the project in Descript web app
+          description: URL to access the project in Descript web app. When a composition ID is available in the result, the URL includes a composition short ID suffix.
           example: https://web.descript.com/9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
         progress:
           type: object
@@ -2950,7 +2950,7 @@ components:
         project_url:
           type: string
           format: uri
-          description: URL to access the project in Descript web app
+          description: URL to access the project in Descript web app. When a composition ID is available in the result, the URL includes a composition short ID suffix.
           example: https://web.descript.com/9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
         progress:
           type: object

@@ -74,7 +74,7 @@ namespace Descript
         public required global::System.Guid ProjectId { get; set; }
 
         /// <summary>
-        /// URL to access the project in Descript web app<br/>
+        /// URL to access the project in Descript web app. When a composition ID is available in the result, the URL includes a composition short ID suffix.<br/>
         /// Example: https://web.descript.com/9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
         /// </summary>
         /// <example>https://web.descript.com/9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb</example>
@@ -129,7 +129,7 @@ namespace Descript
         /// Example: 9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
         /// </param>
         /// <param name="projectUrl">
-        /// URL to access the project in Descript web app<br/>
+        /// URL to access the project in Descript web app. When a composition ID is available in the result, the URL includes a composition short ID suffix.<br/>
         /// Example: https://web.descript.com/9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
         /// </param>
         /// <param name="jobType">
