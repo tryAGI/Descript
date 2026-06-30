@@ -480,20 +480,24 @@ namespace Descript
                                         h => h.Key,
                                         h => h.Value));
                             }
-                            // 
+                            // Unprocessable Entity: - `media_type` was explicitly set to `Video` but the target composition has no   video content. Retry with `media_type` set to `Audio` (or omit it to publish   as audio). 
                             if ((int)__response.StatusCode == 422)
                             {
                                 string? __content_422 = null;
                                 global::System.Exception? __exception_422 = null;
+                                global::Descript.Error400? __value_422 = null;
                                 try
                                 {
                                     if (__effectiveReadResponseAsString)
                                     {
                                         __content_422 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
+                                        __value_422 = global::Descript.Error400.FromJson(__content_422, JsonSerializerContext);
                                     }
                                     else
                                     {
                                         __content_422 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
+
+                                        __value_422 = global::Descript.Error400.FromJson(__content_422, JsonSerializerContext);
                                     }
                                 }
                                 catch (global::System.Exception __ex)
@@ -502,11 +506,12 @@ namespace Descript
                                 }
 
 
-                                throw global::Descript.ApiException.Create(
+                                throw global::Descript.ApiException<global::Descript.Error400>.Create(
                                     statusCode: __response.StatusCode,
                                     message: __content_422 ?? __response.ReasonPhrase ?? string.Empty,
                                     innerException: __exception_422,
                                     responseBody: __content_422,
+                                    responseObject: __value_422,
                                     responseHeaders: global::System.Linq.Enumerable.ToDictionary(
                                         __response.Headers,
                                         h => h.Key,
@@ -674,7 +679,11 @@ namespace Descript
         /// Example: 39677a40-1c43-4c36-8449-46cfbc4de2b5
         /// </param>
         /// <param name="mediaType">
-        /// Media type of the published output.<br/>
+        /// Media type of the published output. Defaults to `Video` when omitted.<br/>
+        /// If the target composition has no video content:<br/>
+        /// - omitting `media_type` publishes it as `Audio`<br/>
+        ///   (the completed job result reports `media_type: Audio`),<br/>
+        /// - explicitly requesting `Video` is rejected with a 422.<br/>
         /// Default Value: Video
         /// </param>
         /// <param name="resolution">

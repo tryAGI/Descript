@@ -23,7 +23,13 @@ internal static partial class ApiEndpointsPublishJobCommandApiCommand
     private static Option<global::Descript.PublishJobRequestMediaType?> MediaType { get; } = new(
         name: @"--media-type")
     {
-        Description = @"Media type of the published output.",
+        Description = @"Media type of the published output. Defaults to `Video` when omitted.
+
+If the target composition has no video content:
+- omitting `media_type` publishes it as `Audio`
+  (the completed job result reports `media_type: Audio`),
+- explicitly requesting `Video` is rejected with a 422.
+",
     };
 
     private static Option<global::Descript.PublishJobRequestResolution?> Resolution { get; } = new(

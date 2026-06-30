@@ -91,7 +91,11 @@ namespace Descript
         /// Example: 39677a40-1c43-4c36-8449-46cfbc4de2b5
         /// </param>
         /// <param name="mediaType">
-        /// Media type of the published output.<br/>
+        /// Media type of the published output. Defaults to `Video` when omitted.<br/>
+        /// If the target composition has no video content:<br/>
+        /// - omitting `media_type` publishes it as `Audio`<br/>
+        ///   (the completed job result reports `media_type: Audio`),<br/>
+        /// - explicitly requesting `Video` is rejected with a 422.<br/>
         /// Default Value: Video
         /// </param>
         /// <param name="resolution">

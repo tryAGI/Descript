@@ -1008,7 +1008,13 @@ paths:
                     - Video
                     - Audio
                   default: Video
-                  description: Media type of the published output.
+                  description: |
+                    Media type of the published output. Defaults to `Video` when omitted.
+
+                    If the target composition has no video content:
+                    - omitting `media_type` publishes it as `Audio`
+                      (the completed job result reports `media_type: Audio`),
+                    - explicitly requesting `Video` is rejected with a 422.
                 resolution:
                   type: string
                   enum:
@@ -1148,7 +1154,20 @@ paths:
                     message: Forbidden
         '422':
           description: |
-            Unprocessable Entity
+            Unprocessable Entity:
+            - `media_type` was explicitly set to `Video` but the target composition has no
+              video content. Retry with `media_type` set to `Audio` (or omit it to publish
+              as audio).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error400'
+              examples:
+                audio_only_video_request:
+                  summary: Audio-only composition requested as video
+                  value:
+                    error: unprocessable_entity
+                    message: Composition <id> has no video content and cannot be published as video. Retry with media_type "Audio".
         '429':
           $ref: '#/components/responses/Error429Response'
   /export/transcript:
@@ -2869,6 +2888,14 @@ components:
           format: uri
           description: Public URL to view the published content
           example: https://share.descript.com/view/abc123
+        media_type:
+          type: string
+          enum:
+            - Video
+            - Audio
+          description: |
+            The media type the composition was actually published as. For an audio-only composition published with the default Video request, this is Audio.
+          example: Audio
         download_url:
           type: string
           format: uri
