@@ -89,6 +89,10 @@ namespace Descript
 
             typeof(global::Descript.JsonConverters.PublishSuccessResultStatusNullableJsonConverter),
 
+            typeof(global::Descript.JsonConverters.PublishSuccessResultMediaTypeJsonConverter),
+
+            typeof(global::Descript.JsonConverters.PublishSuccessResultMediaTypeNullableJsonConverter),
+
             typeof(global::Descript.JsonConverters.PublishErrorResultStatusJsonConverter),
 
             typeof(global::Descript.JsonConverters.PublishErrorResultStatusNullableJsonConverter),
@@ -232,6 +236,7 @@ namespace Descript
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.AgentJobStatusResultDiscriminatorStatus), TypeInfoPropertyName = "AgentJobStatusResultDiscriminatorStatus2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.PublishSuccessResult))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.PublishSuccessResultStatus), TypeInfoPropertyName = "PublishSuccessResultStatus2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.PublishSuccessResultMediaType), TypeInfoPropertyName = "PublishSuccessResultMediaType2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.PublishErrorResult))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.PublishErrorResultStatus), TypeInfoPropertyName = "PublishErrorResultStatus2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.PublishJobStatus))]

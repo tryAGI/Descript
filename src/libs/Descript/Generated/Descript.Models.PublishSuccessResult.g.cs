@@ -34,6 +34,15 @@ namespace Descript
         public required string ShareUrl { get; set; }
 
         /// <summary>
+        /// The media type the composition was actually published as. For an audio-only composition published with the default Video request, this is Audio.<br/>
+        /// Example: Audio
+        /// </summary>
+        /// <example>Audio</example>
+        [global::System.Text.Json.Serialization.JsonPropertyName("media_type")]
+        [global::System.Text.Json.Serialization.JsonConverter(typeof(global::Descript.JsonConverters.PublishSuccessResultMediaTypeJsonConverter))]
+        public global::Descript.PublishSuccessResultMediaType? MediaType { get; set; }
+
+        /// <summary>
         /// Time-limited signed URL to download the original published media file. Present when the job completed successfully and signing succeeded.<br/>
         /// Example: https://storage.googleapis.com/bucket/object?X-Goog-Signature=...
         /// </summary>
@@ -67,6 +76,10 @@ namespace Descript
         /// <param name="status">
         /// Indicates successful completion
         /// </param>
+        /// <param name="mediaType">
+        /// The media type the composition was actually published as. For an audio-only composition published with the default Video request, this is Audio.<br/>
+        /// Example: Audio
+        /// </param>
         /// <param name="downloadUrl">
         /// Time-limited signed URL to download the original published media file. Present when the job completed successfully and signing succeeded.<br/>
         /// Example: https://storage.googleapis.com/bucket/object?X-Goog-Signature=...
@@ -81,12 +94,14 @@ namespace Descript
             string compositionId,
             string shareUrl,
             global::Descript.PublishSuccessResultStatus status,
+            global::Descript.PublishSuccessResultMediaType? mediaType,
             string? downloadUrl,
             global::System.DateTime? downloadUrlExpiresAt)
         {
             this.Status = status;
             this.CompositionId = compositionId ?? throw new global::System.ArgumentNullException(nameof(compositionId));
             this.ShareUrl = shareUrl ?? throw new global::System.ArgumentNullException(nameof(shareUrl));
+            this.MediaType = mediaType;
             this.DownloadUrl = downloadUrl;
             this.DownloadUrlExpiresAt = downloadUrlExpiresAt;
         }
