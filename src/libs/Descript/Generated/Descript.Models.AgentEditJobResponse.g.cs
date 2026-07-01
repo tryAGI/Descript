@@ -45,6 +45,19 @@ namespace Descript
         public required string ProjectUrl { get; set; }
 
         /// <summary>
+        /// Model reported for this request: the canonical id for an explicit<br/>
+        /// model or alias (e.g. `claude-opus-4.8` for `claude-opus`), or<br/>
+        /// `auto` for an `auto` request. Lets you confirm the selection<br/>
+        /// immediately, without waiting for the job result. Matches<br/>
+        /// `result.resolved_model` on [GET /jobs/{job_id}](#operation/getJob).<br/>
+        /// Example: claude-opus-4.8
+        /// </summary>
+        /// <example>claude-opus-4.8</example>
+        [global::System.Text.Json.Serialization.JsonPropertyName("resolved_model")]
+        [global::System.Text.Json.Serialization.JsonRequired]
+        public required string ResolvedModel { get; set; }
+
+        /// <summary>
         /// Additional properties that are not explicitly defined in the schema
         /// </summary>
         [global::System.Text.Json.Serialization.JsonExtensionData]
@@ -69,6 +82,14 @@ namespace Descript
         /// URL to access the project in Descript web app<br/>
         /// Example: https://web.descript.com/9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
         /// </param>
+        /// <param name="resolvedModel">
+        /// Model reported for this request: the canonical id for an explicit<br/>
+        /// model or alias (e.g. `claude-opus-4.8` for `claude-opus`), or<br/>
+        /// `auto` for an `auto` request. Lets you confirm the selection<br/>
+        /// immediately, without waiting for the job result. Matches<br/>
+        /// `result.resolved_model` on [GET /jobs/{job_id}](#operation/getJob).<br/>
+        /// Example: claude-opus-4.8
+        /// </param>
 #if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 #endif
@@ -76,12 +97,14 @@ namespace Descript
             global::System.Guid jobId,
             global::System.Guid driveId,
             global::System.Guid projectId,
-            string projectUrl)
+            string projectUrl,
+            string resolvedModel)
         {
             this.JobId = jobId;
             this.DriveId = driveId;
             this.ProjectId = projectId;
             this.ProjectUrl = projectUrl ?? throw new global::System.ArgumentNullException(nameof(projectUrl));
+            this.ResolvedModel = resolvedModel ?? throw new global::System.ArgumentNullException(nameof(resolvedModel));
         }
 
         /// <summary>

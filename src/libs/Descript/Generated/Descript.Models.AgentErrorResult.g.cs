@@ -35,6 +35,16 @@ namespace Descript
         public string? ErrorCode { get; set; }
 
         /// <summary>
+        /// Model reported for this job: the canonical id for an explicit model or<br/>
+        /// alias, or `auto` for an `auto` request. Present on jobs submitted via the<br/>
+        /// public API after the model-aliases launch; older jobs may omit it.<br/>
+        /// Example: claude-opus-4.8
+        /// </summary>
+        /// <example>claude-opus-4.8</example>
+        [global::System.Text.Json.Serialization.JsonPropertyName("resolved_model")]
+        public string? ResolvedModel { get; set; }
+
+        /// <summary>
         /// Conversation ID for this agent session, if one was created before the error occurred.<br/>
         /// Example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
         /// </summary>
@@ -63,6 +73,12 @@ namespace Descript
         /// Machine-readable error code<br/>
         /// Example: agent_execution_failed
         /// </param>
+        /// <param name="resolvedModel">
+        /// Model reported for this job: the canonical id for an explicit model or<br/>
+        /// alias, or `auto` for an `auto` request. Present on jobs submitted via the<br/>
+        /// public API after the model-aliases launch; older jobs may omit it.<br/>
+        /// Example: claude-opus-4.8
+        /// </param>
         /// <param name="conversationId">
         /// Conversation ID for this agent session, if one was created before the error occurred.<br/>
         /// Example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
@@ -74,11 +90,13 @@ namespace Descript
             string errorMessage,
             global::Descript.AgentErrorResultStatus status,
             string? errorCode,
+            string? resolvedModel,
             global::System.Guid? conversationId)
         {
             this.Status = status;
             this.ErrorMessage = errorMessage ?? throw new global::System.ArgumentNullException(nameof(errorMessage));
             this.ErrorCode = errorCode;
+            this.ResolvedModel = resolvedModel;
             this.ConversationId = conversationId;
         }
 

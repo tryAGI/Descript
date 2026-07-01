@@ -52,6 +52,17 @@ namespace Descript
         public int? AiCreditsUsed { get; set; }
 
         /// <summary>
+        /// Model reported for this job: the canonical id for an explicit model or<br/>
+        /// alias (e.g. `claude-opus-4.8` for `claude-opus`), or `auto` for an<br/>
+        /// `auto` request. Present on jobs submitted via the public API after the<br/>
+        /// model-aliases launch; older jobs may omit it.<br/>
+        /// Example: claude-opus-4.8
+        /// </summary>
+        /// <example>claude-opus-4.8</example>
+        [global::System.Text.Json.Serialization.JsonPropertyName("resolved_model")]
+        public string? ResolvedModel { get; set; }
+
+        /// <summary>
         /// Conversation ID for this agent session. Pass this value as `conversation_id` in a<br/>
         /// subsequent [POST /jobs/agent](#operation/agentEditJob) request to continue the conversation.<br/>
         /// Example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
@@ -89,6 +100,13 @@ namespace Descript
         /// AI credits consumed by this operation<br/>
         /// Example: 5
         /// </param>
+        /// <param name="resolvedModel">
+        /// Model reported for this job: the canonical id for an explicit model or<br/>
+        /// alias (e.g. `claude-opus-4.8` for `claude-opus`), or `auto` for an<br/>
+        /// `auto` request. Present on jobs submitted via the public API after the<br/>
+        /// model-aliases launch; older jobs may omit it.<br/>
+        /// Example: claude-opus-4.8
+        /// </param>
         /// <param name="conversationId">
         /// Conversation ID for this agent session. Pass this value as `conversation_id` in a<br/>
         /// subsequent [POST /jobs/agent](#operation/agentEditJob) request to continue the conversation.<br/>
@@ -103,6 +121,7 @@ namespace Descript
             global::Descript.AgentSuccessResultStatus status,
             int? mediaSecondsUsed,
             int? aiCreditsUsed,
+            string? resolvedModel,
             global::System.Guid? conversationId)
         {
             this.Status = status;
@@ -110,6 +129,7 @@ namespace Descript
             this.ProjectChanged = projectChanged;
             this.MediaSecondsUsed = mediaSecondsUsed;
             this.AiCreditsUsed = aiCreditsUsed;
+            this.ResolvedModel = resolvedModel;
             this.ConversationId = conversationId;
         }
 

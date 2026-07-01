@@ -153,6 +153,14 @@ namespace Descript
 
             typeof(global::Descript.JsonConverters.ListProjectsDirectionNullableJsonConverter),
 
+            typeof(global::Descript.JsonConverters.ListAgentModelsResponseAvailableModelCostJsonConverter),
+
+            typeof(global::Descript.JsonConverters.ListAgentModelsResponseAvailableModelCostNullableJsonConverter),
+
+            typeof(global::Descript.JsonConverters.ListAgentModelsResponseAliaseCostJsonConverter),
+
+            typeof(global::Descript.JsonConverters.ListAgentModelsResponseAliaseCostNullableJsonConverter),
+
             typeof(global::Descript.JsonConverters.GetProjectResponseMediaFilesTypeJsonConverter),
 
             typeof(global::Descript.JsonConverters.GetProjectResponseMediaFilesTypeNullableJsonConverter),
@@ -279,6 +287,13 @@ namespace Descript
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.Dictionary<string, global::Descript.ImportProjectMediaResponseUploadUrls2>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.ImportProjectMediaResponseUploadUrls2))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.AgentEditJobResponse))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.ListAgentModelsResponse))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.IList<global::Descript.ListAgentModelsResponseAvailableModel>))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.ListAgentModelsResponseAvailableModel))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.ListAgentModelsResponseAvailableModelCost), TypeInfoPropertyName = "ListAgentModelsResponseAvailableModelCost2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.IList<global::Descript.ListAgentModelsResponseAliase>))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.ListAgentModelsResponseAliase))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.ListAgentModelsResponseAliaseCost), TypeInfoPropertyName = "ListAgentModelsResponseAliaseCost2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.PublishJobResponse))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(byte[]))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.ListJobsResponse))]
@@ -302,6 +317,8 @@ namespace Descript
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::Descript.ImportProjectMediaRequestAddMediaMultitrackSequenceTrack>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::Descript.ImportProjectMediaRequestAddComposition>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::Descript.ImportProjectMediaRequestAddCompositionClip>))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::Descript.ListAgentModelsResponseAvailableModel>))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::Descript.ListAgentModelsResponseAliase>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::Descript.JobStatus>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::Descript.ListProjectsResponseDataItem>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::Descript.GetProjectResponseComposition>))]

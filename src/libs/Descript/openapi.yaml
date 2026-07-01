@@ -764,7 +764,15 @@ paths:
                 model:
                   type: string
                   description: |
-                    AI model to use for editing. Defaults to the default model.
+                    AI model to use for editing. Accepts a canonical model id
+                    (e.g. `claude-opus-4.8`, `claude-sonnet-4.6`, `gpt-5.5`,
+                    `gemini-3.5-flash`) or a friendly alias (`auto`, `claude-opus`,
+                    `claude-sonnet`, `claude-haiku`, `gpt`, `gemini-pro`,
+                    `gemini-flash`). Call [GET /agent/models](#operation/listAgentModels)
+                    to discover the current set of supported models and aliases.
+
+                    Defaults to `auto` when omitted, which selects a recommended
+                    model for your account.
                 prompt:
                   type: string
                   description: |
@@ -811,7 +819,7 @@ paths:
                 summary: Add Studio Sound effect
                 value:
                   project_id: 9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
-                  model: haiku-4.5
+                  model: claude-haiku-4.5
                   prompt: add studio sound to every clip
               remove_filler_words:
                 summary: Remove filler words
@@ -866,11 +874,21 @@ paths:
                     format: uri
                     description: URL to access the project in Descript web app
                     example: https://web.descript.com/9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
+                  resolved_model:
+                    type: string
+                    description: |
+                      Model reported for this request: the canonical id for an explicit
+                      model or alias (e.g. `claude-opus-4.8` for `claude-opus`), or
+                      `auto` for an `auto` request. Lets you confirm the selection
+                      immediately, without waiting for the job result. Matches
+                      `result.resolved_model` on [GET /jobs/{job_id}](#operation/getJob).
+                    example: claude-opus-4.8
                 required:
                   - job_id
                   - drive_id
                   - project_id
                   - project_url
+                  - resolved_model
         '400':
           description: |
             Invalid input:
@@ -948,6 +966,162 @@ paths:
                   value:
                     error: not_found
                     message: No composition matching '5b507b2b-e3ef-4146-a0d0-6741df516973' found in project 9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
+        '429':
+          $ref: '#/components/responses/Error429Response'
+  /agent/models:
+    get:
+      tags:
+        - API Endpoints
+      summary: List agent models
+      security:
+        - bearerAuth: []
+      description: |
+        List the currently available agent models and the aliases that resolve to them.
+
+        The `model` parameter on [POST /jobs/agent](#operation/agentEditJob) accepts any
+        value listed under `availableModels[].id` or `aliases[].id`. Aliases let you target
+        the latest
+        recommended model for a given tier without chasing version bumps — for example,
+        passing `claude-opus` always routes to whichever Claude Opus version Descript
+        currently recommends.
+
+        Cost tiers are coarse buckets — `low`, `medium`, `high` — useful for showing
+        users a relative price/performance signal. Exact pricing is reported per job via
+        the `ai_credits_used` field on [GET /jobs/{job_id}](#operation/getJob).
+
+        When `model` is omitted on `POST /jobs/agent`, the request defaults to `auto`, which
+        selects a recommended model for your account. `auto` is a `medium`-cost option. For an
+        `auto` request, `result.resolved_model` on [GET /jobs/{job_id}](#operation/getJob) reports
+        `auto`; for an explicit model or alias it reports the canonical id that ran.
+      operationId: listAgentModels
+      responses:
+        '200':
+          description: Available agent models and aliases
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - availableModels
+                  - aliases
+                properties:
+                  availableModels:
+                    type: array
+                    description: |
+                      Canonical model ids currently advertised by the public agent API,
+                      each tagged with a coarse cost tier.
+                    items:
+                      type: object
+                      required:
+                        - id
+                        - cost
+                      properties:
+                        id:
+                          type: string
+                          description: Canonical model id to pass as `model` on `POST /jobs/agent`.
+                          example: claude-opus-4.8
+                        cost:
+                          type: string
+                          enum:
+                            - low
+                            - medium
+                            - high
+                          description: Relative cost tier for this model.
+                          example: high
+                  aliases:
+                    type: array
+                    description: |
+                      Friendly aliases that resolve to one of the `availableModels` at
+                      request time. Pass any alias `id` as `model` and the agent job
+                      result's `result.resolved_model` (on
+                      [GET /jobs/{job_id}](#operation/getJob)) will report the canonical
+                      id that actually ran.
+                    items:
+                      type: object
+                      required:
+                        - id
+                        - resolvesTo
+                        - description
+                        - cost
+                      properties:
+                        id:
+                          type: string
+                          description: Alias id callers can pass as `model`.
+                          example: claude-opus
+                        resolvesTo:
+                          type: string
+                          description: Canonical model id this alias currently resolves to.
+                          example: claude-opus-4.8
+                        description:
+                          type: string
+                          description: Human-readable description of the alias's intent.
+                          example: Tracks stable Anthropic Claude Opus
+                        cost:
+                          type: string
+                          enum:
+                            - low
+                            - medium
+                            - high
+                          description: Relative cost tier of the model this alias resolves to.
+                          example: high
+              examples:
+                default_models:
+                  summary: Current model list and aliases
+                  value:
+                    availableModels:
+                      - id: auto
+                        cost: medium
+                      - id: claude-opus-4.8
+                        cost: high
+                      - id: claude-opus-4.7
+                        cost: high
+                      - id: claude-opus-4.6
+                        cost: high
+                      - id: claude-sonnet-5
+                        cost: medium
+                      - id: claude-sonnet-4.6
+                        cost: medium
+                      - id: claude-haiku-4.5
+                        cost: low
+                      - id: gpt-5.5
+                        cost: high
+                      - id: gpt-5.4
+                        cost: medium
+                      - id: gemini-3.5-flash
+                        cost: medium
+                      - id: gemini-3.1-pro
+                        cost: high
+                    aliases:
+                      - id: claude-opus
+                        resolvesTo: claude-opus-4.8
+                        description: Tracks stable Anthropic Claude Opus
+                        cost: high
+                      - id: claude-sonnet
+                        resolvesTo: claude-sonnet-4.6
+                        description: Tracks stable Anthropic Claude Sonnet
+                        cost: medium
+                      - id: claude-haiku
+                        resolvesTo: claude-haiku-4.5
+                        description: Tracks stable Anthropic Claude Haiku
+                        cost: low
+                      - id: gpt
+                        resolvesTo: gpt-5.5
+                        description: Tracks stable OpenAI GPT
+                        cost: high
+                      - id: gemini-pro
+                        resolvesTo: gemini-3.1-pro
+                        description: Tracks stable Google Gemini Pro
+                        cost: high
+                      - id: gemini-flash
+                        resolvesTo: gemini-3.5-flash
+                        description: Tracks stable Google Gemini Flash
+                        cost: medium
+        '401':
+          description: Unauthorized - missing or invalid authentication token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401'
         '429':
           $ref: '#/components/responses/Error429Response'
   /jobs/publish:
@@ -2740,6 +2914,14 @@ components:
           type: integer
           description: AI credits consumed by this operation
           example: 5
+        resolved_model:
+          type: string
+          description: |
+            Model reported for this job: the canonical id for an explicit model or
+            alias (e.g. `claude-opus-4.8` for `claude-opus`), or `auto` for an
+            `auto` request. Present on jobs submitted via the public API after the
+            model-aliases launch; older jobs may omit it.
+          example: claude-opus-4.8
         conversation_id:
           type: string
           format: uuid
@@ -2770,6 +2952,13 @@ components:
           type: string
           description: Machine-readable error code
           example: agent_execution_failed
+        resolved_model:
+          type: string
+          description: |
+            Model reported for this job: the canonical id for an explicit model or
+            alias, or `auto` for an `auto` request. Present on jobs submitted via the
+            public API after the model-aliases launch; older jobs may omit it.
+          example: claude-opus-4.8
         conversation_id:
           type: string
           format: uuid
