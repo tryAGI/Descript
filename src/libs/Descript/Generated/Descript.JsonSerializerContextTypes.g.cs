@@ -440,71 +440,99 @@ namespace Descript
         /// <summary>
         /// 
         /// </summary>
-        public global::Descript.PublishJobResponse? Type103 { get; set; }
+        public global::Descript.ListAgentModelsResponse? Type103 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public byte[]? Type104 { get; set; }
+        public global::System.Collections.Generic.IList<global::Descript.ListAgentModelsResponseAvailableModel>? Type104 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Descript.ListJobsResponse? Type105 { get; set; }
+        public global::Descript.ListAgentModelsResponseAvailableModel? Type105 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::System.Collections.Generic.IList<global::Descript.JobStatus>? Type106 { get; set; }
+        public global::Descript.ListAgentModelsResponseAvailableModelCost? Type106 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Descript.ListJobsResponsePagination? Type107 { get; set; }
+        public global::System.Collections.Generic.IList<global::Descript.ListAgentModelsResponseAliase>? Type107 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Descript.ListProjectsResponse? Type108 { get; set; }
+        public global::Descript.ListAgentModelsResponseAliase? Type108 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::System.Collections.Generic.IList<global::Descript.ListProjectsResponseDataItem>? Type109 { get; set; }
+        public global::Descript.ListAgentModelsResponseAliaseCost? Type109 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Descript.ListProjectsResponseDataItem? Type110 { get; set; }
+        public global::Descript.PublishJobResponse? Type110 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Descript.ListProjectsResponsePagination? Type111 { get; set; }
+        public byte[]? Type111 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Descript.GetProjectResponse? Type112 { get; set; }
+        public global::Descript.ListJobsResponse? Type112 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::System.Collections.Generic.Dictionary<string, global::Descript.GetProjectResponseMediaFiles2>? Type113 { get; set; }
+        public global::System.Collections.Generic.IList<global::Descript.JobStatus>? Type113 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Descript.GetProjectResponseMediaFiles2? Type114 { get; set; }
+        public global::Descript.ListJobsResponsePagination? Type114 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Descript.GetProjectResponseMediaFilesType? Type115 { get; set; }
+        public global::Descript.ListProjectsResponse? Type115 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::System.Collections.Generic.IList<global::Descript.GetProjectResponseComposition>? Type116 { get; set; }
+        public global::System.Collections.Generic.IList<global::Descript.ListProjectsResponseDataItem>? Type116 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Descript.GetProjectResponseComposition? Type117 { get; set; }
+        public global::Descript.ListProjectsResponseDataItem? Type117 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Descript.GetStatusResponse? Type118 { get; set; }
+        public global::Descript.ListProjectsResponsePagination? Type118 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Descript.GetStatusResponseStatus? Type119 { get; set; }
+        public global::Descript.GetProjectResponse? Type119 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::System.Collections.Generic.Dictionary<string, global::Descript.GetProjectResponseMediaFiles2>? Type120 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::Descript.GetProjectResponseMediaFiles2? Type121 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::Descript.GetProjectResponseMediaFilesType? Type122 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::System.Collections.Generic.IList<global::Descript.GetProjectResponseComposition>? Type123 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::Descript.GetProjectResponseComposition? Type124 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::Descript.GetStatusResponse? Type125 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::Descript.GetStatusResponseStatus? Type126 { get; set; }
 
         /// <summary>
         /// 
@@ -529,14 +557,22 @@ namespace Descript
         /// <summary>
         /// 
         /// </summary>
-        public global::System.Collections.Generic.List<global::Descript.JobStatus>? ListType5 { get; set; }
+        public global::System.Collections.Generic.List<global::Descript.ListAgentModelsResponseAvailableModel>? ListType5 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::System.Collections.Generic.List<global::Descript.ListProjectsResponseDataItem>? ListType6 { get; set; }
+        public global::System.Collections.Generic.List<global::Descript.ListAgentModelsResponseAliase>? ListType6 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::System.Collections.Generic.List<global::Descript.GetProjectResponseComposition>? ListType7 { get; set; }
+        public global::System.Collections.Generic.List<global::Descript.JobStatus>? ListType7 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::System.Collections.Generic.List<global::Descript.ListProjectsResponseDataItem>? ListType8 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::System.Collections.Generic.List<global::Descript.GetProjectResponseComposition>? ListType9 { get; set; }
     }
 }

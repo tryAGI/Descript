@@ -16,6 +16,7 @@ internal static class APIEndpointsApiGroupCommand
                          command.Subcommands.Add(ApiEndpointsGetProjectCommandApiCommand.Create());
                          command.Subcommands.Add(ApiEndpointsGetStatusCommandApiCommand.Create());
                          command.Subcommands.Add(ApiEndpointsImportProjectMediaCommandApiCommand.Create());
+                         command.Subcommands.Add(ApiEndpointsListAgentModelsCommandApiCommand.Create());
                          command.Subcommands.Add(ApiEndpointsListJobsCommandApiCommand.Create());
                          command.Subcommands.Add(ApiEndpointsListProjectsCommandApiCommand.Create());
                          command.Subcommands.Add(ApiEndpointsPublishJobCommandApiCommand.Create());

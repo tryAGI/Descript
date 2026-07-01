@@ -39,7 +39,15 @@ Accepts any of the following formats:
     private static Option<string?> Model { get; } = new(
         name: @"--model")
     {
-        Description = @"AI model to use for editing. Defaults to the default model.
+        Description = @"AI model to use for editing. Accepts a canonical model id
+(e.g. `claude-opus-4.8`, `claude-sonnet-4.6`, `gpt-5.5`,
+`gemini-3.5-flash`) or a friendly alias (`auto`, `claude-opus`,
+`claude-sonnet`, `claude-haiku`, `gpt`, `gemini-pro`,
+`gemini-flash`). Call [GET /agent/models](#operation/listAgentModels)
+to discover the current set of supported models and aliases.
+
+Defaults to `auto` when omitted, which selects a recommended
+model for your account.
 ",
     };
 

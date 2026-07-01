@@ -7,7 +7,7 @@ namespace Descript
     {
 
 
-        private static readonly global::Descript.EndPointSecurityRequirement s_AgentEditJobSecurityRequirement0 =
+        private static readonly global::Descript.EndPointSecurityRequirement s_ListAgentModelsSecurityRequirement0 =
             new global::Descript.EndPointSecurityRequirement
             {
                 Authorizations = new global::Descript.EndPointAuthorizationRequirement[]
@@ -21,57 +21,49 @@ namespace Descript
                     },
                 },
             };
-        private static readonly global::Descript.EndPointSecurityRequirement[] s_AgentEditJobSecurityRequirements =
+        private static readonly global::Descript.EndPointSecurityRequirement[] s_ListAgentModelsSecurityRequirements =
             new global::Descript.EndPointSecurityRequirement[]
-            {                s_AgentEditJobSecurityRequirement0,
+            {                s_ListAgentModelsSecurityRequirement0,
             };
-        partial void PrepareAgentEditJobArguments(
+        partial void PrepareListAgentModelsArguments(
+            global::System.Net.Http.HttpClient httpClient);
+        partial void PrepareListAgentModelsRequest(
             global::System.Net.Http.HttpClient httpClient,
-            global::Descript.AgentEditJobRequest request);
-        partial void PrepareAgentEditJobRequest(
-            global::System.Net.Http.HttpClient httpClient,
-            global::System.Net.Http.HttpRequestMessage httpRequestMessage,
-            global::Descript.AgentEditJobRequest request);
-        partial void ProcessAgentEditJobResponse(
+            global::System.Net.Http.HttpRequestMessage httpRequestMessage);
+        partial void ProcessListAgentModelsResponse(
             global::System.Net.Http.HttpClient httpClient,
             global::System.Net.Http.HttpResponseMessage httpResponseMessage);
 
-        partial void ProcessAgentEditJobResponseContent(
+        partial void ProcessListAgentModelsResponseContent(
             global::System.Net.Http.HttpClient httpClient,
             global::System.Net.Http.HttpResponseMessage httpResponseMessage,
             ref string content);
 
         /// <summary>
-        /// Agent edit<br/>
-        /// Use a background agent to create and edit projects using a natural language prompt.<br/>
-        /// - **Edit existing project**: Provide a `project_id` to edit an existing project<br/>
-        /// - **Target a specific composition**: Provide both `project_id` and `composition_id` to direct the agent to a specific composition within the project<br/>
-        /// - **Create new project**: Provide a `project_name` instead of `project_id` to create a new project<br/>
-        /// ### Common use cases<br/>
-        /// - Create new content: "create a 30-second video about cooking tips"<br/>
-        /// - Apply audio effects: "add studio sound to every clip"<br/>
-        /// - Remove filler words: "remove all filler words from the transcript"<br/>
-        /// - Create highlights: "create a 30-second highlight reel"<br/>
-        /// - Content editing: "remove the section from 1:30 to 2:15"<br/>
-        /// ### Async Operations<br/>
-        /// Agent edits run in the background and return a `job_id`. Monitor progress via the [GET /jobs/{job_id}](#operation/getJob) endpoint.<br/>
-        /// ### Dynamic webhook<br/>
-        /// If `callback_url` is provided, Descript will POST the job status to that URL when the job completes or fails.<br/>
-        /// The payload will match the format returned by [GET /jobs/{job_id}](#operation/getJob).
+        /// List agent models<br/>
+        /// List the currently available agent models and the aliases that resolve to them.<br/>
+        /// The `model` parameter on [POST /jobs/agent](#operation/agentEditJob) accepts any<br/>
+        /// value listed under `availableModels[].id` or `aliases[].id`. Aliases let you target<br/>
+        /// the latest<br/>
+        /// recommended model for a given tier without chasing version bumps — for example,<br/>
+        /// passing `claude-opus` always routes to whichever Claude Opus version Descript<br/>
+        /// currently recommends.<br/>
+        /// Cost tiers are coarse buckets — `low`, `medium`, `high` — useful for showing<br/>
+        /// users a relative price/performance signal. Exact pricing is reported per job via<br/>
+        /// the `ai_credits_used` field on [GET /jobs/{job_id}](#operation/getJob).<br/>
+        /// When `model` is omitted on `POST /jobs/agent`, the request defaults to `auto`, which<br/>
+        /// selects a recommended model for your account. `auto` is a `medium`-cost option. For an<br/>
+        /// `auto` request, `result.resolved_model` on [GET /jobs/{job_id}](#operation/getJob) reports<br/>
+        /// `auto`; for an explicit model or alias it reports the canonical id that ran.
         /// </summary>
-        /// <param name="request"></param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Descript.ApiException"></exception>
-        public async global::System.Threading.Tasks.Task<global::Descript.AgentEditJobResponse> AgentEditJobAsync(
-
-            global::Descript.AgentEditJobRequest request,
+        public async global::System.Threading.Tasks.Task<global::Descript.ListAgentModelsResponse> ListAgentModelsAsync(
             global::Descript.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default)
         {
-            var __response = await AgentEditJobAsResponseAsync(
-
-                request: request,
+            var __response = await ListAgentModelsAsResponseAsync(
                 requestOptions: requestOptions,
                 cancellationToken: cancellationToken
             ).ConfigureAwait(false);
@@ -79,46 +71,39 @@ namespace Descript
             return __response.Body;
         }
         /// <summary>
-        /// Agent edit<br/>
-        /// Use a background agent to create and edit projects using a natural language prompt.<br/>
-        /// - **Edit existing project**: Provide a `project_id` to edit an existing project<br/>
-        /// - **Target a specific composition**: Provide both `project_id` and `composition_id` to direct the agent to a specific composition within the project<br/>
-        /// - **Create new project**: Provide a `project_name` instead of `project_id` to create a new project<br/>
-        /// ### Common use cases<br/>
-        /// - Create new content: "create a 30-second video about cooking tips"<br/>
-        /// - Apply audio effects: "add studio sound to every clip"<br/>
-        /// - Remove filler words: "remove all filler words from the transcript"<br/>
-        /// - Create highlights: "create a 30-second highlight reel"<br/>
-        /// - Content editing: "remove the section from 1:30 to 2:15"<br/>
-        /// ### Async Operations<br/>
-        /// Agent edits run in the background and return a `job_id`. Monitor progress via the [GET /jobs/{job_id}](#operation/getJob) endpoint.<br/>
-        /// ### Dynamic webhook<br/>
-        /// If `callback_url` is provided, Descript will POST the job status to that URL when the job completes or fails.<br/>
-        /// The payload will match the format returned by [GET /jobs/{job_id}](#operation/getJob).
+        /// List agent models<br/>
+        /// List the currently available agent models and the aliases that resolve to them.<br/>
+        /// The `model` parameter on [POST /jobs/agent](#operation/agentEditJob) accepts any<br/>
+        /// value listed under `availableModels[].id` or `aliases[].id`. Aliases let you target<br/>
+        /// the latest<br/>
+        /// recommended model for a given tier without chasing version bumps — for example,<br/>
+        /// passing `claude-opus` always routes to whichever Claude Opus version Descript<br/>
+        /// currently recommends.<br/>
+        /// Cost tiers are coarse buckets — `low`, `medium`, `high` — useful for showing<br/>
+        /// users a relative price/performance signal. Exact pricing is reported per job via<br/>
+        /// the `ai_credits_used` field on [GET /jobs/{job_id}](#operation/getJob).<br/>
+        /// When `model` is omitted on `POST /jobs/agent`, the request defaults to `auto`, which<br/>
+        /// selects a recommended model for your account. `auto` is a `medium`-cost option. For an<br/>
+        /// `auto` request, `result.resolved_model` on [GET /jobs/{job_id}](#operation/getJob) reports<br/>
+        /// `auto`; for an explicit model or alias it reports the canonical id that ran.
         /// </summary>
-        /// <param name="request"></param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Descript.ApiException"></exception>
-        public async global::System.Threading.Tasks.Task<global::Descript.AutoSDKHttpResponse<global::Descript.AgentEditJobResponse>> AgentEditJobAsResponseAsync(
-
-            global::Descript.AgentEditJobRequest request,
+        public async global::System.Threading.Tasks.Task<global::Descript.AutoSDKHttpResponse<global::Descript.ListAgentModelsResponse>> ListAgentModelsAsResponseAsync(
             global::Descript.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default)
         {
-            request = request ?? throw new global::System.ArgumentNullException(nameof(request));
-
             PrepareArguments(
                 client: HttpClient);
-            PrepareAgentEditJobArguments(
-                httpClient: HttpClient,
-                request: request);
+            PrepareListAgentModelsArguments(
+                httpClient: HttpClient);
 
 
             var __authorizations = global::Descript.EndPointSecurityResolver.ResolveAuthorizations(
                 availableAuthorizations: Authorizations,
-                securityRequirements: s_AgentEditJobSecurityRequirements,
-                operationName: "AgentEditJobAsync");
+                securityRequirements: s_ListAgentModelsSecurityRequirements,
+                operationName: "ListAgentModelsAsync");
 
             using var __timeoutCancellationTokenSource = global::Descript.AutoSDKRequestOptionsSupport.CreateTimeoutCancellationTokenSource(
                 clientOptions: Options,
@@ -138,7 +123,7 @@ namespace Descript
             {
 
                             var __pathBuilder = new global::Descript.PathBuilder(
-                                path: "/jobs/agent",
+                                path: "/agent/models",
                                 baseUri: HttpClient.BaseAddress);
                             var __path = __pathBuilder.ToString();
                 __path = global::Descript.AutoSDKRequestOptionsSupport.AppendQueryParameters(
@@ -146,7 +131,7 @@ namespace Descript
                     clientParameters: Options.QueryParameters,
                     requestParameters: requestOptions?.QueryParameters);
                 var __httpRequest = new global::System.Net.Http.HttpRequestMessage(
-                    method: global::System.Net.Http.HttpMethod.Post,
+                    method: global::System.Net.Http.HttpMethod.Get,
                     requestUri: new global::System.Uri(__path, global::System.UriKind.RelativeOrAbsolute));
 #if NET6_0_OR_GREATER
                 __httpRequest.Version = global::System.Net.HttpVersion.Version11;
@@ -169,12 +154,6 @@ namespace Descript
                     __httpRequest.Headers.Add(__authorization.Name, __authorization.Value);
                 } 
             }
-                            var __httpRequestContentBody = request.ToJson(JsonSerializerContext);
-                            var __httpRequestContent = new global::System.Net.Http.StringContent(
-                                content: __httpRequestContentBody,
-                                encoding: global::System.Text.Encoding.UTF8,
-                                mediaType: "application/json");
-                            __httpRequest.Content = __httpRequestContent;
                 global::Descript.AutoSDKRequestOptionsSupport.ApplyHeaders(
                     request: __httpRequest,
                     clientHeaders: Options.Headers,
@@ -183,10 +162,9 @@ namespace Descript
                 PrepareRequest(
                     client: HttpClient,
                     request: __httpRequest);
-                PrepareAgentEditJobRequest(
+                PrepareListAgentModelsRequest(
                     httpClient: HttpClient,
-                    httpRequestMessage: __httpRequest,
-                    request: request);
+                    httpRequestMessage: __httpRequest);
 
                 return __httpRequest;
             }
@@ -203,10 +181,10 @@ namespace Descript
                     await global::Descript.AutoSDKRequestOptionsSupport.OnBeforeRequestAsync(
                             clientOptions: Options,
                             context: global::Descript.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "AgentEditJob",
-                                methodName: "AgentEditJobAsync",
-                                pathTemplate: "\"/jobs/agent\"",
-                                httpMethod: "POST",
+                                operationId: "ListAgentModels",
+                                methodName: "ListAgentModelsAsync",
+                                pathTemplate: "\"/agent/models\"",
+                                httpMethod: "GET",
                                 baseUri: BaseUri,
                                 request: __httpRequest!,
                                 response: null,
@@ -237,10 +215,10 @@ namespace Descript
                         await global::Descript.AutoSDKRequestOptionsSupport.OnAfterErrorAsync(
                             clientOptions: Options,
                             context: global::Descript.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "AgentEditJob",
-                                methodName: "AgentEditJobAsync",
-                                pathTemplate: "\"/jobs/agent\"",
-                                httpMethod: "POST",
+                                operationId: "ListAgentModels",
+                                methodName: "ListAgentModelsAsync",
+                                pathTemplate: "\"/agent/models\"",
+                                httpMethod: "GET",
                                 baseUri: BaseUri,
                                 request: __httpRequest!,
                                 response: null,
@@ -278,10 +256,10 @@ namespace Descript
                         await global::Descript.AutoSDKRequestOptionsSupport.OnAfterErrorAsync(
                             clientOptions: Options,
                             context: global::Descript.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "AgentEditJob",
-                                methodName: "AgentEditJobAsync",
-                                pathTemplate: "\"/jobs/agent\"",
-                                httpMethod: "POST",
+                                operationId: "ListAgentModels",
+                                methodName: "ListAgentModelsAsync",
+                                pathTemplate: "\"/agent/models\"",
+                                httpMethod: "GET",
                                 baseUri: BaseUri,
                                 request: __httpRequest!,
                                 response: __response,
@@ -318,7 +296,7 @@ namespace Descript
                 ProcessResponse(
                     client: HttpClient,
                     response: __response);
-                ProcessAgentEditJobResponse(
+                ProcessListAgentModelsResponse(
                     httpClient: HttpClient,
                     httpResponseMessage: __response);
                 if (__response.IsSuccessStatusCode)
@@ -326,10 +304,10 @@ namespace Descript
                     await global::Descript.AutoSDKRequestOptionsSupport.OnAfterSuccessAsync(
                             clientOptions: Options,
                             context: global::Descript.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "AgentEditJob",
-                                methodName: "AgentEditJobAsync",
-                                pathTemplate: "\"/jobs/agent\"",
-                                httpMethod: "POST",
+                                operationId: "ListAgentModels",
+                                methodName: "ListAgentModelsAsync",
+                                pathTemplate: "\"/agent/models\"",
+                                httpMethod: "GET",
                                 baseUri: BaseUri,
                                 request: __httpRequest!,
                                 response: __response,
@@ -348,10 +326,10 @@ namespace Descript
                     await global::Descript.AutoSDKRequestOptionsSupport.OnAfterErrorAsync(
                             clientOptions: Options,
                             context: global::Descript.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "AgentEditJob",
-                                methodName: "AgentEditJobAsync",
-                                pathTemplate: "\"/jobs/agent\"",
-                                httpMethod: "POST",
+                                operationId: "ListAgentModels",
+                                methodName: "ListAgentModelsAsync",
+                                pathTemplate: "\"/agent/models\"",
+                                httpMethod: "GET",
                                 baseUri: BaseUri,
                                 request: __httpRequest!,
                                 response: __response,
@@ -365,43 +343,6 @@ namespace Descript
                                 retryReason: global::System.String.Empty,
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                 }
-                            // Invalid input: - Malformed request body - Invalid project_id or composition_id format - Empty or invalid prompt 
-                            if ((int)__response.StatusCode == 400)
-                            {
-                                string? __content_400 = null;
-                                global::System.Exception? __exception_400 = null;
-                                global::Descript.Error400? __value_400 = null;
-                                try
-                                {
-                                    if (__effectiveReadResponseAsString)
-                                    {
-                                        __content_400 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
-                                        __value_400 = global::Descript.Error400.FromJson(__content_400, JsonSerializerContext);
-                                    }
-                                    else
-                                    {
-                                        __content_400 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
-
-                                        __value_400 = global::Descript.Error400.FromJson(__content_400, JsonSerializerContext);
-                                    }
-                                }
-                                catch (global::System.Exception __ex)
-                                {
-                                    __exception_400 = __ex;
-                                }
-
-
-                                throw global::Descript.ApiException<global::Descript.Error400>.Create(
-                                    statusCode: __response.StatusCode,
-                                    message: __content_400 ?? __response.ReasonPhrase ?? string.Empty,
-                                    innerException: __exception_400,
-                                    responseBody: __content_400,
-                                    responseObject: __value_400,
-                                    responseHeaders: global::System.Linq.Enumerable.ToDictionary(
-                                        __response.Headers,
-                                        h => h.Key,
-                                        h => h.Value));
-                            }
                             // Unauthorized - missing or invalid authentication token
                             if ((int)__response.StatusCode == 401)
                             {
@@ -434,117 +375,6 @@ namespace Descript
                                     innerException: __exception_401,
                                     responseBody: __content_401,
                                     responseObject: __value_401,
-                                    responseHeaders: global::System.Linq.Enumerable.ToDictionary(
-                                        __response.Headers,
-                                        h => h.Key,
-                                        h => h.Value));
-                            }
-                            // Payment Required - insufficient AI credits to start the job
-                            if ((int)__response.StatusCode == 402)
-                            {
-                                string? __content_402 = null;
-                                global::System.Exception? __exception_402 = null;
-                                global::Descript.Error402? __value_402 = null;
-                                try
-                                {
-                                    if (__effectiveReadResponseAsString)
-                                    {
-                                        __content_402 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
-                                        __value_402 = global::Descript.Error402.FromJson(__content_402, JsonSerializerContext);
-                                    }
-                                    else
-                                    {
-                                        __content_402 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
-
-                                        __value_402 = global::Descript.Error402.FromJson(__content_402, JsonSerializerContext);
-                                    }
-                                }
-                                catch (global::System.Exception __ex)
-                                {
-                                    __exception_402 = __ex;
-                                }
-
-
-                                throw global::Descript.ApiException<global::Descript.Error402>.Create(
-                                    statusCode: __response.StatusCode,
-                                    message: __content_402 ?? __response.ReasonPhrase ?? string.Empty,
-                                    innerException: __exception_402,
-                                    responseBody: __content_402,
-                                    responseObject: __value_402,
-                                    responseHeaders: global::System.Linq.Enumerable.ToDictionary(
-                                        __response.Headers,
-                                        h => h.Key,
-                                        h => h.Value));
-                            }
-                            // Forbidden - the drive admin has disabled agent usage for this drive
-                            if ((int)__response.StatusCode == 403)
-                            {
-                                string? __content_403 = null;
-                                global::System.Exception? __exception_403 = null;
-                                global::Descript.Error403? __value_403 = null;
-                                try
-                                {
-                                    if (__effectiveReadResponseAsString)
-                                    {
-                                        __content_403 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
-                                        __value_403 = global::Descript.Error403.FromJson(__content_403, JsonSerializerContext);
-                                    }
-                                    else
-                                    {
-                                        __content_403 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
-
-                                        __value_403 = global::Descript.Error403.FromJson(__content_403, JsonSerializerContext);
-                                    }
-                                }
-                                catch (global::System.Exception __ex)
-                                {
-                                    __exception_403 = __ex;
-                                }
-
-
-                                throw global::Descript.ApiException<global::Descript.Error403>.Create(
-                                    statusCode: __response.StatusCode,
-                                    message: __content_403 ?? __response.ReasonPhrase ?? string.Empty,
-                                    innerException: __exception_403,
-                                    responseBody: __content_403,
-                                    responseObject: __value_403,
-                                    responseHeaders: global::System.Linq.Enumerable.ToDictionary(
-                                        __response.Headers,
-                                        h => h.Key,
-                                        h => h.Value));
-                            }
-                            // Not found: - Project doesn't exist - Composition doesn't exist in the specified project (when composition_id is provided) 
-                            if ((int)__response.StatusCode == 404)
-                            {
-                                string? __content_404 = null;
-                                global::System.Exception? __exception_404 = null;
-                                global::Descript.Error404? __value_404 = null;
-                                try
-                                {
-                                    if (__effectiveReadResponseAsString)
-                                    {
-                                        __content_404 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
-                                        __value_404 = global::Descript.Error404.FromJson(__content_404, JsonSerializerContext);
-                                    }
-                                    else
-                                    {
-                                        __content_404 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
-
-                                        __value_404 = global::Descript.Error404.FromJson(__content_404, JsonSerializerContext);
-                                    }
-                                }
-                                catch (global::System.Exception __ex)
-                                {
-                                    __exception_404 = __ex;
-                                }
-
-
-                                throw global::Descript.ApiException<global::Descript.Error404>.Create(
-                                    statusCode: __response.StatusCode,
-                                    message: __content_404 ?? __response.ReasonPhrase ?? string.Empty,
-                                    innerException: __exception_404,
-                                    responseBody: __content_404,
-                                    responseObject: __value_404,
                                     responseHeaders: global::System.Linq.Enumerable.ToDictionary(
                                         __response.Headers,
                                         h => h.Key,
@@ -600,7 +430,7 @@ namespace Descript
                                     client: HttpClient,
                                     response: __response,
                                     content: ref __content);
-                                ProcessAgentEditJobResponseContent(
+                                ProcessListAgentModelsResponseContent(
                                     httpClient: HttpClient,
                                     httpResponseMessage: __response,
                                     content: ref __content);
@@ -609,9 +439,9 @@ namespace Descript
                                 {
                                     __response.EnsureSuccessStatusCode();
 
-                                    var __value = global::Descript.AgentEditJobResponse.FromJson(__content, JsonSerializerContext) ??
+                                    var __value = global::Descript.ListAgentModelsResponse.FromJson(__content, JsonSerializerContext) ??
                                         throw new global::System.InvalidOperationException($"Response deserialization failed for \"{__content}\" ");
-                                    return new global::Descript.AutoSDKHttpResponse<global::Descript.AgentEditJobResponse>(
+                                    return new global::Descript.AutoSDKHttpResponse<global::Descript.ListAgentModelsResponse>(
                                         statusCode: __response.StatusCode,
                                         headers: global::Descript.AutoSDKHttpResponse.CreateHeaders(__response),
                                         requestUri: __response.RequestMessage?.RequestUri,
@@ -641,9 +471,9 @@ namespace Descript
                 #endif
                                     ).ConfigureAwait(false);
 
-                                    var __value = await global::Descript.AgentEditJobResponse.FromJsonStreamAsync(__content, JsonSerializerContext).ConfigureAwait(false) ??
+                                    var __value = await global::Descript.ListAgentModelsResponse.FromJsonStreamAsync(__content, JsonSerializerContext).ConfigureAwait(false) ??
                                         throw new global::System.InvalidOperationException("Response deserialization failed.");
-                                    return new global::Descript.AutoSDKHttpResponse<global::Descript.AgentEditJobResponse>(
+                                    return new global::Descript.AutoSDKHttpResponse<global::Descript.ListAgentModelsResponse>(
                                         statusCode: __response.StatusCode,
                                         headers: global::Descript.AutoSDKHttpResponse.CreateHeaders(__response),
                                         requestUri: __response.RequestMessage?.RequestUri,
@@ -682,107 +512,6 @@ namespace Descript
             {
                 __httpRequest?.Dispose();
             }
-        }
-        /// <summary>
-        /// Agent edit<br/>
-        /// Use a background agent to create and edit projects using a natural language prompt.<br/>
-        /// - **Edit existing project**: Provide a `project_id` to edit an existing project<br/>
-        /// - **Target a specific composition**: Provide both `project_id` and `composition_id` to direct the agent to a specific composition within the project<br/>
-        /// - **Create new project**: Provide a `project_name` instead of `project_id` to create a new project<br/>
-        /// ### Common use cases<br/>
-        /// - Create new content: "create a 30-second video about cooking tips"<br/>
-        /// - Apply audio effects: "add studio sound to every clip"<br/>
-        /// - Remove filler words: "remove all filler words from the transcript"<br/>
-        /// - Create highlights: "create a 30-second highlight reel"<br/>
-        /// - Content editing: "remove the section from 1:30 to 2:15"<br/>
-        /// ### Async Operations<br/>
-        /// Agent edits run in the background and return a `job_id`. Monitor progress via the [GET /jobs/{job_id}](#operation/getJob) endpoint.<br/>
-        /// ### Dynamic webhook<br/>
-        /// If `callback_url` is provided, Descript will POST the job status to that URL when the job completes or fails.<br/>
-        /// The payload will match the format returned by [GET /jobs/{job_id}](#operation/getJob).
-        /// </summary>
-        /// <param name="projectId">
-        /// The ID of an existing project to edit. Mutually exclusive with `project_name`.<br/>
-        /// Example: 9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
-        /// </param>
-        /// <param name="projectName">
-        /// Name for creating a new project. Mutually exclusive with `project_id`.<br/>
-        /// Example: My New Project
-        /// </param>
-        /// <param name="compositionId">
-        /// Composition to target within the project. When provided,<br/>
-        /// the agent will focus its edits on this specific composition rather<br/>
-        /// than choosing one automatically. Only valid when `project_id` is also<br/>
-        /// provided. Requires `project_id`.<br/>
-        /// Accepts any of the following formats:<br/>
-        /// - A full composition UUID (e.g. `39677a40-1c43-4c36-8449-46cfbc4de2b5`)<br/>
-        /// - A 5-character short ID from a Descript URL (e.g. `39677`)<br/>
-        /// - A full Descript project URL (e.g. `https://web.descript.com/{project_id}/39677`)<br/>
-        /// Example: 39677a40-1c43-4c36-8449-46cfbc4de2b5
-        /// </param>
-        /// <param name="model">
-        /// AI model to use for editing. Accepts a canonical model id<br/>
-        /// (e.g. `claude-opus-4.8`, `claude-sonnet-4.6`, `gpt-5.5`,<br/>
-        /// `gemini-3.5-flash`) or a friendly alias (`auto`, `claude-opus`,<br/>
-        /// `claude-sonnet`, `claude-haiku`, `gpt`, `gemini-pro`,<br/>
-        /// `gemini-flash`). Call [GET /agent/models](#operation/listAgentModels)<br/>
-        /// to discover the current set of supported models and aliases.<br/>
-        /// Defaults to `auto` when omitted, which selects a recommended<br/>
-        /// model for your account.
-        /// </param>
-        /// <param name="prompt">
-        /// Natural language instruction for the agent to execute.<br/>
-        /// Examples: "add studio sound to every clip", "remove all filler words", "create a 30-second highlight reel"<br/>
-        /// Example: add studio sound to every clip
-        /// </param>
-        /// <param name="teamAccess">
-        /// Access level for team members when creating a new project.<br/>
-        /// Only applicable when `project_name` is provided (not when using `project_id`).<br/>
-        /// Defaults to `none` if not specified.
-        /// </param>
-        /// <param name="callbackUrl">
-        /// Optional webhook URL to call when the job completes or fails.<br/>
-        /// Descript will POST the job status (same format as [GET /jobs/{job_id}](#operation/getJob)) to this URL.<br/>
-        /// Example: https://example.com/webhooks/descript/job_callback
-        /// </param>
-        /// <param name="conversationId">
-        /// Conversation ID from a previous agent job to continue that conversation.<br/>
-        /// Requires `project_id` (a conversation belongs to an existing project).<br/>
-        /// When omitted, a new conversation is started. The `conversation_id` is returned<br/>
-        /// in the job result when the job completes.<br/>
-        /// Example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
-        /// </param>
-        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
-        /// <param name="cancellationToken">The token to cancel the operation with</param>
-        /// <exception cref="global::System.InvalidOperationException"></exception>
-        public async global::System.Threading.Tasks.Task<global::Descript.AgentEditJobResponse> AgentEditJobAsync(
-            string prompt,
-            global::System.Guid? projectId = default,
-            string? projectName = default,
-            string? compositionId = default,
-            string? model = default,
-            global::Descript.AgentEditJobRequestTeamAccess? teamAccess = default,
-            string? callbackUrl = default,
-            global::System.Guid? conversationId = default,
-            global::Descript.AutoSDKRequestOptions? requestOptions = default,
-            global::System.Threading.CancellationToken cancellationToken = default)
-        {
-            var __request = new global::Descript.AgentEditJobRequest
-            {
-                ProjectId = projectId,
-                ProjectName = projectName,
-                CompositionId = compositionId,
-                Model = model,
-                Prompt = prompt,
-                TeamAccess = teamAccess,
-                CallbackUrl = callbackUrl,
-                ConversationId = conversationId,
-            };
-
-            return await AgentEditJobAsync(
-                request: __request,
-                requestOptions: requestOptions,
-                cancellationToken: cancellationToken).ConfigureAwait(false);
         }
     }
 }
