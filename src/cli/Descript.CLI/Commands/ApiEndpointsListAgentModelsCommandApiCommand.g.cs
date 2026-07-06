@@ -41,6 +41,10 @@ recommended model for a given tier without chasing version bumps — for example
 passing `claude-opus` always routes to whichever Claude Opus version Descript
 currently recommends.
 
+The catalog changes as models launch and retire, so this endpoint's live response
+is the source of truth — the example below is an abridged illustration, not the
+full list.
+
 Cost tiers are coarse buckets — `low`, `medium`, `high` — useful for showing
 users a relative price/performance signal. Exact pricing is reported per job via
 the `ai_credits_used` field on [GET /jobs/{job_id}](#operation/getJob).

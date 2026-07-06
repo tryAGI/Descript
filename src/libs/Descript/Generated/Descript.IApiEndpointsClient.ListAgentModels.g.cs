@@ -13,6 +13,9 @@ namespace Descript
         /// recommended model for a given tier without chasing version bumps — for example,<br/>
         /// passing `claude-opus` always routes to whichever Claude Opus version Descript<br/>
         /// currently recommends.<br/>
+        /// The catalog changes as models launch and retire, so this endpoint's live response<br/>
+        /// is the source of truth — the example below is an abridged illustration, not the<br/>
+        /// full list.<br/>
         /// Cost tiers are coarse buckets — `low`, `medium`, `high` — useful for showing<br/>
         /// users a relative price/performance signal. Exact pricing is reported per job via<br/>
         /// the `ai_credits_used` field on [GET /jobs/{job_id}](#operation/getJob).<br/>
@@ -36,6 +39,9 @@ namespace Descript
         /// recommended model for a given tier without chasing version bumps — for example,<br/>
         /// passing `claude-opus` always routes to whichever Claude Opus version Descript<br/>
         /// currently recommends.<br/>
+        /// The catalog changes as models launch and retire, so this endpoint's live response<br/>
+        /// is the source of truth — the example below is an abridged illustration, not the<br/>
+        /// full list.<br/>
         /// Cost tiers are coarse buckets — `low`, `medium`, `high` — useful for showing<br/>
         /// users a relative price/performance signal. Exact pricing is reported per job via<br/>
         /// the `ai_credits_used` field on [GET /jobs/{job_id}](#operation/getJob).<br/>
