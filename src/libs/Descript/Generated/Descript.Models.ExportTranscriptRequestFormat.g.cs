@@ -5,7 +5,8 @@ namespace Descript
 {
     /// <summary>
     /// Transcript file format. The response body is the raw transcript file<br/>
-    /// in the requested format (binary for `docx`, plain text otherwise).
+    /// in the requested format (binary for `docx`, plain text otherwise).<br/>
+    /// The `srt` format exports a SubRip subtitle file with timed captions.
     /// </summary>
     public enum ExportTranscriptRequestFormat
     {
@@ -28,6 +29,10 @@ namespace Descript
         /// <summary>
         /// 
         /// </summary>
+        Srt,
+        /// <summary>
+        /// 
+        /// </summary>
         Txt,
     }
 
@@ -47,6 +52,7 @@ namespace Descript
                 ExportTranscriptRequestFormat.Html => "html",
                 ExportTranscriptRequestFormat.Markdown => "markdown",
                 ExportTranscriptRequestFormat.Rtf => "rtf",
+                ExportTranscriptRequestFormat.Srt => "srt",
                 ExportTranscriptRequestFormat.Txt => "txt",
                 _ => throw new global::System.ArgumentOutOfRangeException(nameof(value), value, null),
             };
@@ -62,6 +68,7 @@ namespace Descript
                 "html" => ExportTranscriptRequestFormat.Html,
                 "markdown" => ExportTranscriptRequestFormat.Markdown,
                 "rtf" => ExportTranscriptRequestFormat.Rtf,
+                "srt" => ExportTranscriptRequestFormat.Srt,
                 "txt" => ExportTranscriptRequestFormat.Txt,
                 _ => null,
             };

@@ -7,7 +7,7 @@ namespace Descript
         /// <summary>
         /// Export project transcript<br/>
         /// Export the transcript from a project composition.<br/>
-        /// Supports plain text, Markdown, HTML, RTF, and DOCX formats.<br/>
+        /// Supports plain text, Markdown, HTML, RTF, DOCX, and SRT (SubRip subtitle) formats.<br/>
         /// Options include speaker labels, timecodes, and markers.<br/>
         /// The response body is the raw transcript file (binary for `docx`,<br/>
         /// text otherwise) with a `Content-Disposition: attachment` header and<br/>
@@ -25,7 +25,7 @@ namespace Descript
         /// <summary>
         /// Export project transcript<br/>
         /// Export the transcript from a project composition.<br/>
-        /// Supports plain text, Markdown, HTML, RTF, and DOCX formats.<br/>
+        /// Supports plain text, Markdown, HTML, RTF, DOCX, and SRT (SubRip subtitle) formats.<br/>
         /// Options include speaker labels, timecodes, and markers.<br/>
         /// The response body is the raw transcript file (binary for `docx`,<br/>
         /// text otherwise) with a `Content-Disposition: attachment` header and<br/>
@@ -43,7 +43,7 @@ namespace Descript
         /// <summary>
         /// Export project transcript<br/>
         /// Export the transcript from a project composition.<br/>
-        /// Supports plain text, Markdown, HTML, RTF, and DOCX formats.<br/>
+        /// Supports plain text, Markdown, HTML, RTF, DOCX, and SRT (SubRip subtitle) formats.<br/>
         /// Options include speaker labels, timecodes, and markers.<br/>
         /// The response body is the raw transcript file (binary for `docx`,<br/>
         /// text otherwise) with a `Content-Disposition: attachment` header and<br/>
@@ -59,7 +59,8 @@ namespace Descript
         /// </param>
         /// <param name="format">
         /// Transcript file format. The response body is the raw transcript file<br/>
-        /// in the requested format (binary for `docx`, plain text otherwise).
+        /// in the requested format (binary for `docx`, plain text otherwise).<br/>
+        /// The `srt` format exports a SubRip subtitle file with timed captions.
         /// </param>
         /// <param name="includeSpeakerLabels">
         /// Speaker label mode.<br/>

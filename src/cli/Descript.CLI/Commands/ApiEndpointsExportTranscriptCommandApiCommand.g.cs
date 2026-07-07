@@ -25,6 +25,7 @@ internal static partial class ApiEndpointsExportTranscriptCommandApiCommand
     {
         Description = @"Transcript file format. The response body is the raw transcript file
 in the requested format (binary for `docx`, plain text otherwise).
+The `srt` format exports a SubRip subtitle file with timed captions.
 ",
         Required = true,
     };
@@ -92,7 +93,7 @@ the output.
         var command = new Command(@"export-transcript", @"Export project transcript
 Export the transcript from a project composition.
 
-Supports plain text, Markdown, HTML, RTF, and DOCX formats.
+Supports plain text, Markdown, HTML, RTF, DOCX, and SRT (SubRip subtitle) formats.
 Options include speaker labels, timecodes, and markers.
 
 The response body is the raw transcript file (binary for `docx`,

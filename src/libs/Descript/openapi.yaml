@@ -1321,7 +1321,7 @@ paths:
       description: |
         Export the transcript from a project composition.
 
-        Supports plain text, Markdown, HTML, RTF, and DOCX formats.
+        Supports plain text, Markdown, HTML, RTF, DOCX, and SRT (SubRip subtitle) formats.
         Options include speaker labels, timecodes, and markers.
 
         The response body is the raw transcript file (binary for `docx`,
@@ -1353,9 +1353,11 @@ paths:
                     - html
                     - rtf
                     - docx
+                    - srt
                   description: |
                     Transcript file format. The response body is the raw transcript file
                     in the requested format (binary for `docx`, plain text otherwise).
+                    The `srt` format exports a SubRip subtitle file with timed captions.
                 include_speaker_labels:
                   type: string
                   enum:
@@ -1416,6 +1418,12 @@ paths:
                   include_speaker_labels: every_paragraph
                   timecodes:
                     on_paragraphs: true
+              srt_subtitles:
+                summary: Export as SRT subtitles
+                value:
+                  project_id: 9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
+                  format: srt
+                  include_speaker_labels: 'off'
         description: Transcript export request
         required: true
       responses:
@@ -1458,6 +1466,9 @@ paths:
               schema:
                 type: string
                 format: binary
+            application/x-subrip:
+              schema:
+                type: string
         '400':
           description: Invalid input
           content:
