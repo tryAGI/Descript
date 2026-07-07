@@ -66,6 +66,13 @@ namespace Descript
         public required global::System.Collections.Generic.IList<global::Descript.GetProjectResponseComposition> Compositions { get; set; }
 
         /// <summary>
+        /// Successfully published share pages for this project. Each entry represents a composition that has been published and is accessible via its share_url.
+        /// </summary>
+        [global::System.Text.Json.Serialization.JsonPropertyName("publishes")]
+        [global::System.Text.Json.Serialization.JsonRequired]
+        public required global::System.Collections.Generic.IList<global::Descript.GetProjectResponsePublishe> Publishes { get; set; }
+
+        /// <summary>
         /// Additional properties that are not explicitly defined in the schema
         /// </summary>
         [global::System.Text.Json.Serialization.JsonExtensionData]
@@ -95,6 +102,9 @@ namespace Descript
         /// <param name="compositions">
         /// Compositions in the project
         /// </param>
+        /// <param name="publishes">
+        /// Successfully published share pages for this project. Each entry represents a composition that has been published and is accessible via its share_url.
+        /// </param>
         /// <param name="folderPath">
         /// Full folder path for the project (e.g. "Clients/Acme/Videos"). Absent when the project is at the drive root.<br/>
         /// Example: Clients/Acme/Videos
@@ -110,6 +120,7 @@ namespace Descript
             global::System.DateTime updatedAt,
             global::System.Collections.Generic.Dictionary<string, global::Descript.GetProjectResponseMediaFiles2> mediaFiles,
             global::System.Collections.Generic.IList<global::Descript.GetProjectResponseComposition> compositions,
+            global::System.Collections.Generic.IList<global::Descript.GetProjectResponsePublishe> publishes,
             string? folderPath)
         {
             this.Id = id;
@@ -120,6 +131,7 @@ namespace Descript
             this.FolderPath = folderPath;
             this.MediaFiles = mediaFiles ?? throw new global::System.ArgumentNullException(nameof(mediaFiles));
             this.Compositions = compositions ?? throw new global::System.ArgumentNullException(nameof(compositions));
+            this.Publishes = publishes ?? throw new global::System.ArgumentNullException(nameof(publishes));
         }
 
         /// <summary>

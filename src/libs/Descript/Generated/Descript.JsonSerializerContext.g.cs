@@ -165,6 +165,14 @@ namespace Descript
 
             typeof(global::Descript.JsonConverters.GetProjectResponseMediaFilesTypeNullableJsonConverter),
 
+            typeof(global::Descript.JsonConverters.GetProjectResponsePublisheAccessLevelJsonConverter),
+
+            typeof(global::Descript.JsonConverters.GetProjectResponsePublisheAccessLevelNullableJsonConverter),
+
+            typeof(global::Descript.JsonConverters.GetProjectResponsePublisheMediaTypeJsonConverter),
+
+            typeof(global::Descript.JsonConverters.GetProjectResponsePublisheMediaTypeNullableJsonConverter),
+
             typeof(global::Descript.JsonConverters.GetStatusResponseStatusJsonConverter),
 
             typeof(global::Descript.JsonConverters.GetStatusResponseStatusNullableJsonConverter),
@@ -309,6 +317,10 @@ namespace Descript
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.GetProjectResponseMediaFilesType), TypeInfoPropertyName = "GetProjectResponseMediaFilesType2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.IList<global::Descript.GetProjectResponseComposition>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.GetProjectResponseComposition))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.IList<global::Descript.GetProjectResponsePublishe>))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.GetProjectResponsePublishe))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.GetProjectResponsePublisheAccessLevel), TypeInfoPropertyName = "GetProjectResponsePublisheAccessLevel2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.GetProjectResponsePublisheMediaType), TypeInfoPropertyName = "GetProjectResponsePublisheMediaType2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.GetStatusResponse))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.GetStatusResponseStatus), TypeInfoPropertyName = "GetStatusResponseStatus2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.OneOf<global::Descript.ImportProjectMediaRequestAddMediaUrlImport, global::Descript.ImportProjectMediaRequestAddMediaDirectUpload, global::Descript.ImportProjectMediaRequestAddMediaMultitrackSequence>?), TypeInfoPropertyName = "ImportProjectMediaRequestAddMediaMultitrackSequence_a84f7d44496d84a5")]
@@ -322,6 +334,7 @@ namespace Descript
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::Descript.JobStatus>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::Descript.ListProjectsResponseDataItem>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::Descript.GetProjectResponseComposition>))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::Descript.GetProjectResponsePublishe>))]
     public sealed partial class SourceGenerationContext : global::System.Text.Json.Serialization.JsonSerializerContext
     {
     }

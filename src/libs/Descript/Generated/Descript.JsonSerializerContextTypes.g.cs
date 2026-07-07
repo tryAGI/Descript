@@ -528,11 +528,27 @@ namespace Descript
         /// <summary>
         /// 
         /// </summary>
-        public global::Descript.GetStatusResponse? Type125 { get; set; }
+        public global::System.Collections.Generic.IList<global::Descript.GetProjectResponsePublishe>? Type125 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Descript.GetStatusResponseStatus? Type126 { get; set; }
+        public global::Descript.GetProjectResponsePublishe? Type126 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::Descript.GetProjectResponsePublisheAccessLevel? Type127 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::Descript.GetProjectResponsePublisheMediaType? Type128 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::Descript.GetStatusResponse? Type129 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::Descript.GetStatusResponseStatus? Type130 { get; set; }
 
         /// <summary>
         /// 
@@ -574,5 +590,9 @@ namespace Descript
         /// 
         /// </summary>
         public global::System.Collections.Generic.List<global::Descript.GetProjectResponseComposition>? ListType9 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::System.Collections.Generic.List<global::Descript.GetProjectResponsePublishe>? ListType10 { get; set; }
     }
 }

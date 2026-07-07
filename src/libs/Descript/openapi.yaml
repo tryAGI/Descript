@@ -2077,13 +2077,16 @@ paths:
         - API Endpoints
       summary: Get project details
       description: |
-        Get a detailed project summary including all media files and compositions.
+        Get a detailed project summary including all media files, compositions,
+        and existing publishes.
 
         Returns the project's id, name, drive_id, a map of media files (keyed by
-        display path) with type and duration, and a list of compositions with id,
-        name, duration, and media type.
+        display path) with type and duration, a list of compositions with id,
+        name, duration, and media type, and a list of successfully published
+        share pages with their URLs, access levels, and publish times.
 
-        Use this to inspect a project's contents before editing or importing media.
+        Use this to inspect a project's contents before editing or importing media,
+        or to retrieve existing share URLs without triggering a republish.
       operationId: getProject
       security:
         - bearerAuth: []
@@ -2110,6 +2113,7 @@ paths:
                   - updated_at
                   - media_files
                   - compositions
+                  - publishes
                 properties:
                   id:
                     type: string
@@ -2178,6 +2182,56 @@ paths:
                         media_type:
                           type: string
                           description: Media type of the composition
+                  publishes:
+                    type: array
+                    description: Successfully published share pages for this project. Each entry represents a composition that has been published and is accessible via its share_url.
+                    items:
+                      type: object
+                      required:
+                        - share_url
+                        - composition_id
+                        - access_level
+                        - media_type
+                        - published_at
+                        - updated_at
+                        - name
+                      properties:
+                        share_url:
+                          type: string
+                          format: uri
+                          description: URL of the published share page
+                          example: https://share.descript.com/view/abc123
+                        composition_id:
+                          type: string
+                          format: uuid
+                          description: ID of the composition that was published
+                        access_level:
+                          type: string
+                          enum:
+                            - public
+                            - unlisted
+                            - drive
+                            - private
+                            - password
+                          description: Access level of the published share page
+                        media_type:
+                          type: string
+                          enum:
+                            - video
+                            - audio
+                            - audiogram
+                          description: Media type of the published output
+                        published_at:
+                          type: string
+                          format: date-time
+                          description: When the publish was created (ISO 8601)
+                        updated_at:
+                          type: string
+                          format: date-time
+                          description: When the publish was last updated (ISO 8601)
+                        name:
+                          type: string
+                          description: Name of the published share page
         '400':
           description: Bad request - `project_id` is not a valid UUID
           content:
