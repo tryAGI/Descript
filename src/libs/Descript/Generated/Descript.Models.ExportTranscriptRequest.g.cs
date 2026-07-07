@@ -27,7 +27,8 @@ namespace Descript
 
         /// <summary>
         /// Transcript file format. The response body is the raw transcript file<br/>
-        /// in the requested format (binary for `docx`, plain text otherwise).
+        /// in the requested format (binary for `docx`, plain text otherwise).<br/>
+        /// The `srt` format exports a SubRip subtitle file with timed captions.
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("format")]
         [global::System.Text.Json.Serialization.JsonConverter(typeof(global::Descript.JsonConverters.ExportTranscriptRequestFormatJsonConverter))]
@@ -74,7 +75,8 @@ namespace Descript
         /// </param>
         /// <param name="format">
         /// Transcript file format. The response body is the raw transcript file<br/>
-        /// in the requested format (binary for `docx`, plain text otherwise).
+        /// in the requested format (binary for `docx`, plain text otherwise).<br/>
+        /// The `srt` format exports a SubRip subtitle file with timed captions.
         /// </param>
         /// <param name="compositionId">
         /// The ID of the composition to export. Defaults to the first composition.<br/>
