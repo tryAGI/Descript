@@ -36,13 +36,16 @@ internal static partial class ApiEndpointsGetProjectCommandApiCommand
     public static Command Create()
     {
         var command = new Command(@"get-project", @"Get project details
-Get a detailed project summary including all media files and compositions.
+Get a detailed project summary including all media files, compositions,
+and existing publishes.
 
 Returns the project's id, name, drive_id, a map of media files (keyed by
-display path) with type and duration, and a list of compositions with id,
-name, duration, and media type.
+display path) with type and duration, a list of compositions with id,
+name, duration, and media type, and a list of successfully published
+share pages with their URLs, access levels, and publish times.
 
-Use this to inspect a project's contents before editing or importing media.
+Use this to inspect a project's contents before editing or importing media,
+or to retrieve existing share URLs without triggering a republish.
 ");
                         command.Arguments.Add(ProjectId);
 
@@ -59,20 +62,12 @@ Use this to inspect a project's contents before editing or importing media.
                                     cancellationToken: cancellationToken).ConfigureAwait(false);
 
 
-                                if (!await CliRuntime.TryWriteOutputDirectoryAsync(
-                                        parseResult,
-                                        response,
-                                        global::Descript.SourceGenerationContext.Default,
-                                        @"Compositions",
-                                        cancellationToken).ConfigureAwait(false))
-                                {
                                 await CliRuntime.WriteResponseAsync(
                                     parseResult,
                                     response,
                                     global::Descript.SourceGenerationContext.Default,
                                     FormatResponse,
                                     cancellationToken).ConfigureAwait(false);
-                                }
             }, cancellationToken).ConfigureAwait(false));
         return command;
     }
