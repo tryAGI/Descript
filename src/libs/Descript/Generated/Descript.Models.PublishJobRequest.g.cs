@@ -18,12 +18,16 @@ namespace Descript
         public required global::System.Guid ProjectId { get; set; }
 
         /// <summary>
-        /// The ID of the composition within the project to publish.<br/>
+        /// Composition to publish. If omitted, the first composition in the project is used.<br/>
+        /// Accepts any of the following formats:<br/>
+        /// - A full composition UUID (e.g. `39677a40-1c43-4c36-8449-46cfbc4de2b5`)<br/>
+        /// - A 5-character short ID from a Descript URL (e.g. `39677`)<br/>
+        /// - A full Descript project URL (e.g. `https://web.descript.com/{project_id}/39677`)<br/>
         /// Example: 39677a40-1c43-4c36-8449-46cfbc4de2b5
         /// </summary>
         /// <example>39677a40-1c43-4c36-8449-46cfbc4de2b5</example>
         [global::System.Text.Json.Serialization.JsonPropertyName("composition_id")]
-        public global::System.Guid? CompositionId { get; set; }
+        public string? CompositionId { get; set; }
 
         /// <summary>
         /// Media type of the published output. Defaults to `Video` when omitted.<br/>
@@ -77,7 +81,11 @@ namespace Descript
         /// Example: 9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
         /// </param>
         /// <param name="compositionId">
-        /// The ID of the composition within the project to publish.<br/>
+        /// Composition to publish. If omitted, the first composition in the project is used.<br/>
+        /// Accepts any of the following formats:<br/>
+        /// - A full composition UUID (e.g. `39677a40-1c43-4c36-8449-46cfbc4de2b5`)<br/>
+        /// - A 5-character short ID from a Descript URL (e.g. `39677`)<br/>
+        /// - A full Descript project URL (e.g. `https://web.descript.com/{project_id}/39677`)<br/>
         /// Example: 39677a40-1c43-4c36-8449-46cfbc4de2b5
         /// </param>
         /// <param name="mediaType">
@@ -107,7 +115,7 @@ namespace Descript
 #endif
         public PublishJobRequest(
             global::System.Guid projectId,
-            global::System.Guid? compositionId,
+            string? compositionId,
             global::Descript.PublishJobRequestMediaType? mediaType,
             global::Descript.PublishJobRequestResolution? resolution,
             string? callbackUrl,
