@@ -480,6 +480,43 @@ namespace Descript
                                         h => h.Key,
                                         h => h.Value));
                             }
+                            // Not found: - Composition doesn't exist in the specified project (when `composition_id` is provided) 
+                            if ((int)__response.StatusCode == 404)
+                            {
+                                string? __content_404 = null;
+                                global::System.Exception? __exception_404 = null;
+                                global::Descript.Error404? __value_404 = null;
+                                try
+                                {
+                                    if (__effectiveReadResponseAsString)
+                                    {
+                                        __content_404 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
+                                        __value_404 = global::Descript.Error404.FromJson(__content_404, JsonSerializerContext);
+                                    }
+                                    else
+                                    {
+                                        __content_404 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
+
+                                        __value_404 = global::Descript.Error404.FromJson(__content_404, JsonSerializerContext);
+                                    }
+                                }
+                                catch (global::System.Exception __ex)
+                                {
+                                    __exception_404 = __ex;
+                                }
+
+
+                                throw global::Descript.ApiException<global::Descript.Error404>.Create(
+                                    statusCode: __response.StatusCode,
+                                    message: __content_404 ?? __response.ReasonPhrase ?? string.Empty,
+                                    innerException: __exception_404,
+                                    responseBody: __content_404,
+                                    responseObject: __value_404,
+                                    responseHeaders: global::System.Linq.Enumerable.ToDictionary(
+                                        __response.Headers,
+                                        h => h.Key,
+                                        h => h.Value));
+                            }
                             // Unprocessable Entity: - `media_type` was explicitly set to `Video` but the target composition has no   video content. Retry with `media_type` set to `Audio` (or omit it to publish   as audio). 
                             if ((int)__response.StatusCode == 422)
                             {
@@ -675,7 +712,11 @@ namespace Descript
         /// Example: 9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
         /// </param>
         /// <param name="compositionId">
-        /// The ID of the composition within the project to publish.<br/>
+        /// Composition to publish. If omitted, the first composition in the project is used.<br/>
+        /// Accepts any of the following formats:<br/>
+        /// - A full composition UUID (e.g. `39677a40-1c43-4c36-8449-46cfbc4de2b5`)<br/>
+        /// - A 5-character short ID from a Descript URL (e.g. `39677`)<br/>
+        /// - A full Descript project URL (e.g. `https://web.descript.com/{project_id}/39677`)<br/>
         /// Example: 39677a40-1c43-4c36-8449-46cfbc4de2b5
         /// </param>
         /// <param name="mediaType">
@@ -705,7 +746,7 @@ namespace Descript
         /// <exception cref="global::System.InvalidOperationException"></exception>
         public async global::System.Threading.Tasks.Task<global::Descript.PublishJobResponse> PublishJobAsync(
             global::System.Guid projectId,
-            global::System.Guid? compositionId = default,
+            string? compositionId = default,
             global::Descript.PublishJobRequestMediaType? mediaType = default,
             global::Descript.PublishJobRequestResolution? resolution = default,
             string? callbackUrl = default,

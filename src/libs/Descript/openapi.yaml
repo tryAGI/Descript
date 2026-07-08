@@ -1140,8 +1140,13 @@ paths:
                   example: 9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
                 composition_id:
                   type: string
-                  format: uuid
-                  description: The ID of the composition within the project to publish.
+                  description: |
+                    Composition to publish. If omitted, the first composition in the project is used.
+
+                    Accepts any of the following formats:
+                    - A full composition UUID (e.g. `39677a40-1c43-4c36-8449-46cfbc4de2b5`)
+                    - A 5-character short ID from a Descript URL (e.g. `39677`)
+                    - A full Descript project URL (e.g. `https://web.descript.com/{project_id}/39677`)
                   example: 39677a40-1c43-4c36-8449-46cfbc4de2b5
                 media_type:
                   type: string
@@ -1293,6 +1298,20 @@ paths:
                   value:
                     error: forbidden
                     message: Forbidden
+        '404':
+          description: |
+            Not found:
+            - Composition doesn't exist in the specified project (when `composition_id` is provided)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404'
+              examples:
+                composition_not_found:
+                  summary: Composition not found in project
+                  value:
+                    error: not_found
+                    message: No composition matching '5b507b2b-e3ef-4146-a0d0-6741df516973' found in project 9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
         '422':
           description: |
             Unprocessable Entity:
