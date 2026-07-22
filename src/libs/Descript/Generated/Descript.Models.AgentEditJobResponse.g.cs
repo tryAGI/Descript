@@ -45,6 +45,17 @@ namespace Descript
         public required string ProjectUrl { get; set; }
 
         /// <summary>
+        /// Conversation ID for this agent run. Always returned on POST — no need<br/>
+        /// to wait for the job to complete to learn the id. Pass it back as<br/>
+        /// `conversation_id` on a subsequent call to continue this conversation.<br/>
+        /// Example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+        /// </summary>
+        /// <example>a1b2c3d4-e5f6-7890-abcd-ef1234567890</example>
+        [global::System.Text.Json.Serialization.JsonPropertyName("conversation_id")]
+        [global::System.Text.Json.Serialization.JsonRequired]
+        public required global::System.Guid ConversationId { get; set; }
+
+        /// <summary>
         /// Model reported for this request: the canonical id for an explicit<br/>
         /// model or alias (e.g. `claude-opus-4.8` for `claude-opus`), or<br/>
         /// `auto` for an `auto` request. Lets you confirm the selection<br/>
@@ -82,6 +93,12 @@ namespace Descript
         /// URL to access the project in Descript web app<br/>
         /// Example: https://web.descript.com/9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
         /// </param>
+        /// <param name="conversationId">
+        /// Conversation ID for this agent run. Always returned on POST — no need<br/>
+        /// to wait for the job to complete to learn the id. Pass it back as<br/>
+        /// `conversation_id` on a subsequent call to continue this conversation.<br/>
+        /// Example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+        /// </param>
         /// <param name="resolvedModel">
         /// Model reported for this request: the canonical id for an explicit<br/>
         /// model or alias (e.g. `claude-opus-4.8` for `claude-opus`), or<br/>
@@ -98,12 +115,14 @@ namespace Descript
             global::System.Guid driveId,
             global::System.Guid projectId,
             string projectUrl,
+            global::System.Guid conversationId,
             string resolvedModel)
         {
             this.JobId = jobId;
             this.DriveId = driveId;
             this.ProjectId = projectId;
             this.ProjectUrl = projectUrl ?? throw new global::System.ArgumentNullException(nameof(projectUrl));
+            this.ConversationId = conversationId;
             this.ResolvedModel = resolvedModel ?? throw new global::System.ArgumentNullException(nameof(resolvedModel));
         }
 
