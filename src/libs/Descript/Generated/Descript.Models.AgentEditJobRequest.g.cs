@@ -82,17 +82,6 @@ namespace Descript
         public string? CallbackUrl { get; set; }
 
         /// <summary>
-        /// Conversation ID from a previous agent job to continue that conversation.<br/>
-        /// Requires `project_id` (a conversation belongs to an existing project).<br/>
-        /// When omitted, a new conversation is started. The `conversation_id` is returned<br/>
-        /// in the job result when the job completes.<br/>
-        /// Example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
-        /// </summary>
-        /// <example>a1b2c3d4-e5f6-7890-abcd-ef1234567890</example>
-        [global::System.Text.Json.Serialization.JsonPropertyName("conversation_id")]
-        public global::System.Guid? ConversationId { get; set; }
-
-        /// <summary>
         /// Additional properties that are not explicitly defined in the schema
         /// </summary>
         [global::System.Text.Json.Serialization.JsonExtensionData]
@@ -144,13 +133,6 @@ namespace Descript
         /// Descript will POST the job status (same format as [GET /jobs/{job_id}](#operation/getJob)) to this URL.<br/>
         /// Example: https://example.com/webhooks/descript/job_callback
         /// </param>
-        /// <param name="conversationId">
-        /// Conversation ID from a previous agent job to continue that conversation.<br/>
-        /// Requires `project_id` (a conversation belongs to an existing project).<br/>
-        /// When omitted, a new conversation is started. The `conversation_id` is returned<br/>
-        /// in the job result when the job completes.<br/>
-        /// Example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
-        /// </param>
 #if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 #endif
@@ -161,8 +143,7 @@ namespace Descript
             string? compositionId,
             string? model,
             global::Descript.AgentEditJobRequestTeamAccess? teamAccess,
-            string? callbackUrl,
-            global::System.Guid? conversationId)
+            string? callbackUrl)
         {
             this.ProjectId = projectId;
             this.ProjectName = projectName;
@@ -171,7 +152,6 @@ namespace Descript
             this.Prompt = prompt ?? throw new global::System.ArgumentNullException(nameof(prompt));
             this.TeamAccess = teamAccess;
             this.CallbackUrl = callbackUrl;
-            this.ConversationId = conversationId;
         }
 
         /// <summary>

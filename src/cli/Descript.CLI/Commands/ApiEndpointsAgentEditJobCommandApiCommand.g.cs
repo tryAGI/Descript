@@ -75,16 +75,6 @@ Defaults to `none` if not specified.
 Descript will POST the job status (same format as [GET /jobs/{job_id}](#operation/getJob)) to this URL.
 ",
     };
-
-    private static Option<global::System.Guid?> ConversationId { get; } = new(
-        name: @"--conversation-id")
-    {
-        Description = @"Conversation ID from a previous agent job to continue that conversation.
-Requires `project_id` (a conversation belongs to an existing project).
-When omitted, a new conversation is started. The `conversation_id` is returned
-in the job result when the job completes.
-",
-    };
       private static Option<string?> Input { get; } = new(@"--input")
       {
           Description = "Load request JSON from a file path, '-' for stdin, or an inline JSON object/array string.",
@@ -154,7 +144,6 @@ The payload will match the format returned by [GET /jobs/{job_id}](#operation/ge
                         command.Options.Add(Prompt);
                         command.Options.Add(TeamAccess);
                         command.Options.Add(CallbackUrl);
-                        command.Options.Add(ConversationId);
           command.Options.Add(Input);
           command.Options.Add(RequestJson);
           command.Options.Add(RequestFile);
@@ -187,7 +176,6 @@ The payload will match the format returned by [GET /jobs/{job_id}](#operation/ge
                         var prompt = parseResult.GetRequiredValue(Prompt);
                         var teamAccess = CliRuntime.WasSpecified(parseResult, TeamAccess) ? parseResult.GetValue(TeamAccess) : (__requestBase is { } __TeamAccessBaseValue ? __TeamAccessBaseValue.TeamAccess : default);
                         var callbackUrl = CliRuntime.WasSpecified(parseResult, CallbackUrl) ? parseResult.GetValue(CallbackUrl) : (__requestBase is { } __CallbackUrlBaseValue ? __CallbackUrlBaseValue.CallbackUrl : default);
-                        var conversationId = CliRuntime.WasSpecified(parseResult, ConversationId) ? parseResult.GetValue(ConversationId) : (__requestBase is { } __ConversationIdBaseValue ? __ConversationIdBaseValue.ConversationId : default);
                 using var client = await CliRuntime.CreateClientAsync(parseResult, cancellationToken).ConfigureAwait(false);
 
 
@@ -199,7 +187,6 @@ The payload will match the format returned by [GET /jobs/{job_id}](#operation/ge
                                     prompt: prompt,
                                     teamAccess: teamAccess,
                                     callbackUrl: callbackUrl,
-                                    conversationId: conversationId,
                                     cancellationToken: cancellationToken).ConfigureAwait(false);
 
 

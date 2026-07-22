@@ -796,15 +796,6 @@ paths:
                     Optional webhook URL to call when the job completes or fails.
                     Descript will POST the job status (same format as [GET /jobs/{job_id}](#operation/getJob)) to this URL.
                   example: https://example.com/webhooks/descript/job_callback
-                conversation_id:
-                  type: string
-                  format: uuid
-                  description: |
-                    Conversation ID from a previous agent job to continue that conversation.
-                    Requires `project_id` (a conversation belongs to an existing project).
-                    When omitted, a new conversation is started. The `conversation_id` is returned
-                    in the job result when the job completes.
-                  example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
               required:
                 - prompt
               additionalProperties: false
@@ -831,12 +822,6 @@ paths:
                   project_id: 9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
                   composition_id: 39677a40-1c43-4c36-8449-46cfbc4de2b5
                   prompt: create a 30-second highlight reel with the best moments
-              continue_conversation:
-                summary: Continue a previous conversation
-                value:
-                  project_id: 9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
-                  prompt: now also add captions to the video
-                  conversation_id: a1b2c3d4-e5f6-7890-abcd-ef1234567890
               with_callback:
                 summary: Agent job with webhook callback
                 value:
@@ -873,6 +858,14 @@ paths:
                     format: uri
                     description: URL to access the project in Descript web app
                     example: https://web.descript.com/9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
+                  conversation_id:
+                    type: string
+                    format: uuid
+                    description: |
+                      Conversation ID for this agent run. Always returned on POST — no need
+                      to wait for the job to complete to learn the id. Pass it back as
+                      `conversation_id` on a subsequent call to continue this conversation.
+                    example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
                   resolved_model:
                     type: string
                     description: |
@@ -888,6 +881,7 @@ paths:
                   - project_id
                   - project_url
                   - resolved_model
+                  - conversation_id
         '400':
           description: |
             Invalid input:
