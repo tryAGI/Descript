@@ -57,6 +57,22 @@ namespace Descript
         public string? FolderName { get; set; }
 
         /// <summary>
+        /// Existing workspace to create the new project in, matched by name (case-insensitive).<br/>
+        /// Only applicable when creating a new project (when project_id is not provided).<br/>
+        /// Reserved names: `Personal` (your private space) and `General` (the shared drive workspace).<br/>
+        /// Any other value is looked up as a custom workspace name; unknown names return 404.<br/>
+        /// When omitted, `team_access` is passed through unchanged.<br/>
+        /// When set to `Personal`, `team_access` must be `none` or omitted.<br/>
+        /// When set to `General` or a custom workspace name, `team_access` must be<br/>
+        /// `edit`, `comment`, or `view`; omitting it defaults to `view`, and `none` is rejected.<br/>
+        /// For custom workspaces, the caller must be a member of that workspace.<br/>
+        /// Example: Marketing
+        /// </summary>
+        /// <example>Marketing</example>
+        [global::System.Text.Json.Serialization.JsonPropertyName("workspace_name")]
+        public string? WorkspaceName { get; set; }
+
+        /// <summary>
         /// Map of media reference IDs (display names with optional folder paths) to media import items.<br/>
         /// Keys are the display names that will appear in the project (e.g., "Misc/intro.mp4" or "demo.mp4").<br/>
         /// Values define how to import each media item (URL import or multitrack sequence).<br/>
@@ -116,6 +132,18 @@ namespace Descript
         /// segments are created automatically.<br/>
         /// Example: Clients/Acme
         /// </param>
+        /// <param name="workspaceName">
+        /// Existing workspace to create the new project in, matched by name (case-insensitive).<br/>
+        /// Only applicable when creating a new project (when project_id is not provided).<br/>
+        /// Reserved names: `Personal` (your private space) and `General` (the shared drive workspace).<br/>
+        /// Any other value is looked up as a custom workspace name; unknown names return 404.<br/>
+        /// When omitted, `team_access` is passed through unchanged.<br/>
+        /// When set to `Personal`, `team_access` must be `none` or omitted.<br/>
+        /// When set to `General` or a custom workspace name, `team_access` must be<br/>
+        /// `edit`, `comment`, or `view`; omitting it defaults to `view`, and `none` is rejected.<br/>
+        /// For custom workspaces, the caller must be a member of that workspace.<br/>
+        /// Example: Marketing
+        /// </param>
         /// <param name="addMedia">
         /// Map of media reference IDs (display names with optional folder paths) to media import items.<br/>
         /// Keys are the display names that will appear in the project (e.g., "Misc/intro.mp4" or "demo.mp4").<br/>
@@ -138,6 +166,7 @@ namespace Descript
             string? projectName,
             global::Descript.ImportProjectMediaRequestTeamAccess? teamAccess,
             string? folderName,
+            string? workspaceName,
             global::System.Collections.Generic.Dictionary<string, global::Descript.OneOf<global::Descript.ImportProjectMediaRequestAddMediaUrlImport, global::Descript.ImportProjectMediaRequestAddMediaDirectUpload, global::Descript.ImportProjectMediaRequestAddMediaMultitrackSequence>>? addMedia,
             global::System.Collections.Generic.IList<global::Descript.ImportProjectMediaRequestAddComposition>? addCompositions,
             string? callbackUrl)
@@ -146,6 +175,7 @@ namespace Descript
             this.ProjectName = projectName;
             this.TeamAccess = teamAccess;
             this.FolderName = folderName;
+            this.WorkspaceName = workspaceName;
             this.AddMedia = addMedia;
             this.AddCompositions = addCompositions;
             this.CallbackUrl = callbackUrl;

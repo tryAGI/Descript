@@ -335,6 +335,22 @@ paths:
                     (when project_id is not provided). Existing folders along the path are reused; missing
                     segments are created automatically.
                   example: Clients/Acme
+                workspace_name:
+                  type: string
+                  description: |
+                    Existing workspace to create the new project in, matched by name (case-insensitive).
+                    Only applicable when creating a new project (when project_id is not provided).
+
+                    Reserved names: `Personal` (your private space) and `General` (the shared drive workspace).
+                    Any other value is looked up as a custom workspace name; unknown names return 404.
+
+                    When omitted, `team_access` is passed through unchanged.
+                    When set to `Personal`, `team_access` must be `none` or omitted.
+                    When set to `General` or a custom workspace name, `team_access` must be
+                    `edit`, `comment`, or `view`; omitting it defaults to `view`, and `none` is rejected.
+
+                    For custom workspaces, the caller must be a member of that workspace.
+                  example: Marketing
                 add_media:
                   type: object
                   description: |
