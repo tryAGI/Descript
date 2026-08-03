@@ -43,6 +43,24 @@ segments are created automatically.
 ",
     };
 
+    private static Option<string?> WorkspaceName { get; } = new(
+        name: @"--workspace-name")
+    {
+        Description = @"Existing workspace to create the new project in, matched by name (case-insensitive).
+Only applicable when creating a new project (when project_id is not provided).
+
+Reserved names: `Personal` (your private space) and `General` (the shared drive workspace).
+Any other value is looked up as a custom workspace name; unknown names return 404.
+
+When omitted, `team_access` is passed through unchanged.
+When set to `Personal`, `team_access` must be `none` or omitted.
+When set to `General` or a custom workspace name, `team_access` must be
+`edit`, `comment`, or `view`; omitting it defaults to `view`, and `none` is rejected.
+
+For custom workspaces, the caller must be a member of that workspace.
+",
+    };
+
     private static Option<global::System.Collections.Generic.Dictionary<string, global::Descript.OneOf<global::Descript.ImportProjectMediaRequestAddMediaUrlImport, global::Descript.ImportProjectMediaRequestAddMediaDirectUpload, global::Descript.ImportProjectMediaRequestAddMediaMultitrackSequence>>?> AddMedia { get; } = new(
         name: @"--add-media")
     {
@@ -138,6 +156,7 @@ The payload will match the format returned by [GET /jobs/{job_id}](#operation/ge
                         command.Options.Add(ProjectName);
                         command.Options.Add(TeamAccess);
                         command.Options.Add(FolderName);
+                        command.Options.Add(WorkspaceName);
                         command.Options.Add(AddMedia);
                         command.Options.Add(AddCompositions);
                         command.Options.Add(CallbackUrl);
@@ -170,6 +189,7 @@ The payload will match the format returned by [GET /jobs/{job_id}](#operation/ge
                         var projectName = CliRuntime.WasSpecified(parseResult, ProjectName) ? parseResult.GetValue(ProjectName) : (__requestBase is { } __ProjectNameBaseValue ? __ProjectNameBaseValue.ProjectName : default);
                         var teamAccess = CliRuntime.WasSpecified(parseResult, TeamAccess) ? parseResult.GetValue(TeamAccess) : (__requestBase is { } __TeamAccessBaseValue ? __TeamAccessBaseValue.TeamAccess : default);
                         var folderName = CliRuntime.WasSpecified(parseResult, FolderName) ? parseResult.GetValue(FolderName) : (__requestBase is { } __FolderNameBaseValue ? __FolderNameBaseValue.FolderName : default);
+                        var workspaceName = CliRuntime.WasSpecified(parseResult, WorkspaceName) ? parseResult.GetValue(WorkspaceName) : (__requestBase is { } __WorkspaceNameBaseValue ? __WorkspaceNameBaseValue.WorkspaceName : default);
                         var addMedia = CliRuntime.WasSpecified(parseResult, AddMedia) ? parseResult.GetValue(AddMedia) : (__requestBase is { } __AddMediaBaseValue ? __AddMediaBaseValue.AddMedia : default);
                         var addCompositions = CliRuntime.WasSpecified(parseResult, AddCompositions) ? parseResult.GetValue(AddCompositions) : (__requestBase is { } __AddCompositionsBaseValue ? __AddCompositionsBaseValue.AddCompositions : default);
                         var callbackUrl = CliRuntime.WasSpecified(parseResult, CallbackUrl) ? parseResult.GetValue(CallbackUrl) : (__requestBase is { } __CallbackUrlBaseValue ? __CallbackUrlBaseValue.CallbackUrl : default);
@@ -181,6 +201,7 @@ The payload will match the format returned by [GET /jobs/{job_id}](#operation/ge
                                     projectName: projectName,
                                     teamAccess: teamAccess,
                                     folderName: folderName,
+                                    workspaceName: workspaceName,
                                     addMedia: addMedia,
                                     addCompositions: addCompositions,
                                     callbackUrl: callbackUrl,
