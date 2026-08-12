@@ -173,10 +173,6 @@ namespace Descript
 
             typeof(global::Descript.JsonConverters.GetProjectResponsePublisheMediaTypeNullableJsonConverter),
 
-            typeof(global::Descript.JsonConverters.GetStatusResponseStatusJsonConverter),
-
-            typeof(global::Descript.JsonConverters.GetStatusResponseStatusNullableJsonConverter),
-
             typeof(global::Descript.JsonConverters.ResultJsonConverter),
 
             typeof(global::Descript.JsonConverters.Result2JsonConverter),
@@ -322,7 +318,6 @@ namespace Descript
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.GetProjectResponsePublisheAccessLevel), TypeInfoPropertyName = "GetProjectResponsePublisheAccessLevel2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.GetProjectResponsePublisheMediaType), TypeInfoPropertyName = "GetProjectResponsePublisheMediaType2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.GetStatusResponse))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.GetStatusResponseStatus), TypeInfoPropertyName = "GetStatusResponseStatus2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.OneOf<global::Descript.ImportProjectMediaRequestAddMediaUrlImport, global::Descript.ImportProjectMediaRequestAddMediaDirectUpload, global::Descript.ImportProjectMediaRequestAddMediaMultitrackSequence>?), TypeInfoPropertyName = "ImportProjectMediaRequestAddMediaMultitrackSequence_a84f7d44496d84a5")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::Descript.EditInDescriptSchemaPostBodyProjectSchemaFile>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::Descript.ImportSuccessResultCreatedComposition>))]

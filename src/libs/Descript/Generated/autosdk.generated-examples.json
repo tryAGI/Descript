@@ -59,9 +59,9 @@
       "Order": 6,
       "Title": "Check API status",
       "Slug": "getstatus",
-      "Description": "\u003E **Work in progress** \u2014 This endpoint is not yet available and will return an error if called.\n\nCheck API availability and validate authentication token.\n\nThis endpoint can be used to:\n- Verify that your authentication token is valid\n- Check API connectivity without performing any heavy operations\n\nReturns a success response if the token is valid, or a 401 error if the token is invalid or missing.",
+      "Description": "Check API availability and validate authentication token.\n\nThis endpoint can be used to:\n- Verify that your authentication token is valid\n- Check API connectivity without performing any heavy operations\n- Identify which drive (workspace) your token is connected to\n\nReturns the connected drive ID and name, plus the API version.",
       "Language": "csharp",
-      "Code": "using var client = new DescriptClient(apiKey);\nvar response = await client.ApiEndpoints.GetStatusAsync();\n\n// Example response:\n// {\n//   \u0022status\u0022: \u0022ok\u0022\n// }",
+      "Code": "using var client = new DescriptClient(apiKey);\nvar response = await client.ApiEndpoints.GetStatusAsync();\n\n// Example response:\n// {\n//   \u0022drive_id\u0022: \u0022openapi-json-null-sentinel-value-2BF93600-0FE4-4250-987A-E5DDB203E464\u0022,\n//   \u0022drive_name\u0022: \u0022openapi-json-null-sentinel-value-2BF93600-0FE4-4250-987A-E5DDB203E464\u0022,\n//   \u0022api_version\u0022: \u00221.2\u0022\n// }",
       "Format": "sdk",
       "OperationId": "getStatus",
       "Setup": "This example assumes \u0060using Descript;\u0060 is in scope and \u0060apiKey\u0060 contains the required credential."

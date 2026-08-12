@@ -27,6 +27,14 @@ namespace Descript
         public required global::System.Guid DriveId { get; set; }
 
         /// <summary>
+        /// Human-readable name of the connected drive (workspace)<br/>
+        /// Example: My Team Workspace
+        /// </summary>
+        /// <example>My Team Workspace</example>
+        [global::System.Text.Json.Serialization.JsonPropertyName("drive_name")]
+        public string? DriveName { get; set; }
+
+        /// <summary>
         /// Project ID (newly created or existing)<br/>
         /// Example: 9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
         /// </summary>
@@ -78,6 +86,10 @@ namespace Descript
         /// URL to access the project in Descript web app<br/>
         /// Example: https://web.descript.com/9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
         /// </param>
+        /// <param name="driveName">
+        /// Human-readable name of the connected drive (workspace)<br/>
+        /// Example: My Team Workspace
+        /// </param>
         /// <param name="uploadUrls">
         /// Signed upload URLs for each direct upload media item. Only present when the request<br/>
         /// includes direct upload references. PUT the file contents to the `upload_url` with<br/>
@@ -92,10 +104,12 @@ namespace Descript
             global::System.Guid driveId,
             global::System.Guid projectId,
             string projectUrl,
+            string? driveName,
             global::System.Collections.Generic.Dictionary<string, global::Descript.ImportProjectMediaResponseUploadUrls2>? uploadUrls)
         {
             this.JobId = jobId;
             this.DriveId = driveId;
+            this.DriveName = driveName;
             this.ProjectId = projectId;
             this.ProjectUrl = projectUrl ?? throw new global::System.ArgumentNullException(nameof(projectUrl));
             this.UploadUrls = uploadUrls;

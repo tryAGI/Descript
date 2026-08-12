@@ -32,15 +32,14 @@ internal static partial class ApiEndpointsGetStatusCommandApiCommand
     public static Command Create()
     {
         var command = new Command(@"get-status", @"Check API status
-&gt; **Work in progress** — This endpoint is not yet available and will return an error if called.
-
 Check API availability and validate authentication token.
 
 This endpoint can be used to:
 - Verify that your authentication token is valid
 - Check API connectivity without performing any heavy operations
+- Identify which drive (workspace) your token is connected to
 
-Returns a success response if the token is valid, or a 401 error if the token is invalid or missing.
+Returns the connected drive ID and name, plus the API version.
 ");
 
 

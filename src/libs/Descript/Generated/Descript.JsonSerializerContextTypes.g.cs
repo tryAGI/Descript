@@ -545,10 +545,6 @@ namespace Descript
         /// 
         /// </summary>
         public global::Descript.GetStatusResponse? Type129 { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public global::Descript.GetStatusResponseStatus? Type130 { get; set; }
 
         /// <summary>
         /// 
