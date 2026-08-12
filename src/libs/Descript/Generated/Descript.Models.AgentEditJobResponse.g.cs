@@ -27,6 +27,14 @@ namespace Descript
         public required global::System.Guid DriveId { get; set; }
 
         /// <summary>
+        /// Human-readable name of the connected drive (workspace)<br/>
+        /// Example: My Team Workspace
+        /// </summary>
+        /// <example>My Team Workspace</example>
+        [global::System.Text.Json.Serialization.JsonPropertyName("drive_name")]
+        public string? DriveName { get; set; }
+
+        /// <summary>
         /// The project ID (existing or newly created)<br/>
         /// Example: 9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
         /// </summary>
@@ -107,6 +115,10 @@ namespace Descript
         /// `result.resolved_model` on [GET /jobs/{job_id}](#operation/getJob).<br/>
         /// Example: claude-opus-4.8
         /// </param>
+        /// <param name="driveName">
+        /// Human-readable name of the connected drive (workspace)<br/>
+        /// Example: My Team Workspace
+        /// </param>
 #if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 #endif
@@ -116,10 +128,12 @@ namespace Descript
             global::System.Guid projectId,
             string projectUrl,
             global::System.Guid conversationId,
-            string resolvedModel)
+            string resolvedModel,
+            string? driveName)
         {
             this.JobId = jobId;
             this.DriveId = driveId;
+            this.DriveName = driveName;
             this.ProjectId = projectId;
             this.ProjectUrl = projectUrl ?? throw new global::System.ArgumentNullException(nameof(projectUrl));
             this.ConversationId = conversationId;

@@ -27,6 +27,14 @@ namespace Descript
         public required global::System.Guid DriveId { get; set; }
 
         /// <summary>
+        /// Human-readable name of the connected drive (workspace)<br/>
+        /// Example: My Team Workspace
+        /// </summary>
+        /// <example>My Team Workspace</example>
+        [global::System.Text.Json.Serialization.JsonPropertyName("drive_name")]
+        public string? DriveName { get; set; }
+
+        /// <summary>
         /// The project ID being published<br/>
         /// Example: 9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
         /// </summary>
@@ -69,6 +77,10 @@ namespace Descript
         /// URL to access the project in Descript web app<br/>
         /// Example: https://web.descript.com/9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
         /// </param>
+        /// <param name="driveName">
+        /// Human-readable name of the connected drive (workspace)<br/>
+        /// Example: My Team Workspace
+        /// </param>
 #if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 #endif
@@ -76,10 +88,12 @@ namespace Descript
             global::System.Guid jobId,
             global::System.Guid driveId,
             global::System.Guid projectId,
-            string projectUrl)
+            string projectUrl,
+            string? driveName)
         {
             this.JobId = jobId;
             this.DriveId = driveId;
+            this.DriveName = driveName;
             this.ProjectId = projectId;
             this.ProjectUrl = projectUrl ?? throw new global::System.ArgumentNullException(nameof(projectUrl));
         }

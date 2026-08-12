@@ -587,6 +587,11 @@ paths:
                     format: uuid
                     description: Drive ID where the project is located
                     example: c9c5c47e-158a-49f7-846b-4f6ee2a229a2
+                  drive_name:
+                    type: string
+                    nullable: true
+                    description: Human-readable name of the connected drive (workspace)
+                    example: My Team Workspace
                   project_id:
                     type: string
                     format: uuid
@@ -864,6 +869,11 @@ paths:
                     format: uuid
                     description: Drive ID where the project is located
                     example: c9c5c47e-158a-49f7-846b-4f6ee2a229a2
+                  drive_name:
+                    type: string
+                    nullable: true
+                    description: Human-readable name of the connected drive (workspace)
+                    example: My Team Workspace
                   project_id:
                     type: string
                     format: uuid
@@ -1244,6 +1254,11 @@ paths:
                     format: uuid
                     description: Drive ID where the project is located
                     example: c9c5c47e-158a-49f7-846b-4f6ee2a229a2
+                  drive_name:
+                    type: string
+                    nullable: true
+                    description: Human-readable name of the connected drive (workspace)
+                    example: My Team Workspace
                   project_id:
                     type: string
                     format: uuid
@@ -2295,15 +2310,14 @@ paths:
       security:
         - bearerAuth: []
       description: |
-        > **Work in progress** — This endpoint is not yet available and will return an error if called.
-
         Check API availability and validate authentication token.
 
         This endpoint can be used to:
         - Verify that your authentication token is valid
         - Check API connectivity without performing any heavy operations
+        - Identify which drive (workspace) your token is connected to
 
-        Returns a success response if the token is valid, or a 401 error if the token is invalid or missing.
+        Returns the connected drive ID and name, plus the API version.
       operationId: getStatus
       responses:
         '200':
@@ -2313,19 +2327,38 @@ paths:
               schema:
                 type: object
                 properties:
-                  status:
+                  drive_id:
                     type: string
-                    enum:
-                      - ok
-                    description: API status indicator
-                    example: ok
+                    format: uuid
+                    nullable: true
+                    description: The drive ID associated with the authentication token, or null if the token has no associated drive
+                    example: c9c5c47e-158a-49f7-846b-4f6ee2a229a2
+                  drive_name:
+                    type: string
+                    nullable: true
+                    description: Human-readable name of the connected drive (workspace), or null if unavailable
+                    example: My Team Workspace
+                  api_version:
+                    type: string
+                    description: Current API version
+                    example: '1.2'
                 required:
-                  - status
+                  - drive_id
+                  - drive_name
+                  - api_version
               examples:
                 success:
-                  summary: Successful status check
+                  summary: Successful status check with drive
                   value:
-                    status: ok
+                    drive_id: c9c5c47e-158a-49f7-846b-4f6ee2a229a2
+                    drive_name: My Team Workspace
+                    api_version: '1.2'
+                no_drive:
+                  summary: Token without associated drive
+                  value:
+                    drive_id: null
+                    drive_name: null
+                    api_version: '1.2'
         '401':
           description: Unauthorized - missing or invalid authentication token
           content:
