@@ -53,9 +53,10 @@ namespace Descript
 
         /// <summary>
         /// Model reported for this job: the canonical id for an explicit model or<br/>
-        /// alias (e.g. `claude-opus-4.8` for `claude-opus`), or `auto` for an<br/>
-        /// `auto` request. Present on jobs submitted via the public API after the<br/>
-        /// model-aliases launch; older jobs may omit it.<br/>
+        /// alias (e.g. `claude-opus-4.8` for `claude-opus`), `auto` for an `auto`<br/>
+        /// request, or `inherited` when a resume keeps the conversation's model.<br/>
+        /// Present on jobs submitted via the public API after the model-aliases<br/>
+        /// launch; older jobs may omit it.<br/>
         /// Example: claude-opus-4.8
         /// </summary>
         /// <example>claude-opus-4.8</example>
@@ -102,9 +103,10 @@ namespace Descript
         /// </param>
         /// <param name="resolvedModel">
         /// Model reported for this job: the canonical id for an explicit model or<br/>
-        /// alias (e.g. `claude-opus-4.8` for `claude-opus`), or `auto` for an<br/>
-        /// `auto` request. Present on jobs submitted via the public API after the<br/>
-        /// model-aliases launch; older jobs may omit it.<br/>
+        /// alias (e.g. `claude-opus-4.8` for `claude-opus`), `auto` for an `auto`<br/>
+        /// request, or `inherited` when a resume keeps the conversation's model.<br/>
+        /// Present on jobs submitted via the public API after the model-aliases<br/>
+        /// launch; older jobs may omit it.<br/>
         /// Example: claude-opus-4.8
         /// </param>
         /// <param name="conversationId">

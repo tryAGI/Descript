@@ -3012,9 +3012,10 @@ components:
           type: string
           description: |
             Model reported for this job: the canonical id for an explicit model or
-            alias (e.g. `claude-opus-4.8` for `claude-opus`), or `auto` for an
-            `auto` request. Present on jobs submitted via the public API after the
-            model-aliases launch; older jobs may omit it.
+            alias (e.g. `claude-opus-4.8` for `claude-opus`), `auto` for an `auto`
+            request, or `inherited` when a resume keeps the conversation's model.
+            Present on jobs submitted via the public API after the model-aliases
+            launch; older jobs may omit it.
           example: claude-opus-4.8
         conversation_id:
           type: string
@@ -3050,8 +3051,9 @@ components:
           type: string
           description: |
             Model reported for this job: the canonical id for an explicit model or
-            alias, or `auto` for an `auto` request. Present on jobs submitted via the
-            public API after the model-aliases launch; older jobs may omit it.
+            alias, `auto` for an `auto` request, or `inherited` when a resume keeps
+            the conversation's model. Present on jobs submitted via the public API
+            after the model-aliases launch; older jobs may omit it.
           example: claude-opus-4.8
         conversation_id:
           type: string
