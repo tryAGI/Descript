@@ -12,6 +12,7 @@ internal static class APIEndpointsApiGroupCommand
                          command.Subcommands.Add(ApiEndpointsAgentEditJobCommandApiCommand.Create());
                          command.Subcommands.Add(ApiEndpointsCancelJobCommandApiCommand.Create());
                          command.Subcommands.Add(ApiEndpointsExportTranscriptCommandApiCommand.Create());
+                         command.Subcommands.Add(ApiEndpointsExportTranscriptAsBytesCommandApiCommand.Create());
                          command.Subcommands.Add(ApiEndpointsGetJobCommandApiCommand.Create());
                          command.Subcommands.Add(ApiEndpointsGetProjectCommandApiCommand.Create());
                          command.Subcommands.Add(ApiEndpointsGetStatusCommandApiCommand.Create());

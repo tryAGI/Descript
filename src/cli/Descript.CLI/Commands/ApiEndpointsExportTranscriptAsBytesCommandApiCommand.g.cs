@@ -5,7 +5,7 @@ using System.CommandLine;
 
 namespace Descript.CLI.Commands;
 
-internal static partial class ApiEndpointsExportTranscriptCommandApiCommand
+internal static partial class ApiEndpointsExportTranscriptAsBytesCommandApiCommand
 {
     private static readonly ExportTranscriptRequestOptionSet ExportTranscriptRequestOptionSetOptions = ExportTranscriptRequestOptionSet.Create();
 
@@ -27,29 +27,9 @@ internal static partial class ApiEndpointsExportTranscriptCommandApiCommand
           Hidden = true,
       };
 
-                    private static string FormatResponse(ParseResult parseResult, string value, global::System.Text.Json.Serialization.JsonSerializerContext context, bool truncateLongStrings)
-                    {
-                        string? text = null;
-                        CustomizeResponseText(parseResult, value, ref text);
-                        if (!string.IsNullOrWhiteSpace(text))
-                        {
-                            return text;
-                        }
-
-                        var hints = new Dictionary<string, CliFormatHint>(StringComparer.OrdinalIgnoreCase)
-                        {
-                        };
-                        CustomizeResponseFormatHints(hints);
-                        return CliRuntime.FormatHumanReadable(value, context, truncateLongStrings, hints);
-                    }
-
-                    static partial void CustomizeResponseText(ParseResult parseResult, string value, ref string? text);
-                    static partial void CustomizeResponseFormatHints(Dictionary<string, CliFormatHint> hints);
-
-
     public static Command Create()
     {
-        var command = new Command(@"export-transcript", @"Export project transcript
+        var command = new Command(@"export-transcript-as-bytes", @"Export project transcript
 Export the transcript from a project composition.
 
 Supports plain text, Markdown, HTML, RTF, DOCX, and SRT (SubRip subtitle) formats.
@@ -119,7 +99,7 @@ an `X-Composition-Id` header identifying the exported composition.
                 using var client = await CliRuntime.CreateClientAsync(parseResult, cancellationToken).ConfigureAwait(false);
 
 
-                                var response = await client.ApiEndpoints.ExportTranscriptAsync(
+                                var response = await client.ApiEndpoints.ExportTranscriptAsBytesAsync(
                                     projectId: projectId,
                                     compositionId: compositionId,
                                     format: format,
@@ -128,13 +108,7 @@ an `X-Composition-Id` header identifying the exported composition.
                                     timecodes: timecodes,
                                     cancellationToken: cancellationToken).ConfigureAwait(false);
 
-
-                                await CliRuntime.WriteResponseAsync(
-                                    parseResult,
-                                    response,
-                                    global::Descript.SourceGenerationContext.Default,
-                                    FormatResponse,
-                                    cancellationToken).ConfigureAwait(false);
+                                await CliRuntime.WriteBinaryAsync(parseResult, response, cancellationToken).ConfigureAwait(false);
             }, cancellationToken).ConfigureAwait(false));
         return command;
     }
