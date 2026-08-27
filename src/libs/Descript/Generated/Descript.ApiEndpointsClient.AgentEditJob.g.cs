@@ -167,7 +167,7 @@ namespace Descript
                          __authorization.Location == "Header")
                 {
                     __httpRequest.Headers.Add(__authorization.Name, __authorization.Value);
-                } 
+                }
             }
                             var __httpRequestContentBody = request.ToJson(JsonSerializerContext);
                             var __httpRequestContent = new global::System.Net.Http.StringContent(
@@ -365,7 +365,7 @@ namespace Descript
                                 retryReason: global::System.String.Empty,
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                 }
-                            // Invalid input: - Malformed request body - Invalid project_id or composition_id format - Empty or invalid prompt 
+                            // Invalid input: - Malformed request body - Invalid project_id or composition_id format - Empty or invalid prompt
                             if ((int)__response.StatusCode == 400)
                             {
                                 string? __content_400 = null;
@@ -513,7 +513,7 @@ namespace Descript
                                         h => h.Key,
                                         h => h.Value));
                             }
-                            // Not found: - Project doesn't exist - Composition doesn't exist in the specified project (when composition_id is provided) 
+                            // Not found: - Project doesn't exist - Composition doesn't exist in the specified project (when composition_id is provided)
                             if ((int)__response.StatusCode == 404)
                             {
                                 string? __content_404 = null;
@@ -550,7 +550,7 @@ namespace Descript
                                         h => h.Key,
                                         h => h.Value));
                             }
-                            // Too many requests - rate limit exceeded. Use the `Retry-After` header to determine when to retry. 
+                            // Too many requests - rate limit exceeded. Use the `Retry-After` header to determine when to retry.
                             if ((int)__response.StatusCode == 429)
                             {
                                 string? __content_429 = null;

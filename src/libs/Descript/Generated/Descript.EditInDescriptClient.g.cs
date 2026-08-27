@@ -44,7 +44,7 @@ namespace Descript
     public sealed partial class EditInDescriptClient : global::Descript.IEditInDescriptClient, global::System.IDisposable
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public const string DefaultBaseUrl = "https://descriptapi.com/v1";
 
@@ -71,7 +71,7 @@ namespace Descript
         internal global::System.Lazy<global::System.Text.Json.Serialization.JsonSerializerContext> JsonSerializerContextProvider { get; set; } = new(() => global::Descript.SourceGenerationContext.Default);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public global::System.Text.Json.Serialization.JsonSerializerContext JsonSerializerContext
         {

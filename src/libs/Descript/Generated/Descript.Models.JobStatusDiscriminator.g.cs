@@ -4,12 +4,12 @@
 namespace Descript
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public sealed partial class JobStatusDiscriminator
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("job_type")]
         [global::System.Text.Json.Serialization.JsonConverter(typeof(global::Descript.JsonConverters.JobStatusDiscriminatorJobTypeJsonConverter))]

@@ -136,7 +136,7 @@ namespace Descript
                          __authorization.Location == "Header")
                 {
                     __httpRequest.Headers.Add(__authorization.Name, __authorization.Value);
-                } 
+                }
             }
                 global::Descript.AutoSDKRequestOptionsSupport.ApplyHeaders(
                     request: __httpRequest,

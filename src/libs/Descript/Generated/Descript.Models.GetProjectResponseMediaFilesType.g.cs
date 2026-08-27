@@ -9,23 +9,23 @@ namespace Descript
     public enum GetProjectResponseMediaFilesType
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Audio,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Image,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Other,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Sequence,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Video,
     }

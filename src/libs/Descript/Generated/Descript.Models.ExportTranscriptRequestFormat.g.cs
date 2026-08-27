@@ -11,27 +11,27 @@ namespace Descript
     public enum ExportTranscriptRequestFormat
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Docx,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Html,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Markdown,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Rtf,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Srt,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Txt,
     }

@@ -20,7 +20,7 @@ namespace Descript.JsonConverters
                     {
                         return global::Descript.ListAgentModelsResponseAvailableModelCostExtensions.ToEnum(stringValue);
                     }
-                    
+
                     break;
                 }
                 case global::System.Text.Json.JsonTokenType.Number:

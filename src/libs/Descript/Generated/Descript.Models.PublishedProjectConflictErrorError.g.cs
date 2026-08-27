@@ -10,7 +10,7 @@ namespace Descript
     public enum PublishedProjectConflictErrorError
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Conflict,
     }

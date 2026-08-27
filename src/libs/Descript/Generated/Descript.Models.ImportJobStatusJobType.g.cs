@@ -9,7 +9,7 @@ namespace Descript
     public enum ImportJobStatusJobType
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         ImportProjectMedia,
     }

@@ -10,11 +10,11 @@ namespace Descript
     public enum PublishedProjectConflictErrorState
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Failed,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Processing,
     }

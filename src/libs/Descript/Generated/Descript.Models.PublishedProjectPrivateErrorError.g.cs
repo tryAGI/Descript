@@ -10,7 +10,7 @@ namespace Descript
     public enum PublishedProjectPrivateErrorError
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Unauthorized,
     }

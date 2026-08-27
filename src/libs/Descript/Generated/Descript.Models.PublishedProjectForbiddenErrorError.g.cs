@@ -10,7 +10,7 @@ namespace Descript
     public enum PublishedProjectForbiddenErrorError
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Forbidden,
     }

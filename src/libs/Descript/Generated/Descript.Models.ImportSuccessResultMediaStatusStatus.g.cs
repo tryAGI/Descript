@@ -9,11 +9,11 @@ namespace Descript
     public enum ImportSuccessResultMediaStatusStatus
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Failed,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Success,
     }

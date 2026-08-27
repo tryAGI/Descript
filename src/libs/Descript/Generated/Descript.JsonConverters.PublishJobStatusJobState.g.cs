@@ -20,7 +20,7 @@ namespace Descript.JsonConverters
                     {
                         return global::Descript.PublishJobStatusJobStateExtensions.ToEnum(stringValue) ?? default;
                     }
-                    
+
                     break;
                 }
                 case global::System.Text.Json.JsonTokenType.Number:

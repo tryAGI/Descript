@@ -9,19 +9,19 @@ namespace Descript
     public enum ListProjectsSort
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         CreatedAt,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         LastViewedAt,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Name,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         UpdatedAt,
     }

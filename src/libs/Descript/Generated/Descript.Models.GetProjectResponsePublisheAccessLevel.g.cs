@@ -9,23 +9,23 @@ namespace Descript
     public enum GetProjectResponsePublisheAccessLevel
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Drive,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Password,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Private,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Public,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Unlisted,
     }

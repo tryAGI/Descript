@@ -10,15 +10,15 @@ namespace Descript
     public enum PublishedProjectMetadataPublishType
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Audio,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Audiogram,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Video,
     }

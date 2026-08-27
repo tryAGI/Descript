@@ -4,20 +4,20 @@
 namespace Descript
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public enum JobStatusDiscriminatorJobType
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Agent,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         ImportProjectMedia,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Publish,
     }

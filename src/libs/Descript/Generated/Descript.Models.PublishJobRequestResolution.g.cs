@@ -9,23 +9,23 @@ namespace Descript
     public enum PublishJobRequestResolution
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         x1080p,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         x1440p,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         x480p,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         x4k,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         x720p,
     }
