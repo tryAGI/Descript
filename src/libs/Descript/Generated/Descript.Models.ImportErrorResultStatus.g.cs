@@ -10,7 +10,7 @@ namespace Descript
     public enum ImportErrorResultStatus
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Error,
     }

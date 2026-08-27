@@ -9,7 +9,7 @@ namespace Descript
     public enum PublishSuccessResultStatus
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Success,
     }

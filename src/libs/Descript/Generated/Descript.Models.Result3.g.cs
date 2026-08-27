@@ -10,7 +10,7 @@ namespace Descript
     public readonly partial struct Result3 : global::System.IEquatable<Result3>
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public global::Descript.PublishJobStatusResultDiscriminatorStatus? Status { get; }
 
@@ -24,7 +24,7 @@ namespace Descript
 #endif
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
 #if NET6_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhen(true, nameof(Success))]
@@ -32,7 +32,7 @@ namespace Descript
         public bool IsSuccess => Success != null;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public bool TryPickSuccess(
 #if NET6_0_OR_GREATER
@@ -45,7 +45,7 @@ namespace Descript
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public global::Descript.PublishSuccessResult PickSuccess() => IsSuccess
             ? Success!
@@ -61,7 +61,7 @@ namespace Descript
 #endif
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
 #if NET6_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhen(true, nameof(Error))]
@@ -69,7 +69,7 @@ namespace Descript
         public bool IsError => Error != null;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public bool TryPickError(
 #if NET6_0_OR_GREATER
@@ -82,23 +82,23 @@ namespace Descript
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public global::Descript.PublishErrorResult PickError() => IsError
             ? Error!
             : throw new global::System.InvalidOperationException($"Expected union variant 'Error' but the value was {ToString()}.");
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public static implicit operator Result3(global::Descript.PublishSuccessResult value) => new Result3((global::Descript.PublishSuccessResult?)value);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public static implicit operator global::Descript.PublishSuccessResult?(Result3 @this) => @this.Success;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public Result3(global::Descript.PublishSuccessResult? value)
         {
@@ -106,22 +106,22 @@ namespace Descript
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public static Result3 FromSuccess(global::Descript.PublishSuccessResult? value) => new Result3(value);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public static implicit operator Result3(global::Descript.PublishErrorResult value) => new Result3((global::Descript.PublishErrorResult?)value);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public static implicit operator global::Descript.PublishErrorResult?(Result3 @this) => @this.Error;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public Result3(global::Descript.PublishErrorResult? value)
         {
@@ -129,12 +129,12 @@ namespace Descript
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public static Result3 FromError(global::Descript.PublishErrorResult? value) => new Result3(value);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public Result3(
             global::Descript.PublishJobStatusResultDiscriminatorStatus? status,
@@ -149,23 +149,23 @@ namespace Descript
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public object? Object =>
             Error as object ??
-            Success as object 
+            Success as object
             ;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public override string? ToString() =>
             Success?.ToString() ??
-            Error?.ToString() 
+            Error?.ToString()
             ;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public bool Validate()
         {
@@ -173,7 +173,7 @@ namespace Descript
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public TResult? Match<TResult>(
             global::System.Func<global::Descript.PublishSuccessResult, TResult>? success = null,
@@ -198,7 +198,7 @@ namespace Descript
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public void Match(
             global::System.Action<global::Descript.PublishSuccessResult>? success = null,
@@ -222,7 +222,7 @@ namespace Descript
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public void Switch(
             global::System.Action<global::Descript.PublishSuccessResult>? success = null,
@@ -245,7 +245,7 @@ namespace Descript
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public override int GetHashCode()
         {
@@ -266,18 +266,18 @@ namespace Descript
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public bool Equals(Result3 other)
         {
             return
                 global::System.Collections.Generic.EqualityComparer<global::Descript.PublishSuccessResult?>.Default.Equals(Success, other.Success) &&
-                global::System.Collections.Generic.EqualityComparer<global::Descript.PublishErrorResult?>.Default.Equals(Error, other.Error) 
+                global::System.Collections.Generic.EqualityComparer<global::Descript.PublishErrorResult?>.Default.Equals(Error, other.Error)
                 ;
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public static bool operator ==(Result3 obj1, Result3 obj2)
         {
@@ -285,7 +285,7 @@ namespace Descript
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public static bool operator !=(Result3 obj1, Result3 obj2)
         {
@@ -293,7 +293,7 @@ namespace Descript
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public override bool Equals(object? obj)
         {

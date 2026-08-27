@@ -10,7 +10,7 @@ namespace Descript
     public readonly partial struct Result2 : global::System.IEquatable<Result2>
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public global::Descript.AgentJobStatusResultDiscriminatorStatus? Status { get; }
 
@@ -24,7 +24,7 @@ namespace Descript
 #endif
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
 #if NET6_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhen(true, nameof(Success))]
@@ -32,7 +32,7 @@ namespace Descript
         public bool IsSuccess => Success != null;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public bool TryPickSuccess(
 #if NET6_0_OR_GREATER
@@ -45,7 +45,7 @@ namespace Descript
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public global::Descript.AgentSuccessResult PickSuccess() => IsSuccess
             ? Success!
@@ -61,7 +61,7 @@ namespace Descript
 #endif
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
 #if NET6_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhen(true, nameof(Error))]
@@ -69,7 +69,7 @@ namespace Descript
         public bool IsError => Error != null;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public bool TryPickError(
 #if NET6_0_OR_GREATER
@@ -82,23 +82,23 @@ namespace Descript
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public global::Descript.AgentErrorResult PickError() => IsError
             ? Error!
             : throw new global::System.InvalidOperationException($"Expected union variant 'Error' but the value was {ToString()}.");
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public static implicit operator Result2(global::Descript.AgentSuccessResult value) => new Result2((global::Descript.AgentSuccessResult?)value);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public static implicit operator global::Descript.AgentSuccessResult?(Result2 @this) => @this.Success;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public Result2(global::Descript.AgentSuccessResult? value)
         {
@@ -106,22 +106,22 @@ namespace Descript
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public static Result2 FromSuccess(global::Descript.AgentSuccessResult? value) => new Result2(value);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public static implicit operator Result2(global::Descript.AgentErrorResult value) => new Result2((global::Descript.AgentErrorResult?)value);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public static implicit operator global::Descript.AgentErrorResult?(Result2 @this) => @this.Error;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public Result2(global::Descript.AgentErrorResult? value)
         {
@@ -129,12 +129,12 @@ namespace Descript
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public static Result2 FromError(global::Descript.AgentErrorResult? value) => new Result2(value);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public Result2(
             global::Descript.AgentJobStatusResultDiscriminatorStatus? status,
@@ -149,23 +149,23 @@ namespace Descript
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public object? Object =>
             Error as object ??
-            Success as object 
+            Success as object
             ;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public override string? ToString() =>
             Success?.ToString() ??
-            Error?.ToString() 
+            Error?.ToString()
             ;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public bool Validate()
         {
@@ -173,7 +173,7 @@ namespace Descript
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public TResult? Match<TResult>(
             global::System.Func<global::Descript.AgentSuccessResult, TResult>? success = null,
@@ -198,7 +198,7 @@ namespace Descript
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public void Match(
             global::System.Action<global::Descript.AgentSuccessResult>? success = null,
@@ -222,7 +222,7 @@ namespace Descript
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public void Switch(
             global::System.Action<global::Descript.AgentSuccessResult>? success = null,
@@ -245,7 +245,7 @@ namespace Descript
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public override int GetHashCode()
         {
@@ -266,18 +266,18 @@ namespace Descript
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public bool Equals(Result2 other)
         {
             return
                 global::System.Collections.Generic.EqualityComparer<global::Descript.AgentSuccessResult?>.Default.Equals(Success, other.Success) &&
-                global::System.Collections.Generic.EqualityComparer<global::Descript.AgentErrorResult?>.Default.Equals(Error, other.Error) 
+                global::System.Collections.Generic.EqualityComparer<global::Descript.AgentErrorResult?>.Default.Equals(Error, other.Error)
                 ;
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public static bool operator ==(Result2 obj1, Result2 obj2)
         {
@@ -285,7 +285,7 @@ namespace Descript
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public static bool operator !=(Result2 obj1, Result2 obj2)
         {
@@ -293,7 +293,7 @@ namespace Descript
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public override bool Equals(object? obj)
         {

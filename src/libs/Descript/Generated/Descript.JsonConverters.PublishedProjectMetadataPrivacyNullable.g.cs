@@ -20,7 +20,7 @@ namespace Descript.JsonConverters
                     {
                         return global::Descript.PublishedProjectMetadataPrivacyExtensions.ToEnum(stringValue);
                     }
-                    
+
                     break;
                 }
                 case global::System.Text.Json.JsonTokenType.Number:

@@ -12,19 +12,19 @@ namespace Descript
     public enum PublishJobRequestAccessLevel
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Drive,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Private,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Public,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Unlisted,
     }

@@ -11,19 +11,19 @@ namespace Descript
     public enum AgentEditJobRequestTeamAccess
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Comment,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Edit,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         None,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         View,
     }

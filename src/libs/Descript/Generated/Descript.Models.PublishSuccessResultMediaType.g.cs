@@ -10,11 +10,11 @@ namespace Descript
     public enum PublishSuccessResultMediaType
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Audio,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Video,
     }

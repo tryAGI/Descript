@@ -4,19 +4,19 @@
 namespace Descript
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public sealed partial class ListProjectsResponse
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("data")]
         [global::System.Text.Json.Serialization.JsonRequired]
         public required global::System.Collections.Generic.IList<global::Descript.ListProjectsResponseDataItem> Data { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("pagination")]
         [global::System.Text.Json.Serialization.JsonRequired]

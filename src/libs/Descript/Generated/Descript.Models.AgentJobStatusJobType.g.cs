@@ -10,7 +10,7 @@ namespace Descript
     public enum AgentJobStatusJobType
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Agent,
     }

@@ -171,7 +171,7 @@ namespace Descript
                          __authorization.Location == "Header")
                 {
                     __httpRequest.Headers.Add(__authorization.Name, __authorization.Value);
-                } 
+                }
             }
                             var __httpRequestContentBody = request.ToJson(JsonSerializerContext);
                             var __httpRequestContent = new global::System.Net.Http.StringContent(
@@ -369,7 +369,7 @@ namespace Descript
                                 retryReason: global::System.String.Empty,
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                 }
-                            // Invalid input: - Malformed request body - Invalid project_id or composition_id format - Invalid media_type or resolution value 
+                            // Invalid input: - Malformed request body - Invalid project_id or composition_id format - Invalid media_type or resolution value
                             if ((int)__response.StatusCode == 400)
                             {
                                 string? __content_400 = null;
@@ -443,7 +443,7 @@ namespace Descript
                                         h => h.Key,
                                         h => h.Value));
                             }
-                            // Forbidden: - User doesn't have write access to the project - Project doesn't belong to the token's drive - Requested `access_level` is not permitted by the drive's publish settings 
+                            // Forbidden: - User doesn't have write access to the project - Project doesn't belong to the token's drive - Requested `access_level` is not permitted by the drive's publish settings
                             if ((int)__response.StatusCode == 403)
                             {
                                 string? __content_403 = null;
@@ -480,7 +480,7 @@ namespace Descript
                                         h => h.Key,
                                         h => h.Value));
                             }
-                            // Not found: - Composition doesn't exist in the specified project (when `composition_id` is provided) 
+                            // Not found: - Composition doesn't exist in the specified project (when `composition_id` is provided)
                             if ((int)__response.StatusCode == 404)
                             {
                                 string? __content_404 = null;
@@ -517,7 +517,7 @@ namespace Descript
                                         h => h.Key,
                                         h => h.Value));
                             }
-                            // Unprocessable Entity: - `media_type` was explicitly set to `Video` but the target composition has no   video content. Retry with `media_type` set to `Audio` (or omit it to publish   as audio). 
+                            // Unprocessable Entity: - `media_type` was explicitly set to `Video` but the target composition has no   video content. Retry with `media_type` set to `Audio` (or omit it to publish   as audio).
                             if ((int)__response.StatusCode == 422)
                             {
                                 string? __content_422 = null;
@@ -554,7 +554,7 @@ namespace Descript
                                         h => h.Key,
                                         h => h.Value));
                             }
-                            // Too many requests - rate limit exceeded. Use the `Retry-After` header to determine when to retry. 
+                            // Too many requests - rate limit exceeded. Use the `Retry-After` header to determine when to retry.
                             if ((int)__response.StatusCode == 429)
                             {
                                 string? __content_429 = null;

@@ -9,7 +9,7 @@ namespace Descript
     public enum PublishJobStatusJobType
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Publish,
     }

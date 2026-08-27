@@ -18,7 +18,7 @@ namespace Descript
         /// </summary>
         Audio,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Video,
     }

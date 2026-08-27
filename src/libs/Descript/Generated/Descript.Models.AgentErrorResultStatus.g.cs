@@ -10,7 +10,7 @@ namespace Descript
     public enum AgentErrorResultStatus
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Error,
     }

@@ -4,7 +4,7 @@
 namespace Descript
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public sealed partial class Error403
     {

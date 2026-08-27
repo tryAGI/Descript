@@ -4,16 +4,16 @@
 namespace Descript
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public enum AgentJobStatusResultDiscriminatorStatus
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Error,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Success,
     }

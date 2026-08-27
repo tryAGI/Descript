@@ -4,16 +4,16 @@
 namespace Descript
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public enum ListJobsType
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Agent,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         ImportProjectMedia,
     }

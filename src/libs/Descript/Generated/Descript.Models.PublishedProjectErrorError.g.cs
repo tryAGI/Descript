@@ -10,15 +10,15 @@ namespace Descript
     public enum PublishedProjectErrorError
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Forbidden,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         NotFound,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Unauthorized,
     }

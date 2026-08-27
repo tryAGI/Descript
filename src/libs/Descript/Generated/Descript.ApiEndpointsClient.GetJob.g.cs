@@ -136,7 +136,7 @@ namespace Descript
                          __authorization.Location == "Header")
                 {
                     __httpRequest.Headers.Add(__authorization.Name, __authorization.Value);
-                } 
+                }
             }
                 global::Descript.AutoSDKRequestOptionsSupport.ApplyHeaders(
                     request: __httpRequest,
@@ -439,7 +439,7 @@ namespace Descript
                                         h => h.Key,
                                         h => h.Value));
                             }
-                            // Too many requests - rate limit exceeded. Use the `Retry-After` header to determine when to retry. 
+                            // Too many requests - rate limit exceeded. Use the `Retry-After` header to determine when to retry.
                             if ((int)__response.StatusCode == 429)
                             {
                                 string? __content_429 = null;

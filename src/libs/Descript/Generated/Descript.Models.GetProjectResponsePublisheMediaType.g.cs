@@ -9,15 +9,15 @@ namespace Descript
     public enum GetProjectResponsePublisheMediaType
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Audio,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Audiogram,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Video,
     }

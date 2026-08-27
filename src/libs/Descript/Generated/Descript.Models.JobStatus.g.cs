@@ -11,7 +11,7 @@ namespace Descript
     public readonly partial struct JobStatus : global::System.IEquatable<JobStatus>
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public global::Descript.JobStatusDiscriminatorJobType? JobType { get; }
 
@@ -25,7 +25,7 @@ namespace Descript
 #endif
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
 #if NET6_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhen(true, nameof(ImportProjectMedia))]
@@ -33,7 +33,7 @@ namespace Descript
         public bool IsImportProjectMedia => ImportProjectMedia != null;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public bool TryPickImportProjectMedia(
 #if NET6_0_OR_GREATER
@@ -46,7 +46,7 @@ namespace Descript
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public global::Descript.ImportJobStatus PickImportProjectMedia() => IsImportProjectMedia
             ? ImportProjectMedia!
@@ -62,7 +62,7 @@ namespace Descript
 #endif
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
 #if NET6_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhen(true, nameof(Agent))]
@@ -70,7 +70,7 @@ namespace Descript
         public bool IsAgent => Agent != null;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public bool TryPickAgent(
 #if NET6_0_OR_GREATER
@@ -83,7 +83,7 @@ namespace Descript
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public global::Descript.AgentJobStatus PickAgent() => IsAgent
             ? Agent!
@@ -99,7 +99,7 @@ namespace Descript
 #endif
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
 #if NET6_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhen(true, nameof(Publish))]
@@ -107,7 +107,7 @@ namespace Descript
         public bool IsPublish => Publish != null;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public bool TryPickPublish(
 #if NET6_0_OR_GREATER
@@ -120,23 +120,23 @@ namespace Descript
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public global::Descript.PublishJobStatus PickPublish() => IsPublish
             ? Publish!
             : throw new global::System.InvalidOperationException($"Expected union variant 'Publish' but the value was {ToString()}.");
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public static implicit operator JobStatus(global::Descript.ImportJobStatus value) => new JobStatus((global::Descript.ImportJobStatus?)value);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public static implicit operator global::Descript.ImportJobStatus?(JobStatus @this) => @this.ImportProjectMedia;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public JobStatus(global::Descript.ImportJobStatus? value)
         {
@@ -144,22 +144,22 @@ namespace Descript
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public static JobStatus FromImportProjectMedia(global::Descript.ImportJobStatus? value) => new JobStatus(value);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public static implicit operator JobStatus(global::Descript.AgentJobStatus value) => new JobStatus((global::Descript.AgentJobStatus?)value);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public static implicit operator global::Descript.AgentJobStatus?(JobStatus @this) => @this.Agent;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public JobStatus(global::Descript.AgentJobStatus? value)
         {
@@ -167,22 +167,22 @@ namespace Descript
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public static JobStatus FromAgent(global::Descript.AgentJobStatus? value) => new JobStatus(value);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public static implicit operator JobStatus(global::Descript.PublishJobStatus value) => new JobStatus((global::Descript.PublishJobStatus?)value);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public static implicit operator global::Descript.PublishJobStatus?(JobStatus @this) => @this.Publish;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public JobStatus(global::Descript.PublishJobStatus? value)
         {
@@ -190,12 +190,12 @@ namespace Descript
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public static JobStatus FromPublish(global::Descript.PublishJobStatus? value) => new JobStatus(value);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public JobStatus(
             global::Descript.JobStatusDiscriminatorJobType? jobType,
@@ -212,25 +212,25 @@ namespace Descript
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public object? Object =>
             Publish as object ??
             Agent as object ??
-            ImportProjectMedia as object 
+            ImportProjectMedia as object
             ;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public override string? ToString() =>
             ImportProjectMedia?.ToString() ??
             Agent?.ToString() ??
-            Publish?.ToString() 
+            Publish?.ToString()
             ;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public bool Validate()
         {
@@ -238,7 +238,7 @@ namespace Descript
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public TResult? Match<TResult>(
             global::System.Func<global::Descript.ImportJobStatus, TResult>? importProjectMedia = null,
@@ -268,7 +268,7 @@ namespace Descript
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public void Match(
             global::System.Action<global::Descript.ImportJobStatus>? importProjectMedia = null,
@@ -298,7 +298,7 @@ namespace Descript
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public void Switch(
             global::System.Action<global::Descript.ImportJobStatus>? importProjectMedia = null,
@@ -326,7 +326,7 @@ namespace Descript
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public override int GetHashCode()
         {
@@ -349,19 +349,19 @@ namespace Descript
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public bool Equals(JobStatus other)
         {
             return
                 global::System.Collections.Generic.EqualityComparer<global::Descript.ImportJobStatus?>.Default.Equals(ImportProjectMedia, other.ImportProjectMedia) &&
                 global::System.Collections.Generic.EqualityComparer<global::Descript.AgentJobStatus?>.Default.Equals(Agent, other.Agent) &&
-                global::System.Collections.Generic.EqualityComparer<global::Descript.PublishJobStatus?>.Default.Equals(Publish, other.Publish) 
+                global::System.Collections.Generic.EqualityComparer<global::Descript.PublishJobStatus?>.Default.Equals(Publish, other.Publish)
                 ;
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public static bool operator ==(JobStatus obj1, JobStatus obj2)
         {
@@ -369,7 +369,7 @@ namespace Descript
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public static bool operator !=(JobStatus obj1, JobStatus obj2)
         {
@@ -377,7 +377,7 @@ namespace Descript
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public override bool Equals(object? obj)
         {

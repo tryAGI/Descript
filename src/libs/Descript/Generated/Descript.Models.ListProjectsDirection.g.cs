@@ -9,11 +9,11 @@ namespace Descript
     public enum ListProjectsDirection
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Asc,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Desc,
     }

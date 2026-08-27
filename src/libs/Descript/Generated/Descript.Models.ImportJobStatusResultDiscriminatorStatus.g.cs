@@ -4,20 +4,20 @@
 namespace Descript
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public enum ImportJobStatusResultDiscriminatorStatus
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Error,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Partial,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Success,
     }

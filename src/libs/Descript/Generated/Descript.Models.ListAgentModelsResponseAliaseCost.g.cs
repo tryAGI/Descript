@@ -10,15 +10,15 @@ namespace Descript
     public enum ListAgentModelsResponseAliaseCost
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         High,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Low,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Medium,
     }
