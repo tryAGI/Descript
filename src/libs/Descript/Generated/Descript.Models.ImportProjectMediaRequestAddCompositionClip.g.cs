@@ -18,6 +18,17 @@ namespace Descript
         public required string Media { get; set; }
 
         /// <summary>
+        /// Mute the track this clip plays on. For a sequence clip, mutes the sequence's own tracks.<br/>
+        /// For any other clip, mutes the composition's script layer, which silences every<br/>
+        /// clip on it — including clips already in the composition. Defaults to false.<br/>
+        /// Default Value: false<br/>
+        /// Example: true
+        /// </summary>
+        /// <example>true</example>
+        [global::System.Text.Json.Serialization.JsonPropertyName("mute")]
+        public bool? Mute { get; set; }
+
+        /// <summary>
         /// Additional properties that are not explicitly defined in the schema
         /// </summary>
         [global::System.Text.Json.Serialization.JsonExtensionData]
@@ -30,13 +41,22 @@ namespace Descript
         /// Media reference ID (display name) of the media to add as a clip<br/>
         /// Example: Misc/intro.mp4
         /// </param>
+        /// <param name="mute">
+        /// Mute the track this clip plays on. For a sequence clip, mutes the sequence's own tracks.<br/>
+        /// For any other clip, mutes the composition's script layer, which silences every<br/>
+        /// clip on it — including clips already in the composition. Defaults to false.<br/>
+        /// Default Value: false<br/>
+        /// Example: true
+        /// </param>
 #if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 #endif
         public ImportProjectMediaRequestAddCompositionClip(
-            string media)
+            string media,
+            bool? mute)
         {
             this.Media = media ?? throw new global::System.ArgumentNullException(nameof(media));
+            this.Mute = mute;
         }
 
         /// <summary>
