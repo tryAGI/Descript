@@ -18,12 +18,16 @@ namespace Descript
         public required global::System.Guid ProjectId { get; set; }
 
         /// <summary>
-        /// The ID of the composition to export. Defaults to the first composition.<br/>
+        /// Composition to export. If omitted, the first composition in the project is used.<br/>
+        /// Accepts any of the following formats:<br/>
+        /// - A full composition UUID (e.g. `39677a40-1c43-4c36-8449-46cfbc4de2b5`)<br/>
+        /// - A 5-character short ID from a Descript URL (e.g. `39677`)<br/>
+        /// - A full Descript project URL (e.g. `https://web.descript.com/{project_id}/39677`)<br/>
         /// Example: 39677a40-1c43-4c36-8449-46cfbc4de2b5
         /// </summary>
         /// <example>39677a40-1c43-4c36-8449-46cfbc4de2b5</example>
         [global::System.Text.Json.Serialization.JsonPropertyName("composition_id")]
-        public global::System.Guid? CompositionId { get; set; }
+        public string? CompositionId { get; set; }
 
         /// <summary>
         /// Transcript file format. The response body is the raw transcript file<br/>
@@ -79,7 +83,11 @@ namespace Descript
         /// The `srt` format exports a SubRip subtitle file with timed captions.
         /// </param>
         /// <param name="compositionId">
-        /// The ID of the composition to export. Defaults to the first composition.<br/>
+        /// Composition to export. If omitted, the first composition in the project is used.<br/>
+        /// Accepts any of the following formats:<br/>
+        /// - A full composition UUID (e.g. `39677a40-1c43-4c36-8449-46cfbc4de2b5`)<br/>
+        /// - A 5-character short ID from a Descript URL (e.g. `39677`)<br/>
+        /// - A full Descript project URL (e.g. `https://web.descript.com/{project_id}/39677`)<br/>
         /// Example: 39677a40-1c43-4c36-8449-46cfbc4de2b5
         /// </param>
         /// <param name="includeSpeakerLabels">
@@ -103,7 +111,7 @@ namespace Descript
         public ExportTranscriptRequest(
             global::System.Guid projectId,
             global::Descript.ExportTranscriptRequestFormat format,
-            global::System.Guid? compositionId,
+            string? compositionId,
             global::Descript.ExportTranscriptRequestIncludeSpeakerLabels? includeSpeakerLabels,
             bool? includeMarkers,
             global::Descript.ExportTranscriptRequestTimecodes? timecodes)

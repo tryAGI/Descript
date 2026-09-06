@@ -6,7 +6,7 @@ namespace Descript.CLI.Commands;
 
 internal sealed record ExportTranscriptRequestOptionSet(
     Option<global::System.Guid> ProjectId,
-                     Option<global::System.Guid?> CompositionId,
+                     Option<string?> CompositionId,
                      Option<global::Descript.ExportTranscriptRequestFormat> Format,
                      Option<global::Descript.ExportTranscriptRequestIncludeSpeakerLabels?> IncludeSpeakerLabels,
                      Option<bool?> IncludeMarkers)
@@ -22,9 +22,15 @@ internal sealed record ExportTranscriptRequestOptionSet(
                     Description = @"The ID of the project to export from.",
                     Required = true,
                 },
-                CompositionId: new Option<global::System.Guid?>($"--{normalizedPrefix}composition-id")
+                CompositionId: new Option<string?>($"--{normalizedPrefix}composition-id")
                 {
-                    Description = @"The ID of the composition to export. Defaults to the first composition.",
+                    Description = @"Composition to export. If omitted, the first composition in the project is used.
+
+Accepts any of the following formats:
+- A full composition UUID (e.g. `39677a40-1c43-4c36-8449-46cfbc4de2b5`)
+- A 5-character short ID from a Descript URL (e.g. `39677`)
+- A full Descript project URL (e.g. `https://web.descript.com/{project_id}/39677`)
+",
                 },
                 Format: new Option<global::Descript.ExportTranscriptRequestFormat>($"--{normalizedPrefix}format")
                 {
