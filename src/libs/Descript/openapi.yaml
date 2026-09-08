@@ -487,6 +487,14 @@ paths:
                               type: string
                               description: Media reference ID (display name) of the media to add as a clip
                               example: Misc/intro.mp4
+                            mute:
+                              type: boolean
+                              description: |
+                                Mute the track this clip plays on. For a sequence clip, mutes the sequence's own tracks.
+                                For any other clip, mutes the composition's script layer, which silences every
+                                clip on it — including clips already in the composition. Defaults to false.
+                              default: false
+                              example: true
                           additionalProperties: false
                     required:
                       - clips
@@ -1386,8 +1394,13 @@ paths:
                   example: 9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
                 composition_id:
                   type: string
-                  format: uuid
-                  description: The ID of the composition to export. Defaults to the first composition.
+                  description: |
+                    Composition to export. If omitted, the first composition in the project is used.
+
+                    Accepts any of the following formats:
+                    - A full composition UUID (e.g. `39677a40-1c43-4c36-8449-46cfbc4de2b5`)
+                    - A 5-character short ID from a Descript URL (e.g. `39677`)
+                    - A full Descript project URL (e.g. `https://web.descript.com/{project_id}/39677`)
                   example: 39677a40-1c43-4c36-8449-46cfbc4de2b5
                 format:
                   type: string
