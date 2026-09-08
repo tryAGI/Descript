@@ -21,6 +21,6 @@ public partial class Tests
 
         status.Should().NotBeNull();
 
-        Console.WriteLine($"API status: {status.Status}");
+        Console.WriteLine($"API version: {status.ApiVersion}");
     }
 }
