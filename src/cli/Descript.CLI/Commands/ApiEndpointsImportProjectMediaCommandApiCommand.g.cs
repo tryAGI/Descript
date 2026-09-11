@@ -136,7 +136,7 @@ This endpoint can:
 - URLs must be accessible by Descript servers
 - URLs must support HTTP Range requests
 - Recommended to sign URLs for 12-48 hours to reduce chance of failure
-- [Supported file types](https://help.descript.com/hc/en-us/articles/10164098416909-Supported-file-types)
+- [Supported file types](https://help.descript.com/add-and-manage-media/supported-file-types)
 
 ### Direct file upload
 
