@@ -5,7 +5,7 @@ namespace Descript
 {
     /// <summary>
     /// Users of Descript currently have three options to export their edited content. They can export files in various<br/>
-    /// formats, share a Descript link, or use our [one-click cloud export](https://help.descript.com/hc/en-us/articles/360043869551-Becoming-a-Supported-Content-Hosting-Partner)<br/>
+    /// formats, share a Descript link, or use our [one-click cloud export](https://help.descript.com/connect-with-us/hosting-partners)<br/>
     /// to publish directly to a partner.<br/>
     /// ### Roundtrip Metadata<br/>
     /// If Project data previously came from a partner via an Edit in Descript schema then any Descript Export pages<br/>
