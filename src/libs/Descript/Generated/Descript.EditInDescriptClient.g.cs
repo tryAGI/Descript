@@ -68,7 +68,7 @@ namespace Descript
         /// <inheritdoc/>
         public global::Descript.AutoSDKClientOptions Options { get; }
 
-        internal global::System.Lazy<global::System.Text.Json.Serialization.JsonSerializerContext> JsonSerializerContextProvider { get; set; } = new(() => global::Descript.SourceGenerationContext.Default);
+        internal global::System.Lazy<global::System.Text.Json.Serialization.JsonSerializerContext> JsonSerializerContextProvider { get; set; } = new(() => global::Descript.EditInDescriptSourceGenerationContext.Default);
 
         /// <summary>
         ///
