@@ -13,6 +13,34 @@ namespace Descript
         DefaultIgnoreCondition = global::System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull,
         Converters = new global::System.Type[]
         {
+            typeof(global::Descript.JsonConverters.SearchResponseResultProjectSearchResultTypeJsonConverter),
+
+            typeof(global::Descript.JsonConverters.SearchResponseResultProjectSearchResultTypeNullableJsonConverter),
+
+            typeof(global::Descript.JsonConverters.SearchResponseResultMediaSearchResultTypeJsonConverter),
+
+            typeof(global::Descript.JsonConverters.SearchResponseResultMediaSearchResultTypeNullableJsonConverter),
+
+            typeof(global::Descript.JsonConverters.SearchResponseResultMediaSearchResultLocationJsonConverter),
+
+            typeof(global::Descript.JsonConverters.SearchResponseResultMediaSearchResultLocationNullableJsonConverter),
+
+            typeof(global::Descript.JsonConverters.SearchResponseResultLayoutPackSearchResultTypeJsonConverter),
+
+            typeof(global::Descript.JsonConverters.SearchResponseResultLayoutPackSearchResultTypeNullableJsonConverter),
+
+            typeof(global::Descript.JsonConverters.SearchResponseResultProjectFolderSearchResultTypeJsonConverter),
+
+            typeof(global::Descript.JsonConverters.SearchResponseResultProjectFolderSearchResultTypeNullableJsonConverter),
+
+            typeof(global::Descript.JsonConverters.SearchResponseResultMediaLibraryFolderSearchResultTypeJsonConverter),
+
+            typeof(global::Descript.JsonConverters.SearchResponseResultMediaLibraryFolderSearchResultTypeNullableJsonConverter),
+
+            typeof(global::Descript.JsonConverters.SearchResponseResultMediaLibraryFolderSearchResultLocationJsonConverter),
+
+            typeof(global::Descript.JsonConverters.SearchResponseResultMediaLibraryFolderSearchResultLocationNullableJsonConverter),
+
             typeof(global::Descript.JsonConverters.PublishedProjectMetadataPublishTypeJsonConverter),
 
             typeof(global::Descript.JsonConverters.PublishedProjectMetadataPublishTypeNullableJsonConverter),
@@ -153,6 +181,18 @@ namespace Descript
 
             typeof(global::Descript.JsonConverters.ListProjectsDirectionNullableJsonConverter),
 
+            typeof(global::Descript.JsonConverters.SearchTypeItemJsonConverter),
+
+            typeof(global::Descript.JsonConverters.SearchTypeItemNullableJsonConverter),
+
+            typeof(global::Descript.JsonConverters.SearchMatchItemJsonConverter),
+
+            typeof(global::Descript.JsonConverters.SearchMatchItemNullableJsonConverter),
+
+            typeof(global::Descript.JsonConverters.SearchSortJsonConverter),
+
+            typeof(global::Descript.JsonConverters.SearchSortNullableJsonConverter),
+
             typeof(global::Descript.JsonConverters.ListAgentModelsResponseAvailableModelCostJsonConverter),
 
             typeof(global::Descript.JsonConverters.ListAgentModelsResponseAvailableModelCostNullableJsonConverter),
@@ -181,6 +221,8 @@ namespace Descript
 
             typeof(global::Descript.JsonConverters.JobStatusJsonConverter),
 
+            typeof(global::Descript.JsonConverters.OneOfJsonConverter<global::Descript.SearchResponseResultProjectSearchResult, global::Descript.SearchResponseResultMediaSearchResult, global::Descript.SearchResponseResultLayoutPackSearchResult, global::Descript.SearchResponseResultProjectFolderSearchResult, global::Descript.SearchResponseResultMediaLibraryFolderSearchResult>),
+
             typeof(global::Descript.JsonConverters.OneOfJsonConverter<global::Descript.ImportProjectMediaRequestAddMediaUrlImport, global::Descript.ImportProjectMediaRequestAddMediaDirectUpload, global::Descript.ImportProjectMediaRequestAddMediaMultitrackSequence>),
 
             typeof(global::Descript.JsonConverters.UnixTimestampJsonConverter),
@@ -194,16 +236,32 @@ namespace Descript
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.Error403))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.Error404))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.Error429))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.EditInDescriptSchemaPostBody))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.SearchResponse))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.IList<global::Descript.OneOf<global::Descript.SearchResponseResultProjectSearchResult, global::Descript.SearchResponseResultMediaSearchResult, global::Descript.SearchResponseResultLayoutPackSearchResult, global::Descript.SearchResponseResultProjectFolderSearchResult, global::Descript.SearchResponseResultMediaLibraryFolderSearchResult>>), TypeInfoPropertyName = "SearchResponseResultMediaLibraryFolderSearchResult_3772f94da0bc6d36")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.OneOf<global::Descript.SearchResponseResultProjectSearchResult, global::Descript.SearchResponseResultMediaSearchResult, global::Descript.SearchResponseResultLayoutPackSearchResult, global::Descript.SearchResponseResultProjectFolderSearchResult, global::Descript.SearchResponseResultMediaLibraryFolderSearchResult>), TypeInfoPropertyName = "SearchResponseResultMediaLibraryFolderSearchResult_bfc3201b218202a0")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.SearchResponseResultProjectSearchResult))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.SearchResponseResultProjectSearchResultType), TypeInfoPropertyName = "SearchResponseResultProjectSearchResultType2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Guid))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.SearchOwner))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.DateTime))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.SearchResponseResultMediaSearchResult))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.SearchResponseResultMediaSearchResultType), TypeInfoPropertyName = "SearchResponseResultMediaSearchResultType2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.SearchResponseResultMediaSearchResultLocation), TypeInfoPropertyName = "SearchResponseResultMediaSearchResultLocation2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(double))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.SearchResponseResultLayoutPackSearchResult))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.SearchResponseResultLayoutPackSearchResultType), TypeInfoPropertyName = "SearchResponseResultLayoutPackSearchResultType2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.SearchResponseResultProjectFolderSearchResult))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.SearchResponseResultProjectFolderSearchResultType), TypeInfoPropertyName = "SearchResponseResultProjectFolderSearchResultType2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.SearchResponseResultMediaLibraryFolderSearchResult))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.SearchResponseResultMediaLibraryFolderSearchResultType), TypeInfoPropertyName = "SearchResponseResultMediaLibraryFolderSearchResultType2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.SearchResponseResultMediaLibraryFolderSearchResultLocation), TypeInfoPropertyName = "SearchResponseResultMediaLibraryFolderSearchResultLocation2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.EditInDescriptSchemaPostBody))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.EditInDescriptSchemaPostBodyProjectSchema))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.IList<global::Descript.EditInDescriptSchemaPostBodyProjectSchemaFile>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.EditInDescriptSchemaPostBodyProjectSchemaFile))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.EditInDescriptSchemaPostBodyProjectSchemaFileStartOffset))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(double))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.EditInDescriptSchemaPostResponse))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.PublishedProjectMetadata))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.DateTime))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.PublishedProjectMetadataPublishType), TypeInfoPropertyName = "PublishedProjectMetadataPublishType2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.PublishedProjectMetadataPrivacy), TypeInfoPropertyName = "PublishedProjectMetadataPrivacy2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.PublishedProjectMetadataMetadata))]
@@ -288,6 +346,12 @@ namespace Descript
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.ListJobsType), TypeInfoPropertyName = "ListJobsType2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.ListProjectsSort), TypeInfoPropertyName = "ListProjectsSort2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.ListProjectsDirection), TypeInfoPropertyName = "ListProjectsDirection2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.IList<global::System.Guid>))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.IList<global::Descript.SearchTypeItem>))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.SearchTypeItem), TypeInfoPropertyName = "SearchTypeItem2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.IList<global::Descript.SearchMatchItem>))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.SearchMatchItem), TypeInfoPropertyName = "SearchMatchItem2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.SearchSort), TypeInfoPropertyName = "SearchSort2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.ImportProjectMediaResponse))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.Dictionary<string, global::Descript.ImportProjectMediaResponseUploadUrls2>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.ImportProjectMediaResponseUploadUrls2))]
@@ -319,12 +383,17 @@ namespace Descript
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.GetProjectResponsePublisheAccessLevel), TypeInfoPropertyName = "GetProjectResponsePublisheAccessLevel2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.GetProjectResponsePublisheMediaType), TypeInfoPropertyName = "GetProjectResponsePublisheMediaType2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.GetStatusResponse))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.OneOf<global::Descript.SearchResponseResultProjectSearchResult, global::Descript.SearchResponseResultMediaSearchResult, global::Descript.SearchResponseResultLayoutPackSearchResult, global::Descript.SearchResponseResultProjectFolderSearchResult, global::Descript.SearchResponseResultMediaLibraryFolderSearchResult>?), TypeInfoPropertyName = "SearchResponseResultMediaLibraryFolderSearchResult_7de459a6117e24a6")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.OneOf<global::Descript.ImportProjectMediaRequestAddMediaUrlImport, global::Descript.ImportProjectMediaRequestAddMediaDirectUpload, global::Descript.ImportProjectMediaRequestAddMediaMultitrackSequence>?), TypeInfoPropertyName = "ImportProjectMediaRequestAddMediaMultitrackSequence_a84f7d44496d84a5")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::Descript.OneOf<global::Descript.SearchResponseResultProjectSearchResult, global::Descript.SearchResponseResultMediaSearchResult, global::Descript.SearchResponseResultLayoutPackSearchResult, global::Descript.SearchResponseResultProjectFolderSearchResult, global::Descript.SearchResponseResultMediaLibraryFolderSearchResult>>), TypeInfoPropertyName = "SearchResponseResultMediaLibraryFolderSearchResult_07217df44b83550a")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::Descript.EditInDescriptSchemaPostBodyProjectSchemaFile>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::Descript.ImportSuccessResultCreatedComposition>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::Descript.ImportProjectMediaRequestAddMediaMultitrackSequenceTrack>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::Descript.ImportProjectMediaRequestAddComposition>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::Descript.ImportProjectMediaRequestAddCompositionClip>))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::System.Guid>))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::Descript.SearchTypeItem>))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::Descript.SearchMatchItem>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::Descript.ListAgentModelsResponseAvailableModel>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::Descript.ListAgentModelsResponseAliase>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::Descript.JobStatus>))]

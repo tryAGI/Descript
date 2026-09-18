@@ -21,6 +21,7 @@ internal static class APIEndpointsApiGroupCommand
                          command.Subcommands.Add(ApiEndpointsListJobsCommandApiCommand.Create());
                          command.Subcommands.Add(ApiEndpointsListProjectsCommandApiCommand.Create());
                          command.Subcommands.Add(ApiEndpointsPublishJobCommandApiCommand.Create());
+                         command.Subcommands.Add(ApiEndpointsSearchCommandApiCommand.Create());
         return command;
     }
 }

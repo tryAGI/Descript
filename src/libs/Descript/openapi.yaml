@@ -2315,6 +2315,208 @@ paths:
                 $ref: '#/components/schemas/Error404'
         '429':
           $ref: '#/components/responses/Error429Response'
+  /search:
+    get:
+      tags:
+        - API Endpoints
+      summary: Search a drive
+      description: |
+        Search the drive tied to the personal API token. Matches project names,
+        folder names, layout pack names, media file names, composition text,
+        and transcripts across projects, the drive media library, and Brand
+        Studio. Returns up to 100 results ranked by relevance.
+      operationId: search
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: query
+          name: query
+          description: |
+            Search term. Matched against names and contents. Must be non-empty.
+          required: true
+          schema:
+            type: string
+            minLength: 1
+          example: quarterly update
+        - in: query
+          name: updated_after
+          description: |
+            Return results updated at or after this time. Accepts an ISO 8601
+            date (`2026-08-01`, interpreted as the start of that UTC day) or
+            timestamp (`2026-08-01T09:30:00Z`). Values without a timezone
+            offset are read as UTC.
+          required: false
+          schema:
+            type: string
+            format: date-time
+          example: '2026-08-01T00:00:00Z'
+        - in: query
+          name: updated_before
+          description: |
+            Return results updated at or before this time. Accepts an ISO 8601
+            date (`2026-08-01`, interpreted as the end of that UTC day) or
+            timestamp (`2026-08-01T23:59:59Z`). Values without a timezone
+            offset are read as UTC.
+          required: false
+          schema:
+            type: string
+            format: date-time
+          example: '2026-08-31T23:59:59Z'
+        - in: query
+          name: owner
+          description: |
+            Return items owned by these user UUIDs. Repeat this parameter to
+            include more than one owner. If omitted, results from all owners
+            are returned.
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+              format: uuid
+          example:
+            - 3fa85f64-5717-4562-b3fc-2c963f66afa6
+        - in: query
+          name: type
+          description: |
+            Result types to search. Repeat this parameter to search more than
+            one type. If omitted, all result types are returned.
+
+            - `project`: Projects
+            - `layout_pack`: Layout packs
+            - `project_folder`: Folders that hold projects
+            - `media_library_folder`: Folders in the drive media library
+            - `video`, `image`, `audio`: Files of that media type in the drive
+               media library, Brand Studio, and inside projects
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+              enum:
+                - project
+                - video
+                - image
+                - audio
+                - project_folder
+                - media_library_folder
+                - layout_pack
+          example:
+            - project
+            - media_library_folder
+        - in: query
+          name: match
+          description: |
+            How the query may match. Repeat this parameter to allow more than
+            one kind. `name` matches project, file, folder, and layout pack
+            names. `content` matches transcripts and composition text. If
+            omitted, names and contents both contribute.
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+              enum:
+                - name
+                - content
+          example:
+            - content
+        - in: query
+          name: sort
+          description: |
+            How to sort results:
+
+            - `relevance`: closest matches first. This is the default.
+            - `newest`: most recently modified first.
+            - `oldest`: least recently modified first.
+          required: false
+          schema:
+            type: string
+            enum:
+              - relevance
+              - newest
+              - oldest
+            default: relevance
+          example: newest
+        - in: query
+          name: limit
+          description: |
+            Maximum number of results to return. Defaults to 30. Maximum is
+            100.
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 30
+          example: 30
+      responses:
+        '200':
+          description: Search completed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+              examples:
+                mixed:
+                  summary: A project hit and a media-library file hit
+                  value:
+                    results:
+                      - type: project
+                        project_id: 9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
+                        name: Quarterly update
+                        owner:
+                          id: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+                          name: Ada Lovelace
+                        updated_at: '2026-08-15T14:00:00.000Z'
+                      - type: video
+                        asset_id: 6dc3f30a-58c2-4174-96a6-dc18cf3c7776
+                        name: standup.mp4
+                        location: media_library
+                        owner:
+                          id: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+                          name: Ada Lovelace
+                        updated_at: '2026-08-12T09:30:00.000Z'
+                        duration: 184.5
+                brand_studio:
+                  summary: A media file in Brand Studio
+                  value:
+                    results:
+                      - type: image
+                        asset_id: 6dc3f30a-58c2-4174-96a6-dc18cf3c7776
+                        brand_studio_id: 7c1e2a90-4b3d-4f6a-9c8e-1a2b3c4d5e6f
+                        name: logo.png
+                        location: brand_studio
+                        owner:
+                          id: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+                          name: Ada Lovelace
+                        updated_at: '2026-08-12T09:30:00.000Z'
+        '400':
+          description: The query is missing or the token is not associated with a drive.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error400'
+        '401':
+          description: The personal API token is missing or invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401'
+        '404':
+          description: The search endpoint is not enabled for the authenticated user.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404'
+        '429':
+          $ref: '#/components/responses/Error429Response'
   /status:
     get:
       tags:
@@ -2598,6 +2800,210 @@ components:
       required:
         - error
         - message
+    SearchResponse:
+      type: object
+      description: Ranked search results.
+      required:
+        - results
+      properties:
+        results:
+          type: array
+          description: Search results ranked by relevance, best match first.
+          items:
+            oneOf:
+              - type: object
+                title: Project search result
+                description: A project matched.
+                required:
+                  - type
+                  - project_id
+                  - name
+                  - updated_at
+                properties:
+                  type:
+                    type: string
+                    description: Always `project` for a project result.
+                    enum:
+                      - project
+                  project_id:
+                    type: string
+                    format: uuid
+                    description: |
+                      ID of the project. Endpoints that take a
+                      `project_id` accept it.
+                  name:
+                    type: string
+                    description: Name of the project.
+                  owner:
+                    $ref: '#/components/schemas/SearchOwner'
+                  updated_at:
+                    type: string
+                    format: date-time
+                    description: |
+                      When the project was last modified. This is the
+                      field `updated_after` and `updated_before` filter
+                      on.
+              - type: object
+                title: Media search result
+                description: |
+                  A video, audio, or image file in the drive media library,
+                  Brand Studio, or a project.
+                required:
+                  - type
+                  - asset_id
+                  - name
+                  - location
+                  - updated_at
+                properties:
+                  type:
+                    type: string
+                    description: |
+                      The kind of media: `video`, `audio`, or `image`.
+                    enum:
+                      - video
+                      - image
+                      - audio
+                  asset_id:
+                    type: string
+                    format: uuid
+                    description: ID of the file. Endpoints that take an `asset_id` accept it.
+                  project_id:
+                    type: string
+                    format: uuid
+                    description: |
+                      ID of the project that contains the file. Present
+                      only when `location` is `project`.
+                  brand_studio_id:
+                    type: string
+                    format: uuid
+                    description: |
+                      ID of the Brand Studio that contains the file.
+                      Present only when `location` is `brand_studio`.
+                  name:
+                    type: string
+                    description: File name of the media file.
+                  location:
+                    type: string
+                    description: |
+                      Where the file lives: `media_library` in the drive
+                      media library, `project` inside a project, or
+                      `brand_studio` in Brand Studio.
+                    enum:
+                      - media_library
+                      - project
+                      - brand_studio
+                  owner:
+                    $ref: '#/components/schemas/SearchOwner'
+                  updated_at:
+                    type: string
+                    format: date-time
+                    description: |
+                      When the file was last modified. This is the
+                      field `updated_after` and `updated_before` filter
+                      on.
+                  duration:
+                    type: number
+                    description: |
+                      Playback length of the file in seconds. Omitted
+                      for images and for files with no duration.
+              - type: object
+                title: Layout pack search result
+                description: A layout pack matched.
+                required:
+                  - type
+                  - project_id
+                  - name
+                  - updated_at
+                properties:
+                  type:
+                    type: string
+                    description: Always `layout_pack` for a layout pack result.
+                    enum:
+                      - layout_pack
+                  project_id:
+                    type: string
+                    format: uuid
+                    description: ID of the layout pack.
+                  name:
+                    type: string
+                    description: Name of the layout pack.
+                  owner:
+                    $ref: '#/components/schemas/SearchOwner'
+                  updated_at:
+                    type: string
+                    format: date-time
+                    description: |
+                      When the layout pack was last modified. This is
+                      the field `updated_after` and `updated_before`
+                      filter on.
+              - type: object
+                title: Project folder search result
+                description: A folder that holds projects.
+                required:
+                  - type
+                  - folder_id
+                  - name
+                  - updated_at
+                properties:
+                  type:
+                    type: string
+                    description: Always `project_folder`. The folder holds projects.
+                    enum:
+                      - project_folder
+                  folder_id:
+                    type: string
+                    format: uuid
+                    description: ID of the folder.
+                  name:
+                    type: string
+                    description: Name of the folder.
+                  owner:
+                    $ref: '#/components/schemas/SearchOwner'
+                  updated_at:
+                    type: string
+                    format: date-time
+                    description: |
+                      When the folder was last modified. This is the
+                      field `updated_after` and `updated_before` filter
+                      on.
+              - type: object
+                title: Media library folder search result
+                description: A folder in the drive media library.
+                required:
+                  - type
+                  - folder_id
+                  - name
+                  - location
+                  - updated_at
+                properties:
+                  type:
+                    type: string
+                    description: |
+                      Always `media_library_folder`. The folder holds
+                      media library files.
+                    enum:
+                      - media_library_folder
+                  folder_id:
+                    type: string
+                    format: uuid
+                    description: ID of the folder.
+                  name:
+                    type: string
+                    description: Name of the folder.
+                  location:
+                    type: string
+                    description: Always `media_library` for a media-library folder.
+                    enum:
+                      - media_library
+                  owner:
+                    $ref: '#/components/schemas/SearchOwner'
+                  updated_at:
+                    type: string
+                    format: date-time
+                    description: |
+                      When the folder was last modified. This is the
+                      field `updated_after` and `updated_before` filter
+                      on.
     EditInDescriptSchemaPostBody:
       type: object
       properties:
@@ -3338,6 +3744,20 @@ components:
       description: |
         Status of an async job. The response structure varies based on the job type.
         Use the `job_type` field to determine which fields will be present.
+    SearchOwner:
+      type: object
+      description: Owner of the search result. Omitted when the owner is unavailable.
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: User ID of the owner.
+        name:
+          type: string
+          description: Display name of the owner.
   responses:
     Error429Response:
       description: |
