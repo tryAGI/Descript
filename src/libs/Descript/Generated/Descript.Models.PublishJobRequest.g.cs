@@ -18,7 +18,9 @@ namespace Descript
         public required global::System.Guid ProjectId { get; set; }
 
         /// <summary>
-        /// Composition to publish. If omitted, the first composition in the project is used.<br/>
+        /// Composition to publish. If omitted, the first composition that has content is<br/>
+        /// used, skipping the empty placeholder that leads projects created by an agent or<br/>
+        /// import job.<br/>
         /// Accepts any of the following formats:<br/>
         /// - A full composition UUID (e.g. `39677a40-1c43-4c36-8449-46cfbc4de2b5`)<br/>
         /// - A 5-character short ID from a Descript URL (e.g. `39677`)<br/>
@@ -81,7 +83,9 @@ namespace Descript
         /// Example: 9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
         /// </param>
         /// <param name="compositionId">
-        /// Composition to publish. If omitted, the first composition in the project is used.<br/>
+        /// Composition to publish. If omitted, the first composition that has content is<br/>
+        /// used, skipping the empty placeholder that leads projects created by an agent or<br/>
+        /// import job.<br/>
         /// Accepts any of the following formats:<br/>
         /// - A full composition UUID (e.g. `39677a40-1c43-4c36-8449-46cfbc4de2b5`)<br/>
         /// - A 5-character short ID from a Descript URL (e.g. `39677`)<br/>

@@ -1169,7 +1169,9 @@ paths:
                 composition_id:
                   type: string
                   description: |
-                    Composition to publish. If omitted, the first composition in the project is used.
+                    Composition to publish. If omitted, the first composition that has content is
+                    used, skipping the empty placeholder that leads projects created by an agent or
+                    import job.
 
                     Accepts any of the following formats:
                     - A full composition UUID (e.g. `39677a40-1c43-4c36-8449-46cfbc4de2b5`)
@@ -1288,6 +1290,10 @@ paths:
             - Malformed request body
             - Invalid project_id or composition_id format
             - Invalid media_type or resolution value
+            - The target composition is empty: either the requested `composition_id` names an
+              empty composition, or `composition_id` was omitted and every composition in the
+              project is empty. The message names any compositions that do have content, so
+              you can retry with one of those.
           content:
             application/json:
               schema:
@@ -1303,6 +1309,11 @@ paths:
                   value:
                     error: invalid_input
                     message: '"resolution" must be one of [480p, 720p, 1080p, 1440p, 4K]'
+                empty_composition:
+                  summary: Target composition has no content
+                  value:
+                    error: invalid_input
+                    message: 'Composition 39677a40-1c43-4c36-8449-46cfbc4de2b5 ("Untitled") is empty and cannot be published. Retry with composition_id set to a composition that has content: 5b507b2b-e3ef-4146-a0d0-6741df516973.'
         '401':
           description: Unauthorized - missing or invalid authentication token
           content:

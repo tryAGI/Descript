@@ -17,7 +17,9 @@ internal static partial class ApiEndpointsPublishJobCommandApiCommand
     private static Option<string?> CompositionId { get; } = new(
         name: @"--composition-id")
     {
-        Description = @"Composition to publish. If omitted, the first composition in the project is used.
+        Description = @"Composition to publish. If omitted, the first composition that has content is
+used, skipping the empty placeholder that leads projects created by an agent or
+import job.
 
 Accepts any of the following formats:
 - A full composition UUID (e.g. `39677a40-1c43-4c36-8449-46cfbc4de2b5`)
