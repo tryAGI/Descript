@@ -369,7 +369,7 @@ namespace Descript
                                 retryReason: global::System.String.Empty,
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                 }
-                            // Invalid input: - Malformed request body - Invalid project_id or composition_id format - Invalid media_type or resolution value
+                            // Invalid input: - Malformed request body - Invalid project_id or composition_id format - Invalid media_type or resolution value - The target composition is empty: either the requested `composition_id` names an   empty composition, or `composition_id` was omitted and every composition in the   project is empty. The message names any compositions that do have content, so   you can retry with one of those.
                             if ((int)__response.StatusCode == 400)
                             {
                                 string? __content_400 = null;
@@ -712,7 +712,9 @@ namespace Descript
         /// Example: 9f36ee32-5a2c-47e7-b1a3-94991d3e3ddb
         /// </param>
         /// <param name="compositionId">
-        /// Composition to publish. If omitted, the first composition in the project is used.<br/>
+        /// Composition to publish. If omitted, the first composition that has content is<br/>
+        /// used, skipping the empty placeholder that leads projects created by an agent or<br/>
+        /// import job.<br/>
         /// Accepts any of the following formats:<br/>
         /// - A full composition UUID (e.g. `39677a40-1c43-4c36-8449-46cfbc4de2b5`)<br/>
         /// - A 5-character short ID from a Descript URL (e.g. `39677`)<br/>
