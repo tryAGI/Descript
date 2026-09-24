@@ -56,6 +56,23 @@ namespace Descript
         public required global::Descript.SearchResponseResultMediaSearchResultLocation Location { get; set; }
 
         /// <summary>
+        /// Link that opens this file in Descript. Files<br/>
+        /// inside a project open that project with the file<br/>
+        /// highlighted.
+        /// </summary>
+        [global::System.Text.Json.Serialization.JsonPropertyName("url")]
+        [global::System.Text.Json.Serialization.JsonRequired]
+        public required string Url { get; set; }
+
+        /// <summary>
+        /// Time-limited signed URL of a preview image for<br/>
+        /// video and image files. Omitted for audio and when<br/>
+        /// a thumbnail is unavailable.
+        /// </summary>
+        [global::System.Text.Json.Serialization.JsonPropertyName("thumbnail_url")]
+        public string? ThumbnailUrl { get; set; }
+
+        /// <summary>
         /// Owner of the search result. Omitted when the owner is unavailable.
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("owner")]
@@ -100,6 +117,11 @@ namespace Descript
         /// media library, `project` inside a project, or<br/>
         /// `brand_studio` in Brand Studio.
         /// </param>
+        /// <param name="url">
+        /// Link that opens this file in Descript. Files<br/>
+        /// inside a project open that project with the file<br/>
+        /// highlighted.
+        /// </param>
         /// <param name="updatedAt">
         /// When the file was last modified. This is the<br/>
         /// field `updated_after` and `updated_before` filter<br/>
@@ -112,6 +134,11 @@ namespace Descript
         /// <param name="brandStudioId">
         /// ID of the Brand Studio that contains the file.<br/>
         /// Present only when `location` is `brand_studio`.
+        /// </param>
+        /// <param name="thumbnailUrl">
+        /// Time-limited signed URL of a preview image for<br/>
+        /// video and image files. Omitted for audio and when<br/>
+        /// a thumbnail is unavailable.
         /// </param>
         /// <param name="owner">
         /// Owner of the search result. Omitted when the owner is unavailable.
@@ -128,9 +155,11 @@ namespace Descript
             global::System.Guid assetId,
             string name,
             global::Descript.SearchResponseResultMediaSearchResultLocation location,
+            string url,
             global::System.DateTime updatedAt,
             global::System.Guid? projectId,
             global::System.Guid? brandStudioId,
+            string? thumbnailUrl,
             global::Descript.SearchOwner? owner,
             double? duration)
         {
@@ -140,6 +169,8 @@ namespace Descript
             this.BrandStudioId = brandStudioId;
             this.Name = name ?? throw new global::System.ArgumentNullException(nameof(name));
             this.Location = location;
+            this.Url = url ?? throw new global::System.ArgumentNullException(nameof(url));
+            this.ThumbnailUrl = thumbnailUrl;
             this.Owner = owner;
             this.UpdatedAt = updatedAt;
             this.Duration = duration;

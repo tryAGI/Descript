@@ -38,6 +38,14 @@ namespace Descript
         public global::Descript.SearchResponseResultMediaLibraryFolderSearchResultLocation Location { get; set; }
 
         /// <summary>
+        /// Link that opens this media library folder in<br/>
+        /// Descript.
+        /// </summary>
+        [global::System.Text.Json.Serialization.JsonPropertyName("url")]
+        [global::System.Text.Json.Serialization.JsonRequired]
+        public required string Url { get; set; }
+
+        /// <summary>
         /// Owner of the search result. Omitted when the owner is unavailable.
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("owner")]
@@ -67,6 +75,10 @@ namespace Descript
         /// <param name="name">
         /// Name of the folder.
         /// </param>
+        /// <param name="url">
+        /// Link that opens this media library folder in<br/>
+        /// Descript.
+        /// </param>
         /// <param name="updatedAt">
         /// When the folder was last modified. This is the<br/>
         /// field `updated_after` and `updated_before` filter<br/>
@@ -88,6 +100,7 @@ namespace Descript
         public SearchResponseResultMediaLibraryFolderSearchResult(
             global::System.Guid folderId,
             string name,
+            string url,
             global::System.DateTime updatedAt,
             global::Descript.SearchResponseResultMediaLibraryFolderSearchResultType type,
             global::Descript.SearchResponseResultMediaLibraryFolderSearchResultLocation location,
@@ -97,6 +110,7 @@ namespace Descript
             this.FolderId = folderId;
             this.Name = name ?? throw new global::System.ArgumentNullException(nameof(name));
             this.Location = location;
+            this.Url = url ?? throw new global::System.ArgumentNullException(nameof(url));
             this.Owner = owner;
             this.UpdatedAt = updatedAt;
         }
