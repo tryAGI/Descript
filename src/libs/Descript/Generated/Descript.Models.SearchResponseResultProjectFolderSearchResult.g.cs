@@ -30,6 +30,13 @@ namespace Descript
         public required string Name { get; set; }
 
         /// <summary>
+        /// Link that opens this project folder in Descript.
+        /// </summary>
+        [global::System.Text.Json.Serialization.JsonPropertyName("url")]
+        [global::System.Text.Json.Serialization.JsonRequired]
+        public required string Url { get; set; }
+
+        /// <summary>
         /// Owner of the search result. Omitted when the owner is unavailable.
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("owner")]
@@ -59,6 +66,9 @@ namespace Descript
         /// <param name="name">
         /// Name of the folder.
         /// </param>
+        /// <param name="url">
+        /// Link that opens this project folder in Descript.
+        /// </param>
         /// <param name="updatedAt">
         /// When the folder was last modified. This is the<br/>
         /// field `updated_after` and `updated_before` filter<br/>
@@ -76,6 +86,7 @@ namespace Descript
         public SearchResponseResultProjectFolderSearchResult(
             global::System.Guid folderId,
             string name,
+            string url,
             global::System.DateTime updatedAt,
             global::Descript.SearchResponseResultProjectFolderSearchResultType type,
             global::Descript.SearchOwner? owner)
@@ -83,6 +94,7 @@ namespace Descript
             this.Type = type;
             this.FolderId = folderId;
             this.Name = name ?? throw new global::System.ArgumentNullException(nameof(name));
+            this.Url = url ?? throw new global::System.ArgumentNullException(nameof(url));
             this.Owner = owner;
             this.UpdatedAt = updatedAt;
         }
