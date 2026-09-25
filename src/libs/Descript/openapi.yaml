@@ -2830,6 +2830,7 @@ components:
                   - project_id
                   - name
                   - updated_at
+                  - url
                 properties:
                   type:
                     type: string
@@ -2845,6 +2846,10 @@ components:
                   name:
                     type: string
                     description: Name of the project.
+                  url:
+                    type: string
+                    format: uri
+                    description: Link that opens this project in Descript.
                   owner:
                     $ref: '#/components/schemas/SearchOwner'
                   updated_at:
@@ -2865,6 +2870,7 @@ components:
                   - name
                   - location
                   - updated_at
+                  - url
                 properties:
                   type:
                     type: string
@@ -2903,6 +2909,20 @@ components:
                       - media_library
                       - project
                       - brand_studio
+                  url:
+                    type: string
+                    format: uri
+                    description: |
+                      Link that opens this file in Descript. Files
+                      inside a project open that project with the file
+                      highlighted.
+                  thumbnail_url:
+                    type: string
+                    format: uri
+                    description: |
+                      Time-limited signed URL of a preview image for
+                      video and image files. Omitted for audio and when
+                      a thumbnail is unavailable.
                   owner:
                     $ref: '#/components/schemas/SearchOwner'
                   updated_at:
@@ -2925,6 +2945,7 @@ components:
                   - project_id
                   - name
                   - updated_at
+                  - url
                 properties:
                   type:
                     type: string
@@ -2938,6 +2959,10 @@ components:
                   name:
                     type: string
                     description: Name of the layout pack.
+                  url:
+                    type: string
+                    format: uri
+                    description: Link that opens this layout pack in Descript.
                   owner:
                     $ref: '#/components/schemas/SearchOwner'
                   updated_at:
@@ -2955,6 +2980,7 @@ components:
                   - folder_id
                   - name
                   - updated_at
+                  - url
                 properties:
                   type:
                     type: string
@@ -2968,6 +2994,10 @@ components:
                   name:
                     type: string
                     description: Name of the folder.
+                  url:
+                    type: string
+                    format: uri
+                    description: Link that opens this project folder in Descript.
                   owner:
                     $ref: '#/components/schemas/SearchOwner'
                   updated_at:
@@ -2986,6 +3016,7 @@ components:
                   - name
                   - location
                   - updated_at
+                  - url
                 properties:
                   type:
                     type: string
@@ -3006,6 +3037,12 @@ components:
                     description: Always `media_library` for a media-library folder.
                     enum:
                       - media_library
+                  url:
+                    type: string
+                    format: uri
+                    description: |
+                      Link that opens this media library folder in
+                      Descript.
                   owner:
                     $ref: '#/components/schemas/SearchOwner'
                   updated_at:
