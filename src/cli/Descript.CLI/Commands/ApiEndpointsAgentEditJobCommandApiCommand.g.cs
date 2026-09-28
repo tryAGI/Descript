@@ -112,6 +112,8 @@ Descript will POST the job status (same format as [GET /jobs/{job_id}](#operatio
                     static partial void CustomizeResponseFormatHints(Dictionary<string, CliFormatHint> hints);
 
 
+    static partial void CustomizeCommand(ref Command command);
+
     public static Command Create()
     {
         var command = new Command(@"agent-edit-job", @"Agent edit
@@ -197,6 +199,7 @@ The payload will match the format returned by [GET /jobs/{job_id}](#operation/ge
                                     FormatResponse,
                                     cancellationToken).ConfigureAwait(false);
             }, cancellationToken).ConfigureAwait(false));
+        CustomizeCommand(ref command);
         return command;
     }
 }

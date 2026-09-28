@@ -63,6 +63,8 @@ internal static partial class ApiEndpointsListJobsCommandApiCommand
                     static partial void CustomizeResponseFormatHints(Dictionary<string, CliFormatHint> hints);
 
 
+    static partial void CustomizeCommand(ref Command command);
+
     public static Command Create()
     {
         var command = new Command(@"list-jobs", @"List jobs
@@ -123,6 +125,7 @@ Query parameters allow you to filter the results:
                                     cancellationToken).ConfigureAwait(false);
                                 }
             }, cancellationToken).ConfigureAwait(false));
+        CustomizeCommand(ref command);
         return command;
     }
 }

@@ -29,6 +29,8 @@ internal static partial class ApiEndpointsListAgentModelsCommandApiCommand
                     static partial void CustomizeResponseFormatHints(Dictionary<string, CliFormatHint> hints);
 
 
+    static partial void CustomizeCommand(ref Command command);
+
     public static Command Create()
     {
         var command = new Command(@"list-agent-models", @"List agent models
@@ -76,6 +78,7 @@ selects a recommended model for your account. `auto` is a `medium`-cost option. 
                                     FormatResponse,
                                     cancellationToken).ConfigureAwait(false);
             }, cancellationToken).ConfigureAwait(false));
+        CustomizeCommand(ref command);
         return command;
     }
 }

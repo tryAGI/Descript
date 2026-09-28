@@ -29,6 +29,8 @@ internal static partial class ApiEndpointsGetStatusCommandApiCommand
                     static partial void CustomizeResponseFormatHints(Dictionary<string, CliFormatHint> hints);
 
 
+    static partial void CustomizeCommand(ref Command command);
+
     public static Command Create()
     {
         var command = new Command(@"get-status", @"Check API status
@@ -63,6 +65,7 @@ Returns the connected drive ID and name, plus the API version.
                                     FormatResponse,
                                     cancellationToken).ConfigureAwait(false);
             }, cancellationToken).ConfigureAwait(false));
+        CustomizeCommand(ref command);
         return command;
     }
 }

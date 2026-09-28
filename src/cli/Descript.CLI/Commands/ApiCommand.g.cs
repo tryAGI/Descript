@@ -4,8 +4,10 @@ using System.CommandLine;
 
 namespace Descript.CLI.Commands;
 
-internal static class ApiCommand
+internal static partial class ApiCommand
 {
+    static partial void CustomizeCommand(ref Command command);
+
     public static Command Create()
     {
         var command = new Command("api", "Generated endpoint commands.");
@@ -13,6 +15,7 @@ internal static class ApiCommand
                          command.Subcommands.Add(APIEndpointsApiGroupCommand.Create());
                          command.Subcommands.Add(EditInDescriptApiGroupCommand.Create());
                          command.Subcommands.Add(ExportFromDescriptApiGroupCommand.Create());
+        CustomizeCommand(ref command);
         return command;
     }
 }

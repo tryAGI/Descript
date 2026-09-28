@@ -41,6 +41,8 @@ internal static partial class EditInDescriptPostEditInDescriptSchemaCommandApiCo
                     static partial void CustomizeResponseFormatHints(Dictionary<string, CliFormatHint> hints);
 
 
+    static partial void CustomizeCommand(ref Command command);
+
     public static Command Create()
     {
         var command = new Command(@"post-edit-in-descript-schema", @"Create Import URL
@@ -114,6 +116,7 @@ tracks, we recommend prioritizing sending us the full multi-track sequence over 
                                     FormatResponse,
                                     cancellationToken).ConfigureAwait(false);
             }, cancellationToken).ConfigureAwait(false));
+        CustomizeCommand(ref command);
         return command;
     }
 }
