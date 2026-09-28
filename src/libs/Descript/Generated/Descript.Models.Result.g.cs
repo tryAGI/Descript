@@ -47,8 +47,8 @@ namespace Descript
         /// <summary>
         ///
         /// </summary>
-        public global::Descript.ImportSuccessResult PickSuccess() => IsSuccess
-            ? Success!
+        public global::Descript.ImportSuccessResult PickSuccess() => Success is { } value
+            ? value
             : throw new global::System.InvalidOperationException($"Expected union variant 'Success' but the value was {ToString()}.");
 
         /// <summary>
@@ -84,8 +84,8 @@ namespace Descript
         /// <summary>
         ///
         /// </summary>
-        public global::Descript.ImportErrorResult PickError() => IsError
-            ? Error!
+        public global::Descript.ImportErrorResult PickError() => Error is { } value
+            ? value
             : throw new global::System.InvalidOperationException($"Expected union variant 'Error' but the value was {ToString()}.");
         /// <summary>
         ///
@@ -185,13 +185,13 @@ namespace Descript
                 Validate();
             }
 
-            if (IsSuccess && success != null)
+            if (Success is { } __value0 && success != null)
             {
-                return success(Success!);
+                return success(__value0);
             }
-            else if (IsError && error != null)
+            else if (Error is { } __value1 && error != null)
             {
-                return error(Error!);
+                return error(__value1);
             }
 
             return default(TResult);
@@ -211,13 +211,13 @@ namespace Descript
                 Validate();
             }
 
-            if (IsSuccess)
+            if (Success is { } __value0)
             {
-                success?.Invoke(Success!);
+                success?.Invoke(__value0);
             }
-            else if (IsError)
+            else if (Error is { } __value1)
             {
-                error?.Invoke(Error!);
+                error?.Invoke(__value1);
             }
         }
 
@@ -234,13 +234,13 @@ namespace Descript
                 Validate();
             }
 
-            if (IsSuccess)
+            if (Success is { } __value0)
             {
-                success?.Invoke(Success!);
+                success?.Invoke(__value0);
             }
-            else if (IsError)
+            else if (Error is { } __value1)
             {
-                error?.Invoke(Error!);
+                error?.Invoke(__value1);
             }
         }
 
