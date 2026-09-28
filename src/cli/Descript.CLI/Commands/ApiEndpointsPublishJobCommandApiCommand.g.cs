@@ -100,6 +100,8 @@ Returns 403 if the requested level is not permitted by the drive's publish setti
                     static partial void CustomizeResponseFormatHints(Dictionary<string, CliFormatHint> hints);
 
 
+    static partial void CustomizeCommand(ref Command command);
+
     public static Command Create()
     {
         var command = new Command(@"publish-job", @"Publish project media
@@ -186,6 +188,7 @@ The payload will match the format returned by [GET /jobs/{job_id}](#operation/ge
                                     FormatResponse,
                                     cancellationToken).ConfigureAwait(false);
             }, cancellationToken).ConfigureAwait(false));
+        CustomizeCommand(ref command);
         return command;
     }
 }

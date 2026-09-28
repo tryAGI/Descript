@@ -33,6 +33,8 @@ internal static partial class ApiEndpointsGetProjectCommandApiCommand
                     static partial void CustomizeResponseFormatHints(Dictionary<string, CliFormatHint> hints);
 
 
+    static partial void CustomizeCommand(ref Command command);
+
     public static Command Create()
     {
         var command = new Command(@"get-project", @"Get project details
@@ -69,6 +71,7 @@ or to retrieve existing share URLs without triggering a republish.
                                     FormatResponse,
                                     cancellationToken).ConfigureAwait(false);
             }, cancellationToken).ConfigureAwait(false));
+        CustomizeCommand(ref command);
         return command;
     }
 }

@@ -27,6 +27,8 @@ internal static partial class ApiEndpointsExportTranscriptAsBytesCommandApiComma
           Hidden = true,
       };
 
+    static partial void CustomizeCommand(ref Command command);
+
     public static Command Create()
     {
         var command = new Command(@"export-transcript-as-bytes", @"Export project transcript
@@ -110,6 +112,7 @@ an `X-Composition-Id` header identifying the exported composition.
 
                                 await CliRuntime.WriteBinaryAsync(parseResult, response, cancellationToken).ConfigureAwait(false);
             }, cancellationToken).ConfigureAwait(false));
+        CustomizeCommand(ref command);
         return command;
     }
 }

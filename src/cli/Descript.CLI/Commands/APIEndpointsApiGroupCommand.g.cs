@@ -4,8 +4,10 @@ using System.CommandLine;
 
 namespace Descript.CLI.Commands;
 
-internal static class APIEndpointsApiGroupCommand
+internal static partial class APIEndpointsApiGroupCommand
 {
+    static partial void CustomizeCommand(ref Command command);
+
     public static Command Create()
     {
         var command = new Command(@"api-endpoints", @"API Endpoints endpoint commands.");
@@ -22,6 +24,7 @@ internal static class APIEndpointsApiGroupCommand
                          command.Subcommands.Add(ApiEndpointsListProjectsCommandApiCommand.Create());
                          command.Subcommands.Add(ApiEndpointsPublishJobCommandApiCommand.Create());
                          command.Subcommands.Add(ApiEndpointsSearchCommandApiCommand.Create());
+        CustomizeCommand(ref command);
         return command;
     }
 }

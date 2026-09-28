@@ -108,6 +108,8 @@ omitted, names and contents both contribute.
                     static partial void CustomizeResponseFormatHints(Dictionary<string, CliFormatHint> hints);
 
 
+    static partial void CustomizeCommand(ref Command command);
+
     public static Command Create()
     {
         var command = new Command(@"search", @"Search a drive
@@ -167,6 +169,7 @@ Studio. Returns up to 100 results ranked by relevance.
                                     cancellationToken).ConfigureAwait(false);
                                 }
             }, cancellationToken).ConfigureAwait(false));
+        CustomizeCommand(ref command);
         return command;
     }
 }

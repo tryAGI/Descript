@@ -13,6 +13,8 @@ internal static partial class ApiEndpointsCancelJobCommandApiCommand
         Description = @"The job ID",
     };
 
+    static partial void CustomizeCommand(ref Command command);
+
     public static Command Create()
     {
         var command = new Command(@"cancel-job", @"Cancel job
@@ -34,6 +36,7 @@ Cancel a running job.
 
                                 await CliRuntime.WriteSuccessAsync(parseResult, cancellationToken).ConfigureAwait(false);
             }, cancellationToken).ConfigureAwait(false));
+        CustomizeCommand(ref command);
         return command;
     }
 }
