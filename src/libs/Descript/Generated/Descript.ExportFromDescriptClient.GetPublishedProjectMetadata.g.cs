@@ -153,7 +153,7 @@ namespace Descript
                 PrepareGetPublishedProjectMetadataRequest(
                     httpClient: HttpClient,
                     httpRequestMessage: __httpRequest,
-                    publishedProjectSlug: publishedProjectSlug!);
+                    publishedProjectSlug: publishedProjectSlug);
 
                 return __httpRequest;
             }
@@ -175,7 +175,7 @@ namespace Descript
                                 pathTemplate: "$\"/published_projects/{publishedProjectSlug}\"",
                                 httpMethod: "GET",
                                 baseUri: BaseUri,
-                                request: __httpRequest!,
+                                request: __httpRequest ?? throw new global::System.InvalidOperationException("The HTTP request was not created before invoking a request hook."),
                                 response: null,
                                 exception: null,
                                 clientOptions: Options,
@@ -209,7 +209,7 @@ namespace Descript
                                 pathTemplate: "$\"/published_projects/{publishedProjectSlug}\"",
                                 httpMethod: "GET",
                                 baseUri: BaseUri,
-                                request: __httpRequest!,
+                                request: __httpRequest ?? throw new global::System.InvalidOperationException("The HTTP request was not created before invoking a request hook."),
                                 response: null,
                                 exception: __exception,
                                 clientOptions: Options,
@@ -250,7 +250,7 @@ namespace Descript
                                 pathTemplate: "$\"/published_projects/{publishedProjectSlug}\"",
                                 httpMethod: "GET",
                                 baseUri: BaseUri,
-                                request: __httpRequest!,
+                                request: __httpRequest ?? throw new global::System.InvalidOperationException("The HTTP request was not created before invoking a request hook."),
                                 response: __response,
                                 exception: null,
                                 clientOptions: Options,
@@ -298,7 +298,7 @@ namespace Descript
                                 pathTemplate: "$\"/published_projects/{publishedProjectSlug}\"",
                                 httpMethod: "GET",
                                 baseUri: BaseUri,
-                                request: __httpRequest!,
+                                request: __httpRequest ?? throw new global::System.InvalidOperationException("The HTTP request was not created before invoking a request hook."),
                                 response: __response,
                                 exception: null,
                                 clientOptions: Options,
@@ -320,7 +320,7 @@ namespace Descript
                                 pathTemplate: "$\"/published_projects/{publishedProjectSlug}\"",
                                 httpMethod: "GET",
                                 baseUri: BaseUri,
-                                request: __httpRequest!,
+                                request: __httpRequest ?? throw new global::System.InvalidOperationException("The HTTP request was not created before invoking a request hook."),
                                 response: __response,
                                 exception: null,
                                 clientOptions: Options,

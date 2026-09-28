@@ -48,8 +48,8 @@ namespace Descript
         /// <summary>
         ///
         /// </summary>
-        public global::Descript.ImportJobStatus PickImportProjectMedia() => IsImportProjectMedia
-            ? ImportProjectMedia!
+        public global::Descript.ImportJobStatus PickImportProjectMedia() => ImportProjectMedia is { } value
+            ? value
             : throw new global::System.InvalidOperationException($"Expected union variant 'ImportProjectMedia' but the value was {ToString()}.");
 
         /// <summary>
@@ -85,8 +85,8 @@ namespace Descript
         /// <summary>
         ///
         /// </summary>
-        public global::Descript.AgentJobStatus PickAgent() => IsAgent
-            ? Agent!
+        public global::Descript.AgentJobStatus PickAgent() => Agent is { } value
+            ? value
             : throw new global::System.InvalidOperationException($"Expected union variant 'Agent' but the value was {ToString()}.");
 
         /// <summary>
@@ -122,8 +122,8 @@ namespace Descript
         /// <summary>
         ///
         /// </summary>
-        public global::Descript.PublishJobStatus PickPublish() => IsPublish
-            ? Publish!
+        public global::Descript.PublishJobStatus PickPublish() => Publish is { } value
+            ? value
             : throw new global::System.InvalidOperationException($"Expected union variant 'Publish' but the value was {ToString()}.");
         /// <summary>
         ///
@@ -251,17 +251,17 @@ namespace Descript
                 Validate();
             }
 
-            if (IsImportProjectMedia && importProjectMedia != null)
+            if (ImportProjectMedia is { } __value0 && importProjectMedia != null)
             {
-                return importProjectMedia(ImportProjectMedia!);
+                return importProjectMedia(__value0);
             }
-            else if (IsAgent && agent != null)
+            else if (Agent is { } __value1 && agent != null)
             {
-                return agent(Agent!);
+                return agent(__value1);
             }
-            else if (IsPublish && publish != null)
+            else if (Publish is { } __value2 && publish != null)
             {
-                return publish(Publish!);
+                return publish(__value2);
             }
 
             return default(TResult);
@@ -283,17 +283,17 @@ namespace Descript
                 Validate();
             }
 
-            if (IsImportProjectMedia)
+            if (ImportProjectMedia is { } __value0)
             {
-                importProjectMedia?.Invoke(ImportProjectMedia!);
+                importProjectMedia?.Invoke(__value0);
             }
-            else if (IsAgent)
+            else if (Agent is { } __value1)
             {
-                agent?.Invoke(Agent!);
+                agent?.Invoke(__value1);
             }
-            else if (IsPublish)
+            else if (Publish is { } __value2)
             {
-                publish?.Invoke(Publish!);
+                publish?.Invoke(__value2);
             }
         }
 
@@ -311,17 +311,17 @@ namespace Descript
                 Validate();
             }
 
-            if (IsImportProjectMedia)
+            if (ImportProjectMedia is { } __value0)
             {
-                importProjectMedia?.Invoke(ImportProjectMedia!);
+                importProjectMedia?.Invoke(__value0);
             }
-            else if (IsAgent)
+            else if (Agent is { } __value1)
             {
-                agent?.Invoke(Agent!);
+                agent?.Invoke(__value1);
             }
-            else if (IsPublish)
+            else if (Publish is { } __value2)
             {
-                publish?.Invoke(Publish!);
+                publish?.Invoke(__value2);
             }
         }
 

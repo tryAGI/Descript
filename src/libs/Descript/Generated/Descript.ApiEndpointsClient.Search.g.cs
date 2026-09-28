@@ -181,7 +181,7 @@ namespace Descript
                                 .AddRequiredParameter("query", query)
                                 .AddOptionalParameter("updated_after", updatedAfter?.ToString("yyyy-MM-ddTHH:mm:ssZ"))
                                 .AddOptionalParameter("updated_before", updatedBefore?.ToString("yyyy-MM-ddTHH:mm:ssZ"))
-                                .AddOptionalParameter("owner", owner, selector: static x => x.ToString()!, delimiter: ",", explode: true)
+                                .AddOptionalParameter("owner", owner, selector: static x => x.ToString() ?? throw new global::System.InvalidOperationException("A required query parameter returned null from ToString()."), delimiter: ",", explode: true)
                                 .AddOptionalParameter("type", type, selector: static x => x.ToValueString(), delimiter: ",", explode: true)
                                 .AddOptionalParameter("match", match, selector: static x => x.ToValueString(), delimiter: ",", explode: true)
                                 .AddOptionalParameter("sort", sort?.ToValueString())
@@ -227,7 +227,7 @@ namespace Descript
                 PrepareSearchRequest(
                     httpClient: HttpClient,
                     httpRequestMessage: __httpRequest,
-                    query: query!,
+                    query: query,
                     updatedAfter: updatedAfter,
                     updatedBefore: updatedBefore,
                     owner: owner,
@@ -256,7 +256,7 @@ namespace Descript
                                 pathTemplate: "\"/search\"",
                                 httpMethod: "GET",
                                 baseUri: BaseUri,
-                                request: __httpRequest!,
+                                request: __httpRequest ?? throw new global::System.InvalidOperationException("The HTTP request was not created before invoking a request hook."),
                                 response: null,
                                 exception: null,
                                 clientOptions: Options,
@@ -290,7 +290,7 @@ namespace Descript
                                 pathTemplate: "\"/search\"",
                                 httpMethod: "GET",
                                 baseUri: BaseUri,
-                                request: __httpRequest!,
+                                request: __httpRequest ?? throw new global::System.InvalidOperationException("The HTTP request was not created before invoking a request hook."),
                                 response: null,
                                 exception: __exception,
                                 clientOptions: Options,
@@ -331,7 +331,7 @@ namespace Descript
                                 pathTemplate: "\"/search\"",
                                 httpMethod: "GET",
                                 baseUri: BaseUri,
-                                request: __httpRequest!,
+                                request: __httpRequest ?? throw new global::System.InvalidOperationException("The HTTP request was not created before invoking a request hook."),
                                 response: __response,
                                 exception: null,
                                 clientOptions: Options,
@@ -379,7 +379,7 @@ namespace Descript
                                 pathTemplate: "\"/search\"",
                                 httpMethod: "GET",
                                 baseUri: BaseUri,
-                                request: __httpRequest!,
+                                request: __httpRequest ?? throw new global::System.InvalidOperationException("The HTTP request was not created before invoking a request hook."),
                                 response: __response,
                                 exception: null,
                                 clientOptions: Options,
@@ -401,7 +401,7 @@ namespace Descript
                                 pathTemplate: "\"/search\"",
                                 httpMethod: "GET",
                                 baseUri: BaseUri,
-                                request: __httpRequest!,
+                                request: __httpRequest ?? throw new global::System.InvalidOperationException("The HTTP request was not created before invoking a request hook."),
                                 response: __response,
                                 exception: null,
                                 clientOptions: Options,

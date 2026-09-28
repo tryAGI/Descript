@@ -59,13 +59,13 @@ namespace Descript.JsonConverters
             {
                 var typeInfo = typeInfoResolver.GetTypeInfo(typeof(global::Descript.PublishSuccessResult), options) as global::System.Text.Json.Serialization.Metadata.JsonTypeInfo<global::Descript.PublishSuccessResult?> ??
                                throw new global::System.InvalidOperationException($"Cannot get type info for {typeof(global::Descript.PublishSuccessResult).Name}");
-                global::System.Text.Json.JsonSerializer.Serialize(writer, value.Success!, typeInfo);
+                global::System.Text.Json.JsonSerializer.Serialize(writer, value.PickSuccess(), typeInfo);
             }
             else if (value.IsError)
             {
                 var typeInfo = typeInfoResolver.GetTypeInfo(typeof(global::Descript.PublishErrorResult), options) as global::System.Text.Json.Serialization.Metadata.JsonTypeInfo<global::Descript.PublishErrorResult?> ??
                                throw new global::System.InvalidOperationException($"Cannot get type info for {typeof(global::Descript.PublishErrorResult).Name}");
-                global::System.Text.Json.JsonSerializer.Serialize(writer, value.Error!, typeInfo);
+                global::System.Text.Json.JsonSerializer.Serialize(writer, value.PickError(), typeInfo);
             }
         }
     }
