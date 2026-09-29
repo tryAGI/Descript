@@ -114,9 +114,9 @@ Descript will POST the job status (same format as [GET /jobs/{job_id}](#operatio
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"agent-edit-job", @"Agent edit
+        var command = new Command(commandName ?? @"agent-edit-job", @"Agent edit
 Use a background agent to create and edit projects using a natural language prompt.
 
 - **Edit existing project**: Provide a `project_id` to edit an existing project

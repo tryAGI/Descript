@@ -49,9 +49,9 @@ internal static partial class ApiEndpointsExportTranscriptCommandApiCommand
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"export-transcript", @"Export project transcript
+        var command = new Command(commandName ?? @"export-transcript", @"Export project transcript
 Export the transcript from a project composition.
 
 Supports plain text, Markdown, HTML, RTF, DOCX, and SRT (SubRip subtitle) formats.

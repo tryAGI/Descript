@@ -43,9 +43,9 @@ internal static partial class EditInDescriptPostEditInDescriptSchemaCommandApiCo
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"post-edit-in-descript-schema", @"Create Import URL
+        var command = new Command(commandName ?? @"post-edit-in-descript-schema", @"Create Import URL
 Create an Import URL by sending a Project schema to Descript API from your service's backend.
 
 ### Import Schema

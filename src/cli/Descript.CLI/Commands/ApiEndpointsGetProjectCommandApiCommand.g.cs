@@ -35,9 +35,9 @@ internal static partial class ApiEndpointsGetProjectCommandApiCommand
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"get-project", @"Get project details
+        var command = new Command(commandName ?? @"get-project", @"Get project details
 Get a detailed project summary including all media files, compositions,
 and existing publishes.
 

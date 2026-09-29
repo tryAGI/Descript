@@ -110,9 +110,9 @@ omitted, names and contents both contribute.
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"search", @"Search a drive
+        var command = new Command(commandName ?? @"search", @"Search a drive
 Search the drive tied to the personal API token. Matches project names,
 folder names, layout pack names, media file names, composition text,
 and transcripts across projects, the drive media library, and Brand

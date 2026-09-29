@@ -65,9 +65,9 @@ internal static partial class ApiEndpointsListJobsCommandApiCommand
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"list-jobs", @"List jobs
+        var command = new Command(commandName ?? @"list-jobs", @"List jobs
 List recent jobs with optional filtering by project or job type.
 
 By default, jobs created within the last 7 days are returned. Use `created_after` and

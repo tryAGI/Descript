@@ -31,9 +31,9 @@ internal static partial class ApiEndpointsListAgentModelsCommandApiCommand
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"list-agent-models", @"List agent models
+        var command = new Command(commandName ?? @"list-agent-models", @"List agent models
 List the currently available agent models and the aliases that resolve to them.
 
 The `model` parameter on [POST /jobs/agent](#operation/agentEditJob) accepts any

@@ -15,9 +15,9 @@ internal static partial class ApiEndpointsCancelJobCommandApiCommand
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"cancel-job", @"Cancel job
+        var command = new Command(commandName ?? @"cancel-job", @"Cancel job
 Cancel a running job.
 ");
                         command.Arguments.Add(JobId);

@@ -122,9 +122,9 @@ Descript will POST the job status (same format as [GET /jobs/{job_id}](#operatio
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"import-project-media", @"Import media and sequences
+        var command = new Command(commandName ?? @"import-project-media", @"Import media and sequences
 Import media files into a new or existing project and create compositions.
 
 This endpoint can:
