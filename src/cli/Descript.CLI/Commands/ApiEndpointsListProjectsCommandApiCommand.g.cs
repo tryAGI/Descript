@@ -95,9 +95,9 @@ internal static partial class ApiEndpointsListProjectsCommandApiCommand
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"list-projects", @"List projects
+        var command = new Command(commandName ?? @"list-projects", @"List projects
 List projects accessible to the authenticated user within a drive.
 
 The drive is determined from the access token.

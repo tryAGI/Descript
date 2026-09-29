@@ -35,9 +35,9 @@ internal static partial class ExportFromDescriptGetPublishedProjectMetadataComma
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"get-published-project-metadata", @"Get Published Project Metadata
+        var command = new Command(commandName ?? @"get-published-project-metadata", @"Get Published Project Metadata
 Retrieve metadata for a published Descript project by its URL slug. This endpoint provides information
 about the published project including title, duration, publisher details, privacy settings, and subtitles.
 

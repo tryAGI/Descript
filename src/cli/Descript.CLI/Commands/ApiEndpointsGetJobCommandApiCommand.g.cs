@@ -35,9 +35,9 @@ internal static partial class ApiEndpointsGetJobCommandApiCommand
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"get-job", @"Get job status
+        var command = new Command(commandName ?? @"get-job", @"Get job status
 Retrieve the status of any job.
 
 The response format varies based on job type and includes type-specific fields.

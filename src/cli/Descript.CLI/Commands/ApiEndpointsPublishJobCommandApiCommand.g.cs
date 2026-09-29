@@ -102,9 +102,9 @@ Returns 403 if the requested level is not permitted by the drive's publish setti
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"publish-job", @"Publish project media
+        var command = new Command(commandName ?? @"publish-job", @"Publish project media
 Publish a project composition to create a shareable link and download the exported file.
 
 Publishes a specific composition from a project, rendering the output as video or audio

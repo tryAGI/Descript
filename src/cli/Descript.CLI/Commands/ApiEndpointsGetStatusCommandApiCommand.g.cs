@@ -31,9 +31,9 @@ internal static partial class ApiEndpointsGetStatusCommandApiCommand
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"get-status", @"Check API status
+        var command = new Command(commandName ?? @"get-status", @"Check API status
 Check API availability and validate authentication token.
 
 This endpoint can be used to:
