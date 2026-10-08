@@ -7,7 +7,7 @@ namespace Descript
         /// <summary>
         /// Get job status<br/>
         /// Retrieve the status of any job.<br/>
-        /// The response format varies based on job type and includes type-specific fields.
+        /// The response format varies based on job type and includes type-specific fields. A finished job has `job_state: stopped`. Read `result.status` for the outcome: `success`, or `error` when the job failed. Import jobs can also return `partial`. An individual file inside `result.media_status` uses `failed` when that file did not import.
         /// </summary>
         /// <param name="jobId"></param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
@@ -20,7 +20,7 @@ namespace Descript
         /// <summary>
         /// Get job status<br/>
         /// Retrieve the status of any job.<br/>
-        /// The response format varies based on job type and includes type-specific fields.
+        /// The response format varies based on job type and includes type-specific fields. A finished job has `job_state: stopped`. Read `result.status` for the outcome: `success`, or `error` when the job failed. Import jobs can also return `partial`. An individual file inside `result.media_status` uses `failed` when that file did not import.
         /// </summary>
         /// <param name="jobId"></param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>

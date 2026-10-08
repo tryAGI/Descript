@@ -60,7 +60,8 @@ namespace Descript
         /// Search the drive tied to the personal API token. Matches project names,<br/>
         /// folder names, layout pack names, media file names, composition text,<br/>
         /// and transcripts across projects, the drive media library, and Brand<br/>
-        /// Studio. Returns up to 100 results ranked by relevance.
+        /// Studio. On drives with the Enterprise plan, also allows searches for visual matches.<br/>
+        /// Returns up to 100 results.
         /// </summary>
         /// <param name="query"></param>
         /// <param name="updatedAfter"></param>
@@ -109,7 +110,8 @@ namespace Descript
         /// Search the drive tied to the personal API token. Matches project names,<br/>
         /// folder names, layout pack names, media file names, composition text,<br/>
         /// and transcripts across projects, the drive media library, and Brand<br/>
-        /// Studio. Returns up to 100 results ranked by relevance.
+        /// Studio. On drives with the Enterprise plan, also allows searches for visual matches.<br/>
+        /// Returns up to 100 results.
         /// </summary>
         /// <param name="query"></param>
         /// <param name="updatedAfter"></param>
@@ -482,6 +484,43 @@ namespace Descript
                                     innerException: __exception_401,
                                     responseBody: __content_401,
                                     responseObject: __value_401,
+                                    responseHeaders: global::System.Linq.Enumerable.ToDictionary(
+                                        __response.Headers,
+                                        h => h.Key,
+                                        h => h.Value));
+                            }
+                            // Visual search (`match=visual`) is not enabled for the drive.
+                            if ((int)__response.StatusCode == 403)
+                            {
+                                string? __content_403 = null;
+                                global::System.Exception? __exception_403 = null;
+                                global::Descript.Error403? __value_403 = null;
+                                try
+                                {
+                                    if (__effectiveReadResponseAsString)
+                                    {
+                                        __content_403 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
+                                        __value_403 = global::Descript.Error403.FromJson(__content_403, JsonSerializerContext);
+                                    }
+                                    else
+                                    {
+                                        __content_403 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
+
+                                        __value_403 = global::Descript.Error403.FromJson(__content_403, JsonSerializerContext);
+                                    }
+                                }
+                                catch (global::System.Exception __ex)
+                                {
+                                    __exception_403 = __ex;
+                                }
+
+
+                                throw global::Descript.ApiException<global::Descript.Error403>.Create(
+                                    statusCode: __response.StatusCode,
+                                    message: __content_403 ?? __response.ReasonPhrase ?? string.Empty,
+                                    innerException: __exception_403,
+                                    responseBody: __content_403,
+                                    responseObject: __value_403,
                                     responseHeaders: global::System.Linq.Enumerable.ToDictionary(
                                         __response.Headers,
                                         h => h.Key,

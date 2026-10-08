@@ -9,7 +9,8 @@ namespace Descript
     public sealed partial class AgentErrorResult
     {
         /// <summary>
-        /// Indicates the job failed<br/>
+        /// The string `error`. A stopped agent job with this status did not complete.<br/>
+        /// Read `error_message` for what went wrong.<br/>
         /// Example: error
         /// </summary>
         /// <example>error</example>
@@ -67,7 +68,8 @@ namespace Descript
         /// Example: AI agent failed to process the request
         /// </param>
         /// <param name="status">
-        /// Indicates the job failed<br/>
+        /// The string `error`. A stopped agent job with this status did not complete.<br/>
+        /// Read `error_message` for what went wrong.<br/>
         /// Example: error
         /// </param>
         /// <param name="errorCode">

@@ -9,7 +9,8 @@ namespace Descript
         /// Search the drive tied to the personal API token. Matches project names,<br/>
         /// folder names, layout pack names, media file names, composition text,<br/>
         /// and transcripts across projects, the drive media library, and Brand<br/>
-        /// Studio. Returns up to 100 results ranked by relevance.
+        /// Studio. On drives with the Enterprise plan, also allows searches for visual matches.<br/>
+        /// Returns up to 100 results.
         /// </summary>
         /// <param name="query"></param>
         /// <param name="updatedAfter"></param>
@@ -42,7 +43,8 @@ namespace Descript
         /// Search the drive tied to the personal API token. Matches project names,<br/>
         /// folder names, layout pack names, media file names, composition text,<br/>
         /// and transcripts across projects, the drive media library, and Brand<br/>
-        /// Studio. Returns up to 100 results ranked by relevance.
+        /// Studio. On drives with the Enterprise plan, also allows searches for visual matches.<br/>
+        /// Returns up to 100 results.
         /// </summary>
         /// <param name="query"></param>
         /// <param name="updatedAfter"></param>

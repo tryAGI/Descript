@@ -40,7 +40,7 @@ internal static partial class ApiEndpointsGetJobCommandApiCommand
         var command = new Command(commandName ?? @"get-job", @"Get job status
 Retrieve the status of any job.
 
-The response format varies based on job type and includes type-specific fields.
+The response format varies based on job type and includes type-specific fields. A finished job has `job_state: stopped`. Read `result.status` for the outcome: `success`, or `error` when the job failed. Import jobs can also return `partial`. An individual file inside `result.media_status` uses `failed` when that file did not import.
 ");
                         command.Arguments.Add(JobId);
 

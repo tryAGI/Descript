@@ -16,6 +16,10 @@ namespace Descript
         ///
         /// </summary>
         Name,
+        /// <summary>
+        ///
+        /// </summary>
+        Visual,
     }
 
     /// <summary>
@@ -32,6 +36,7 @@ namespace Descript
             {
                 SearchMatchItem.Content => "content",
                 SearchMatchItem.Name => "name",
+                SearchMatchItem.Visual => "visual",
                 _ => throw new global::System.ArgumentOutOfRangeException(nameof(value), value, null),
             };
         }
@@ -44,6 +49,7 @@ namespace Descript
             {
                 "content" => SearchMatchItem.Content,
                 "name" => SearchMatchItem.Name,
+                "visual" => SearchMatchItem.Visual,
                 _ => null,
             };
         }
