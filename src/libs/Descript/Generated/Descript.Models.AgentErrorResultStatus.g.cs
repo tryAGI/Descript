@@ -4,7 +4,8 @@
 namespace Descript
 {
     /// <summary>
-    /// Indicates the job failed<br/>
+    /// The string `error`. A stopped agent job with this status did not complete.<br/>
+    /// Read `error_message` for what went wrong.<br/>
     /// Example: error
     /// </summary>
     public enum AgentErrorResultStatus

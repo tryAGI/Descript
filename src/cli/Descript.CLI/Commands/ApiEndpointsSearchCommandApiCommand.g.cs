@@ -10,7 +10,8 @@ internal static partial class ApiEndpointsSearchCommandApiCommand
     private static Option<string> Query { get; } = new(
         name: @"--query")
     {
-        Description = @"Search term. Matched against names and contents. Must be non-empty.
+        Description = @"Search term. Matched against names, contents, and visual matches
+(on drives with the Enterprise plan). Must be non-empty.
 ",
         Required = true,
     };
@@ -64,8 +65,10 @@ one type. If omitted, all result types are returned.
     {
         Description = @"How the query may match. Repeat this parameter to allow more than
 one kind. `name` matches project, file, folder, and layout pack
-names. `content` matches transcripts and composition text. If
-omitted, names and contents both contribute.
+names. `content` matches transcripts and composition text.
+`visual` matches what appears in videos and images, and is only
+available on drives with the Enterprise plan. `visual` cannot be combined
+with another match kind. If omitted, only names and contents contribute.
 ",
     };
 
@@ -116,7 +119,8 @@ omitted, names and contents both contribute.
 Search the drive tied to the personal API token. Matches project names,
 folder names, layout pack names, media file names, composition text,
 and transcripts across projects, the drive media library, and Brand
-Studio. Returns up to 100 results ranked by relevance.
+Studio. On drives with the Enterprise plan, also allows searches for visual matches.
+Returns up to 100 results.
 ");
                         command.Options.Add(Query);
                         command.Options.Add(UpdatedAfter);

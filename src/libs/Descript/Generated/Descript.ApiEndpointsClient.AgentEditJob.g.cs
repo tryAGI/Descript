@@ -365,7 +365,7 @@ namespace Descript
                                 retryReason: global::System.String.Empty,
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                 }
-                            // Invalid input: - Malformed request body - Invalid project_id or composition_id format - Empty or invalid prompt
+                            // Invalid input: - Malformed request body - Invalid project_id or composition_id format - Empty or invalid prompt - `conversation_id` belongs to a different project
                             if ((int)__response.StatusCode == 400)
                             {
                                 string? __content_400 = null;
@@ -513,7 +513,7 @@ namespace Descript
                                         h => h.Key,
                                         h => h.Value));
                             }
-                            // Not found: - Project doesn't exist - Composition doesn't exist in the specified project (when composition_id is provided)
+                            // Not found: - Project doesn't exist - Composition doesn't exist in the specified project (when composition_id is provided) - `conversation_id` does not match an existing conversation
                             if ((int)__response.StatusCode == 404)
                             {
                                 string? __content_404 = null;
@@ -744,6 +744,13 @@ namespace Descript
         /// Descript will POST the job status (same format as [GET /jobs/{job_id}](#operation/getJob)) to this URL.<br/>
         /// Example: https://example.com/webhooks/descript/job_callback
         /// </param>
+        /// <param name="conversationId">
+        /// Conversation ID from a previous agent response. Pass it back on your<br/>
+        /// next call, with the same `project_id`, so the agent sees prior turns.<br/>
+        /// Omit it to start a new conversation.<br/>
+        /// Requires `project_id`.<br/>
+        /// Example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+        /// </param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::System.InvalidOperationException"></exception>
@@ -755,6 +762,7 @@ namespace Descript
             string? model = default,
             global::Descript.AgentEditJobRequestTeamAccess? teamAccess = default,
             string? callbackUrl = default,
+            global::System.Guid? conversationId = default,
             global::Descript.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default)
         {
@@ -767,6 +775,7 @@ namespace Descript
                 Prompt = prompt,
                 TeamAccess = teamAccess,
                 CallbackUrl = callbackUrl,
+                ConversationId = conversationId,
             };
 
             return await AgentEditJobAsync(
