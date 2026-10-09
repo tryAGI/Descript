@@ -53,13 +53,13 @@ namespace Descript
 
         /// <summary>
         /// Model reported for this job: the canonical id for an explicit model or<br/>
-        /// alias (e.g. `claude-opus-4.8` for `claude-opus`), `auto` for an `auto`<br/>
+        /// alias (e.g. `claude-opus-5.5` for `claude-opus`), `auto` for an `auto`<br/>
         /// request, or `inherited` when a resume keeps the conversation's model.<br/>
         /// Present on jobs submitted via the public API after the model-aliases<br/>
         /// launch; older jobs may omit it.<br/>
-        /// Example: claude-opus-4.8
+        /// Example: claude-opus-5.5
         /// </summary>
-        /// <example>claude-opus-4.8</example>
+        /// <example>claude-opus-5.5</example>
         [global::System.Text.Json.Serialization.JsonPropertyName("resolved_model")]
         public string? ResolvedModel { get; set; }
 
@@ -103,11 +103,11 @@ namespace Descript
         /// </param>
         /// <param name="resolvedModel">
         /// Model reported for this job: the canonical id for an explicit model or<br/>
-        /// alias (e.g. `claude-opus-4.8` for `claude-opus`), `auto` for an `auto`<br/>
+        /// alias (e.g. `claude-opus-5.5` for `claude-opus`), `auto` for an `auto`<br/>
         /// request, or `inherited` when a resume keeps the conversation's model.<br/>
         /// Present on jobs submitted via the public API after the model-aliases<br/>
         /// launch; older jobs may omit it.<br/>
-        /// Example: claude-opus-4.8
+        /// Example: claude-opus-5.5
         /// </param>
         /// <param name="conversationId">
         /// Conversation ID for this agent session. Pass this value as `conversation_id` in a<br/>

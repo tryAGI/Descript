@@ -19,9 +19,9 @@ namespace Descript
 
         /// <summary>
         /// Canonical model id this alias currently resolves to.<br/>
-        /// Example: claude-opus-4.8
+        /// Example: claude-opus-5.5
         /// </summary>
-        /// <example>claude-opus-4.8</example>
+        /// <example>claude-opus-5.5</example>
         [global::System.Text.Json.Serialization.JsonPropertyName("resolvesTo")]
         [global::System.Text.Json.Serialization.JsonRequired]
         public required string ResolvesTo { get; set; }
@@ -60,7 +60,7 @@ namespace Descript
         /// </param>
         /// <param name="resolvesTo">
         /// Canonical model id this alias currently resolves to.<br/>
-        /// Example: claude-opus-4.8
+        /// Example: claude-opus-5.5
         /// </param>
         /// <param name="description">
         /// Human-readable description of the alias's intent.<br/>

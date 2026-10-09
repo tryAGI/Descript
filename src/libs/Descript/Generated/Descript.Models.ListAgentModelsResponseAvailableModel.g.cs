@@ -10,9 +10,9 @@ namespace Descript
     {
         /// <summary>
         /// Canonical model id to pass as `model` on `POST /jobs/agent`.<br/>
-        /// Example: claude-opus-4.8
+        /// Example: claude-opus-5.5
         /// </summary>
-        /// <example>claude-opus-4.8</example>
+        /// <example>claude-opus-5.5</example>
         [global::System.Text.Json.Serialization.JsonPropertyName("id")]
         [global::System.Text.Json.Serialization.JsonRequired]
         public required string Id { get; set; }
@@ -38,7 +38,7 @@ namespace Descript
         /// </summary>
         /// <param name="id">
         /// Canonical model id to pass as `model` on `POST /jobs/agent`.<br/>
-        /// Example: claude-opus-4.8
+        /// Example: claude-opus-5.5
         /// </param>
         /// <param name="cost">
         /// Relative cost tier for this model.<br/>
