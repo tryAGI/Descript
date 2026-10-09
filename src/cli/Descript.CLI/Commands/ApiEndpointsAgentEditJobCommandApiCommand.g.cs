@@ -40,7 +40,7 @@ Accepts any of the following formats:
         name: @"--model")
     {
         Description = @"AI model to use for editing. Accepts a canonical model id
-(e.g. `claude-opus-4.8`) or a friendly alias that tracks the
+(e.g. `claude-opus-5.5`) or a friendly alias that tracks the
 stable version of a family (e.g. `claude-opus`). Call
 [GET /agent/models](#operation/listAgentModels) for the current
 set of supported models and aliases.

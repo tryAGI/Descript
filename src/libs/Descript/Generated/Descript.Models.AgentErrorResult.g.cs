@@ -40,9 +40,9 @@ namespace Descript
         /// alias, `auto` for an `auto` request, or `inherited` when a resume keeps<br/>
         /// the conversation's model. Present on jobs submitted via the public API<br/>
         /// after the model-aliases launch; older jobs may omit it.<br/>
-        /// Example: claude-opus-4.8
+        /// Example: claude-opus-5.5
         /// </summary>
-        /// <example>claude-opus-4.8</example>
+        /// <example>claude-opus-5.5</example>
         [global::System.Text.Json.Serialization.JsonPropertyName("resolved_model")]
         public string? ResolvedModel { get; set; }
 
@@ -81,7 +81,7 @@ namespace Descript
         /// alias, `auto` for an `auto` request, or `inherited` when a resume keeps<br/>
         /// the conversation's model. Present on jobs submitted via the public API<br/>
         /// after the model-aliases launch; older jobs may omit it.<br/>
-        /// Example: claude-opus-4.8
+        /// Example: claude-opus-5.5
         /// </param>
         /// <param name="conversationId">
         /// Conversation ID for this agent session, if one was created before the error occurred.<br/>

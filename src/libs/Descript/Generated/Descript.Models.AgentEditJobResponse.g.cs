@@ -65,13 +65,13 @@ namespace Descript
 
         /// <summary>
         /// Model reported for this request: the canonical id for an explicit<br/>
-        /// model or alias (e.g. `claude-opus-4.8` for `claude-opus`), or<br/>
+        /// model or alias (e.g. `claude-opus-5.5` for `claude-opus`), or<br/>
         /// `auto` for an `auto` request. Lets you confirm the selection<br/>
         /// immediately, without waiting for the job result. Matches<br/>
         /// `result.resolved_model` on [GET /jobs/{job_id}](#operation/getJob).<br/>
-        /// Example: claude-opus-4.8
+        /// Example: claude-opus-5.5
         /// </summary>
-        /// <example>claude-opus-4.8</example>
+        /// <example>claude-opus-5.5</example>
         [global::System.Text.Json.Serialization.JsonPropertyName("resolved_model")]
         [global::System.Text.Json.Serialization.JsonRequired]
         public required string ResolvedModel { get; set; }
@@ -109,11 +109,11 @@ namespace Descript
         /// </param>
         /// <param name="resolvedModel">
         /// Model reported for this request: the canonical id for an explicit<br/>
-        /// model or alias (e.g. `claude-opus-4.8` for `claude-opus`), or<br/>
+        /// model or alias (e.g. `claude-opus-5.5` for `claude-opus`), or<br/>
         /// `auto` for an `auto` request. Lets you confirm the selection<br/>
         /// immediately, without waiting for the job result. Matches<br/>
         /// `result.resolved_model` on [GET /jobs/{job_id}](#operation/getJob).<br/>
-        /// Example: claude-opus-4.8
+        /// Example: claude-opus-5.5
         /// </param>
         /// <param name="driveName">
         /// Human-readable name of the connected drive (workspace)<br/>
