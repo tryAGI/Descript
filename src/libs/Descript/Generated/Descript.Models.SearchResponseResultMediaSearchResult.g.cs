@@ -95,6 +95,15 @@ namespace Descript
         public double? Duration { get; set; }
 
         /// <summary>
+        /// The time range of the best match for a visual search.<br/>
+        /// Present only on visual video matches. The time range is<br/>
+        /// represented by `start_time_sec` and `end_time_sec`, in seconds.<br/>
+        /// Omitted for images, and non-visual searches.
+        /// </summary>
+        [global::System.Text.Json.Serialization.JsonPropertyName("moment")]
+        public global::Descript.SearchResponseResultMediaSearchResultMoment? Moment { get; set; }
+
+        /// <summary>
         /// Additional properties that are not explicitly defined in the schema
         /// </summary>
         [global::System.Text.Json.Serialization.JsonExtensionData]
@@ -147,6 +156,12 @@ namespace Descript
         /// Playback length of the file in seconds. Omitted<br/>
         /// for images and for files with no duration.
         /// </param>
+        /// <param name="moment">
+        /// The time range of the best match for a visual search.<br/>
+        /// Present only on visual video matches. The time range is<br/>
+        /// represented by `start_time_sec` and `end_time_sec`, in seconds.<br/>
+        /// Omitted for images, and non-visual searches.
+        /// </param>
 #if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 #endif
@@ -161,7 +176,8 @@ namespace Descript
             global::System.Guid? brandStudioId,
             string? thumbnailUrl,
             global::Descript.SearchOwner? owner,
-            double? duration)
+            double? duration,
+            global::Descript.SearchResponseResultMediaSearchResultMoment? moment)
         {
             this.Type = type;
             this.AssetId = assetId;
@@ -174,6 +190,7 @@ namespace Descript
             this.Owner = owner;
             this.UpdatedAt = updatedAt;
             this.Duration = duration;
+            this.Moment = moment;
         }
 
         /// <summary>
