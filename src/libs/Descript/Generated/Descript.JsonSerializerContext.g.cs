@@ -247,6 +247,7 @@ namespace Descript
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.SearchResponseResultMediaSearchResultType), TypeInfoPropertyName = "SearchResponseResultMediaSearchResultType2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.SearchResponseResultMediaSearchResultLocation), TypeInfoPropertyName = "SearchResponseResultMediaSearchResultLocation2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(double))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.SearchResponseResultMediaSearchResultMoment))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.SearchResponseResultLayoutPackSearchResult))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.SearchResponseResultLayoutPackSearchResultType), TypeInfoPropertyName = "SearchResponseResultLayoutPackSearchResultType2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.SearchResponseResultProjectFolderSearchResult))]

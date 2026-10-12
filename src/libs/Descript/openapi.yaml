@@ -3182,6 +3182,22 @@ components:
                     description: |
                       Playback length of the file in seconds. Omitted
                       for images and for files with no duration.
+                  moment:
+                    type: object
+                    description: |
+                      The time range of the best match for a visual search.
+                      Present only on visual video matches. The time range is
+                      represented by `start_time_sec` and `end_time_sec`, in seconds.
+                      Omitted for images, and non-visual searches.
+                    properties:
+                      start_time_sec:
+                        type: number
+                        description: |
+                          Start of the matched time range, in seconds.
+                      end_time_sec:
+                        type: number
+                        description: |
+                          End of the matched time range, in seconds.
               - type: object
                 title: Layout pack search result
                 description: A layout pack matched.
