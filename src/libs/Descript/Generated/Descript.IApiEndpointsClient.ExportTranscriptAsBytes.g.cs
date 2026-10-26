@@ -50,6 +50,25 @@ namespace Descript
         /// an `X-Composition-Id` header identifying the exported composition.
         /// </summary>
         /// <param name="request"></param>
+        /// <returns>The response metadata and an unbuffered body stream. The caller must dispose Body to release the HTTP response.</returns>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
+        /// <param name="cancellationToken">The token to cancel the operation with</param>
+        /// <exception cref="global::Descript.ApiException"></exception>
+        global::System.Threading.Tasks.Task<global::Descript.AutoSDKHttpResponse<global::System.IO.Stream>> ExportTranscriptAsBytesAsStreamAsResponseAsync(
+
+            global::Descript.ExportTranscriptRequest request,
+            global::Descript.AutoSDKRequestOptions? requestOptions = default,
+            global::System.Threading.CancellationToken cancellationToken = default);
+        /// <summary>
+        /// Export project transcript<br/>
+        /// Export the transcript from a project composition.<br/>
+        /// Supports plain text, Markdown, HTML, RTF, DOCX, and SRT (SubRip subtitle) formats.<br/>
+        /// Options include speaker labels, timecodes, and markers.<br/>
+        /// The response body is the raw transcript file (binary for `docx`,<br/>
+        /// text otherwise) with a `Content-Disposition: attachment` header and<br/>
+        /// an `X-Composition-Id` header identifying the exported composition.
+        /// </summary>
+        /// <param name="request"></param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Descript.ApiException"></exception>
