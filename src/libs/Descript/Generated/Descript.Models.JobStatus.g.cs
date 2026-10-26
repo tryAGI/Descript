@@ -53,6 +53,43 @@ namespace Descript
             : throw new global::System.InvalidOperationException($"Expected union variant 'ImportProjectMedia' but the value was {ToString()}.");
 
         /// <summary>
+        /// Job status for a drive media import job.
+        /// </summary>
+#if NET6_0_OR_GREATER
+        public global::Descript.DriveMediaImportJobStatus? ImportDriveMedia { get; init; }
+#else
+        public global::Descript.DriveMediaImportJobStatus? ImportDriveMedia { get; }
+#endif
+
+        /// <summary>
+        ///
+        /// </summary>
+#if NET6_0_OR_GREATER
+        [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhen(true, nameof(ImportDriveMedia))]
+#endif
+        public bool IsImportDriveMedia => ImportDriveMedia != null;
+
+        /// <summary>
+        ///
+        /// </summary>
+        public bool TryPickImportDriveMedia(
+#if NET6_0_OR_GREATER
+            [global::System.Diagnostics.CodeAnalysis.NotNullWhen(true)]
+#endif
+            out global::Descript.DriveMediaImportJobStatus? value)
+        {
+            value = ImportDriveMedia;
+            return IsImportDriveMedia;
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        public global::Descript.DriveMediaImportJobStatus PickImportDriveMedia() => ImportDriveMedia is { } value
+            ? value
+            : throw new global::System.InvalidOperationException($"Expected union variant 'ImportDriveMedia' but the value was {ToString()}.");
+
+        /// <summary>
         /// Status of an Agent edit job
         /// </summary>
 #if NET6_0_OR_GREATER
@@ -151,6 +188,29 @@ namespace Descript
         /// <summary>
         ///
         /// </summary>
+        public static implicit operator JobStatus(global::Descript.DriveMediaImportJobStatus value) => new JobStatus((global::Descript.DriveMediaImportJobStatus?)value);
+
+        /// <summary>
+        ///
+        /// </summary>
+        public static implicit operator global::Descript.DriveMediaImportJobStatus?(JobStatus @this) => @this.ImportDriveMedia;
+
+        /// <summary>
+        ///
+        /// </summary>
+        public JobStatus(global::Descript.DriveMediaImportJobStatus? value)
+        {
+            ImportDriveMedia = value;
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        public static JobStatus FromImportDriveMedia(global::Descript.DriveMediaImportJobStatus? value) => new JobStatus(value);
+
+        /// <summary>
+        ///
+        /// </summary>
         public static implicit operator JobStatus(global::Descript.AgentJobStatus value) => new JobStatus((global::Descript.AgentJobStatus?)value);
 
         /// <summary>
@@ -200,6 +260,7 @@ namespace Descript
         public JobStatus(
             global::Descript.JobStatusDiscriminatorJobType? jobType,
             global::Descript.ImportJobStatus? importProjectMedia,
+            global::Descript.DriveMediaImportJobStatus? importDriveMedia,
             global::Descript.AgentJobStatus? agent,
             global::Descript.PublishJobStatus? publish
             )
@@ -207,6 +268,7 @@ namespace Descript
             JobType = jobType;
 
             ImportProjectMedia = importProjectMedia;
+            ImportDriveMedia = importDriveMedia;
             Agent = agent;
             Publish = publish;
         }
@@ -217,6 +279,7 @@ namespace Descript
         public object? Object =>
             Publish as object ??
             Agent as object ??
+            ImportDriveMedia as object ??
             ImportProjectMedia as object
             ;
 
@@ -225,6 +288,7 @@ namespace Descript
         /// </summary>
         public override string? ToString() =>
             ImportProjectMedia?.ToString() ??
+            ImportDriveMedia?.ToString() ??
             Agent?.ToString() ??
             Publish?.ToString()
             ;
@@ -234,7 +298,7 @@ namespace Descript
         /// </summary>
         public bool Validate()
         {
-            return IsImportProjectMedia && !IsAgent && !IsPublish || !IsImportProjectMedia && IsAgent && !IsPublish || !IsImportProjectMedia && !IsAgent && IsPublish;
+            return IsImportProjectMedia && !IsImportDriveMedia && !IsAgent && !IsPublish || !IsImportProjectMedia && IsImportDriveMedia && !IsAgent && !IsPublish || !IsImportProjectMedia && !IsImportDriveMedia && IsAgent && !IsPublish || !IsImportProjectMedia && !IsImportDriveMedia && !IsAgent && IsPublish;
         }
 
         /// <summary>
@@ -242,6 +306,7 @@ namespace Descript
         /// </summary>
         public TResult? Match<TResult>(
             global::System.Func<global::Descript.ImportJobStatus, TResult>? importProjectMedia = null,
+            global::System.Func<global::Descript.DriveMediaImportJobStatus, TResult>? importDriveMedia = null,
             global::System.Func<global::Descript.AgentJobStatus, TResult>? agent = null,
             global::System.Func<global::Descript.PublishJobStatus, TResult>? publish = null,
             bool validate = true)
@@ -255,13 +320,17 @@ namespace Descript
             {
                 return importProjectMedia(__value0);
             }
-            else if (Agent is { } __value1 && agent != null)
+            else if (ImportDriveMedia is { } __value1 && importDriveMedia != null)
             {
-                return agent(__value1);
+                return importDriveMedia(__value1);
             }
-            else if (Publish is { } __value2 && publish != null)
+            else if (Agent is { } __value2 && agent != null)
             {
-                return publish(__value2);
+                return agent(__value2);
+            }
+            else if (Publish is { } __value3 && publish != null)
+            {
+                return publish(__value3);
             }
 
             return default(TResult);
@@ -273,6 +342,8 @@ namespace Descript
         public void Match(
             global::System.Action<global::Descript.ImportJobStatus>? importProjectMedia = null,
 
+            global::System.Action<global::Descript.DriveMediaImportJobStatus>? importDriveMedia = null,
+
             global::System.Action<global::Descript.AgentJobStatus>? agent = null,
 
             global::System.Action<global::Descript.PublishJobStatus>? publish = null,
@@ -287,13 +358,17 @@ namespace Descript
             {
                 importProjectMedia?.Invoke(__value0);
             }
-            else if (Agent is { } __value1)
+            else if (ImportDriveMedia is { } __value1)
             {
-                agent?.Invoke(__value1);
+                importDriveMedia?.Invoke(__value1);
             }
-            else if (Publish is { } __value2)
+            else if (Agent is { } __value2)
             {
-                publish?.Invoke(__value2);
+                agent?.Invoke(__value2);
+            }
+            else if (Publish is { } __value3)
+            {
+                publish?.Invoke(__value3);
             }
         }
 
@@ -302,6 +377,7 @@ namespace Descript
         /// </summary>
         public void Switch(
             global::System.Action<global::Descript.ImportJobStatus>? importProjectMedia = null,
+            global::System.Action<global::Descript.DriveMediaImportJobStatus>? importDriveMedia = null,
             global::System.Action<global::Descript.AgentJobStatus>? agent = null,
             global::System.Action<global::Descript.PublishJobStatus>? publish = null,
             bool validate = true)
@@ -315,13 +391,17 @@ namespace Descript
             {
                 importProjectMedia?.Invoke(__value0);
             }
-            else if (Agent is { } __value1)
+            else if (ImportDriveMedia is { } __value1)
             {
-                agent?.Invoke(__value1);
+                importDriveMedia?.Invoke(__value1);
             }
-            else if (Publish is { } __value2)
+            else if (Agent is { } __value2)
             {
-                publish?.Invoke(__value2);
+                agent?.Invoke(__value2);
+            }
+            else if (Publish is { } __value3)
+            {
+                publish?.Invoke(__value3);
             }
         }
 
@@ -334,6 +414,8 @@ namespace Descript
             {
                 ImportProjectMedia,
                 typeof(global::Descript.ImportJobStatus),
+                ImportDriveMedia,
+                typeof(global::Descript.DriveMediaImportJobStatus),
                 Agent,
                 typeof(global::Descript.AgentJobStatus),
                 Publish,
@@ -355,6 +437,7 @@ namespace Descript
         {
             return
                 global::System.Collections.Generic.EqualityComparer<global::Descript.ImportJobStatus?>.Default.Equals(ImportProjectMedia, other.ImportProjectMedia) &&
+                global::System.Collections.Generic.EqualityComparer<global::Descript.DriveMediaImportJobStatus?>.Default.Equals(ImportDriveMedia, other.ImportDriveMedia) &&
                 global::System.Collections.Generic.EqualityComparer<global::Descript.AgentJobStatus?>.Default.Equals(Agent, other.Agent) &&
                 global::System.Collections.Generic.EqualityComparer<global::Descript.PublishJobStatus?>.Default.Equals(Publish, other.Publish)
                 ;

@@ -28,6 +28,13 @@ namespace Descript.JsonConverters
                                throw new global::System.InvalidOperationException($"Cannot get type info for {nameof(global::Descript.ImportJobStatus)}");
                 importProjectMedia = global::System.Text.Json.JsonSerializer.Deserialize(ref reader, typeInfo);
             }
+            global::Descript.DriveMediaImportJobStatus? importDriveMedia = default;
+            if (discriminator?.JobType == global::Descript.JobStatusDiscriminatorJobType.ImportDriveMedia)
+            {
+                var typeInfo = typeInfoResolver.GetTypeInfo(typeof(global::Descript.DriveMediaImportJobStatus), options) as global::System.Text.Json.Serialization.Metadata.JsonTypeInfo<global::Descript.DriveMediaImportJobStatus> ??
+                               throw new global::System.InvalidOperationException($"Cannot get type info for {nameof(global::Descript.DriveMediaImportJobStatus)}");
+                importDriveMedia = global::System.Text.Json.JsonSerializer.Deserialize(ref reader, typeInfo);
+            }
             global::Descript.AgentJobStatus? agent = default;
             if (discriminator?.JobType == global::Descript.JobStatusDiscriminatorJobType.Agent)
             {
@@ -46,6 +53,8 @@ namespace Descript.JsonConverters
             var __value = new global::Descript.JobStatus(
                 discriminator?.JobType,
                 importProjectMedia,
+
+                importDriveMedia,
 
                 agent,
 
@@ -69,6 +78,12 @@ namespace Descript.JsonConverters
                 var typeInfo = typeInfoResolver.GetTypeInfo(typeof(global::Descript.ImportJobStatus), options) as global::System.Text.Json.Serialization.Metadata.JsonTypeInfo<global::Descript.ImportJobStatus?> ??
                                throw new global::System.InvalidOperationException($"Cannot get type info for {typeof(global::Descript.ImportJobStatus).Name}");
                 global::System.Text.Json.JsonSerializer.Serialize(writer, value.PickImportProjectMedia(), typeInfo);
+            }
+            else if (value.IsImportDriveMedia)
+            {
+                var typeInfo = typeInfoResolver.GetTypeInfo(typeof(global::Descript.DriveMediaImportJobStatus), options) as global::System.Text.Json.Serialization.Metadata.JsonTypeInfo<global::Descript.DriveMediaImportJobStatus?> ??
+                               throw new global::System.InvalidOperationException($"Cannot get type info for {typeof(global::Descript.DriveMediaImportJobStatus).Name}");
+                global::System.Text.Json.JsonSerializer.Serialize(writer, value.PickImportDriveMedia(), typeInfo);
             }
             else if (value.IsAgent)
             {

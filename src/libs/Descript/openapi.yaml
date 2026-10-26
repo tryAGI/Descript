@@ -911,6 +911,62 @@ paths:
                     message: Drive not found
         '429':
           $ref: '#/components/responses/Error429Response'
+  /jobs/import/drive_media:
+    post:
+      tags:
+        - API Endpoints
+      summary: Import media to drive library
+      security:
+        - bearerAuth: []
+      description: |
+        Import media files into the drive media library (shared workspace-level media collection).
+
+        Unlike project media import, this endpoint adds files to the drive's shared media library
+        rather than to a specific project. Files can optionally be placed in a folder.
+
+        ### Media URL requirements
+        - URLs must be accessible by Descript servers
+        - URLs must support HTTP Range requests
+        - Recommended to sign URLs for 12-48 hours to reduce chance of failure
+        - [Supported file types](https://help.descript.com/add-and-manage-media/supported-file-types)
+
+        ### Direct file upload
+
+        Instead of providing a URL, you can upload files directly by specifying `content_type` and `file_size` for a media item. The response will include a signed `upload_url` for each direct upload item. PUT the file bytes to that URL, and the import job will process it automatically. See the [Direct file upload](#tag/Direct-file-upload) guide for a full walkthrough.
+
+        ### Async Operations
+
+        Imports run in the background and return a `job_id`. Monitor progress via the [GET /jobs/{job_id}](#operation/getJob) endpoint.
+
+        ### Dynamic webhook
+
+        If `callback_url` is provided, Descript will POST the job status to that URL when the job finishes (successfully or not).
+      operationId: importDriveMedia
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DriveMediaImportRequest'
+        required: true
+      responses:
+        '201':
+          description: Job created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DriveMediaImportResponse'
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized
+        '402':
+          description: Insufficient media minutes
+        '403':
+          description: Forbidden
+        '404':
+          description: Folder not found
+        '429':
+          description: Too many requests
   /jobs/agent:
     post:
       tags:
@@ -1786,7 +1842,7 @@ paths:
 
         Query parameters allow you to filter the results:
         * Filter by `project_id` to see all jobs for a project
-        * Filter by `type` to see specific job types (import/project_media, agent)
+        * Filter by `type` to see specific job types (import/project_media, import/drive_media, agent, publish)
       operationId: listJobs
       security:
         - bearerAuth: []
@@ -1806,7 +1862,9 @@ paths:
             type: string
             enum:
               - import/project_media
+              - import/drive_media
               - agent
+              - publish
         - in: query
           name: cursor
           description: Cursor for the next page of results, obtained from `pagination.next_cursor` in a previous response
@@ -3529,6 +3587,95 @@ components:
         - error
         - message
         - state
+    MediaUrlReference:
+      type: object
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          format: uri
+          description: URL to download the media file from. Recommended signed for 12+ hours.
+        language:
+          type: string
+          description: ISO 639-1 language code for transcription (e.g., "en", "es").
+    MediaUploadReference:
+      type: object
+      required:
+        - content_type
+        - file_size
+      properties:
+        content_type:
+          type: string
+          description: MIME type of the file to upload (e.g. "video/mp4").
+        file_size:
+          type: integer
+          minimum: 1
+          description: File size in bytes.
+        language:
+          type: string
+          description: ISO 639-1 language code for transcription (e.g., "en", "es").
+    DriveMediaImportRequest:
+      type: object
+      required:
+        - add_media
+      properties:
+        folder_id:
+          type: string
+          description: Target drive media folder ID (UUID) or "root" for the root folder. If not provided, defaults to root.
+        add_media:
+          type: object
+          description: |
+            Map of media reference IDs to their import definitions. Key is the display name
+            or path (e.g. "video.mp4" or "Folder/SubFolder/video.mp4"). Paths with forward
+            slashes create nested folders automatically.
+          minProperties: 1
+          maxProperties: 100
+          additionalProperties:
+            oneOf:
+              - $ref: '#/components/schemas/MediaUrlReference'
+              - $ref: '#/components/schemas/MediaUploadReference'
+        callback_url:
+          type: string
+          format: uri
+          description: Optional callback URL to receive notifications about job status changes.
+    DriveMediaImportResponse:
+      type: object
+      required:
+        - job_id
+        - drive_id
+        - folder_id
+      properties:
+        job_id:
+          type: string
+          description: The ID of the created import job. Use this to query job status.
+        drive_id:
+          type: string
+          description: The drive ID where the media is being imported.
+        drive_name:
+          type: string
+          nullable: true
+          description: Human-readable name of the connected drive (workspace)
+          example: My Team Workspace
+        folder_id:
+          type: string
+          description: The target folder ID in the drive media library.
+        upload_urls:
+          type: object
+          description: Signed upload URLs for direct upload media items. Only present when the request includes direct upload references.
+          additionalProperties:
+            type: object
+            properties:
+              upload_url:
+                type: string
+                format: uri
+                description: Signed URL to PUT the file bytes to.
+              asset_id:
+                type: string
+                description: The asset ID for the uploaded file.
+              artifact_id:
+                type: string
+                description: The artifact ID for the uploaded file.
     ImportSuccessResult:
       type: object
       title: ImportSuccessResult
@@ -3709,6 +3856,108 @@ components:
         - drive_id
         - project_id
         - project_url
+    DriveMediaImportJobStatus:
+      type: object
+      description: Job status for a drive media import job.
+      properties:
+        job_id:
+          type: string
+          description: The job ID.
+        job_type:
+          type: string
+          enum:
+            - import/drive_media
+        job_state:
+          type: string
+          enum:
+            - queued
+            - running
+            - stopped
+            - cancelled
+        created_at:
+          type: string
+          format: date-time
+          description: When the job was created.
+        stopped_at:
+          type: string
+          format: date-time
+          description: When the job stopped (only present when job_state is stopped or cancelled).
+        drive_id:
+          type: string
+          description: The drive ID.
+        drive_name:
+          type: string
+          nullable: true
+          description: Human-readable name of the connected drive (workspace)
+          example: My Team Workspace
+        folder_id:
+          type: string
+          description: The target folder ID.
+        progress:
+          type: object
+          description: Progress information for the workflow (only present when job_state is running)
+          properties:
+            label:
+              type: string
+              description: Human-readable label describing the current action
+            percent:
+              type: integer
+              description: Percentage of the workflow that has been completed
+            last_update_at:
+              type: string
+              format: date-time
+              description: When the progress was last updated
+            waiting_for_uploads:
+              type: boolean
+              description: Whether the job is still waiting for direct uploads to finish
+            uploaded_artifacts:
+              type: integer
+              description: Number of direct upload files received so far
+            total_artifacts:
+              type: integer
+              description: Total number of direct upload files expected
+          required:
+            - label
+        result:
+          oneOf:
+            - type: object
+              properties:
+                status:
+                  type: string
+                  enum:
+                    - success
+                    - partial
+                media_status:
+                  type: object
+                  additionalProperties:
+                    type: object
+                    properties:
+                      status:
+                        type: string
+                        enum:
+                          - success
+                          - error
+                      error_message:
+                        type: string
+                      duration_seconds:
+                        type: number
+                media_seconds_used:
+                  type: number
+            - type: object
+              properties:
+                status:
+                  type: string
+                  enum:
+                    - error
+                error_message:
+                  type: string
+      required:
+        - job_id
+        - job_type
+        - job_state
+        - created_at
+        - drive_id
+        - folder_id
     AgentSuccessResult:
       type: object
       title: AgentSuccessResult
@@ -4043,12 +4292,14 @@ components:
     JobStatus:
       oneOf:
         - $ref: '#/components/schemas/ImportJobStatus'
+        - $ref: '#/components/schemas/DriveMediaImportJobStatus'
         - $ref: '#/components/schemas/AgentJobStatus'
         - $ref: '#/components/schemas/PublishJobStatus'
       discriminator:
         propertyName: job_type
         mapping:
           import/project_media: '#/components/schemas/ImportJobStatus'
+          import/drive_media: '#/components/schemas/DriveMediaImportJobStatus'
           agent: '#/components/schemas/AgentJobStatus'
           publish: '#/components/schemas/PublishJobStatus'
           export/timeline: '#/components/schemas/TimelineExportJobStatus'
