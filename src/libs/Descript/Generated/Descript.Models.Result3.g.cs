@@ -12,15 +12,15 @@ namespace Descript
         /// <summary>
         ///
         /// </summary>
-        public global::Descript.PublishJobStatusResultDiscriminatorStatus? Status { get; }
+        public global::Descript.AgentJobStatusResultDiscriminatorStatus? Status { get; }
 
         /// <summary>
-        /// Result when publish completed successfully
+        /// Result when Agent edit completed successfully
         /// </summary>
 #if NET6_0_OR_GREATER
-        public global::Descript.PublishSuccessResult? Success { get; init; }
+        public global::Descript.AgentSuccessResult? Success { get; init; }
 #else
-        public global::Descript.PublishSuccessResult? Success { get; }
+        public global::Descript.AgentSuccessResult? Success { get; }
 #endif
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace Descript
 #if NET6_0_OR_GREATER
             [global::System.Diagnostics.CodeAnalysis.NotNullWhen(true)]
 #endif
-            out global::Descript.PublishSuccessResult? value)
+            out global::Descript.AgentSuccessResult? value)
         {
             value = Success;
             return IsSuccess;
@@ -47,17 +47,17 @@ namespace Descript
         /// <summary>
         ///
         /// </summary>
-        public global::Descript.PublishSuccessResult PickSuccess() => Success is { } value
+        public global::Descript.AgentSuccessResult PickSuccess() => Success is { } value
             ? value
             : throw new global::System.InvalidOperationException($"Expected union variant 'Success' but the value was {ToString()}.");
 
         /// <summary>
-        /// Result when publish failed
+        /// Result when Agent edit failed
         /// </summary>
 #if NET6_0_OR_GREATER
-        public global::Descript.PublishErrorResult? Error { get; init; }
+        public global::Descript.AgentErrorResult? Error { get; init; }
 #else
-        public global::Descript.PublishErrorResult? Error { get; }
+        public global::Descript.AgentErrorResult? Error { get; }
 #endif
 
         /// <summary>
@@ -75,7 +75,7 @@ namespace Descript
 #if NET6_0_OR_GREATER
             [global::System.Diagnostics.CodeAnalysis.NotNullWhen(true)]
 #endif
-            out global::Descript.PublishErrorResult? value)
+            out global::Descript.AgentErrorResult? value)
         {
             value = Error;
             return IsError;
@@ -84,23 +84,23 @@ namespace Descript
         /// <summary>
         ///
         /// </summary>
-        public global::Descript.PublishErrorResult PickError() => Error is { } value
+        public global::Descript.AgentErrorResult PickError() => Error is { } value
             ? value
             : throw new global::System.InvalidOperationException($"Expected union variant 'Error' but the value was {ToString()}.");
         /// <summary>
         ///
         /// </summary>
-        public static implicit operator Result3(global::Descript.PublishSuccessResult value) => new Result3((global::Descript.PublishSuccessResult?)value);
+        public static implicit operator Result3(global::Descript.AgentSuccessResult value) => new Result3((global::Descript.AgentSuccessResult?)value);
 
         /// <summary>
         ///
         /// </summary>
-        public static implicit operator global::Descript.PublishSuccessResult?(Result3 @this) => @this.Success;
+        public static implicit operator global::Descript.AgentSuccessResult?(Result3 @this) => @this.Success;
 
         /// <summary>
         ///
         /// </summary>
-        public Result3(global::Descript.PublishSuccessResult? value)
+        public Result3(global::Descript.AgentSuccessResult? value)
         {
             Success = value;
         }
@@ -108,22 +108,22 @@ namespace Descript
         /// <summary>
         ///
         /// </summary>
-        public static Result3 FromSuccess(global::Descript.PublishSuccessResult? value) => new Result3(value);
+        public static Result3 FromSuccess(global::Descript.AgentSuccessResult? value) => new Result3(value);
 
         /// <summary>
         ///
         /// </summary>
-        public static implicit operator Result3(global::Descript.PublishErrorResult value) => new Result3((global::Descript.PublishErrorResult?)value);
+        public static implicit operator Result3(global::Descript.AgentErrorResult value) => new Result3((global::Descript.AgentErrorResult?)value);
 
         /// <summary>
         ///
         /// </summary>
-        public static implicit operator global::Descript.PublishErrorResult?(Result3 @this) => @this.Error;
+        public static implicit operator global::Descript.AgentErrorResult?(Result3 @this) => @this.Error;
 
         /// <summary>
         ///
         /// </summary>
-        public Result3(global::Descript.PublishErrorResult? value)
+        public Result3(global::Descript.AgentErrorResult? value)
         {
             Error = value;
         }
@@ -131,15 +131,15 @@ namespace Descript
         /// <summary>
         ///
         /// </summary>
-        public static Result3 FromError(global::Descript.PublishErrorResult? value) => new Result3(value);
+        public static Result3 FromError(global::Descript.AgentErrorResult? value) => new Result3(value);
 
         /// <summary>
         ///
         /// </summary>
         public Result3(
-            global::Descript.PublishJobStatusResultDiscriminatorStatus? status,
-            global::Descript.PublishSuccessResult? success,
-            global::Descript.PublishErrorResult? error
+            global::Descript.AgentJobStatusResultDiscriminatorStatus? status,
+            global::Descript.AgentSuccessResult? success,
+            global::Descript.AgentErrorResult? error
             )
         {
             Status = status;
@@ -176,8 +176,8 @@ namespace Descript
         ///
         /// </summary>
         public TResult? Match<TResult>(
-            global::System.Func<global::Descript.PublishSuccessResult, TResult>? success = null,
-            global::System.Func<global::Descript.PublishErrorResult, TResult>? error = null,
+            global::System.Func<global::Descript.AgentSuccessResult, TResult>? success = null,
+            global::System.Func<global::Descript.AgentErrorResult, TResult>? error = null,
             bool validate = true)
         {
             if (validate)
@@ -201,9 +201,9 @@ namespace Descript
         ///
         /// </summary>
         public void Match(
-            global::System.Action<global::Descript.PublishSuccessResult>? success = null,
+            global::System.Action<global::Descript.AgentSuccessResult>? success = null,
 
-            global::System.Action<global::Descript.PublishErrorResult>? error = null,
+            global::System.Action<global::Descript.AgentErrorResult>? error = null,
             bool validate = true)
         {
             if (validate)
@@ -225,8 +225,8 @@ namespace Descript
         ///
         /// </summary>
         public void Switch(
-            global::System.Action<global::Descript.PublishSuccessResult>? success = null,
-            global::System.Action<global::Descript.PublishErrorResult>? error = null,
+            global::System.Action<global::Descript.AgentSuccessResult>? success = null,
+            global::System.Action<global::Descript.AgentErrorResult>? error = null,
             bool validate = true)
         {
             if (validate)
@@ -252,9 +252,9 @@ namespace Descript
             var fields = new object?[]
             {
                 Success,
-                typeof(global::Descript.PublishSuccessResult),
+                typeof(global::Descript.AgentSuccessResult),
                 Error,
-                typeof(global::Descript.PublishErrorResult),
+                typeof(global::Descript.AgentErrorResult),
             };
             const int offset = unchecked((int)2166136261);
             const int prime = 16777619;
@@ -271,8 +271,8 @@ namespace Descript
         public bool Equals(Result3 other)
         {
             return
-                global::System.Collections.Generic.EqualityComparer<global::Descript.PublishSuccessResult?>.Default.Equals(Success, other.Success) &&
-                global::System.Collections.Generic.EqualityComparer<global::Descript.PublishErrorResult?>.Default.Equals(Error, other.Error)
+                global::System.Collections.Generic.EqualityComparer<global::Descript.AgentSuccessResult?>.Default.Equals(Success, other.Success) &&
+                global::System.Collections.Generic.EqualityComparer<global::Descript.AgentErrorResult?>.Default.Equals(Error, other.Error)
                 ;
         }
 

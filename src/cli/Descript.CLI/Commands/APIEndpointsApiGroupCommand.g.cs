@@ -18,6 +18,7 @@ internal static partial class APIEndpointsApiGroupCommand
                          command.Subcommands.Add(ApiEndpointsGetJobCommandApiCommand.Create());
                          command.Subcommands.Add(ApiEndpointsGetProjectCommandApiCommand.Create());
                          command.Subcommands.Add(ApiEndpointsGetStatusCommandApiCommand.Create());
+                         command.Subcommands.Add(ApiEndpointsImportDriveMediaCommandApiCommand.Create());
                          command.Subcommands.Add(ApiEndpointsImportProjectMediaCommandApiCommand.Create());
                          command.Subcommands.Add(ApiEndpointsListAgentModelsCommandApiCommand.Create());
                          command.Subcommands.Add(ApiEndpointsListJobsCommandApiCommand.Create());

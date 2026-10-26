@@ -15,7 +15,15 @@ namespace Descript
         /// <summary>
         ///
         /// </summary>
+        ImportDriveMedia,
+        /// <summary>
+        ///
+        /// </summary>
         ImportProjectMedia,
+        /// <summary>
+        ///
+        /// </summary>
+        Publish,
     }
 
     /// <summary>
@@ -31,7 +39,9 @@ namespace Descript
             return value switch
             {
                 ListJobsType.Agent => "agent",
+                ListJobsType.ImportDriveMedia => "import/drive_media",
                 ListJobsType.ImportProjectMedia => "import/project_media",
+                ListJobsType.Publish => "publish",
                 _ => throw new global::System.ArgumentOutOfRangeException(nameof(value), value, null),
             };
         }
@@ -43,7 +53,9 @@ namespace Descript
             return value switch
             {
                 "agent" => ListJobsType.Agent,
+                "import/drive_media" => ListJobsType.ImportDriveMedia,
                 "import/project_media" => ListJobsType.ImportProjectMedia,
+                "publish" => ListJobsType.Publish,
                 _ => null,
             };
         }

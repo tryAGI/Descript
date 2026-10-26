@@ -13,7 +13,7 @@ namespace Descript
         /// fetch subsequent pages.<br/>
         /// Query parameters allow you to filter the results:<br/>
         /// * Filter by `project_id` to see all jobs for a project<br/>
-        /// * Filter by `type` to see specific job types (import/project_media, agent)
+        /// * Filter by `type` to see specific job types (import/project_media, import/drive_media, agent, publish)
         /// </summary>
         /// <param name="projectId"></param>
         /// <param name="type"></param>
@@ -44,7 +44,7 @@ namespace Descript
         /// fetch subsequent pages.<br/>
         /// Query parameters allow you to filter the results:<br/>
         /// * Filter by `project_id` to see all jobs for a project<br/>
-        /// * Filter by `type` to see specific job types (import/project_media, agent)
+        /// * Filter by `type` to see specific job types (import/project_media, import/drive_media, agent, publish)
         /// </summary>
         /// <param name="projectId"></param>
         /// <param name="type"></param>

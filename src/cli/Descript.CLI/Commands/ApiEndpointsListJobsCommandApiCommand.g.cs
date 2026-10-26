@@ -78,7 +78,7 @@ fetch subsequent pages.
 
 Query parameters allow you to filter the results:
 * Filter by `project_id` to see all jobs for a project
-* Filter by `type` to see specific job types (import/project_media, agent)
+* Filter by `type` to see specific job types (import/project_media, import/drive_media, agent, publish)
 ");
                         command.Options.Add(ProjectId);
                         command.Options.Add(Type);
