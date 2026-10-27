@@ -138,7 +138,7 @@ This endpoint can:
 - URLs must be accessible by Descript servers
 - URLs must support HTTP Range requests
 - Recommended to sign URLs for 12-48 hours to reduce chance of failure
-- [Supported file types](https://help.descript.com/add-and-manage-media/supported-file-types)
+- [Supported file types](https://help.descript.com/add-and-manage-media/supported-file-types#importing-with-the-api): the API accepts more containers and codecs than the app, including MXF, MPEG-TS, and AVI
 
 ### Direct file upload
 
