@@ -53,6 +53,9 @@ namespace Descript
         /// - Remove filler words: "remove all filler words from the transcript"<br/>
         /// - Create highlights: "create a 30-second highlight reel"<br/>
         /// - Content editing: "remove the section from 1:30 to 2:15"<br/>
+        /// ### Default model and conversation mode<br/>
+        /// With `auto`, the default model and conversation mode may vary. Specify a<br/>
+        /// model and conversation mode explicitly when you need predictable behavior.<br/>
         /// ### Async Operations<br/>
         /// Agent edits run in the background and return a `job_id`. Monitor progress via the [GET /jobs/{job_id}](#operation/getJob) endpoint.<br/>
         /// ### Dynamic webhook<br/>
@@ -90,6 +93,9 @@ namespace Descript
         /// - Remove filler words: "remove all filler words from the transcript"<br/>
         /// - Create highlights: "create a 30-second highlight reel"<br/>
         /// - Content editing: "remove the section from 1:30 to 2:15"<br/>
+        /// ### Default model and conversation mode<br/>
+        /// With `auto`, the default model and conversation mode may vary. Specify a<br/>
+        /// model and conversation mode explicitly when you need predictable behavior.<br/>
         /// ### Async Operations<br/>
         /// Agent edits run in the background and return a `job_id`. Monitor progress via the [GET /jobs/{job_id}](#operation/getJob) endpoint.<br/>
         /// ### Dynamic webhook<br/>
@@ -695,6 +701,9 @@ namespace Descript
         /// - Remove filler words: "remove all filler words from the transcript"<br/>
         /// - Create highlights: "create a 30-second highlight reel"<br/>
         /// - Content editing: "remove the section from 1:30 to 2:15"<br/>
+        /// ### Default model and conversation mode<br/>
+        /// With `auto`, the default model and conversation mode may vary. Specify a<br/>
+        /// model and conversation mode explicitly when you need predictable behavior.<br/>
         /// ### Async Operations<br/>
         /// Agent edits run in the background and return a `job_id`. Monitor progress via the [GET /jobs/{job_id}](#operation/getJob) endpoint.<br/>
         /// ### Dynamic webhook<br/>
