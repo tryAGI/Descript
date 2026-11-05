@@ -141,6 +141,11 @@ Use a background agent to create and edit projects using a natural language prom
 - Create highlights: ""create a 30-second highlight reel""
 - Content editing: ""remove the section from 1:30 to 2:15""
 
+### Default model and conversation mode
+
+With `auto`, the default model and conversation mode may vary. Specify a
+model and conversation mode explicitly when you need predictable behavior.
+
 ### Async Operations
 
 Agent edits run in the background and return a `job_id`. Monitor progress via the [GET /jobs/{job_id}](#operation/getJob) endpoint.
