@@ -14,5 +14,6 @@ rootCommand.Subcommands.Add(AuthCommand.Create());
 rootCommand.Subcommands.Add(APIEndpointsApiGroupCommand.Create());
 rootCommand.Subcommands.Add(EditInDescriptApiGroupCommand.Create());
 rootCommand.Subcommands.Add(ExportFromDescriptApiGroupCommand.Create());
+rootCommand.Subcommands.Add(CliCompletion.CreateCommand(rootCommand, @"descript"));
 
 return await rootCommand.Parse(args).InvokeAsync().ConfigureAwait(false);
