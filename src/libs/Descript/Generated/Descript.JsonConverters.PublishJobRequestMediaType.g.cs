@@ -18,7 +18,7 @@ namespace Descript.JsonConverters
                     var stringValue = reader.GetString();
                     if (stringValue != null)
                     {
-                        return global::Descript.PublishJobRequestMediaTypeExtensions.ToEnum(stringValue) ?? default;
+                        return global::Descript.PublishJobRequestMediaTypeExtensions.ToEnum(stringValue) ?? throw new global::System.Text.Json.JsonException($"Unknown value '{stringValue}' for global::Descript.PublishJobRequestMediaType.");
                     }
 
                     break;

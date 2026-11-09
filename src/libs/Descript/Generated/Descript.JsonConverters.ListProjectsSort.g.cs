@@ -18,7 +18,7 @@ namespace Descript.JsonConverters
                     var stringValue = reader.GetString();
                     if (stringValue != null)
                     {
-                        return global::Descript.ListProjectsSortExtensions.ToEnum(stringValue) ?? default;
+                        return global::Descript.ListProjectsSortExtensions.ToEnum(stringValue) ?? throw new global::System.Text.Json.JsonException($"Unknown value '{stringValue}' for global::Descript.ListProjectsSort.");
                     }
 
                     break;
