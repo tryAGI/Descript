@@ -8,7 +8,7 @@ namespace Descript
         /// Get Published Project Metadata<br/>
         /// Retrieve metadata for a published Descript project by its URL slug. This endpoint provides information<br/>
         /// about the published project including title, duration, publisher details, privacy settings, and subtitles.<br/>
-        /// This endpoint requires authentication using a personal token and is subject to rate limiting of 1000<br/>
+        /// This endpoint requires authentication using a personal token and is subject to rate limiting of 5000<br/>
         /// requests per hour per user.
         /// </summary>
         /// <param name="publishedProjectSlug"></param>
@@ -23,7 +23,7 @@ namespace Descript
         /// Get Published Project Metadata<br/>
         /// Retrieve metadata for a published Descript project by its URL slug. This endpoint provides information<br/>
         /// about the published project including title, duration, publisher details, privacy settings, and subtitles.<br/>
-        /// This endpoint requires authentication using a personal token and is subject to rate limiting of 1000<br/>
+        /// This endpoint requires authentication using a personal token and is subject to rate limiting of 5000<br/>
         /// requests per hour per user.
         /// </summary>
         /// <param name="publishedProjectSlug"></param>
