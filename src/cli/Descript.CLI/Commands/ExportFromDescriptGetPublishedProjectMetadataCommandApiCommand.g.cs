@@ -41,7 +41,7 @@ internal static partial class ExportFromDescriptGetPublishedProjectMetadataComma
 Retrieve metadata for a published Descript project by its URL slug. This endpoint provides information
 about the published project including title, duration, publisher details, privacy settings, and subtitles.
 
-This endpoint requires authentication using a personal token and is subject to rate limiting of 1000
+This endpoint requires authentication using a personal token and is subject to rate limiting of 5000
 requests per hour per user.
 ");
                         command.Arguments.Add(PublishedProjectSlug);
