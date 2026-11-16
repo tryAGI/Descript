@@ -94,8 +94,8 @@ namespace Descript
         /// Job result (only present when job_state is stopped)
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("result")]
-        [global::System.Text.Json.Serialization.JsonConverter(typeof(global::Descript.JsonConverters.Result3JsonConverter))]
-        public global::Descript.Result3? Result { get; set; }
+        [global::System.Text.Json.Serialization.JsonConverter(typeof(global::Descript.JsonConverters.ResultJsonConverter))]
+        public global::Descript.Result? Result { get; set; }
 
         /// <summary>
         /// Additional properties that are not explicitly defined in the schema
@@ -161,7 +161,7 @@ namespace Descript
             global::Descript.AgentJobStatusJobType jobType,
             global::System.DateTime? stoppedAt,
             global::Descript.AgentJobStatusProgress? progress,
-            global::Descript.Result3? result)
+            global::Descript.Result? result)
         {
             this.JobId = jobId;
             this.JobType = jobType;

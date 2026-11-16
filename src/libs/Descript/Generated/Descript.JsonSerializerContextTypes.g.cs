@@ -314,7 +314,7 @@ namespace Descript
         /// <summary>
         ///
         /// </summary>
-        public global::Descript.Result? Type69 { get; set; }
+        public global::Descript.Result2? Type69 { get; set; }
         /// <summary>
         ///
         /// </summary>
@@ -410,7 +410,7 @@ namespace Descript
         /// <summary>
         ///
         /// </summary>
-        public global::Descript.Result3? Type93 { get; set; }
+        public global::Descript.Result? Type93 { get; set; }
         /// <summary>
         ///
         /// </summary>
@@ -458,7 +458,7 @@ namespace Descript
         /// <summary>
         ///
         /// </summary>
-        public global::Descript.Result4? Type105 { get; set; }
+        public global::Descript.Result3? Type105 { get; set; }
         /// <summary>
         ///
         /// </summary>

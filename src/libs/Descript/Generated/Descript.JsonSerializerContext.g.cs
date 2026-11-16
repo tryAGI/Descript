@@ -231,11 +231,11 @@ namespace Descript
 
             typeof(global::Descript.JsonConverters.GetProjectResponsePublisheMediaTypeNullableJsonConverter),
 
+            typeof(global::Descript.JsonConverters.Result2JsonConverter),
+
             typeof(global::Descript.JsonConverters.ResultJsonConverter),
 
             typeof(global::Descript.JsonConverters.Result3JsonConverter),
-
-            typeof(global::Descript.JsonConverters.Result4JsonConverter),
 
             typeof(global::Descript.JsonConverters.JobStatusJsonConverter),
 
@@ -324,7 +324,7 @@ namespace Descript
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.ImportJobStatusJobType), TypeInfoPropertyName = "ImportJobStatusJobType2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.ImportJobStatusJobState), TypeInfoPropertyName = "ImportJobStatusJobState2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.ImportJobStatusProgress))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.Result), TypeInfoPropertyName = "Result2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.Result2), TypeInfoPropertyName = "Result22")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.ImportJobStatusResultDiscriminator))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.ImportJobStatusResultDiscriminatorStatus), TypeInfoPropertyName = "ImportJobStatusResultDiscriminatorStatus2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.DriveMediaImportJobStatus))]
@@ -348,7 +348,7 @@ namespace Descript
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.AgentJobStatusJobType), TypeInfoPropertyName = "AgentJobStatusJobType2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.AgentJobStatusJobState), TypeInfoPropertyName = "AgentJobStatusJobState2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.AgentJobStatusProgress))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.Result3), TypeInfoPropertyName = "Result32")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.Result), TypeInfoPropertyName = "Result2_3")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.AgentJobStatusResultDiscriminator))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.AgentJobStatusResultDiscriminatorStatus), TypeInfoPropertyName = "AgentJobStatusResultDiscriminatorStatus2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.PublishSuccessResult))]
@@ -360,7 +360,7 @@ namespace Descript
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.PublishJobStatusJobType), TypeInfoPropertyName = "PublishJobStatusJobType2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.PublishJobStatusJobState), TypeInfoPropertyName = "PublishJobStatusJobState2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.PublishJobStatusProgress))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.Result4), TypeInfoPropertyName = "Result42")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.Result3), TypeInfoPropertyName = "Result32")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.PublishJobStatusResultDiscriminator))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.PublishJobStatusResultDiscriminatorStatus), TypeInfoPropertyName = "PublishJobStatusResultDiscriminatorStatus2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Descript.JobStatus), TypeInfoPropertyName = "JobStatus2")]

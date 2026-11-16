@@ -17,22 +17,22 @@ namespace Descript.JsonConverters
 
 
             var readerCopy = reader;
-            var discriminatorTypeInfo = typeInfoResolver.GetTypeInfo(typeof(global::Descript.AgentJobStatusResultDiscriminator), options) as global::System.Text.Json.Serialization.Metadata.JsonTypeInfo<global::Descript.AgentJobStatusResultDiscriminator> ??
-                            throw new global::System.InvalidOperationException($"Cannot get type info for {nameof(global::Descript.AgentJobStatusResultDiscriminator)}");
+            var discriminatorTypeInfo = typeInfoResolver.GetTypeInfo(typeof(global::Descript.PublishJobStatusResultDiscriminator), options) as global::System.Text.Json.Serialization.Metadata.JsonTypeInfo<global::Descript.PublishJobStatusResultDiscriminator> ??
+                            throw new global::System.InvalidOperationException($"Cannot get type info for {nameof(global::Descript.PublishJobStatusResultDiscriminator)}");
             var discriminator = global::System.Text.Json.JsonSerializer.Deserialize(ref readerCopy, discriminatorTypeInfo);
 
-            global::Descript.AgentSuccessResult? success = default;
-            if (discriminator?.Status == global::Descript.AgentJobStatusResultDiscriminatorStatus.Success)
+            global::Descript.PublishSuccessResult? success = default;
+            if (discriminator?.Status == global::Descript.PublishJobStatusResultDiscriminatorStatus.Success)
             {
-                var typeInfo = typeInfoResolver.GetTypeInfo(typeof(global::Descript.AgentSuccessResult), options) as global::System.Text.Json.Serialization.Metadata.JsonTypeInfo<global::Descript.AgentSuccessResult> ??
-                               throw new global::System.InvalidOperationException($"Cannot get type info for {nameof(global::Descript.AgentSuccessResult)}");
+                var typeInfo = typeInfoResolver.GetTypeInfo(typeof(global::Descript.PublishSuccessResult), options) as global::System.Text.Json.Serialization.Metadata.JsonTypeInfo<global::Descript.PublishSuccessResult> ??
+                               throw new global::System.InvalidOperationException($"Cannot get type info for {nameof(global::Descript.PublishSuccessResult)}");
                 success = global::System.Text.Json.JsonSerializer.Deserialize(ref reader, typeInfo);
             }
-            global::Descript.AgentErrorResult? error = default;
-            if (discriminator?.Status == global::Descript.AgentJobStatusResultDiscriminatorStatus.Error)
+            global::Descript.PublishErrorResult? error = default;
+            if (discriminator?.Status == global::Descript.PublishJobStatusResultDiscriminatorStatus.Error)
             {
-                var typeInfo = typeInfoResolver.GetTypeInfo(typeof(global::Descript.AgentErrorResult), options) as global::System.Text.Json.Serialization.Metadata.JsonTypeInfo<global::Descript.AgentErrorResult> ??
-                               throw new global::System.InvalidOperationException($"Cannot get type info for {nameof(global::Descript.AgentErrorResult)}");
+                var typeInfo = typeInfoResolver.GetTypeInfo(typeof(global::Descript.PublishErrorResult), options) as global::System.Text.Json.Serialization.Metadata.JsonTypeInfo<global::Descript.PublishErrorResult> ??
+                               throw new global::System.InvalidOperationException($"Cannot get type info for {nameof(global::Descript.PublishErrorResult)}");
                 error = global::System.Text.Json.JsonSerializer.Deserialize(ref reader, typeInfo);
             }
 
@@ -57,14 +57,14 @@ namespace Descript.JsonConverters
 
             if (value.IsSuccess)
             {
-                var typeInfo = typeInfoResolver.GetTypeInfo(typeof(global::Descript.AgentSuccessResult), options) as global::System.Text.Json.Serialization.Metadata.JsonTypeInfo<global::Descript.AgentSuccessResult?> ??
-                               throw new global::System.InvalidOperationException($"Cannot get type info for {typeof(global::Descript.AgentSuccessResult).Name}");
+                var typeInfo = typeInfoResolver.GetTypeInfo(typeof(global::Descript.PublishSuccessResult), options) as global::System.Text.Json.Serialization.Metadata.JsonTypeInfo<global::Descript.PublishSuccessResult?> ??
+                               throw new global::System.InvalidOperationException($"Cannot get type info for {typeof(global::Descript.PublishSuccessResult).Name}");
                 global::System.Text.Json.JsonSerializer.Serialize(writer, value.PickSuccess(), typeInfo);
             }
             else if (value.IsError)
             {
-                var typeInfo = typeInfoResolver.GetTypeInfo(typeof(global::Descript.AgentErrorResult), options) as global::System.Text.Json.Serialization.Metadata.JsonTypeInfo<global::Descript.AgentErrorResult?> ??
-                               throw new global::System.InvalidOperationException($"Cannot get type info for {typeof(global::Descript.AgentErrorResult).Name}");
+                var typeInfo = typeInfoResolver.GetTypeInfo(typeof(global::Descript.PublishErrorResult), options) as global::System.Text.Json.Serialization.Metadata.JsonTypeInfo<global::Descript.PublishErrorResult?> ??
+                               throw new global::System.InvalidOperationException($"Cannot get type info for {typeof(global::Descript.PublishErrorResult).Name}");
                 global::System.Text.Json.JsonSerializer.Serialize(writer, value.PickError(), typeInfo);
             }
         }
